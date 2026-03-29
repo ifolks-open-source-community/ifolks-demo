@@ -1,0 +1,37 @@
+<!-- -->
+<!-- auto generated details component html file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton generator -->
+<!-- -->
+
+<app-private-template>
+<app-calendar-menu  #menu [activePath]="activePath" [id]="id"></app-calendar-menu>
+
+<h2>
+Calendar details
+</h2>
+
+<div class="details-form" >
+<form [formGroup]="form" (ngSubmit)="update()">
+<p>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Code</mat-label>
+<input matInput placeholder="Code" formControlName="code"/>
+</mat-form-field>
+</p>
+
+<p>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Label</mat-label>
+<input matInput placeholder="Label" formControlName="label"/>
+</mat-form-field>
+</p>
+
+<p>
+<button *ngIf="view.canUpdate" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+</p>
+</form>
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+</div>
+</app-private-template>

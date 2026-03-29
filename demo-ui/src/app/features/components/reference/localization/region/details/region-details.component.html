@@ -1,0 +1,47 @@
+<!-- -->
+<!-- auto generated details component html file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton generator -->
+<!-- -->
+
+<app-private-template>
+<app-region-menu  #menu [activePath]="activePath" [id]="id"></app-region-menu>
+
+<h2>
+Region details
+</h2>
+
+<div class="details-form" >
+<form [formGroup]="form" (ngSubmit)="update()">
+<p>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Country</mat-label>
+<mat-select placeholder="Country" formControlName="countryCode" >
+<mat-option [value]="null"></mat-option>
+<mat-option *ngFor="let option of countryCodeOptions" [value]="option.key">{{option.key}}</mat-option>
+</mat-select>
+</mat-form-field>
+</p>
+
+<p>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Code</mat-label>
+<input matInput placeholder="Code" formControlName="code"/>
+</mat-form-field>
+</p>
+
+<p>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Label</mat-label>
+<input matInput placeholder="Label" formControlName="label"/>
+</mat-form-field>
+</p>
+
+<p>
+<button *ngIf="view.canUpdate" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+</p>
+</form>
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+</div>
+</app-private-template>

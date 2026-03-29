@@ -1,0 +1,62 @@
+<!-- -->
+<!-- auto generated one to many component list component html file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton generator -->
+<!-- -->
+
+<app-private-template>
+<app-calendar-menu  #menu [activePath]="activePath" [id]="id"></app-calendar-menu>
+
+<h2>
+Days off: {{scrollView.count}} / {{scrollView.size}}
+</h2>
+
+<form [formGroup]="filter">
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Date Min</mat-label>
+<input matInput [matDatepicker]="dayOffDateMinValueDatePicker" placeholder="yyyy-MM-dd" formControlName="dayOffDateMinValue"/>
+<mat-datepicker-toggle matSuffix [for]="dayOffDateMinValueDatePicker"></mat-datepicker-toggle>
+<mat-datepicker #dayOffDateMinValueDatePicker></mat-datepicker>
+</mat-form-field>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Date Max</mat-label>
+<input matInput [matDatepicker]="dayOffDateMaxValueDatePicker" placeholder="yyyy-MM-dd" formControlName="dayOffDateMaxValue"/>
+<mat-datepicker-toggle matSuffix [for]="dayOffDateMaxValueDatePicker"></mat-datepicker-toggle>
+<mat-datepicker #dayOffDateMaxValueDatePicker></mat-datepicker>
+</mat-form-field>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Label</mat-label>
+<input matInput placeholder="Label" formControlName="dayOffLabel"/>
+</mat-form-field>
+</form>
+<mat-table [dataSource]="dataSource" matSort>
+<ng-container matColumnDef="dayOffDate">
+<mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">Date</mat-header-cell>
+<mat-cell *matCellDef="let element"> {{element.dayOffDate}} </mat-cell>
+</ng-container>
+<ng-container matColumnDef="dayOffLabel">
+<mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">Label</mat-header-cell>
+<mat-cell *matCellDef="let element"> {{element.dayOffLabel}} </mat-cell>
+</ng-container>
+<ng-container matColumnDef="Actions">
+<mat-header-cell *matHeaderCellDef class="table-header">Actions</mat-header-cell>
+<mat-cell *matCellDef="let element">
+<a class="margin-10" (click)="edit(element.id)"><mat-icon aria-label="Edit" svgIcon="pencil" class="text-success"></mat-icon></a>
+<a *ngIf="element.canDelete" class="margin-10" (click)="delete(element.id)"><mat-icon aria-label="Delete" svgIcon="delete" class="text-warn"></mat-icon></a>
+</mat-cell>
+</ng-container>
+<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator #paginator [length]="scrollView.count"
+[pageSize]="scrollForm.elementsPerPage"
+[showFirstLastButtons]="true"
+[pageSizeOptions]="pageSizeOptions">
+</mat-paginator>
+
+<button mat-raised-button (click)="create()" color="primary">
+Create
+</button>
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+</app-private-template>

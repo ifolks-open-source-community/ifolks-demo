@@ -1,0 +1,31 @@
+<!-- -->
+<!-- auto generated one to one component details component html file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton generator -->
+<!-- -->
+
+<app-private-template>
+<app-organization-menu  #menu [activePath]="activePath" [id]="id"></app-organization-menu>
+
+<h2>
+Certification
+</h2>
+
+<div class="details-form" >
+<form [formGroup]="form" (ngSubmit)="saveOrUpdate()">
+<p>
+<mat-checkbox color="primary" formControlName="certified">
+Certified
+</mat-checkbox>
+</p>
+
+<mat-dialog-actions>
+<button mat-raised-button *ngIf="view.id == null" color="primary" type="submit" [disabled]="form.invalid">Save</button>
+<button mat-raised-button *ngIf="view.id != null && view.canUpdate" color="primary" type="submit" [disabled]="form.invalid">Update</button>
+<button mat-raised-button *ngIf="view.id != null && view.canDelete" color="warn" type="button" (click)="delete()">Delete</button>
+</mat-dialog-actions>
+</form>
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+</div>
+</app-private-template>

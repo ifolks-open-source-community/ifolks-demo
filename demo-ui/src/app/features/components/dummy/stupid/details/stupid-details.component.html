@@ -1,0 +1,40 @@
+<!-- -->
+<!-- auto generated details component html file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton generator -->
+<!-- -->
+
+<app-private-template>
+<app-stupid-menu  #menu [activePath]="activePath" [id]="id"></app-stupid-menu>
+
+<h2>
+Stupid details
+</h2>
+
+<div class="details-form" >
+<form [formGroup]="form" (ngSubmit)="update()">
+<p>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Code</mat-label>
+<input matInput placeholder="Code" formControlName="code"/>
+</mat-form-field>
+</p>
+
+<p>
+<mat-form-field appearance="outline" floatLabel="always" class="autocomplete">
+<mat-label>Fool</mat-label>
+<input matInput placeholder="Fool" formControlName="foolCode" [matAutocomplete]="foolCodeAutoComplete"/>
+<mat-autocomplete #foolCodeAutoComplete="matAutocomplete">
+<mat-option *ngFor="let option of foolCodeOptions | async" [value]="option.key">{{option.key}}</mat-option>
+</mat-autocomplete>
+</mat-form-field>
+</p>
+
+<p>
+<button *ngIf="view.canUpdate" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+</p>
+</form>
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+</div>
+</app-private-template>

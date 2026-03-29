@@ -1,0 +1,39 @@
+<!-- -->
+<!-- auto generated modal component html file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton generator -->
+<!-- -->
+
+<div class="modal-form" >
+<form [formGroup]="form" (ngSubmit)="saveOrUpdate()">
+<mat-dialog-content class="text-grey-darker">
+<div>
+<button mat-icon-button mat-dialog-close disableRipple>
+<mat-icon class="text-grey" svgIcon="close"></mat-icon>
+</button>
+</div>
+<section>
+<p>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Code</mat-label>
+<input matInput placeholder="Code" formControlName="code"/>
+</mat-form-field>
+</p>
+
+<p>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Label</mat-label>
+<input matInput placeholder="Label" formControlName="label"/>
+</mat-form-field>
+</p>
+
+</section>
+</mat-dialog-content>
+<mat-dialog-actions>
+<button mat-raised-button *ngIf="view.id == null" color="primary" type="submit" [disabled]="form.invalid">Save</button>
+<button mat-raised-button *ngIf="view.id != null && view.canUpdate" color="primary" type="submit" [disabled]="form.invalid">Update</button>
+</mat-dialog-actions>
+</form>
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+</div>

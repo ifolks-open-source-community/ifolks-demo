@@ -1,0 +1,15 @@
+-- table unique constraints --
+ALTER TABLE STUPID ADD CONSTRAINT UC_STUPID UNIQUE (CODE) USING INDEX (CREATE INDEX IDX_STUPID_UC ON STUPID(CODE))
+/
+
+-- table foreign keys --
+ALTER TABLE STUPID ADD CONSTRAINT FK_STUPID_1 FOREIGN KEY (FOOL_ID) REFERENCES FOOL
+/
+
+-- table indexes --
+CREATE INDEX IDX_STUPID_C1 ON STUPID(FOOL_ID)
+/
+
+-- Specific Code Start --
+-- Specific Code End --
+

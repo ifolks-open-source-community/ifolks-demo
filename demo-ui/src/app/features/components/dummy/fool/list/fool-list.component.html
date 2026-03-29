@@ -1,0 +1,105 @@
+<!-- -->
+<!-- auto generated list component html file -->
+<!-- write modifications between specific code marks -->
+<!-- processed by skeleton generator -->
+<!-- -->
+
+<app-private-template>
+<h2>
+Fools: {{scrollView.count}} / {{scrollView.size}}
+</h2>
+
+<form [formGroup]="filter">
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Code</mat-label>
+<input matInput placeholder="Code" formControlName="code"/>
+</mat-form-field>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Description</mat-label>
+<input matInput placeholder="Description" formControlName="description"/>
+</mat-form-field>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Boolean</mat-label>
+<mat-select placeholder="Boolean" formControlName="booleanField" >
+<mat-option [value]=""></mat-option>
+<mat-option [value]="true">true</mat-option>
+<mat-option [value]="false">false</mat-option>
+</mat-select>
+</mat-form-field>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Date Min</mat-label>
+<input matInput [matDatepicker]="dateFieldMinValueDatePicker" placeholder="yyyy-MM-dd" formControlName="dateFieldMinValue"/>
+<mat-datepicker-toggle matSuffix [for]="dateFieldMinValueDatePicker"></mat-datepicker-toggle>
+<mat-datepicker #dateFieldMinValueDatePicker></mat-datepicker>
+</mat-form-field>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Date Max</mat-label>
+<input matInput [matDatepicker]="dateFieldMaxValueDatePicker" placeholder="yyyy-MM-dd" formControlName="dateFieldMaxValue"/>
+<mat-datepicker-toggle matSuffix [for]="dateFieldMaxValueDatePicker"></mat-datepicker-toggle>
+<mat-datepicker #dateFieldMaxValueDatePicker></mat-datepicker>
+</mat-form-field>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Date and time Min</mat-label>
+<input matInput placeholder="yyyy-MM-ddTHH:mm:ssZ" formControlName="datetimeFieldMinValue"/>
+</mat-form-field>
+<mat-form-field appearance="outline" floatLabel="always">
+<mat-label>Date and time Max</mat-label>
+<input matInput placeholder="yyyy-MM-ddTHH:mm:ssZ" formControlName="datetimeFieldMaxValue"/>
+</mat-form-field>
+</form>
+<mat-table [dataSource]="dataSource" matSort>
+<ng-container matColumnDef="code">
+<mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">Code</mat-header-cell>
+<mat-cell *matCellDef="let element"> {{element.code}} </mat-cell>
+</ng-container>
+<ng-container matColumnDef="description">
+<mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">Description</mat-header-cell>
+<mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+</ng-container>
+<ng-container matColumnDef="longField">
+<mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">Long</mat-header-cell>
+<mat-cell *matCellDef="let element"> {{element.longField}} </mat-cell>
+</ng-container>
+<ng-container matColumnDef="booleanField">
+<mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">Boolean</mat-header-cell>
+<mat-cell *matCellDef="let element"> {{element.booleanField}} </mat-cell>
+</ng-container>
+<ng-container matColumnDef="doubleField">
+<mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">Double</mat-header-cell>
+<mat-cell *matCellDef="let element"> {{element.doubleField}} </mat-cell>
+</ng-container>
+<ng-container matColumnDef="decimalField">
+<mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">Decimal</mat-header-cell>
+<mat-cell *matCellDef="let element"> {{element.decimalField}} </mat-cell>
+</ng-container>
+<ng-container matColumnDef="dateField">
+<mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">Date</mat-header-cell>
+<mat-cell *matCellDef="let element"> {{element.dateField}} </mat-cell>
+</ng-container>
+<ng-container matColumnDef="datetimeField">
+<mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">Date and time</mat-header-cell>
+<mat-cell *matCellDef="let element"> {{element.datetimeField| date:'yyyy-MM-ddTHH:mm:ssZ':'GMT'}} </mat-cell>
+</ng-container>
+<ng-container matColumnDef="Actions">
+<mat-header-cell *matHeaderCellDef class="table-header">Actions</mat-header-cell>
+<mat-cell *matCellDef="let element">
+<a class="margin-10" href="{{'/fool/' + element.id}}"><mat-icon aria-label="Edit" svgIcon="table-edit" class="text-success"></mat-icon></a>
+<a class="margin-10" (click)="edit(element.id)"><mat-icon aria-label="Edit" svgIcon="pencil" class="text-success"></mat-icon></a>
+<a *ngIf="element.canDelete" class="margin-10" (click)="delete(element.id)"><mat-icon aria-label="Delete" svgIcon="delete" class="text-warn"></mat-icon></a>
+</mat-cell>
+</ng-container>
+<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+<mat-paginator #paginator [length]="scrollView.count"
+[pageSize]="scrollForm.elementsPerPage"
+[showFirstLastButtons]="true"
+[pageSizeOptions]="pageSizeOptions">
+</mat-paginator>
+
+<button mat-raised-button (click)="create()" color="primary">
+Create
+</button>
+<!-- Specific Code Start -->
+<!-- Specific Code End -->
+</app-private-template>
