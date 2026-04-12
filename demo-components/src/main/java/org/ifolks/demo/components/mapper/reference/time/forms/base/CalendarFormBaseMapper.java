@@ -1,39 +1,50 @@
 package org.ifolks.demo.components.mapper.reference.time.forms.base;
 
-import org.ifolks.commons.mapper.impl.BasicMapperImpl;
 import org.ifolks.demo.api.model.reference.time.forms.CalendarForm;
 import org.ifolks.demo.model.reference.time.Calendar;
+import org.springframework.stereotype.Component;
 
 /**
  * auto generated base mapper class file
  * <br/>no modification should be done to this file
  * <br/>processed by ifolks-generator
  */
-public class CalendarFormBaseMapper extends BasicMapperImpl<CalendarForm, Calendar> {
+@Component
+public class CalendarFormBaseMapper {
 
-public CalendarFormBaseMapper() {
-super(CalendarForm.class, Calendar.class);
-}
 
 /*
  * properties
  */
 
 /**
- * mapping form from object
+ * mapping object arry to form
  */
-@Override
-public CalendarForm mapFrom(CalendarForm calendarForm, Calendar calendar) {
-calendarForm = super.mapFrom(calendarForm, calendar);
-return calendarForm;
+public CalendarForm toForm(Object[] args) {
+
+return new CalendarForm (
+(String)args[0],
+(String)args[1]);
 }
 
 /**
- * mapping view to object
+ * mapping entity to form
  */
-@Override
-public Calendar mapTo(CalendarForm calendarForm, Calendar calendar) {
-calendar = super.mapTo(calendarForm, calendar);
+public CalendarForm toForm(Calendar calendar) {
+String code = calendar.getCode();
+String label = calendar.getLabel();
+
+return new CalendarForm (
+code,
+label);
+}
+
+/**
+ * mapping form to entity
+ */
+public Calendar toEntity(CalendarForm calendarForm, Calendar calendar) {
+calendar.setCode(calendarForm.code());
+calendar.setLabel(calendarForm.label());
 return calendar;
 }
 

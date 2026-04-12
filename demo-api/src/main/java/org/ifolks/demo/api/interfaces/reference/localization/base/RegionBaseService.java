@@ -53,12 +53,6 @@ public static final String FIND_URL = "/region/find";
 RegionFullView find(String countryCode, String code);
 
 /**
- * create object
- */
-RegionFullView create();
-public static final String GET_NEW_URL = "/region/new";
-
-/**
  * save object
  */
 Integer save(RegionForm regionForm);
@@ -75,11 +69,5 @@ public static final String UPDATE_URL = "/region/{id}";
  */
 void delete(Integer id);
 public static final String DELETE_URL = "/region/{id}";
-
-/**
- * delete object list
- */
-void deleteList(List<Integer> idList);
-public static final String DELETE_LIST_URL = "/region/delete";
 
 }

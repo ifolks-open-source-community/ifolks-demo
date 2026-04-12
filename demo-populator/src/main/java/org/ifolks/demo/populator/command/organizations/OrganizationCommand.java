@@ -1,12 +1,10 @@
 package org.ifolks.demo.populator.command.organizations;
 
-import org.ifolks.commons.mapper.impl.ObjectArrayToBeanMapperImpl;
-import org.ifolks.commons.mapper.impl.StringArrayToBeanMapperImpl;
-import org.ifolks.commons.mapper.interfaces.ObjectArrayToBeanMapper;
+import java.util.List;
 import org.ifolks.demo.api.interfaces.organizations.OrganizationService;
 import org.ifolks.demo.api.model.organizations.forms.OrganizationForm;
-import org.ifolks.generator.persistence.backup.command.interfaces.BackupArgumentsCommand;
-import org.ifolks.generator.persistence.backup.reader.model.BackupArguments;
+import org.ifolks.demo.components.mapper.organizations.forms.OrganizationFormMapper;
+import org.ifolks.generator.components.population.commands.interfaces.ServiceCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ import org.springframework.stereotype.Component;
  * <br/>processed by ifolks-generator
  */
 @Component
-public class OrganizationCommand implements BackupArgumentsCommand {
+public class OrganizationCommand implements ServiceCommand {
 
 /*
  * logger
@@ -28,15 +26,12 @@ private static final Logger logger = LoggerFactory.getLogger(OrganizationCommand
 @Autowired
 private OrganizationService organizationService;
 
+@Autowired
+private OrganizationFormMapper organizationFormMapper;
+
 @Override
-public void execute(BackupArguments arguments) {
-ObjectArrayToBeanMapper<OrganizationForm> mapper;
-if (arguments.isArgumentsTyped()) {
-mapper = new ObjectArrayToBeanMapperImpl<OrganizationForm>(OrganizationForm.class);
-} else {
-mapper = new StringArrayToBeanMapperImpl<OrganizationForm>(OrganizationForm.class);
-}
-for (Object[] args : arguments.getArguments()) {
+public void execute(List<Object[]> data) {
+for (Object[] args : data) {
 String message = "execute organizationService.save - args : ";
 for (Object arg:args) {
 message += "[" + arg + "]";
@@ -44,7 +39,7 @@ message += "[" + arg + "]";
 logger.info(message);
 
 try {
-OrganizationForm organizationForm = mapper.mapFrom(new OrganizationForm(), args);
+OrganizationForm organizationForm = organizationFormMapper.toForm(args);
 
 this.organizationService.save(organizationForm);
 } catch (Exception e) {

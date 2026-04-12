@@ -72,14 +72,6 @@ return countryService.find(code);
 }
 
 /**
- * create object
- */
-@RequestMapping(value = {CountryService.GET_NEW_URL}, method = RequestMethod.GET)
-public @ResponseBody CountryFullView create() {
-return countryService.create();
-}
-
-/**
  * save object
  */
 @RequestMapping(value = {CountryService.SAVE_URL}, method = RequestMethod.POST)
@@ -101,14 +93,6 @@ countryService.update(id, form);
 @RequestMapping(value = {CountryService.DELETE_URL}, method = RequestMethod.DELETE)
 public @ResponseBody void delete(@PathVariable("id") Short id) {
 countryService.delete(id);
-}
-
-/**
- * delete object list
- */
-@RequestMapping(value = {CountryService.DELETE_LIST_URL}, method = RequestMethod.POST)
-public @ResponseBody void deleteList(@RequestBody List<Short> idList) {
-countryService.deleteList(idList);
 }
 
 }

@@ -7,7 +7,7 @@ import { CityForm } from 'src/app/features/models/reference/localization/forms/C
 export class CityFullView {
 
 id: number;
-form: CityForm;
+form: CityForm = new CityForm();
 canUpdate: boolean;
 canDelete: boolean;
 

@@ -7,7 +7,7 @@ import { CalendarForm } from 'src/app/features/models/reference/time/forms/Calen
 export class CalendarFullView {
 
 id: number;
-form: CalendarForm;
+form: CalendarForm = new CalendarForm();
 canUpdate: boolean;
 canDelete: boolean;
 

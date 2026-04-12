@@ -84,10 +84,10 @@ return result;
 public ScrollView<CountryBasicView> scroll(ScrollForm<CountryFilter, CountrySorting> form) {
 countryRightsManager.checkCanAccess();
 Long size = countryDao.count();
-Long count = countryDao.count(form.getFilter());
-Long numberOfPages = count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L);
-Long currentPage = Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, numberOfPages));
-List<Country> list = countryDao.scroll(form.getFilter(), form.getSorting(),(currentPage-1)*form.getElementsPerPage(), form.getElementsPerPage());
+Long count = countryDao.count(form.filter());
+Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
+Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
+List<Country> list = countryDao.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<CountryBasicView> elements = new ArrayList<>(list.size());
 for (Country country : list) {
 elements.add(this.countryBasicViewMapper.toView(country));
@@ -103,7 +103,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 public CountryFullView load(Short id) {
 Country country = countryDao.load(id);
 countryRightsManager.checkCanAccess(country);
-return this.countryFullViewMapper.mapFrom(new CountryFullView(),country);
+return this.countryFullViewMapper.toView(country);
 }
 
 /**
@@ -114,16 +114,7 @@ return this.countryFullViewMapper.mapFrom(new CountryFullView(),country);
 public CountryFullView find(String code) {
 Country country = countryDao.find(code);
 countryRightsManager.checkCanAccess(country);
-return this.countryFullViewMapper.mapFrom(new CountryFullView(), country);
-}
-
-/**
- * create object
- */
-@Override
-public CountryFullView create() {
-countryRightsManager.checkCanCreate();
-return new CountryFullView();
+return this.countryFullViewMapper.toView(country);
 }
 
 /**
@@ -132,7 +123,7 @@ return new CountryFullView();
 @Override
 @Transactional(rollbackFor=Exception.class)
 public Short save(CountryForm countryForm) {
-Country country = this.countryFormMapper.mapTo(countryForm, new Country());
+Country country = this.countryFormMapper.toEntity(countryForm, new Country());
 countryRightsManager.checkCanSave(country);
 countryStateManager.checkCanSave(country);
 return countryProcessor.save(country);
@@ -147,7 +138,7 @@ public void update(Short id, CountryForm countryForm) {
 Country country = this.countryDao.load(id);
 countryRightsManager.checkCanUpdate(country);
 countryStateManager.checkCanUpdate(country);
-country = this.countryFormMapper.mapTo(countryForm, country);
+country = this.countryFormMapper.toEntity(countryForm, country);
 countryProcessor.update(country);
 }
 
@@ -161,23 +152,6 @@ Country country = countryDao.load(id);
 countryRightsManager.checkCanDelete(country);
 countryStateManager.checkCanDelete(country);
 countryProcessor.delete(country);
-}
-
-/**
- * delete object list
- */
-@Override
-@Transactional(rollbackFor=Exception.class)
-public void deleteList(List<Short> idList) {
-Country country;
-if (idList != null){
-for (Short id:idList){
-country = countryDao.load(id);
-countryRightsManager.checkCanDelete(country);
-countryStateManager.checkCanDelete(country);
-countryProcessor.delete(country);
-}
-}
 }
 
 }

@@ -21,7 +21,7 @@ protected CountryRightsManager countryRightsManager;
 protected CountryStateManager countryStateManager;
 
 /**
- * mapping object to view
+ * mapping entity to view
  */
 public CountryBasicView toView(Country country) {
 Short id = country.getId();

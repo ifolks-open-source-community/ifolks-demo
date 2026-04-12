@@ -82,14 +82,6 @@ return organizationService.loadOrganizationCertification(id);
 }
 
 /**
- * create object
- */
-@RequestMapping(value = {OrganizationService.GET_NEW_URL}, method = RequestMethod.GET)
-public @ResponseBody OrganizationFullView create() {
-return organizationService.create();
-}
-
-/**
  * save object
  */
 @RequestMapping(value = {OrganizationService.SAVE_URL}, method = RequestMethod.POST)
@@ -135,14 +127,6 @@ organizationService.delete(id);
 @RequestMapping(value = {OrganizationService.DELETE_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.DELETE)
 public @ResponseBody void deleteOrganizationCertification(@PathVariable("id")Integer id) {
 organizationService.deleteOrganizationCertification(id);
-}
-
-/**
- * delete object list
- */
-@RequestMapping(value = {OrganizationService.DELETE_LIST_URL}, method = RequestMethod.POST)
-public @ResponseBody void deleteList(@RequestBody List<Integer> idList) {
-organizationService.deleteList(idList);
 }
 
 }

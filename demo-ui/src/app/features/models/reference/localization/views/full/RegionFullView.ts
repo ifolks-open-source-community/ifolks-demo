@@ -7,7 +7,7 @@ import { RegionForm } from 'src/app/features/models/reference/localization/forms
 export class RegionFullView {
 
 id: number;
-form: RegionForm;
+form: RegionForm = new RegionForm();
 canUpdate: boolean;
 canDelete: boolean;
 

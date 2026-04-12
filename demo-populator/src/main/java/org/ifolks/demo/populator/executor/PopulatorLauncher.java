@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.Set;
 import javax.sql.DataSource;
 import org.ifolks.generator.bash.prompt.PopulatorPrompter;
-import org.ifolks.generator.components.checker.BackupPostExecutionChecker;
-import org.ifolks.generator.components.checker.BackupPreExecutionChecker;
-import org.ifolks.generator.model.backup.check.BackupPlanPostExecutionWarning;
-import org.ifolks.generator.model.backup.check.BackupPlanPreExecutionWarning;
+import org.ifolks.generator.components.metadata.persistence.interfaces.ProjectMetaDataDao;
+import org.ifolks.generator.components.population.checks.PopulationPostExecutionChecker;
+import org.ifolks.generator.components.population.checks.PopulationPreExecutionChecker;
+import org.ifolks.generator.components.population.datasources.InputDataSourceProvider;
 import org.ifolks.generator.model.domain.Project;
 import org.ifolks.generator.model.metadata.ProjectMetaData;
-import org.ifolks.generator.persistence.backup.datasource.interfaces.InputDataSourceProvider;
-import org.ifolks.generator.persistence.metadata.interfaces.ProjectMetaDataDao;
+import org.ifolks.generator.model.population.check.PopulationPlanPostExecutionWarning;
+import org.ifolks.generator.model.population.check.PopulationPlanPreExecutionWarning;
 import org.ifolks.generator.services.impl.Populator;
 import org.ifolks.generator.services.interfaces.ProjectLoader;
 import org.ifolks.generator.services.interfaces.ProjectMetaDataService;
@@ -84,9 +84,9 @@ public class PopulatorLauncher {
 												
 				InputDataSourceProvider inputDataSourceProvider = appContext.getBean(InputDataSourceProvider.class);
 				
-				BackupPreExecutionChecker preChecker = appContext.getBean(BackupPreExecutionChecker.class);
+				PopulationPreExecutionChecker preChecker = appContext.getBean(PopulationPreExecutionChecker.class);
 				logger.info("Checking backup plan before execution...");
-				List<BackupPlanPreExecutionWarning> preExecutionWarnings = preChecker.checkPlan(inputDataSourceProvider, project, tables, backupPath);
+				List<PopulationPlanPreExecutionWarning> preExecutionWarnings = preChecker.checkPlan(inputDataSourceProvider, project, tables, backupPath);
 				logger.info("plan pre-execution check finished");
 				
 				PopulatorPrompter prompter = new PopulatorPrompter();
@@ -101,9 +101,9 @@ public class PopulatorLauncher {
 				Populator populator = appContext.getBean(Populator.class);
 				populator.populate(inputDataSourceProvider, project, tables, backupPath);
 				
-				BackupPostExecutionChecker postChecker = appContext.getBean(BackupPostExecutionChecker.class);
+				PopulationPostExecutionChecker postChecker = appContext.getBean(PopulationPostExecutionChecker.class);
 				logger.info("Checking backup plan after execution...");
-				List<BackupPlanPostExecutionWarning> postExecutionWarnings = postChecker.checkPlan(dataSource, project, tables);
+				List<PopulationPlanPostExecutionWarning> postExecutionWarnings = postChecker.checkPlan(dataSource, project, tables);
 				logger.info("plan post-execution check finished");
 				
 				prompter.printPostExecutionWarnings(postExecutionWarnings);

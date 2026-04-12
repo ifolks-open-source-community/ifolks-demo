@@ -7,7 +7,7 @@ import { FoolForm } from 'src/app/features/models/dummy/forms/FoolForm';
 export class FoolFullView {
 
 id: string;
-form: FoolForm;
+form: FoolForm = new FoolForm();
 canUpdate: boolean;
 canDelete: boolean;
 

@@ -93,10 +93,10 @@ return result;
 public ScrollView<OrganizationBasicView> scroll(ScrollForm<OrganizationFilter, OrganizationSorting> form) {
 organizationRightsManager.checkCanAccess();
 Long size = organizationDao.count();
-Long count = organizationDao.count(form.getFilter());
-Long numberOfPages = count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L);
-Long currentPage = Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, numberOfPages));
-List<Organization> list = organizationDao.scroll(form.getFilter(), form.getSorting(),(currentPage-1)*form.getElementsPerPage(), form.getElementsPerPage());
+Long count = organizationDao.count(form.filter());
+Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
+Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
+List<Organization> list = organizationDao.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<OrganizationBasicView> elements = new ArrayList<>(list.size());
 for (Organization organization : list) {
 elements.add(this.organizationBasicViewMapper.toView(organization));
@@ -112,7 +112,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 public OrganizationFullView load(Integer id) {
 Organization organization = organizationDao.load(id);
 organizationRightsManager.checkCanAccess(organization);
-return this.organizationFullViewMapper.mapFrom(new OrganizationFullView(),organization);
+return this.organizationFullViewMapper.toView(organization);
 }
 
 /**
@@ -123,7 +123,7 @@ return this.organizationFullViewMapper.mapFrom(new OrganizationFullView(),organi
 public OrganizationFullView find(String code) {
 Organization organization = organizationDao.find(code);
 organizationRightsManager.checkCanAccess(organization);
-return this.organizationFullViewMapper.mapFrom(new OrganizationFullView(), organization);
+return this.organizationFullViewMapper.toView(organization);
 }
 
 /**
@@ -136,19 +136,10 @@ Organization organization = organizationDao.load(id);
 organizationRightsManager.checkCanAccessOrganizationCertification(organization);
 OrganizationCertification organizationCertification = organization.getOrganizationCertification();
 if (organizationCertification==null) {
-return new OrganizationCertificationFullView();
+return null;
 } else {
-return this.organizationCertificationFullViewMapper.mapFrom(new OrganizationCertificationFullView(), organizationCertification);
+return this.organizationCertificationFullViewMapper.toView(organizationCertification);
 }
-}
-
-/**
- * create object
- */
-@Override
-public OrganizationFullView create() {
-organizationRightsManager.checkCanCreate();
-return new OrganizationFullView();
 }
 
 /**
@@ -157,7 +148,7 @@ return new OrganizationFullView();
 @Override
 @Transactional(rollbackFor=Exception.class)
 public Integer save(OrganizationForm organizationForm) {
-Organization organization = this.organizationFormMapper.mapTo(organizationForm, new Organization());
+Organization organization = this.organizationFormMapper.toEntity(organizationForm, new Organization());
 organizationRightsManager.checkCanSave(organization);
 organizationStateManager.checkCanSave(organization);
 return organizationProcessor.save(organization);
@@ -170,7 +161,7 @@ return organizationProcessor.save(organization);
 @Transactional(rollbackFor=Exception.class)
 public void saveOrganizationCertification(Integer id, OrganizationCertificationForm organizationCertificationForm) {
 Organization organization = this.organizationDao.load(id);
-OrganizationCertification organizationCertification = this.organizationCertificationFormMapper.mapTo(organizationCertificationForm, new OrganizationCertification());
+OrganizationCertification organizationCertification = this.organizationCertificationFormMapper.toEntity(organizationCertificationForm, new OrganizationCertification());
 organizationRightsManager.checkCanSaveOrganizationCertification(organizationCertification,organization);
 organizationStateManager.checkCanSaveOrganizationCertification(organizationCertification,organization);
 organizationProcessor.saveOrganizationCertification(organizationCertification, organization);
@@ -185,7 +176,7 @@ public void update(Integer id, OrganizationForm organizationForm) {
 Organization organization = this.organizationDao.load(id);
 organizationRightsManager.checkCanUpdate(organization);
 organizationStateManager.checkCanUpdate(organization);
-organization = this.organizationFormMapper.mapTo(organizationForm, organization);
+organization = this.organizationFormMapper.toEntity(organizationForm, organization);
 organizationProcessor.update(organization);
 }
 
@@ -199,7 +190,7 @@ Organization organization = this.organizationDao.load(id);
 OrganizationCertification organizationCertification = organization.getOrganizationCertification();
 organizationRightsManager.checkCanUpdateOrganizationCertification(organizationCertification);
 organizationStateManager.checkCanUpdateOrganizationCertification(organizationCertification);
-organization.setOrganizationCertification(this.organizationCertificationFormMapper.mapTo(organizationCertificationForm, organizationCertification));
+organization.setOrganizationCertification(this.organizationCertificationFormMapper.toEntity(organizationCertificationForm, organizationCertification));
 organizationProcessor.updateOrganizationCertification(organizationCertification);
 }
 
@@ -226,23 +217,6 @@ OrganizationCertification organizationCertification = organization.getOrganizati
 organizationRightsManager.checkCanDeleteOrganizationCertification(organizationCertification);
 organizationStateManager.checkCanDeleteOrganizationCertification(organizationCertification);
 this.organizationProcessor.deleteOrganizationCertification(organizationCertification);
-}
-
-/**
- * delete object list
- */
-@Override
-@Transactional(rollbackFor=Exception.class)
-public void deleteList(List<Integer> idList) {
-Organization organization;
-if (idList != null){
-for (Integer id:idList){
-organization = organizationDao.load(id);
-organizationRightsManager.checkCanDelete(organization);
-organizationStateManager.checkCanDelete(organization);
-organizationProcessor.delete(organization);
-}
-}
 }
 
 }

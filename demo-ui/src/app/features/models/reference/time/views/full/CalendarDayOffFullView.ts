@@ -7,7 +7,7 @@ import { CalendarDayOffForm } from 'src/app/features/models/reference/time/forms
 export class CalendarDayOffFullView {
 
 id: number;
-form: CalendarDayOffForm;
+form: CalendarDayOffForm = new CalendarDayOffForm();
 canUpdate: boolean;
 canDelete: boolean;
 

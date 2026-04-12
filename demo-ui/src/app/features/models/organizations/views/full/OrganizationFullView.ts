@@ -7,7 +7,7 @@ import { OrganizationForm } from 'src/app/features/models/organizations/forms/Or
 export class OrganizationFullView {
 
 id: number;
-form: OrganizationForm;
+form: OrganizationForm = new OrganizationForm();
 canUpdate: boolean;
 canDelete: boolean;
 

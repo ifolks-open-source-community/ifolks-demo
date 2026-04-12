@@ -50,13 +50,6 @@ return this.http.get<CountryFullView>(environment.restApiUrl + '/country/' + id)
 }
 
 /**
- * create object
- */
-public create() {
-return this.http.get<CountryFullView>(environment.restApiUrl + '/country/new');
-}
-
-/**
  * save object
  */
 public save(form: CountryForm) {

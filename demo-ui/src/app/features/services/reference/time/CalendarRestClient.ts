@@ -76,21 +76,6 @@ return this.http.get<CalendarDayOffFullView>(environment.restApiUrl + '/calendar
 }
 
 /**
- * create object
- */
-public create() {
-return this.http.get<CalendarFullView>(environment.restApiUrl + '/calendar/new');
-}
-
-/**
- * create one to many component calendarDayOff
- */
-public createCalendarDayOff(id:number) {
-return this.http.get<CalendarDayOffFullView>(environment.restApiUrl + '/calendar/' + id + '/calendar-day-off/new', this.httpOptions);
-}
-
-
-/**
  * save object
  */
 public save(form: CalendarForm) {

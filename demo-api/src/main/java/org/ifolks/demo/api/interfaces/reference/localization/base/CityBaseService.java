@@ -53,12 +53,6 @@ public static final String FIND_URL = "/city/find";
 CityFullView find(String regionCountryCode, String regionCode, String code);
 
 /**
- * create object
- */
-CityFullView create();
-public static final String GET_NEW_URL = "/city/new";
-
-/**
  * save object
  */
 Long save(CityForm cityForm);
@@ -75,11 +69,5 @@ public static final String UPDATE_URL = "/city/{id}";
  */
 void delete(Long id);
 public static final String DELETE_URL = "/city/{id}";
-
-/**
- * delete object list
- */
-void deleteList(List<Long> idList);
-public static final String DELETE_LIST_URL = "/city/delete";
 
 }

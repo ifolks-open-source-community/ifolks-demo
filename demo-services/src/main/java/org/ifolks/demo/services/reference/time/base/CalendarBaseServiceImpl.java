@@ -99,10 +99,10 @@ return result;
 public ScrollView<CalendarBasicView> scroll(ScrollForm<CalendarFilter, CalendarSorting> form) {
 calendarRightsManager.checkCanAccess();
 Long size = calendarDao.count();
-Long count = calendarDao.count(form.getFilter());
-Long numberOfPages = count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L);
-Long currentPage = Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, numberOfPages));
-List<Calendar> list = calendarDao.scroll(form.getFilter(), form.getSorting(),(currentPage-1)*form.getElementsPerPage(), form.getElementsPerPage());
+Long count = calendarDao.count(form.filter());
+Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
+Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
+List<Calendar> list = calendarDao.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<CalendarBasicView> elements = new ArrayList<>(list.size());
 for (Calendar calendar : list) {
 elements.add(this.calendarBasicViewMapper.toView(calendar));
@@ -118,7 +118,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 public CalendarFullView load(Integer id) {
 Calendar calendar = calendarDao.load(id);
 calendarRightsManager.checkCanAccess(calendar);
-return this.calendarFullViewMapper.mapFrom(new CalendarFullView(),calendar);
+return this.calendarFullViewMapper.toView(calendar);
 }
 
 /**
@@ -129,7 +129,7 @@ return this.calendarFullViewMapper.mapFrom(new CalendarFullView(),calendar);
 public CalendarFullView find(String code) {
 Calendar calendar = calendarDao.find(code);
 calendarRightsManager.checkCanAccess(calendar);
-return this.calendarFullViewMapper.mapFrom(new CalendarFullView(), calendar);
+return this.calendarFullViewMapper.toView(calendar);
 }
 
 /**
@@ -157,10 +157,10 @@ public ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (Integer calenda
 Calendar calendar = calendarDao.load(calendarId);
 calendarRightsManager.checkCanAccessCalendarDayOff(calendar);
 Long size = calendarDao.countCalendarDayOff(calendarId);
-Long count = calendarDao.countCalendarDayOff(calendarId, form.getFilter());
-Long numberOfPages = count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L);
-Long currentPage = Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, numberOfPages));
-List<CalendarDayOff> list = calendarDao.scrollCalendarDayOff(calendarId, form.getFilter(), form.getSorting(),(currentPage-1)*form.getElementsPerPage(), form.getElementsPerPage());
+Long count = calendarDao.countCalendarDayOff(calendarId, form.filter());
+Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
+Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
+List<CalendarDayOff> list = calendarDao.scrollCalendarDayOff(calendarId, form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<CalendarDayOffBasicView> elements = new ArrayList<>(list.size());
 for (CalendarDayOff calendarDayOff : list) {
 elements.add(this.calendarDayOffBasicViewMapper.toView(calendarDayOff));
@@ -176,27 +176,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 public CalendarDayOffFullView loadCalendarDayOff(Integer id) {
 CalendarDayOff calendarDayOff = calendarDao.loadCalendarDayOff(id);
 calendarRightsManager.checkCanAccessCalendarDayOff(calendarDayOff.getCalendar());
-return this.calendarDayOffFullViewMapper.mapFrom(calendarDayOff);
-}
-
-/**
- * create object
- */
-@Override
-public CalendarFullView create() {
-calendarRightsManager.checkCanCreate();
-return new CalendarFullView();
-}
-
-/**
- * create one to many component calendarDayOff
- */
-@Override
-@Transactional(readOnly=true)
-public CalendarDayOffFullView createCalendarDayOff(Integer id) {
-Calendar calendar = calendarDao.load(id);
-calendarRightsManager.checkCanCreateCalendarDayOff(calendar);
-return new CalendarDayOffFullView();
+return this.calendarDayOffFullViewMapper.toView(calendarDayOff);
 }
 
 /**
@@ -205,7 +185,7 @@ return new CalendarDayOffFullView();
 @Override
 @Transactional(rollbackFor=Exception.class)
 public Integer save(CalendarForm calendarForm) {
-Calendar calendar = this.calendarFormMapper.mapTo(calendarForm, new Calendar());
+Calendar calendar = this.calendarFormMapper.toEntity(calendarForm, new Calendar());
 calendarRightsManager.checkCanSave(calendar);
 calendarStateManager.checkCanSave(calendar);
 return calendarProcessor.save(calendar);
@@ -218,7 +198,7 @@ return calendarProcessor.save(calendar);
 @Transactional(rollbackFor=Exception.class)
 public void saveCalendarDayOff(Integer id, CalendarDayOffForm calendarDayOffForm) {
 Calendar calendar = this.calendarDao.load(id);
-CalendarDayOff calendarDayOff = this.calendarDayOffFormMapper.mapTo(calendarDayOffForm, new CalendarDayOff());
+CalendarDayOff calendarDayOff = this.calendarDayOffFormMapper.toEntity(calendarDayOffForm, new CalendarDayOff());
 calendarRightsManager.checkCanSaveCalendarDayOff(calendarDayOff,calendar);
 calendarStateManager.checkCanSaveCalendarDayOff(calendarDayOff,calendar);
 calendarProcessor.saveCalendarDayOff(calendarDayOff,calendar);
@@ -233,7 +213,7 @@ public void update(Integer id, CalendarForm calendarForm) {
 Calendar calendar = this.calendarDao.load(id);
 calendarRightsManager.checkCanUpdate(calendar);
 calendarStateManager.checkCanUpdate(calendar);
-calendar = this.calendarFormMapper.mapTo(calendarForm, calendar);
+calendar = this.calendarFormMapper.toEntity(calendarForm, calendar);
 calendarProcessor.update(calendar);
 }
 
@@ -246,7 +226,7 @@ public void updateCalendarDayOff(Integer id, CalendarDayOffForm calendarDayOffFo
 CalendarDayOff calendarDayOff = this.calendarDao.loadCalendarDayOff(id);
 calendarRightsManager.checkCanUpdateCalendarDayOff(calendarDayOff);
 calendarStateManager.checkCanUpdateCalendarDayOff(calendarDayOff);
-calendarDayOff = this.calendarDayOffFormMapper.mapTo(calendarDayOffForm, calendarDayOff);
+calendarDayOff = this.calendarDayOffFormMapper.toEntity(calendarDayOffForm, calendarDayOff);
 calendarProcessor.updateCalendarDayOff(calendarDayOff);
 }
 
@@ -273,40 +253,6 @@ CalendarDayOff calendarDayOff = calendarDao.loadCalendarDayOff(id);
 calendarRightsManager.checkCanDeleteCalendarDayOff(calendarDayOff);
 calendarStateManager.checkCanDeleteCalendarDayOff(calendarDayOff);
 this.calendarProcessor.deleteCalendarDayOff(calendarDayOff);
-}
-
-/**
- * delete object list
- */
-@Override
-@Transactional(rollbackFor=Exception.class)
-public void deleteList(List<Integer> idList) {
-Calendar calendar;
-if (idList != null){
-for (Integer id:idList){
-calendar = calendarDao.load(id);
-calendarRightsManager.checkCanDelete(calendar);
-calendarStateManager.checkCanDelete(calendar);
-calendarProcessor.delete(calendar);
-}
-}
-}
-
-/**
- * delete one to many component calendarDayOff list
- */
-@Override
-@Transactional(rollbackFor=Exception.class)
-public void deleteCalendarDayOffList(List<Integer> idList) {
-CalendarDayOff calendarDayOff;
-if (idList != null){
-for (Integer i:idList){
-calendarDayOff = calendarDao.loadCalendarDayOff(i);
-calendarRightsManager.checkCanDeleteCalendarDayOff(calendarDayOff);
-calendarStateManager.checkCanDeleteCalendarDayOff(calendarDayOff);
-this.calendarProcessor.deleteCalendarDayOff(calendarDayOff);
-}
-}
 }
 
 }

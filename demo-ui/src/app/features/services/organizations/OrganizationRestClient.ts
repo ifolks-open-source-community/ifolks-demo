@@ -59,13 +59,6 @@ return this.http.get<OrganizationCertificationFullView>(environment.restApiUrl +
 }
 
 /**
- * create object
- */
-public create() {
-return this.http.get<OrganizationFullView>(environment.restApiUrl + '/organization/new');
-}
-
-/**
  * save object
  */
 public save(form: OrganizationForm) {

@@ -1,39 +1,77 @@
 package org.ifolks.demo.components.mapper.dummy.forms.base;
 
-import org.ifolks.commons.mapper.impl.BasicMapperImpl;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
 import org.ifolks.demo.api.model.dummy.forms.FoolForm;
 import org.ifolks.demo.model.dummy.Fool;
+import org.springframework.stereotype.Component;
 
 /**
  * auto generated base mapper class file
  * <br/>no modification should be done to this file
  * <br/>processed by ifolks-generator
  */
-public class FoolFormBaseMapper extends BasicMapperImpl<FoolForm, Fool> {
+@Component
+public class FoolFormBaseMapper {
 
-public FoolFormBaseMapper() {
-super(FoolForm.class, Fool.class);
-}
 
 /*
  * properties
  */
 
 /**
- * mapping form from object
+ * mapping object arry to form
  */
-@Override
-public FoolForm mapFrom(FoolForm foolForm, Fool fool) {
-foolForm = super.mapFrom(foolForm, fool);
-return foolForm;
+public FoolForm toForm(Object[] args) {
+
+return new FoolForm (
+(String)args[0],
+(String)args[1],
+(Long)args[2],
+(Boolean)args[3],
+(Double)args[4],
+(BigDecimal)args[5],
+(LocalDate)args[6],
+(Date)args[7]);
 }
 
 /**
- * mapping view to object
+ * mapping entity to form
  */
-@Override
-public Fool mapTo(FoolForm foolForm, Fool fool) {
-fool = super.mapTo(foolForm, fool);
+public FoolForm toForm(Fool fool) {
+String code = fool.getCode();
+String description = fool.getDescription();
+Long longField = fool.getLongField();
+Boolean booleanField = fool.getBooleanField();
+Double doubleField = fool.getDoubleField();
+BigDecimal decimalField = fool.getDecimalField();
+LocalDate dateField = fool.getDateField();
+Date datetimeField = fool.getDatetimeField();
+
+return new FoolForm (
+code,
+description,
+longField,
+booleanField,
+doubleField,
+decimalField,
+dateField,
+datetimeField);
+}
+
+/**
+ * mapping form to entity
+ */
+public Fool toEntity(FoolForm foolForm, Fool fool) {
+fool.setCode(foolForm.code());
+fool.setDescription(foolForm.description());
+fool.setLongField(foolForm.longField());
+fool.setBooleanField(foolForm.booleanField());
+fool.setDoubleField(foolForm.doubleField());
+fool.setDecimalField(foolForm.decimalField());
+fool.setDateField(foolForm.dateField());
+fool.setDatetimeField(foolForm.datetimeField());
 return fool;
 }
 

@@ -1,39 +1,46 @@
 package org.ifolks.demo.components.mapper.organizations.forms.base;
 
-import org.ifolks.commons.mapper.impl.BasicMapperImpl;
 import org.ifolks.demo.api.model.organizations.forms.OrganizationCertificationForm;
 import org.ifolks.demo.model.organizations.OrganizationCertification;
+import org.springframework.stereotype.Component;
 
 /**
  * auto generated base mapper class file
  * <br/>no modification should be done to this file
  * <br/>processed by ifolks-generator
  */
-public class OrganizationCertificationFormBaseMapper extends BasicMapperImpl<OrganizationCertificationForm, OrganizationCertification> {
+@Component
+public class OrganizationCertificationFormBaseMapper {
 
-public OrganizationCertificationFormBaseMapper() {
-super(OrganizationCertificationForm.class, OrganizationCertification.class);
-}
 
 /*
  * properties
  */
 
 /**
- * mapping form from object
+ * mapping object arry to form
  */
-@Override
-public OrganizationCertificationForm mapFrom(OrganizationCertificationForm organizationCertificationForm, OrganizationCertification organizationCertification) {
-organizationCertificationForm = super.mapFrom(organizationCertificationForm, organizationCertification);
-return organizationCertificationForm;
+public OrganizationCertificationForm toForm(Object[] args) {
+
+return new OrganizationCertificationForm (
+(Boolean)args[0]);
 }
 
 /**
- * mapping view to object
+ * mapping entity to form
  */
-@Override
-public OrganizationCertification mapTo(OrganizationCertificationForm organizationCertificationForm, OrganizationCertification organizationCertification) {
-organizationCertification = super.mapTo(organizationCertificationForm, organizationCertification);
+public OrganizationCertificationForm toForm(OrganizationCertification organizationCertification) {
+Boolean certified = organizationCertification.getCertified();
+
+return new OrganizationCertificationForm (
+certified);
+}
+
+/**
+ * mapping form to entity
+ */
+public OrganizationCertification toEntity(OrganizationCertificationForm organizationCertificationForm, OrganizationCertification organizationCertification) {
+organizationCertification.setCertified(organizationCertificationForm.certified());
 return organizationCertification;
 }
 

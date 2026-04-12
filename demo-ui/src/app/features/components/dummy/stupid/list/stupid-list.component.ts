@@ -96,11 +96,9 @@ this.refresh();
 }
 
 create(): void {
-this.service.create().subscribe((t) => {
 let ref = this.dialog.open(StupidModalComponent);
-ref.componentInstance.view = t;
+ref.componentInstance.view = new StupidFullView();
 ref.afterClosed().subscribe(result => {this.refresh();});
-});
 }
 
 edit(id: number): void {

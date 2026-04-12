@@ -1,21 +1,19 @@
 package org.ifolks.demo.components.mapper.reference.localization.forms.base;
 
-import org.ifolks.commons.mapper.impl.BasicMapperImpl;
 import org.ifolks.demo.api.model.reference.localization.forms.RegionForm;
 import org.ifolks.demo.model.reference.localization.Region;
 import org.ifolks.demo.persistence.interfaces.reference.localization.CountryDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * auto generated base mapper class file
  * <br/>no modification should be done to this file
  * <br/>processed by ifolks-generator
  */
-public class RegionFormBaseMapper extends BasicMapperImpl<RegionForm, Region> {
+@Component
+public class RegionFormBaseMapper {
 
-public RegionFormBaseMapper() {
-super(RegionForm.class, Region.class);
-}
 
 /*
  * properties
@@ -24,22 +22,37 @@ super(RegionForm.class, Region.class);
 protected CountryDao countryDao;
 
 /**
- * mapping form from object
+ * mapping object arry to form
  */
-@Override
-public RegionForm mapFrom(RegionForm regionForm, Region region) {
-regionForm = super.mapFrom(regionForm, region);
-regionForm.setCountryCode(region.getCountry().getCode());
-return regionForm;
+public RegionForm toForm(Object[] args) {
+
+return new RegionForm (
+(String)args[0],
+(String)args[1],
+(String)args[2]);
 }
 
 /**
- * mapping view to object
+ * mapping entity to form
  */
-@Override
-public Region mapTo(RegionForm regionForm, Region region) {
-region = super.mapTo(regionForm, region);
-region.setCountry(countryDao.find(regionForm.getCountryCode()));
+public RegionForm toForm(Region region) {
+String countryCode = region.getCountry().getCode();
+String code = region.getCode();
+String label = region.getLabel();
+
+return new RegionForm (
+countryCode,
+code,
+label);
+}
+
+/**
+ * mapping form to entity
+ */
+public Region toEntity(RegionForm regionForm, Region region) {
+region.setCountry(countryDao.find(regionForm.countryCode()));
+region.setCode(regionForm.code());
+region.setLabel(regionForm.label());
 return region;
 }
 

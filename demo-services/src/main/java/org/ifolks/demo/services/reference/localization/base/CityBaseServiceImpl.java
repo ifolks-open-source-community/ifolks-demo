@@ -87,10 +87,10 @@ return result;
 public ScrollView<CityBasicView> scroll(ScrollForm<CityFilter, CitySorting> form) {
 cityRightsManager.checkCanAccess();
 Long size = cityDao.count();
-Long count = cityDao.count(form.getFilter());
-Long numberOfPages = count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L);
-Long currentPage = Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, numberOfPages));
-List<City> list = cityDao.scroll(form.getFilter(), form.getSorting(),(currentPage-1)*form.getElementsPerPage(), form.getElementsPerPage());
+Long count = cityDao.count(form.filter());
+Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
+Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
+List<City> list = cityDao.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<CityBasicView> elements = new ArrayList<>(list.size());
 for (City city : list) {
 elements.add(this.cityBasicViewMapper.toView(city));
@@ -106,10 +106,10 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 public ScrollView<CityBasicView> scrollFromRegion (Integer regionId, ScrollForm<CityFilter, CitySorting> form) {
 cityRightsManager.checkCanAccess();
 Long size = cityDao.countFromRegion(regionId);
-Long count = cityDao.countFromRegion(regionId, form.getFilter());
-Long numberOfPages = count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L);
-Long currentPage = Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, numberOfPages));
-List<City> list = cityDao.scrollFromRegion(regionId, form.getFilter(), form.getSorting(),(currentPage-1)*form.getElementsPerPage(), form.getElementsPerPage());
+Long count = cityDao.countFromRegion(regionId, form.filter());
+Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
+Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
+List<City> list = cityDao.scrollFromRegion(regionId, form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<CityBasicView> elements = new ArrayList<>(list.size());
 for (City city : list) {
 elements.add(this.cityBasicViewMapper.toView(city));
@@ -125,7 +125,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 public CityFullView load(Long id) {
 City city = cityDao.load(id);
 cityRightsManager.checkCanAccess(city);
-return this.cityFullViewMapper.mapFrom(new CityFullView(),city);
+return this.cityFullViewMapper.toView(city);
 }
 
 /**
@@ -136,16 +136,7 @@ return this.cityFullViewMapper.mapFrom(new CityFullView(),city);
 public CityFullView find(String regionCountryCode, String regionCode, String code) {
 City city = cityDao.find(regionCountryCode, regionCode, code);
 cityRightsManager.checkCanAccess(city);
-return this.cityFullViewMapper.mapFrom(new CityFullView(), city);
-}
-
-/**
- * create object
- */
-@Override
-public CityFullView create() {
-cityRightsManager.checkCanCreate();
-return new CityFullView();
+return this.cityFullViewMapper.toView(city);
 }
 
 /**
@@ -154,7 +145,7 @@ return new CityFullView();
 @Override
 @Transactional(rollbackFor=Exception.class)
 public Long save(CityForm cityForm) {
-City city = this.cityFormMapper.mapTo(cityForm, new City());
+City city = this.cityFormMapper.toEntity(cityForm, new City());
 cityRightsManager.checkCanSave(city);
 cityStateManager.checkCanSave(city);
 return cityProcessor.save(city);
@@ -169,7 +160,7 @@ public void update(Long id, CityForm cityForm) {
 City city = this.cityDao.load(id);
 cityRightsManager.checkCanUpdate(city);
 cityStateManager.checkCanUpdate(city);
-city = this.cityFormMapper.mapTo(cityForm, city);
+city = this.cityFormMapper.toEntity(cityForm, city);
 cityProcessor.update(city);
 }
 
@@ -183,23 +174,6 @@ City city = cityDao.load(id);
 cityRightsManager.checkCanDelete(city);
 cityStateManager.checkCanDelete(city);
 cityProcessor.delete(city);
-}
-
-/**
- * delete object list
- */
-@Override
-@Transactional(rollbackFor=Exception.class)
-public void deleteList(List<Long> idList) {
-City city;
-if (idList != null){
-for (Long id:idList){
-city = cityDao.load(id);
-cityRightsManager.checkCanDelete(city);
-cityStateManager.checkCanDelete(city);
-cityProcessor.delete(city);
-}
-}
 }
 
 }

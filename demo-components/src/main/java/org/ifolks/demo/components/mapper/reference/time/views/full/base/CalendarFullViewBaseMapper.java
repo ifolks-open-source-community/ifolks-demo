@@ -1,12 +1,13 @@
 package org.ifolks.demo.components.mapper.reference.time.views.full.base;
 
-import org.ifolks.commons.mapper.impl.FullViewMapper;
 import org.ifolks.demo.api.model.reference.time.forms.CalendarForm;
 import org.ifolks.demo.api.model.reference.time.views.full.CalendarFullView;
+import org.ifolks.demo.components.mapper.reference.time.forms.CalendarFormMapper;
 import org.ifolks.demo.components.rightsmanager.reference.time.CalendarRightsManager;
 import org.ifolks.demo.components.statemanager.reference.time.CalendarStateManager;
 import org.ifolks.demo.model.reference.time.Calendar;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * auto generated mapper class file
@@ -14,23 +15,26 @@ import org.springframework.beans.factory.annotation.Autowired;
  * <br/>processed by ifolks-generator
  */
 
-public class CalendarFullViewBaseMapper extends FullViewMapper<CalendarFullView, Integer, CalendarForm, Calendar> {
+@Component
+public class CalendarFullViewBaseMapper {
 
 @Autowired
 protected CalendarRightsManager calendarRightsManager;
 @Autowired
 protected CalendarStateManager calendarStateManager;
 
-public CalendarFullViewBaseMapper() {
-super(CalendarFullView.class, Calendar.class);
-}
+@Autowired
+protected CalendarFormMapper formMapper;
 
-@Override
-public CalendarFullView mapFrom(CalendarFullView calendarFullView, Calendar calendar) {
-calendarFullView = super.mapFrom(calendarFullView, calendar);
-calendarFullView.setCanUpdate(calendarRightsManager.canUpdate(calendar) && calendarStateManager.canUpdate(calendar));
-calendarFullView.setCanDelete(calendarRightsManager.canDelete(calendar) && calendarStateManager.canDelete(calendar));
-return calendarFullView;
+/**
+ * mapping entity to view
+ */
+public CalendarFullView toView(Calendar calendar) {
+Integer id = calendar.getId();
+CalendarForm form = formMapper.toForm(calendar);
+boolean canUpdate = calendarRightsManager.canUpdate(calendar) && calendarStateManager.canUpdate(calendar);
+boolean canDelete = calendarRightsManager.canDelete(calendar) && calendarStateManager.canDelete(calendar);
+return new CalendarFullView(id, canUpdate, canDelete, form);
 }
 
 }

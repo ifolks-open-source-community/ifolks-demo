@@ -57,13 +57,6 @@ return this.http.get<CityFullView>(environment.restApiUrl + '/city/' + id);
 }
 
 /**
- * create object
- */
-public create() {
-return this.http.get<CityFullView>(environment.restApiUrl + '/city/new');
-}
-
-/**
  * save object
  */
 public save(form: CityForm) {

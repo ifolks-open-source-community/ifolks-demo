@@ -1,21 +1,19 @@
 package org.ifolks.demo.components.mapper.reference.localization.forms.base;
 
-import org.ifolks.commons.mapper.impl.BasicMapperImpl;
 import org.ifolks.demo.api.model.reference.localization.forms.CityForm;
 import org.ifolks.demo.model.reference.localization.City;
 import org.ifolks.demo.persistence.interfaces.reference.localization.RegionDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * auto generated base mapper class file
  * <br/>no modification should be done to this file
  * <br/>processed by ifolks-generator
  */
-public class CityFormBaseMapper extends BasicMapperImpl<CityForm, City> {
+@Component
+public class CityFormBaseMapper {
 
-public CityFormBaseMapper() {
-super(CityForm.class, City.class);
-}
 
 /*
  * properties
@@ -24,23 +22,40 @@ super(CityForm.class, City.class);
 protected RegionDao regionDao;
 
 /**
- * mapping form from object
+ * mapping object arry to form
  */
-@Override
-public CityForm mapFrom(CityForm cityForm, City city) {
-cityForm = super.mapFrom(cityForm, city);
-cityForm.setRegionCountryCode(city.getRegion().getCountry().getCode());
-cityForm.setRegionCode(city.getRegion().getCode());
-return cityForm;
+public CityForm toForm(Object[] args) {
+
+return new CityForm (
+(String)args[0],
+(String)args[1],
+(String)args[2],
+(String)args[3]);
 }
 
 /**
- * mapping view to object
+ * mapping entity to form
  */
-@Override
-public City mapTo(CityForm cityForm, City city) {
-city = super.mapTo(cityForm, city);
-city.setRegion(regionDao.find(cityForm.getRegionCountryCode(), cityForm.getRegionCode()));
+public CityForm toForm(City city) {
+String regionCountryCode = city.getRegion().getCountry().getCode();
+String regionCode = city.getRegion().getCode();
+String code = city.getCode();
+String label = city.getLabel();
+
+return new CityForm (
+regionCountryCode,
+regionCode,
+code,
+label);
+}
+
+/**
+ * mapping form to entity
+ */
+public City toEntity(CityForm cityForm, City city) {
+city.setRegion(regionDao.find(cityForm.regionCountryCode(), cityForm.regionCode()));
+city.setCode(cityForm.code());
+city.setLabel(cityForm.label());
 return city;
 }
 

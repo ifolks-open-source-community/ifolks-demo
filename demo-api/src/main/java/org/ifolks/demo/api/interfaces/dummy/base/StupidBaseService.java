@@ -53,12 +53,6 @@ public static final String FIND_URL = "/stupid/find";
 StupidFullView find(String code);
 
 /**
- * create object
- */
-StupidFullView create();
-public static final String GET_NEW_URL = "/stupid/new";
-
-/**
  * save object
  */
 Long save(StupidForm stupidForm);
@@ -75,11 +69,5 @@ public static final String UPDATE_URL = "/stupid/{id}";
  */
 void delete(Long id);
 public static final String DELETE_URL = "/stupid/{id}";
-
-/**
- * delete object list
- */
-void deleteList(List<Long> idList);
-public static final String DELETE_LIST_URL = "/stupid/delete";
 
 }

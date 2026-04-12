@@ -1,12 +1,13 @@
 package org.ifolks.demo.components.mapper.reference.time.views.full.base;
 
-import org.ifolks.commons.mapper.impl.FullViewMapper;
 import org.ifolks.demo.api.model.reference.time.forms.CalendarDayOffForm;
 import org.ifolks.demo.api.model.reference.time.views.full.CalendarDayOffFullView;
+import org.ifolks.demo.components.mapper.reference.time.forms.CalendarDayOffFormMapper;
 import org.ifolks.demo.components.rightsmanager.reference.time.CalendarRightsManager;
 import org.ifolks.demo.components.statemanager.reference.time.CalendarStateManager;
 import org.ifolks.demo.model.reference.time.CalendarDayOff;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * auto generated mapper class file
@@ -14,23 +15,26 @@ import org.springframework.beans.factory.annotation.Autowired;
  * <br/>processed by ifolks-generator
  */
 
-public class CalendarDayOffFullViewBaseMapper extends FullViewMapper<CalendarDayOffFullView, Integer, CalendarDayOffForm, CalendarDayOff> {
+@Component
+public class CalendarDayOffFullViewBaseMapper {
 
 @Autowired
 protected CalendarRightsManager calendarRightsManager;
 @Autowired
 protected CalendarStateManager calendarStateManager;
 
-public CalendarDayOffFullViewBaseMapper() {
-super(CalendarDayOffFullView.class, CalendarDayOff.class);
-}
+@Autowired
+protected CalendarDayOffFormMapper formMapper;
 
-@Override
-public CalendarDayOffFullView mapFrom(CalendarDayOffFullView calendarDayOffFullView, CalendarDayOff calendarDayOff) {
-calendarDayOffFullView = super.mapFrom(calendarDayOffFullView, calendarDayOff);
-calendarDayOffFullView.setCanUpdate(calendarRightsManager.canUpdateCalendarDayOff(calendarDayOff) && calendarStateManager.canUpdateCalendarDayOff(calendarDayOff));
-calendarDayOffFullView.setCanDelete(calendarRightsManager.canDeleteCalendarDayOff(calendarDayOff) && calendarStateManager.canDeleteCalendarDayOff(calendarDayOff));
-return calendarDayOffFullView;
+/**
+ * mapping entity to view
+ */
+public CalendarDayOffFullView toView(CalendarDayOff calendarDayOff) {
+Integer id = calendarDayOff.getId();
+CalendarDayOffForm form = formMapper.toForm(calendarDayOff);
+boolean canUpdate = calendarRightsManager.canUpdateCalendarDayOff(calendarDayOff) && calendarStateManager.canUpdateCalendarDayOff(calendarDayOff);
+boolean canDelete = calendarRightsManager.canDeleteCalendarDayOff(calendarDayOff) && calendarStateManager.canDeleteCalendarDayOff(calendarDayOff);
+return new CalendarDayOffFullView(id, canUpdate, canDelete, form);
 }
 
 }

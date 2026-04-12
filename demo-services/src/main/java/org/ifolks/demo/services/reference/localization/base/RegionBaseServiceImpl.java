@@ -87,10 +87,10 @@ return result;
 public ScrollView<RegionBasicView> scroll(ScrollForm<RegionFilter, RegionSorting> form) {
 regionRightsManager.checkCanAccess();
 Long size = regionDao.count();
-Long count = regionDao.count(form.getFilter());
-Long numberOfPages = count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L);
-Long currentPage = Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, numberOfPages));
-List<Region> list = regionDao.scroll(form.getFilter(), form.getSorting(),(currentPage-1)*form.getElementsPerPage(), form.getElementsPerPage());
+Long count = regionDao.count(form.filter());
+Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
+Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
+List<Region> list = regionDao.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<RegionBasicView> elements = new ArrayList<>(list.size());
 for (Region region : list) {
 elements.add(this.regionBasicViewMapper.toView(region));
@@ -106,10 +106,10 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 public ScrollView<RegionBasicView> scrollFromCountry (Short countryId, ScrollForm<RegionFilter, RegionSorting> form) {
 regionRightsManager.checkCanAccess();
 Long size = regionDao.countFromCountry(countryId);
-Long count = regionDao.countFromCountry(countryId, form.getFilter());
-Long numberOfPages = count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L);
-Long currentPage = Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, numberOfPages));
-List<Region> list = regionDao.scrollFromCountry(countryId, form.getFilter(), form.getSorting(),(currentPage-1)*form.getElementsPerPage(), form.getElementsPerPage());
+Long count = regionDao.countFromCountry(countryId, form.filter());
+Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
+Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
+List<Region> list = regionDao.scrollFromCountry(countryId, form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<RegionBasicView> elements = new ArrayList<>(list.size());
 for (Region region : list) {
 elements.add(this.regionBasicViewMapper.toView(region));
@@ -125,7 +125,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 public RegionFullView load(Integer id) {
 Region region = regionDao.load(id);
 regionRightsManager.checkCanAccess(region);
-return this.regionFullViewMapper.mapFrom(new RegionFullView(),region);
+return this.regionFullViewMapper.toView(region);
 }
 
 /**
@@ -136,16 +136,7 @@ return this.regionFullViewMapper.mapFrom(new RegionFullView(),region);
 public RegionFullView find(String countryCode, String code) {
 Region region = regionDao.find(countryCode, code);
 regionRightsManager.checkCanAccess(region);
-return this.regionFullViewMapper.mapFrom(new RegionFullView(), region);
-}
-
-/**
- * create object
- */
-@Override
-public RegionFullView create() {
-regionRightsManager.checkCanCreate();
-return new RegionFullView();
+return this.regionFullViewMapper.toView(region);
 }
 
 /**
@@ -154,7 +145,7 @@ return new RegionFullView();
 @Override
 @Transactional(rollbackFor=Exception.class)
 public Integer save(RegionForm regionForm) {
-Region region = this.regionFormMapper.mapTo(regionForm, new Region());
+Region region = this.regionFormMapper.toEntity(regionForm, new Region());
 regionRightsManager.checkCanSave(region);
 regionStateManager.checkCanSave(region);
 return regionProcessor.save(region);
@@ -169,7 +160,7 @@ public void update(Integer id, RegionForm regionForm) {
 Region region = this.regionDao.load(id);
 regionRightsManager.checkCanUpdate(region);
 regionStateManager.checkCanUpdate(region);
-region = this.regionFormMapper.mapTo(regionForm, region);
+region = this.regionFormMapper.toEntity(regionForm, region);
 regionProcessor.update(region);
 }
 
@@ -183,23 +174,6 @@ Region region = regionDao.load(id);
 regionRightsManager.checkCanDelete(region);
 regionStateManager.checkCanDelete(region);
 regionProcessor.delete(region);
-}
-
-/**
- * delete object list
- */
-@Override
-@Transactional(rollbackFor=Exception.class)
-public void deleteList(List<Integer> idList) {
-Region region;
-if (idList != null){
-for (Integer id:idList){
-region = regionDao.load(id);
-regionRightsManager.checkCanDelete(region);
-regionStateManager.checkCanDelete(region);
-regionProcessor.delete(region);
-}
-}
 }
 
 }

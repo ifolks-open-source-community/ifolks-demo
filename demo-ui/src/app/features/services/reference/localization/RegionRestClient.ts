@@ -57,13 +57,6 @@ return this.http.get<RegionFullView>(environment.restApiUrl + '/region/' + id);
 }
 
 /**
- * create object
- */
-public create() {
-return this.http.get<RegionFullView>(environment.restApiUrl + '/region/new');
-}
-
-/**
  * save object
  */
 public save(form: RegionForm) {

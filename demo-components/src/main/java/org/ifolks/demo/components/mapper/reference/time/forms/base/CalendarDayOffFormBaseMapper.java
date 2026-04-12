@@ -1,39 +1,51 @@
 package org.ifolks.demo.components.mapper.reference.time.forms.base;
 
-import org.ifolks.commons.mapper.impl.BasicMapperImpl;
+import java.time.LocalDate;
 import org.ifolks.demo.api.model.reference.time.forms.CalendarDayOffForm;
 import org.ifolks.demo.model.reference.time.CalendarDayOff;
+import org.springframework.stereotype.Component;
 
 /**
  * auto generated base mapper class file
  * <br/>no modification should be done to this file
  * <br/>processed by ifolks-generator
  */
-public class CalendarDayOffFormBaseMapper extends BasicMapperImpl<CalendarDayOffForm, CalendarDayOff> {
+@Component
+public class CalendarDayOffFormBaseMapper {
 
-public CalendarDayOffFormBaseMapper() {
-super(CalendarDayOffForm.class, CalendarDayOff.class);
-}
 
 /*
  * properties
  */
 
 /**
- * mapping form from object
+ * mapping object arry to form
  */
-@Override
-public CalendarDayOffForm mapFrom(CalendarDayOffForm calendarDayOffForm, CalendarDayOff calendarDayOff) {
-calendarDayOffForm = super.mapFrom(calendarDayOffForm, calendarDayOff);
-return calendarDayOffForm;
+public CalendarDayOffForm toForm(Object[] args) {
+
+return new CalendarDayOffForm (
+(LocalDate)args[0],
+(String)args[1]);
 }
 
 /**
- * mapping view to object
+ * mapping entity to form
  */
-@Override
-public CalendarDayOff mapTo(CalendarDayOffForm calendarDayOffForm, CalendarDayOff calendarDayOff) {
-calendarDayOff = super.mapTo(calendarDayOffForm, calendarDayOff);
+public CalendarDayOffForm toForm(CalendarDayOff calendarDayOff) {
+LocalDate dayOffDate = calendarDayOff.getDayOffDate();
+String dayOffLabel = calendarDayOff.getDayOffLabel();
+
+return new CalendarDayOffForm (
+dayOffDate,
+dayOffLabel);
+}
+
+/**
+ * mapping form to entity
+ */
+public CalendarDayOff toEntity(CalendarDayOffForm calendarDayOffForm, CalendarDayOff calendarDayOff) {
+calendarDayOff.setDayOffDate(calendarDayOffForm.dayOffDate());
+calendarDayOff.setDayOffLabel(calendarDayOffForm.dayOffLabel());
 return calendarDayOff;
 }
 

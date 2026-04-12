@@ -84,10 +84,10 @@ return result;
 public ScrollView<FoolBasicView> scroll(ScrollForm<FoolFilter, FoolSorting> form) {
 foolRightsManager.checkCanAccess();
 Long size = foolDao.count();
-Long count = foolDao.count(form.getFilter());
-Long numberOfPages = count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L);
-Long currentPage = Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, numberOfPages));
-List<Fool> list = foolDao.scroll(form.getFilter(), form.getSorting(),(currentPage-1)*form.getElementsPerPage(), form.getElementsPerPage());
+Long count = foolDao.count(form.filter());
+Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
+Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
+List<Fool> list = foolDao.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<FoolBasicView> elements = new ArrayList<>(list.size());
 for (Fool fool : list) {
 elements.add(this.foolBasicViewMapper.toView(fool));
@@ -103,7 +103,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 public FoolFullView load(String id) {
 Fool fool = foolDao.load(id);
 foolRightsManager.checkCanAccess(fool);
-return this.foolFullViewMapper.mapFrom(new FoolFullView(),fool);
+return this.foolFullViewMapper.toView(fool);
 }
 
 /**
@@ -114,16 +114,7 @@ return this.foolFullViewMapper.mapFrom(new FoolFullView(),fool);
 public FoolFullView find(String code) {
 Fool fool = foolDao.find(code);
 foolRightsManager.checkCanAccess(fool);
-return this.foolFullViewMapper.mapFrom(new FoolFullView(), fool);
-}
-
-/**
- * create object
- */
-@Override
-public FoolFullView create() {
-foolRightsManager.checkCanCreate();
-return new FoolFullView();
+return this.foolFullViewMapper.toView(fool);
 }
 
 /**
@@ -132,7 +123,7 @@ return new FoolFullView();
 @Override
 @Transactional(rollbackFor=Exception.class)
 public String save(FoolForm foolForm) {
-Fool fool = this.foolFormMapper.mapTo(foolForm, new Fool());
+Fool fool = this.foolFormMapper.toEntity(foolForm, new Fool());
 foolRightsManager.checkCanSave(fool);
 foolStateManager.checkCanSave(fool);
 return foolProcessor.save(fool);
@@ -147,7 +138,7 @@ public void update(String id, FoolForm foolForm) {
 Fool fool = this.foolDao.load(id);
 foolRightsManager.checkCanUpdate(fool);
 foolStateManager.checkCanUpdate(fool);
-fool = this.foolFormMapper.mapTo(foolForm, fool);
+fool = this.foolFormMapper.toEntity(foolForm, fool);
 foolProcessor.update(fool);
 }
 
@@ -161,23 +152,6 @@ Fool fool = foolDao.load(id);
 foolRightsManager.checkCanDelete(fool);
 foolStateManager.checkCanDelete(fool);
 foolProcessor.delete(fool);
-}
-
-/**
- * delete object list
- */
-@Override
-@Transactional(rollbackFor=Exception.class)
-public void deleteList(List<String> idList) {
-Fool fool;
-if (idList != null){
-for (String id:idList){
-fool = foolDao.load(id);
-foolRightsManager.checkCanDelete(fool);
-foolStateManager.checkCanDelete(fool);
-foolProcessor.delete(fool);
-}
-}
 }
 
 }

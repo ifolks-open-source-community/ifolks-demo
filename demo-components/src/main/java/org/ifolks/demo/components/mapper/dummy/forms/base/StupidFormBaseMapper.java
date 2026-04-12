@@ -1,21 +1,19 @@
 package org.ifolks.demo.components.mapper.dummy.forms.base;
 
-import org.ifolks.commons.mapper.impl.BasicMapperImpl;
 import org.ifolks.demo.api.model.dummy.forms.StupidForm;
 import org.ifolks.demo.model.dummy.Stupid;
 import org.ifolks.demo.persistence.interfaces.dummy.FoolDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * auto generated base mapper class file
  * <br/>no modification should be done to this file
  * <br/>processed by ifolks-generator
  */
-public class StupidFormBaseMapper extends BasicMapperImpl<StupidForm, Stupid> {
+@Component
+public class StupidFormBaseMapper {
 
-public StupidFormBaseMapper() {
-super(StupidForm.class, Stupid.class);
-}
 
 /*
  * properties
@@ -24,22 +22,33 @@ super(StupidForm.class, Stupid.class);
 protected FoolDao foolDao;
 
 /**
- * mapping form from object
+ * mapping object arry to form
  */
-@Override
-public StupidForm mapFrom(StupidForm stupidForm, Stupid stupid) {
-stupidForm = super.mapFrom(stupidForm, stupid);
-stupidForm.setFoolCode(stupid.getFool().getCode());
-return stupidForm;
+public StupidForm toForm(Object[] args) {
+
+return new StupidForm (
+(String)args[0],
+(String)args[1]);
 }
 
 /**
- * mapping view to object
+ * mapping entity to form
  */
-@Override
-public Stupid mapTo(StupidForm stupidForm, Stupid stupid) {
-stupid = super.mapTo(stupidForm, stupid);
-stupid.setFool(foolDao.find(stupidForm.getFoolCode()));
+public StupidForm toForm(Stupid stupid) {
+String code = stupid.getCode();
+String foolCode = stupid.getFool().getCode();
+
+return new StupidForm (
+code,
+foolCode);
+}
+
+/**
+ * mapping form to entity
+ */
+public Stupid toEntity(StupidForm stupidForm, Stupid stupid) {
+stupid.setCode(stupidForm.code());
+stupid.setFool(foolDao.find(stupidForm.foolCode()));
 return stupid;
 }
 

@@ -1,12 +1,10 @@
 package org.ifolks.demo.populator.command.reference.localization;
 
-import org.ifolks.commons.mapper.impl.ObjectArrayToBeanMapperImpl;
-import org.ifolks.commons.mapper.impl.StringArrayToBeanMapperImpl;
-import org.ifolks.commons.mapper.interfaces.ObjectArrayToBeanMapper;
+import java.util.List;
 import org.ifolks.demo.api.interfaces.reference.localization.RegionService;
 import org.ifolks.demo.api.model.reference.localization.forms.RegionForm;
-import org.ifolks.generator.persistence.backup.command.interfaces.BackupArgumentsCommand;
-import org.ifolks.generator.persistence.backup.reader.model.BackupArguments;
+import org.ifolks.demo.components.mapper.reference.localization.forms.RegionFormMapper;
+import org.ifolks.generator.components.population.commands.interfaces.ServiceCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ import org.springframework.stereotype.Component;
  * <br/>processed by ifolks-generator
  */
 @Component
-public class RegionCommand implements BackupArgumentsCommand {
+public class RegionCommand implements ServiceCommand {
 
 /*
  * logger
@@ -28,15 +26,12 @@ private static final Logger logger = LoggerFactory.getLogger(RegionCommand.class
 @Autowired
 private RegionService regionService;
 
+@Autowired
+private RegionFormMapper regionFormMapper;
+
 @Override
-public void execute(BackupArguments arguments) {
-ObjectArrayToBeanMapper<RegionForm> mapper;
-if (arguments.isArgumentsTyped()) {
-mapper = new ObjectArrayToBeanMapperImpl<RegionForm>(RegionForm.class);
-} else {
-mapper = new StringArrayToBeanMapperImpl<RegionForm>(RegionForm.class);
-}
-for (Object[] args : arguments.getArguments()) {
+public void execute(List<Object[]> data) {
+for (Object[] args : data) {
 String message = "execute regionService.save - args : ";
 for (Object arg:args) {
 message += "[" + arg + "]";
@@ -44,7 +39,7 @@ message += "[" + arg + "]";
 logger.info(message);
 
 try {
-RegionForm regionForm = mapper.mapFrom(new RegionForm(), args);
+RegionForm regionForm = regionFormMapper.toForm(args);
 
 this.regionService.save(regionForm);
 } catch (Exception e) {

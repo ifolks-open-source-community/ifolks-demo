@@ -1,12 +1,13 @@
 package org.ifolks.demo.components.mapper.reference.localization.views.full.base;
 
-import org.ifolks.commons.mapper.impl.FullViewMapper;
 import org.ifolks.demo.api.model.reference.localization.forms.CityForm;
 import org.ifolks.demo.api.model.reference.localization.views.full.CityFullView;
+import org.ifolks.demo.components.mapper.reference.localization.forms.CityFormMapper;
 import org.ifolks.demo.components.rightsmanager.reference.localization.CityRightsManager;
 import org.ifolks.demo.components.statemanager.reference.localization.CityStateManager;
 import org.ifolks.demo.model.reference.localization.City;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * auto generated mapper class file
@@ -14,23 +15,26 @@ import org.springframework.beans.factory.annotation.Autowired;
  * <br/>processed by ifolks-generator
  */
 
-public class CityFullViewBaseMapper extends FullViewMapper<CityFullView, Long, CityForm, City> {
+@Component
+public class CityFullViewBaseMapper {
 
 @Autowired
 protected CityRightsManager cityRightsManager;
 @Autowired
 protected CityStateManager cityStateManager;
 
-public CityFullViewBaseMapper() {
-super(CityFullView.class, City.class);
-}
+@Autowired
+protected CityFormMapper formMapper;
 
-@Override
-public CityFullView mapFrom(CityFullView cityFullView, City city) {
-cityFullView = super.mapFrom(cityFullView, city);
-cityFullView.setCanUpdate(cityRightsManager.canUpdate(city) && cityStateManager.canUpdate(city));
-cityFullView.setCanDelete(cityRightsManager.canDelete(city) && cityStateManager.canDelete(city));
-return cityFullView;
+/**
+ * mapping entity to view
+ */
+public CityFullView toView(City city) {
+Long id = city.getId();
+CityForm form = formMapper.toForm(city);
+boolean canUpdate = cityRightsManager.canUpdate(city) && cityStateManager.canUpdate(city);
+boolean canDelete = cityRightsManager.canDelete(city) && cityStateManager.canDelete(city);
+return new CityFullView(id, canUpdate, canDelete, form);
 }
 
 }

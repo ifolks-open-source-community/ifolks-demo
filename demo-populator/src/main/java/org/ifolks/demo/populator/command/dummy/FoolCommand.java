@@ -1,12 +1,10 @@
 package org.ifolks.demo.populator.command.dummy;
 
-import org.ifolks.commons.mapper.impl.ObjectArrayToBeanMapperImpl;
-import org.ifolks.commons.mapper.impl.StringArrayToBeanMapperImpl;
-import org.ifolks.commons.mapper.interfaces.ObjectArrayToBeanMapper;
+import java.util.List;
 import org.ifolks.demo.api.interfaces.dummy.FoolService;
 import org.ifolks.demo.api.model.dummy.forms.FoolForm;
-import org.ifolks.generator.persistence.backup.command.interfaces.BackupArgumentsCommand;
-import org.ifolks.generator.persistence.backup.reader.model.BackupArguments;
+import org.ifolks.demo.components.mapper.dummy.forms.FoolFormMapper;
+import org.ifolks.generator.components.population.commands.interfaces.ServiceCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,7 @@ import org.springframework.stereotype.Component;
  * <br/>processed by ifolks-generator
  */
 @Component
-public class FoolCommand implements BackupArgumentsCommand {
+public class FoolCommand implements ServiceCommand {
 
 /*
  * logger
@@ -28,15 +26,12 @@ private static final Logger logger = LoggerFactory.getLogger(FoolCommand.class);
 @Autowired
 private FoolService foolService;
 
+@Autowired
+private FoolFormMapper foolFormMapper;
+
 @Override
-public void execute(BackupArguments arguments) {
-ObjectArrayToBeanMapper<FoolForm> mapper;
-if (arguments.isArgumentsTyped()) {
-mapper = new ObjectArrayToBeanMapperImpl<FoolForm>(FoolForm.class);
-} else {
-mapper = new StringArrayToBeanMapperImpl<FoolForm>(FoolForm.class);
-}
-for (Object[] args : arguments.getArguments()) {
+public void execute(List<Object[]> data) {
+for (Object[] args : data) {
 String message = "execute foolService.save - args : ";
 for (Object arg:args) {
 message += "[" + arg + "]";
@@ -44,7 +39,7 @@ message += "[" + arg + "]";
 logger.info(message);
 
 try {
-FoolForm foolForm = mapper.mapFrom(new FoolForm(), args);
+FoolForm foolForm = foolFormMapper.toForm(args);
 
 this.foolService.save(foolForm);
 } catch (Exception e) {

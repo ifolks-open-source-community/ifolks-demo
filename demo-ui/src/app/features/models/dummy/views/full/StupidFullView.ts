@@ -7,7 +7,7 @@ import { StupidForm } from 'src/app/features/models/dummy/forms/StupidForm';
 export class StupidFullView {
 
 id: number;
-form: StupidForm;
+form: StupidForm = new StupidForm();
 canUpdate: boolean;
 canDelete: boolean;
 

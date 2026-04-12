@@ -1,6 +1,5 @@
 package org.ifolks.demo.persistence.impl.reference.time.base;
 
-import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.*;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addBetweenRestriction;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addOrder;

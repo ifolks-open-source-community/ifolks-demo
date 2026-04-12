@@ -1,6 +1,5 @@
 package org.ifolks.demo.persistence.impl.organizations.base;
 
-import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.*;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addOrder;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;

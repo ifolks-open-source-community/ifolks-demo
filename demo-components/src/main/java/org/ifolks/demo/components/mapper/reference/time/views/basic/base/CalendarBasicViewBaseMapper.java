@@ -21,7 +21,7 @@ protected CalendarRightsManager calendarRightsManager;
 protected CalendarStateManager calendarStateManager;
 
 /**
- * mapping object to view
+ * mapping entity to view
  */
 public CalendarBasicView toView(Calendar calendar) {
 Integer id = calendar.getId();

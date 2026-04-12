@@ -56,12 +56,6 @@ OrganizationCertificationFullView loadOrganizationCertification(Integer id);
 public static final String GET_ORGANIZATION_CERTIFICATION_URL = "/organization/{id}/organization-certification";
 
 /**
- * create object
- */
-OrganizationFullView create();
-public static final String GET_NEW_URL = "/organization/new";
-
-/**
  * save object
  */
 Integer save(OrganizationForm organizationForm);
@@ -96,11 +90,5 @@ public static final String DELETE_URL = "/organization/{id}";
  */
 public void deleteOrganizationCertification(Integer id);
 public static final String DELETE_ORGANIZATION_CERTIFICATION_URL = "/organization/{id}/organization-certification";
-
-/**
- * delete object list
- */
-void deleteList(List<Integer> idList);
-public static final String DELETE_LIST_URL = "/organization/delete";
 
 }

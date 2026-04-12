@@ -24,7 +24,7 @@ protected FoolRightsManager foolRightsManager;
 protected FoolStateManager foolStateManager;
 
 /**
- * mapping object to view
+ * mapping entity to view
  */
 public FoolBasicView toView(Fool fool) {
 String id = fool.getId();

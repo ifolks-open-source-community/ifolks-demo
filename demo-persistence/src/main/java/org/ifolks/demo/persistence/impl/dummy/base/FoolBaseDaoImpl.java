@@ -1,6 +1,5 @@
 package org.ifolks.demo.persistence.impl.dummy.base;
 
-import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.*;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addBetweenRestriction;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addBooleanRestriction;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;

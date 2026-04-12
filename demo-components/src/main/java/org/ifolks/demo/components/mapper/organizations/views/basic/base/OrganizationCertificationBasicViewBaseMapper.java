@@ -21,7 +21,7 @@ protected OrganizationRightsManager organizationRightsManager;
 protected OrganizationStateManager organizationStateManager;
 
 /**
- * mapping object to view
+ * mapping entity to view
  */
 public OrganizationCertificationBasicView toView(OrganizationCertification organizationCertification) {
 String id = organizationCertification.getId();

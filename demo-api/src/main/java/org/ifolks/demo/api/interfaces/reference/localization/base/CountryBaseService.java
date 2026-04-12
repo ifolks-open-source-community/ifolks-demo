@@ -48,12 +48,6 @@ public static final String FIND_URL = "/country/find";
 CountryFullView find(String code);
 
 /**
- * create object
- */
-CountryFullView create();
-public static final String GET_NEW_URL = "/country/new";
-
-/**
  * save object
  */
 Short save(CountryForm countryForm);
@@ -70,11 +64,5 @@ public static final String UPDATE_URL = "/country/{id}";
  */
 void delete(Short id);
 public static final String DELETE_URL = "/country/{id}";
-
-/**
- * delete object list
- */
-void deleteList(List<Short> idList);
-public static final String DELETE_LIST_URL = "/country/delete";
 
 }

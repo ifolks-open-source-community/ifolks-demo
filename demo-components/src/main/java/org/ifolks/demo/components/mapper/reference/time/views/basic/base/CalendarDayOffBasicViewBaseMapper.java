@@ -22,7 +22,7 @@ protected CalendarRightsManager calendarRightsManager;
 protected CalendarStateManager calendarStateManager;
 
 /**
- * mapping object to view
+ * mapping entity to view
  */
 public CalendarDayOffBasicView toView(CalendarDayOff calendarDayOff) {
 Integer id = calendarDayOff.getId();

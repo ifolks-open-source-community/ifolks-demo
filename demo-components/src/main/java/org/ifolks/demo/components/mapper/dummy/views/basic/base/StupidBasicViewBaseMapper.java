@@ -21,7 +21,7 @@ protected StupidRightsManager stupidRightsManager;
 protected StupidStateManager stupidStateManager;
 
 /**
- * mapping object to view
+ * mapping entity to view
  */
 public StupidBasicView toView(Stupid stupid) {
 Long id = stupid.getId();

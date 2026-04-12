@@ -50,13 +50,6 @@ return this.http.get<FoolFullView>(environment.restApiUrl + '/fool/' + id);
 }
 
 /**
- * create object
- */
-public create() {
-return this.http.get<FoolFullView>(environment.restApiUrl + '/fool/new');
-}
-
-/**
  * save object
  */
 public save(form: FoolForm) {

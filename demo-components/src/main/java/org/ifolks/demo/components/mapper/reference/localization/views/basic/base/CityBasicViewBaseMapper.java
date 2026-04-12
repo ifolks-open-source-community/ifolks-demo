@@ -21,7 +21,7 @@ protected CityRightsManager cityRightsManager;
 protected CityStateManager cityStateManager;
 
 /**
- * mapping object to view
+ * mapping entity to view
  */
 public CityBasicView toView(City city) {
 Long id = city.getId();

@@ -1,12 +1,13 @@
 package org.ifolks.demo.components.mapper.dummy.views.full.base;
 
-import org.ifolks.commons.mapper.impl.FullViewMapper;
 import org.ifolks.demo.api.model.dummy.forms.StupidForm;
 import org.ifolks.demo.api.model.dummy.views.full.StupidFullView;
+import org.ifolks.demo.components.mapper.dummy.forms.StupidFormMapper;
 import org.ifolks.demo.components.rightsmanager.dummy.StupidRightsManager;
 import org.ifolks.demo.components.statemanager.dummy.StupidStateManager;
 import org.ifolks.demo.model.dummy.Stupid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * auto generated mapper class file
@@ -14,23 +15,26 @@ import org.springframework.beans.factory.annotation.Autowired;
  * <br/>processed by ifolks-generator
  */
 
-public class StupidFullViewBaseMapper extends FullViewMapper<StupidFullView, Long, StupidForm, Stupid> {
+@Component
+public class StupidFullViewBaseMapper {
 
 @Autowired
 protected StupidRightsManager stupidRightsManager;
 @Autowired
 protected StupidStateManager stupidStateManager;
 
-public StupidFullViewBaseMapper() {
-super(StupidFullView.class, Stupid.class);
-}
+@Autowired
+protected StupidFormMapper formMapper;
 
-@Override
-public StupidFullView mapFrom(StupidFullView stupidFullView, Stupid stupid) {
-stupidFullView = super.mapFrom(stupidFullView, stupid);
-stupidFullView.setCanUpdate(stupidRightsManager.canUpdate(stupid) && stupidStateManager.canUpdate(stupid));
-stupidFullView.setCanDelete(stupidRightsManager.canDelete(stupid) && stupidStateManager.canDelete(stupid));
-return stupidFullView;
+/**
+ * mapping entity to view
+ */
+public StupidFullView toView(Stupid stupid) {
+Long id = stupid.getId();
+StupidForm form = formMapper.toForm(stupid);
+boolean canUpdate = stupidRightsManager.canUpdate(stupid) && stupidStateManager.canUpdate(stupid);
+boolean canDelete = stupidRightsManager.canDelete(stupid) && stupidStateManager.canDelete(stupid);
+return new StupidFullView(id, canUpdate, canDelete, form);
 }
 
 }

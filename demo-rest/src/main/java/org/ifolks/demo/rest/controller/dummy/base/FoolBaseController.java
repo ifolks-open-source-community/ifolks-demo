@@ -72,14 +72,6 @@ return foolService.find(code);
 }
 
 /**
- * create object
- */
-@RequestMapping(value = {FoolService.GET_NEW_URL}, method = RequestMethod.GET)
-public @ResponseBody FoolFullView create() {
-return foolService.create();
-}
-
-/**
  * save object
  */
 @RequestMapping(value = {FoolService.SAVE_URL}, method = RequestMethod.POST)
@@ -101,14 +93,6 @@ foolService.update(id, form);
 @RequestMapping(value = {FoolService.DELETE_URL}, method = RequestMethod.DELETE)
 public @ResponseBody void delete(@PathVariable("id") String id) {
 foolService.delete(id);
-}
-
-/**
- * delete object list
- */
-@RequestMapping(value = {FoolService.DELETE_LIST_URL}, method = RequestMethod.POST)
-public @ResponseBody void deleteList(@RequestBody List<String> idList) {
-foolService.deleteList(idList);
 }
 
 }

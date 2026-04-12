@@ -102,12 +102,10 @@ this.refresh();
 }
 
 create(): void {
-this.service.create().subscribe((t) => {
 let ref = this.dialog.open(RegionModalComponent);
-ref.componentInstance.view = t;
+ref.componentInstance.view = new RegionFullView();
 ref.componentInstance.parentId = this.id;
 ref.afterClosed().subscribe(result => {this.refresh();});
-});
 }
 
 edit(id: number): void {

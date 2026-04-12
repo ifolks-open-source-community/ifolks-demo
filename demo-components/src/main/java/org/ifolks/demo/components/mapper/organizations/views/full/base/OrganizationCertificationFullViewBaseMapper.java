@@ -1,12 +1,13 @@
 package org.ifolks.demo.components.mapper.organizations.views.full.base;
 
-import org.ifolks.commons.mapper.impl.FullViewMapper;
 import org.ifolks.demo.api.model.organizations.forms.OrganizationCertificationForm;
 import org.ifolks.demo.api.model.organizations.views.full.OrganizationCertificationFullView;
+import org.ifolks.demo.components.mapper.organizations.forms.OrganizationCertificationFormMapper;
 import org.ifolks.demo.components.rightsmanager.organizations.OrganizationRightsManager;
 import org.ifolks.demo.components.statemanager.organizations.OrganizationStateManager;
 import org.ifolks.demo.model.organizations.OrganizationCertification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * auto generated mapper class file
@@ -14,23 +15,26 @@ import org.springframework.beans.factory.annotation.Autowired;
  * <br/>processed by ifolks-generator
  */
 
-public class OrganizationCertificationFullViewBaseMapper extends FullViewMapper<OrganizationCertificationFullView, String, OrganizationCertificationForm, OrganizationCertification> {
+@Component
+public class OrganizationCertificationFullViewBaseMapper {
 
 @Autowired
 protected OrganizationRightsManager organizationRightsManager;
 @Autowired
 protected OrganizationStateManager organizationStateManager;
 
-public OrganizationCertificationFullViewBaseMapper() {
-super(OrganizationCertificationFullView.class, OrganizationCertification.class);
-}
+@Autowired
+protected OrganizationCertificationFormMapper formMapper;
 
-@Override
-public OrganizationCertificationFullView mapFrom(OrganizationCertificationFullView organizationCertificationFullView, OrganizationCertification organizationCertification) {
-organizationCertificationFullView = super.mapFrom(organizationCertificationFullView, organizationCertification);
-organizationCertificationFullView.setCanUpdate(organizationRightsManager.canUpdateOrganizationCertification(organizationCertification) && organizationStateManager.canUpdateOrganizationCertification(organizationCertification));
-organizationCertificationFullView.setCanDelete(organizationRightsManager.canDeleteOrganizationCertification(organizationCertification) && organizationStateManager.canDeleteOrganizationCertification(organizationCertification));
-return organizationCertificationFullView;
+/**
+ * mapping entity to view
+ */
+public OrganizationCertificationFullView toView(OrganizationCertification organizationCertification) {
+String id = organizationCertification.getId();
+OrganizationCertificationForm form = formMapper.toForm(organizationCertification);
+boolean canUpdate = organizationRightsManager.canUpdateOrganizationCertification(organizationCertification) && organizationStateManager.canUpdateOrganizationCertification(organizationCertification);
+boolean canDelete = organizationRightsManager.canDeleteOrganizationCertification(organizationCertification) && organizationStateManager.canDeleteOrganizationCertification(organizationCertification);
+return new OrganizationCertificationFullView(id, canUpdate, canDelete, form);
 }
 
 }

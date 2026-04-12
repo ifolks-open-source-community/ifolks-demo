@@ -48,12 +48,6 @@ public static final String FIND_URL = "/fool/find";
 FoolFullView find(String code);
 
 /**
- * create object
- */
-FoolFullView create();
-public static final String GET_NEW_URL = "/fool/new";
-
-/**
  * save object
  */
 String save(FoolForm foolForm);
@@ -70,11 +64,5 @@ public static final String UPDATE_URL = "/fool/{id}";
  */
 void delete(String id);
 public static final String DELETE_URL = "/fool/{id}";
-
-/**
- * delete object list
- */
-void deleteList(List<String> idList);
-public static final String DELETE_LIST_URL = "/fool/delete";
 
 }

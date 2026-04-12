@@ -77,14 +77,6 @@ return cityService.find(regionCountryCode, regionCode, code);
 }
 
 /**
- * create object
- */
-@RequestMapping(value = {CityService.GET_NEW_URL}, method = RequestMethod.GET)
-public @ResponseBody CityFullView create() {
-return cityService.create();
-}
-
-/**
  * save object
  */
 @RequestMapping(value = {CityService.SAVE_URL}, method = RequestMethod.POST)
@@ -106,14 +98,6 @@ cityService.update(id, form);
 @RequestMapping(value = {CityService.DELETE_URL}, method = RequestMethod.DELETE)
 public @ResponseBody void delete(@PathVariable("id") Long id) {
 cityService.delete(id);
-}
-
-/**
- * delete object list
- */
-@RequestMapping(value = {CityService.DELETE_LIST_URL}, method = RequestMethod.POST)
-public @ResponseBody void deleteList(@RequestBody List<Long> idList) {
-cityService.deleteList(idList);
 }
 
 }

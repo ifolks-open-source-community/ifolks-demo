@@ -57,13 +57,6 @@ return this.http.get<StupidFullView>(environment.restApiUrl + '/stupid/' + id);
 }
 
 /**
- * create object
- */
-public create() {
-return this.http.get<StupidFullView>(environment.restApiUrl + '/stupid/new');
-}
-
-/**
  * save object
  */
 public save(form: StupidForm) {

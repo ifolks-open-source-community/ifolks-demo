@@ -71,18 +71,6 @@ CalendarDayOffFullView loadCalendarDayOff(Integer id);
 public static final String GET_CALENDAR_DAY_OFF_URL = "/calendar-day-off/{id}";
 
 /**
- * create object
- */
-CalendarFullView create();
-public static final String GET_NEW_URL = "/calendar/new";
-
-/**
- * create one to many component calendarDayOff
- */
-CalendarDayOffFullView createCalendarDayOff(Integer id);
-public static final String GET_NEW_CALENDAR_DAY_OFF_URL = "/calendar/{id}/calendar-day-off/new";
-
-/**
  * save object
  */
 Integer save(CalendarForm calendarForm);
@@ -117,17 +105,5 @@ public static final String DELETE_URL = "/calendar/{id}";
  */
 void deleteCalendarDayOff(Integer id);
 public static final String DELETE_CALENDAR_DAY_OFF_URL = "/calendar-day-off/{id}";
-
-/**
- * delete object list
- */
-void deleteList(List<Integer> idList);
-public static final String DELETE_LIST_URL = "/calendar/delete";
-
-/**
- * delete one to many component calendarDayOff list
- */
-void deleteCalendarDayOffList(List<Integer> idList);
-public static final String DELETE_CALENDAR_DAY_OFF_LIST_URL = "/calendar-day-off/delete";
 
 }

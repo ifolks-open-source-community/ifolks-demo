@@ -21,7 +21,7 @@ protected RegionRightsManager regionRightsManager;
 protected RegionStateManager regionStateManager;
 
 /**
- * mapping object to view
+ * mapping entity to view
  */
 public RegionBasicView toView(Region region) {
 Integer id = region.getId();

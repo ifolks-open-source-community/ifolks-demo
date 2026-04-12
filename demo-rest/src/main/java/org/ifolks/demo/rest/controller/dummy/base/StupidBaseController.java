@@ -77,14 +77,6 @@ return stupidService.find(code);
 }
 
 /**
- * create object
- */
-@RequestMapping(value = {StupidService.GET_NEW_URL}, method = RequestMethod.GET)
-public @ResponseBody StupidFullView create() {
-return stupidService.create();
-}
-
-/**
  * save object
  */
 @RequestMapping(value = {StupidService.SAVE_URL}, method = RequestMethod.POST)
@@ -106,14 +98,6 @@ stupidService.update(id, form);
 @RequestMapping(value = {StupidService.DELETE_URL}, method = RequestMethod.DELETE)
 public @ResponseBody void delete(@PathVariable("id") Long id) {
 stupidService.delete(id);
-}
-
-/**
- * delete object list
- */
-@RequestMapping(value = {StupidService.DELETE_LIST_URL}, method = RequestMethod.POST)
-public @ResponseBody void deleteList(@RequestBody List<Long> idList) {
-stupidService.deleteList(idList);
 }
 
 }

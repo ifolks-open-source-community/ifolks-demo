@@ -7,7 +7,7 @@ import { OrganizationCertificationForm } from 'src/app/features/models/organizat
 export class OrganizationCertificationFullView {
 
 id: string;
-form: OrganizationCertificationForm;
+form: OrganizationCertificationForm = new OrganizationCertificationForm();
 canUpdate: boolean;
 canDelete: boolean;
 

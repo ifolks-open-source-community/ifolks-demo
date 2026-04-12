@@ -87,10 +87,10 @@ return result;
 public ScrollView<StupidBasicView> scroll(ScrollForm<StupidFilter, StupidSorting> form) {
 stupidRightsManager.checkCanAccess();
 Long size = stupidDao.count();
-Long count = stupidDao.count(form.getFilter());
-Long numberOfPages = count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L);
-Long currentPage = Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, numberOfPages));
-List<Stupid> list = stupidDao.scroll(form.getFilter(), form.getSorting(),(currentPage-1)*form.getElementsPerPage(), form.getElementsPerPage());
+Long count = stupidDao.count(form.filter());
+Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
+Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
+List<Stupid> list = stupidDao.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<StupidBasicView> elements = new ArrayList<>(list.size());
 for (Stupid stupid : list) {
 elements.add(this.stupidBasicViewMapper.toView(stupid));
@@ -106,10 +106,10 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 public ScrollView<StupidBasicView> scrollFromFool (String foolId, ScrollForm<StupidFilter, StupidSorting> form) {
 stupidRightsManager.checkCanAccess();
 Long size = stupidDao.countFromFool(foolId);
-Long count = stupidDao.countFromFool(foolId, form.getFilter());
-Long numberOfPages = count/form.getElementsPerPage() + ((count%form.getElementsPerPage()) > 0L?1L:0L);
-Long currentPage = Math.max(1L, Math.min(form.getPage()!=null?form.getPage():1L, numberOfPages));
-List<Stupid> list = stupidDao.scrollFromFool(foolId, form.getFilter(), form.getSorting(),(currentPage-1)*form.getElementsPerPage(), form.getElementsPerPage());
+Long count = stupidDao.countFromFool(foolId, form.filter());
+Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
+Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
+List<Stupid> list = stupidDao.scrollFromFool(foolId, form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<StupidBasicView> elements = new ArrayList<>(list.size());
 for (Stupid stupid : list) {
 elements.add(this.stupidBasicViewMapper.toView(stupid));
@@ -125,7 +125,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 public StupidFullView load(Long id) {
 Stupid stupid = stupidDao.load(id);
 stupidRightsManager.checkCanAccess(stupid);
-return this.stupidFullViewMapper.mapFrom(new StupidFullView(),stupid);
+return this.stupidFullViewMapper.toView(stupid);
 }
 
 /**
@@ -136,16 +136,7 @@ return this.stupidFullViewMapper.mapFrom(new StupidFullView(),stupid);
 public StupidFullView find(String code) {
 Stupid stupid = stupidDao.find(code);
 stupidRightsManager.checkCanAccess(stupid);
-return this.stupidFullViewMapper.mapFrom(new StupidFullView(), stupid);
-}
-
-/**
- * create object
- */
-@Override
-public StupidFullView create() {
-stupidRightsManager.checkCanCreate();
-return new StupidFullView();
+return this.stupidFullViewMapper.toView(stupid);
 }
 
 /**
@@ -154,7 +145,7 @@ return new StupidFullView();
 @Override
 @Transactional(rollbackFor=Exception.class)
 public Long save(StupidForm stupidForm) {
-Stupid stupid = this.stupidFormMapper.mapTo(stupidForm, new Stupid());
+Stupid stupid = this.stupidFormMapper.toEntity(stupidForm, new Stupid());
 stupidRightsManager.checkCanSave(stupid);
 stupidStateManager.checkCanSave(stupid);
 return stupidProcessor.save(stupid);
@@ -169,7 +160,7 @@ public void update(Long id, StupidForm stupidForm) {
 Stupid stupid = this.stupidDao.load(id);
 stupidRightsManager.checkCanUpdate(stupid);
 stupidStateManager.checkCanUpdate(stupid);
-stupid = this.stupidFormMapper.mapTo(stupidForm, stupid);
+stupid = this.stupidFormMapper.toEntity(stupidForm, stupid);
 stupidProcessor.update(stupid);
 }
 
@@ -183,23 +174,6 @@ Stupid stupid = stupidDao.load(id);
 stupidRightsManager.checkCanDelete(stupid);
 stupidStateManager.checkCanDelete(stupid);
 stupidProcessor.delete(stupid);
-}
-
-/**
- * delete object list
- */
-@Override
-@Transactional(rollbackFor=Exception.class)
-public void deleteList(List<Long> idList) {
-Stupid stupid;
-if (idList != null){
-for (Long id:idList){
-stupid = stupidDao.load(id);
-stupidRightsManager.checkCanDelete(stupid);
-stupidStateManager.checkCanDelete(stupid);
-stupidProcessor.delete(stupid);
-}
-}
 }
 
 }

@@ -1,47 +1,56 @@
 package org.ifolks.demo.components.mapper.organizations.forms.base;
 
-import org.ifolks.commons.mapper.impl.BasicMapperImpl;
 import org.ifolks.demo.api.model.organizations.forms.OrganizationForm;
 import org.ifolks.demo.model.organizations.Organization;
 import org.ifolks.demo.model.organizations.OrganizationDescription;
+import org.springframework.stereotype.Component;
 
 /**
  * auto generated base mapper class file
  * <br/>no modification should be done to this file
  * <br/>processed by ifolks-generator
  */
-public class OrganizationFormBaseMapper extends BasicMapperImpl<OrganizationForm, Organization> {
+@Component
+public class OrganizationFormBaseMapper {
 
-public OrganizationFormBaseMapper() {
-super(OrganizationForm.class, Organization.class);
-}
 
 /*
  * properties
  */
 
 /**
- * mapping form from object
+ * mapping object arry to form
  */
-@Override
-public OrganizationForm mapFrom(OrganizationForm organizationForm, Organization organization) {
-organizationForm = super.mapFrom(organizationForm, organization);
-organizationForm.setDescription(organization.getOrganizationDescription().getDescription());
-return organizationForm;
+public OrganizationForm toForm(Object[] args) {
+
+return new OrganizationForm (
+(String)args[0],
+(String)args[1]);
 }
 
 /**
- * mapping view to object
+ * mapping entity to form
  */
-@Override
-public Organization mapTo(OrganizationForm organizationForm, Organization organization) {
-organization = super.mapTo(organizationForm, organization);
+public OrganizationForm toForm(Organization organization) {
+String code = organization.getCode();
+String description = organization.getOrganizationDescription().getDescription();
+
+return new OrganizationForm (
+code,
+description);
+}
+
+/**
+ * mapping form to entity
+ */
+public Organization toEntity(OrganizationForm organizationForm, Organization organization) {
+organization.setCode(organizationForm.code());
 OrganizationDescription organizationDescription = organization.getOrganizationDescription();
 if (organizationDescription == null) {
 organizationDescription = new OrganizationDescription();
 organization.setOrganizationDescription(organizationDescription);
 }
-organizationDescription.setDescription(organizationForm.getDescription());
+organizationDescription.setDescription(organizationForm.description());
 return organization;
 }
 
