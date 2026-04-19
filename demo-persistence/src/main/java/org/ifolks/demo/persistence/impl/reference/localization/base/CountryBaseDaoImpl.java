@@ -4,6 +4,7 @@ import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addEqualsRestri
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addOrder;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
 
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Order;
@@ -11,8 +12,6 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
 import org.ifolks.commons.api.model.OrderType;
 import org.ifolks.commons.model.patterns.BaseDaoImpl;
@@ -39,10 +38,8 @@ super(Country.class);
  * load object list eagerly
  */
 @Override
-@SuppressWarnings({"unused","unchecked"})
 public List<Country> loadListEagerly() {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Country> criteria = builder.createQuery(Country.class);
 
 Root<Country> root = criteria.from(Country.class);
@@ -52,7 +49,7 @@ List<Order> orders = new ArrayList<>();
 addOrder(builder, orders, root.get(Country_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-return session.createQuery(criteria).getResultList();
+return entityManager.createQuery(criteria).getResultList();
 }
 
 /**
@@ -60,8 +57,7 @@ return session.createQuery(criteria).getResultList();
  */
 @Override
 public Long count(CountryFilter filter) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Country> root = criteria.from(Country.class);
@@ -72,17 +68,15 @@ addStringStartsWithRestriction(builder, predicates, root.get(Country_.label), fi
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
-return session.createQuery(criteria).getSingleResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
  * scroll filtered object list
  */
 @Override
-@SuppressWarnings("unchecked")
 public List<Country> scroll(CountryFilter filter, CountrySorting sorting, Long firstResult, Long maxResults) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Country> criteria = builder.createQuery(Country.class);
 
 Root<Country> root = criteria.from(Country.class);
@@ -99,7 +93,7 @@ addOrder(builder, orders, root.get(Country_.label), sorting.getLabelOrderType())
 addOrder(builder, orders, root.get(Country_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-Query<Country> query = session.createQuery(criteria);
+TypedQuery<Country> query = entityManager.createQuery(criteria);
 if (firstResult != null){
 query.setFirstResult(firstResult.intValue());
 }
@@ -114,8 +108,7 @@ return query.getResultList();
  */
 @Override
 public Country findOrNull(String code) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Country> criteria = builder.createQuery(Country.class);
 
 Root<Country> root = criteria.from(Country.class);
@@ -126,7 +119,7 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 
-return session.createQuery(criteria).uniqueResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**

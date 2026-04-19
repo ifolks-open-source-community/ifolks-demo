@@ -1,7 +1,7 @@
 package org.ifolks.demo.rest.controller.reference.time.base;
 
+import jakarta.validation.Valid;
 import java.util.List;
-import javax.validation.Valid;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.commons.api.model.SelectItem;

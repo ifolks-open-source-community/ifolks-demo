@@ -5,6 +5,7 @@ import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addEqualsRestri
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addOrder;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
 
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Join;
@@ -14,8 +15,6 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
 import org.ifolks.commons.api.model.OrderType;
 import org.ifolks.commons.model.patterns.BaseDaoImpl;
@@ -46,10 +45,8 @@ super(Calendar.class);
  * load object list eagerly
  */
 @Override
-@SuppressWarnings({"unused","unchecked"})
 public List<Calendar> loadListEagerly() {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Calendar> criteria = builder.createQuery(Calendar.class);
 
 Root<Calendar> root = criteria.from(Calendar.class);
@@ -59,7 +56,7 @@ List<Order> orders = new ArrayList<>();
 addOrder(builder, orders, root.get(Calendar_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-return session.createQuery(criteria).getResultList();
+return entityManager.createQuery(criteria).getResultList();
 }
 
 /**
@@ -67,8 +64,7 @@ return session.createQuery(criteria).getResultList();
  */
 @Override
 public Long count(CalendarFilter filter) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Calendar> root = criteria.from(Calendar.class);
@@ -79,17 +75,15 @@ addStringStartsWithRestriction(builder, predicates, root.get(Calendar_.label), f
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
-return session.createQuery(criteria).getSingleResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
  * scroll filtered object list
  */
 @Override
-@SuppressWarnings("unchecked")
 public List<Calendar> scroll(CalendarFilter filter, CalendarSorting sorting, Long firstResult, Long maxResults) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Calendar> criteria = builder.createQuery(Calendar.class);
 
 Root<Calendar> root = criteria.from(Calendar.class);
@@ -106,7 +100,7 @@ addOrder(builder, orders, root.get(Calendar_.label), sorting.getLabelOrderType()
 addOrder(builder, orders, root.get(Calendar_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-Query<Calendar> query = session.createQuery(criteria);
+TypedQuery<Calendar> query = entityManager.createQuery(criteria);
 if (firstResult != null){
 query.setFirstResult(firstResult.intValue());
 }
@@ -121,8 +115,7 @@ return query.getResultList();
  */
 @Override
 public List<CalendarDayOff> loadCalendarDayOffList(Integer calendarId) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<CalendarDayOff> criteria = builder.createQuery(CalendarDayOff.class);
 
 Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
@@ -139,7 +132,7 @@ List<Order> orders = new ArrayList<>();
 addOrder(builder, orders, root.get(CalendarDayOff_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-return session.createQuery(criteria).getResultList();
+return entityManager.createQuery(criteria).getResultList();
 }
 
 /**
@@ -147,8 +140,7 @@ return session.createQuery(criteria).getResultList();
  */
 @Override
 public Long countCalendarDayOff(Integer calendarId) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
@@ -161,7 +153,7 @@ criteria.where(builder.equal(calendar.get(Calendar_.id), calendarId));
 }
 
 criteria.select(builder.count(root));
-return session.createQuery(criteria).getSingleResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
@@ -169,8 +161,7 @@ return session.createQuery(criteria).getSingleResult();
  */
 @Override
 public Long countCalendarDayOff(Integer calendarId, CalendarDayOffFilter filter) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
@@ -187,7 +178,7 @@ predicates.add(builder.equal(calendar.get(Calendar_.id), calendarId));
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
-return session.createQuery(criteria).getSingleResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
@@ -195,8 +186,7 @@ return session.createQuery(criteria).getSingleResult();
  */
 @Override
 public List<CalendarDayOff> scrollCalendarDayOff(Integer calendarId, CalendarDayOffFilter filter, CalendarDayOffSorting sorting, Long firstResult, Long maxResults) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<CalendarDayOff> criteria = builder.createQuery(CalendarDayOff.class);
 
 Root<CalendarDayOff> root = criteria.from(CalendarDayOff.class);
@@ -219,7 +209,7 @@ addOrder(builder, orders, root.get(CalendarDayOff_.dayOffLabel), sorting.getDayO
 addOrder(builder, orders, root.get(CalendarDayOff_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-Query<CalendarDayOff> query = session.createQuery(criteria);
+TypedQuery<CalendarDayOff> query = entityManager.createQuery(criteria);
 if (firstResult != null){
 query.setFirstResult(firstResult.intValue());
 }
@@ -234,7 +224,7 @@ return query.getResultList();
  */
 @Override
 public CalendarDayOff loadCalendarDayOff(Integer id) {
-CalendarDayOff calendarDayOff = (CalendarDayOff)this.sessionFactory.getCurrentSession().get(CalendarDayOff.class,id);
+CalendarDayOff calendarDayOff = (CalendarDayOff)entityManager.find(CalendarDayOff.class,id);
 if (calendarDayOff == null) {
 throw new ObjectNotFoundException("CalendarDayOff.notFound");
 } else {
@@ -247,8 +237,7 @@ return calendarDayOff;
  */
 @Override
 public Calendar findOrNull(String code) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Calendar> criteria = builder.createQuery(Calendar.class);
 
 Root<Calendar> root = criteria.from(Calendar.class);
@@ -259,7 +248,7 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 
-return session.createQuery(criteria).uniqueResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
@@ -296,7 +285,7 @@ return calendar != null;
 @Override
 public void saveCalendarDayOff(Calendar calendar, CalendarDayOff calendarDayOff) {
 calendarDayOff.setCalendar(calendar);
-this.sessionFactory.getCurrentSession().save(calendarDayOff);
+entityManager.persist(calendarDayOff);
 }
 
 /**
@@ -305,7 +294,7 @@ this.sessionFactory.getCurrentSession().save(calendarDayOff);
 @Override
 public void deleteCalendarDayOff(CalendarDayOff calendarDayOff) {
 calendarDayOff.getCalendar().getCalendarDayOffCollection().remove(calendarDayOff);
-this.sessionFactory.getCurrentSession().delete(calendarDayOff);
+entityManager.remove(calendarDayOff);
 }
 
 }

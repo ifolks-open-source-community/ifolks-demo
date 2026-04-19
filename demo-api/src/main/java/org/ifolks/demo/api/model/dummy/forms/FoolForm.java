@@ -1,9 +1,9 @@
 package org.ifolks.demo.api.model.dummy.forms;
 
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
-import javax.validation.constraints.NotNull;
 
 /**
  * auto generated form bean record file

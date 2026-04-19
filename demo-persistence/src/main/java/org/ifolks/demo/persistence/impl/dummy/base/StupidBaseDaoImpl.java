@@ -4,6 +4,7 @@ import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addEqualsRestri
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addOrder;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
 
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Fetch;
@@ -14,8 +15,6 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
 import org.ifolks.commons.api.model.OrderType;
 import org.ifolks.commons.model.patterns.BaseDaoImpl;
@@ -44,10 +43,8 @@ super(Stupid.class);
  * load object list eagerly
  */
 @Override
-@SuppressWarnings({"unused","unchecked"})
 public List<Stupid> loadListEagerly() {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
@@ -59,7 +56,7 @@ List<Order> orders = new ArrayList<>();
 addOrder(builder, orders, root.get(Stupid_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-return session.createQuery(criteria).getResultList();
+return entityManager.createQuery(criteria).getResultList();
 }
 
 /**
@@ -67,8 +64,7 @@ return session.createQuery(criteria).getResultList();
  */
 @Override
 public List<Stupid> loadListFromFool(String foolId) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
@@ -85,17 +81,15 @@ List<Order> orders = new ArrayList<>();
 addOrder(builder, orders, root.get(Stupid_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-return session.createQuery(criteria).getResultList();
+return entityManager.createQuery(criteria).getResultList();
 }
 
 /**
  * load object list eagerly from fool
  */
 @Override
-@SuppressWarnings({"unused","unchecked"})
 public List<Stupid> loadListEagerlyFromFool(String foolId) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
@@ -113,7 +107,7 @@ List<Order> orders = new ArrayList<>();
 addOrder(builder, orders, root.get(Stupid_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-return session.createQuery(criteria).getResultList();
+return entityManager.createQuery(criteria).getResultList();
 }
 
 /**
@@ -121,8 +115,7 @@ return session.createQuery(criteria).getResultList();
  */
 @Override
 public Long count(StupidFilter filter) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
@@ -134,15 +127,14 @@ addStringStartsWithRestriction(builder, predicates, fool.get(Fool_.code), filter
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
-return session.createQuery(criteria).getSingleResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
  * count object list from fool
  */
 public Long countFromFool(String foolId) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
@@ -155,15 +147,14 @@ criteria.where(builder.equal(fool.get(Fool_.id), foolId));
 }
 
 criteria.select(builder.count(root));
-return session.createQuery(criteria).getSingleResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
  * count filtered object list from fool
  */
 public Long countFromFool(String foolId, StupidFilter filter) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
@@ -181,17 +172,15 @@ predicates.add(builder.equal(fool.get(Fool_.id), foolId));
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
-return session.createQuery(criteria).getSingleResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
  * scroll filtered object list
  */
 @Override
-@SuppressWarnings("unchecked")
 public List<Stupid> scroll(StupidFilter filter, StupidSorting sorting, Long firstResult, Long maxResults) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
@@ -210,7 +199,7 @@ addOrder(builder, orders, fool.get(Fool_.code), sorting.getFoolCodeOrderType());
 addOrder(builder, orders, root.get(Stupid_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-Query<Stupid> query = session.createQuery(criteria);
+TypedQuery<Stupid> query = entityManager.createQuery(criteria);
 if (firstResult != null){
 query.setFirstResult(firstResult.intValue());
 }
@@ -224,10 +213,8 @@ return query.getResultList();
  * scroll filtered object list from fool
  */
 @Override
-@SuppressWarnings("unchecked")
 public List<Stupid> scrollFromFool(String foolId, StupidFilter filter, StupidSorting sorting, Long firstResult, Long maxResults) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
@@ -251,7 +238,7 @@ addOrder(builder, orders, fool.get(Fool_.code), sorting.getFoolCodeOrderType());
 addOrder(builder, orders, root.get(Stupid_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-Query<Stupid> query = session.createQuery(criteria);
+TypedQuery<Stupid> query = entityManager.createQuery(criteria);
 if (firstResult != null){
 query.setFirstResult(firstResult.intValue());
 }
@@ -266,8 +253,7 @@ return query.getResultList();
  */
 @Override
 public Stupid findOrNull(String code) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Stupid> criteria = builder.createQuery(Stupid.class);
 
 Root<Stupid> root = criteria.from(Stupid.class);
@@ -278,7 +264,7 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 
-return session.createQuery(criteria).uniqueResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**

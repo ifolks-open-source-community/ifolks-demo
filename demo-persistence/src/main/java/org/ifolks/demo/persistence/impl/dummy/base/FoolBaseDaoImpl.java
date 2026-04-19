@@ -7,6 +7,7 @@ import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addOrder;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.getStringStartsWithRestriction;
 
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Order;
@@ -14,8 +15,6 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
 import org.ifolks.commons.api.model.OrderType;
 import org.ifolks.commons.model.patterns.BaseDaoImpl;
@@ -42,10 +41,8 @@ super(Fool.class);
  * load object list eagerly
  */
 @Override
-@SuppressWarnings({"unused","unchecked"})
 public List<Fool> loadListEagerly() {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Fool> criteria = builder.createQuery(Fool.class);
 
 Root<Fool> root = criteria.from(Fool.class);
@@ -55,7 +52,7 @@ List<Order> orders = new ArrayList<>();
 addOrder(builder, orders, root.get(Fool_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-return session.createQuery(criteria).getResultList();
+return entityManager.createQuery(criteria).getResultList();
 }
 
 /**
@@ -63,8 +60,7 @@ return session.createQuery(criteria).getResultList();
  */
 @Override
 public Long count(FoolFilter filter) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Fool> root = criteria.from(Fool.class);
@@ -81,17 +77,15 @@ addBetweenRestriction(builder, predicates, root.get(Fool_.datetimeField), filter
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
-return session.createQuery(criteria).getSingleResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
  * scroll filtered object list
  */
 @Override
-@SuppressWarnings("unchecked")
 public List<Fool> scroll(FoolFilter filter, FoolSorting sorting, Long firstResult, Long maxResults) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Fool> criteria = builder.createQuery(Fool.class);
 
 Root<Fool> root = criteria.from(Fool.class);
@@ -120,7 +114,7 @@ addOrder(builder, orders, root.get(Fool_.datetimeField), sorting.getDatetimeFiel
 addOrder(builder, orders, root.get(Fool_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-Query<Fool> query = session.createQuery(criteria);
+TypedQuery<Fool> query = entityManager.createQuery(criteria);
 if (firstResult != null){
 query.setFirstResult(firstResult.intValue());
 }
@@ -135,8 +129,7 @@ return query.getResultList();
  */
 @Override
 public Fool findOrNull(String code) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Fool> criteria = builder.createQuery(Fool.class);
 
 Root<Fool> root = criteria.from(Fool.class);
@@ -147,7 +140,7 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 
-return session.createQuery(criteria).uniqueResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
@@ -183,8 +176,7 @@ return fool != null;
  */
 @Override
 public List<Fool> search(String arg) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Fool> criteria = builder.createQuery(Fool.class);
 
 Root<Fool> root = criteria.from(Fool.class);
@@ -196,7 +188,7 @@ criteria.where(predicate);
 
 criteria.select(root);
 
-Query<Fool> query = session.createQuery(criteria);
+TypedQuery<Fool> query = entityManager.createQuery(criteria);
 query.setMaxResults(20);
 return query.getResultList();
 }

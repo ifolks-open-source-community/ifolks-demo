@@ -5,6 +5,7 @@ import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addOrder;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.getStringStartsWithRestriction;
 
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Fetch;
@@ -15,8 +16,6 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
 import org.ifolks.commons.api.model.OrderType;
 import org.ifolks.commons.model.patterns.BaseDaoImpl;
@@ -46,10 +45,8 @@ super(Organization.class);
  * load object list eagerly
  */
 @Override
-@SuppressWarnings({"unused","unchecked"})
 public List<Organization> loadListEagerly() {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Organization> criteria = builder.createQuery(Organization.class);
 
 Root<Organization> root = criteria.from(Organization.class);
@@ -61,7 +58,7 @@ List<Order> orders = new ArrayList<>();
 addOrder(builder, orders, root.get(Organization_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-return session.createQuery(criteria).getResultList();
+return entityManager.createQuery(criteria).getResultList();
 }
 
 /**
@@ -69,8 +66,7 @@ return session.createQuery(criteria).getResultList();
  */
 @Override
 public Long count(OrganizationFilter filter) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<Organization> root = criteria.from(Organization.class);
@@ -82,17 +78,15 @@ addStringStartsWithRestriction(builder, predicates, organizationDescription.get(
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
-return session.createQuery(criteria).getSingleResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
  * scroll filtered object list
  */
 @Override
-@SuppressWarnings("unchecked")
 public List<Organization> scroll(OrganizationFilter filter, OrganizationSorting sorting, Long firstResult, Long maxResults) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Organization> criteria = builder.createQuery(Organization.class);
 
 Root<Organization> root = criteria.from(Organization.class);
@@ -111,7 +105,7 @@ addOrder(builder, orders, organizationDescription.get(OrganizationDescription_.d
 addOrder(builder, orders, root.get(Organization_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-Query<Organization> query = session.createQuery(criteria);
+TypedQuery<Organization> query = entityManager.createQuery(criteria);
 if (firstResult != null){
 query.setFirstResult(firstResult.intValue());
 }
@@ -126,8 +120,7 @@ return query.getResultList();
  */
 @Override
 public Organization findOrNull(String code) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Organization> criteria = builder.createQuery(Organization.class);
 
 Root<Organization> root = criteria.from(Organization.class);
@@ -138,7 +131,7 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 
-return session.createQuery(criteria).uniqueResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
@@ -174,8 +167,7 @@ return organization != null;
  */
 @Override
 public List<Organization> search(String arg) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Organization> criteria = builder.createQuery(Organization.class);
 
 Root<Organization> root = criteria.from(Organization.class);
@@ -187,7 +179,7 @@ criteria.where(predicate);
 
 criteria.select(root);
 
-Query<Organization> query = session.createQuery(criteria);
+TypedQuery<Organization> query = entityManager.createQuery(criteria);
 query.setMaxResults(20);
 return query.getResultList();
 }
@@ -198,7 +190,7 @@ return query.getResultList();
 @Override
 public void saveOrganizationCertification(Organization organization, OrganizationCertification organizationCertification) {
 organizationCertification.setOrganization(organization);
-this.sessionFactory.getCurrentSession().save(organizationCertification);
+entityManager.persist(organizationCertification);
 }
 
 /**
@@ -208,7 +200,7 @@ this.sessionFactory.getCurrentSession().save(organizationCertification);
 public void deleteOrganizationCertification(OrganizationCertification organizationCertification) {
 Organization organization = organizationCertification.getOrganization();
 organization.setOrganizationCertification(null);
-this.sessionFactory.getCurrentSession().delete(organizationCertification);
+entityManager.remove(organizationCertification);
 }
 
 }

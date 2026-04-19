@@ -1,7 +1,7 @@
 package org.ifolks.demo.api.model.reference.time.forms;
 
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
-import javax.validation.constraints.NotNull;
 
 /**
  * auto generated form bean record file

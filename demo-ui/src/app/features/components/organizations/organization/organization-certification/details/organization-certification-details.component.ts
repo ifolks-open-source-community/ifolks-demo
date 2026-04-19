@@ -47,7 +47,7 @@ this.view.form.certified = StringUtils.stringToStrictBoolean(this.form.get('cert
 }
 
 load(): void {
-this.service.loadOrganizationCertification(this.id).subscribe((t) => {this.view=t;this.restoreForm();});
+this.service.loadOrganizationCertification(this.id).subscribe((t) => {if(t){this.view=t}else{this.view = new OrganizationCertificationFullView()};this.restoreForm();});
 }
 
 save(): void {

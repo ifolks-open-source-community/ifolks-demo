@@ -1,6 +1,6 @@
 package org.ifolks.demo.api.model.organizations.forms;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * auto generated form bean record file

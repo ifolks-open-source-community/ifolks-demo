@@ -8,7 +8,7 @@
 	<parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.1</version>
+        <version>3.4.4</version>
     </parent>
 	
 	<groupId>org.ifolks.demo</groupId>
@@ -37,13 +37,6 @@
 		
 		<ifolks.generator.version>1.0.0-SNAPSHOT</ifolks.generator.version>
 		<ifolks.commons.version>1.0.0-SNAPSHOT</ifolks.commons.version>
-		
-		<hibernate.validator.version>5.2.3.Final</hibernate.validator.version>
-		<javax.validation.version>1.1.0.Final</javax.validation.version>
-		
-		<commons.dbcp.version>1.4</commons.dbcp.version>
-		<commons.digester.version>1.8.1</commons.digester.version>
-		<commons.lang.version>2.5</commons.lang.version>
 		
 	</properties>
 	
@@ -90,7 +83,7 @@
 			<!-- ifolks generator -->
 			<dependency>
 				<groupId>org.ifolks.generator</groupId>
-				<artifactId>generator-bash</artifactId>
+				<artifactId>generator-services</artifactId>
 				<version>${ifolks.generator.version}</version>
 			</dependency>
 			
@@ -115,12 +108,6 @@
 			
 			<dependency>
 				<groupId>org.ifolks.commons</groupId>
-				<artifactId>commons-mapper</artifactId>
-				<version>${ifolks.commons.version}</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>org.ifolks.commons</groupId>
 				<artifactId>commons-log</artifactId>
 				<version>${ifolks.commons.version}</version>
 			</dependency>
@@ -129,40 +116,6 @@
 				<groupId>org.ifolks.commons</groupId>
 				<artifactId>commons-rest</artifactId>
 				<version>${ifolks.commons.version}</version>
-			</dependency>
-			
-		
-			<!-- validation -->
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-validator</artifactId>
-				<version>${hibernate.validator.version}</version>
-			</dependency>
-	
-			<dependency>
-				<groupId>javax.validation</groupId>
-				<artifactId>validation-api</artifactId>
-				<version>${javax.validation.version}</version>
-			</dependency>
-			
-			
-			<!-- apache commons -->
-			<dependency>
-				<groupId>commons-dbcp</groupId>
-				<artifactId>commons-dbcp</artifactId>
-				<version>${commons.dbcp.version}</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>commons-digester</groupId>
-				<artifactId>commons-digester</artifactId>
-				<version>${commons.digester.version}</version>
-			</dependency>
-			
-			<dependency>
-				<groupId>commons-lang</groupId>
-				<artifactId>commons-lang</artifactId>
-				<version>${commons.lang.version}</version>
 			</dependency>
 			
 		</dependencies>

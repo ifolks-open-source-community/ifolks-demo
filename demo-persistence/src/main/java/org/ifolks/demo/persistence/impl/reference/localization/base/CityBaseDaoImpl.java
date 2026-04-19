@@ -4,6 +4,7 @@ import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addEqualsRestri
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addOrder;
 import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
 
+import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Fetch;
@@ -14,8 +15,6 @@ import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
 import org.ifolks.commons.api.model.OrderType;
 import org.ifolks.commons.model.patterns.BaseDaoImpl;
@@ -46,10 +45,8 @@ super(City.class);
  * load object list eagerly
  */
 @Override
-@SuppressWarnings({"unused","unchecked"})
 public List<City> loadListEagerly() {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<City> criteria = builder.createQuery(City.class);
 
 Root<City> root = criteria.from(City.class);
@@ -63,7 +60,7 @@ List<Order> orders = new ArrayList<>();
 addOrder(builder, orders, root.get(City_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-return session.createQuery(criteria).getResultList();
+return entityManager.createQuery(criteria).getResultList();
 }
 
 /**
@@ -71,8 +68,7 @@ return session.createQuery(criteria).getResultList();
  */
 @Override
 public List<City> loadListFromRegion(Integer regionId) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<City> criteria = builder.createQuery(City.class);
 
 Root<City> root = criteria.from(City.class);
@@ -89,17 +85,15 @@ List<Order> orders = new ArrayList<>();
 addOrder(builder, orders, root.get(City_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-return session.createQuery(criteria).getResultList();
+return entityManager.createQuery(criteria).getResultList();
 }
 
 /**
  * load object list eagerly from region
  */
 @Override
-@SuppressWarnings({"unused","unchecked"})
 public List<City> loadListEagerlyFromRegion(Integer regionId) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<City> criteria = builder.createQuery(City.class);
 
 Root<City> root = criteria.from(City.class);
@@ -119,7 +113,7 @@ List<Order> orders = new ArrayList<>();
 addOrder(builder, orders, root.get(City_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-return session.createQuery(criteria).getResultList();
+return entityManager.createQuery(criteria).getResultList();
 }
 
 /**
@@ -127,8 +121,7 @@ return session.createQuery(criteria).getResultList();
  */
 @Override
 public Long count(CityFilter filter) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<City> root = criteria.from(City.class);
@@ -143,15 +136,14 @@ addStringStartsWithRestriction(builder, predicates, root.get(City_.label), filte
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
-return session.createQuery(criteria).getSingleResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
  * count object list from region
  */
 public Long countFromRegion(Integer regionId) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<City> root = criteria.from(City.class);
@@ -164,15 +156,14 @@ criteria.where(builder.equal(region.get(Region_.id), regionId));
 }
 
 criteria.select(builder.count(root));
-return session.createQuery(criteria).getSingleResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
  * count filtered object list from region
  */
 public Long countFromRegion(Integer regionId, CityFilter filter) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
 
 Root<City> root = criteria.from(City.class);
@@ -193,17 +184,15 @@ predicates.add(builder.equal(region.get(Region_.id), regionId));
 criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(builder.count(root));
-return session.createQuery(criteria).getSingleResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**
  * scroll filtered object list
  */
 @Override
-@SuppressWarnings("unchecked")
 public List<City> scroll(CityFilter filter, CitySorting sorting, Long firstResult, Long maxResults) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<City> criteria = builder.createQuery(City.class);
 
 Root<City> root = criteria.from(City.class);
@@ -228,7 +217,7 @@ addOrder(builder, orders, root.get(City_.label), sorting.getLabelOrderType());
 addOrder(builder, orders, root.get(City_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-Query<City> query = session.createQuery(criteria);
+TypedQuery<City> query = entityManager.createQuery(criteria);
 if (firstResult != null){
 query.setFirstResult(firstResult.intValue());
 }
@@ -242,10 +231,8 @@ return query.getResultList();
  * scroll filtered object list from region
  */
 @Override
-@SuppressWarnings("unchecked")
 public List<City> scrollFromRegion(Integer regionId, CityFilter filter, CitySorting sorting, Long firstResult, Long maxResults) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<City> criteria = builder.createQuery(City.class);
 
 Root<City> root = criteria.from(City.class);
@@ -275,7 +262,7 @@ addOrder(builder, orders, root.get(City_.label), sorting.getLabelOrderType());
 addOrder(builder, orders, root.get(City_.id), OrderType.DESC);
 criteria.orderBy(orders);
 
-Query<City> query = session.createQuery(criteria);
+TypedQuery<City> query = entityManager.createQuery(criteria);
 if (firstResult != null){
 query.setFirstResult(firstResult.intValue());
 }
@@ -290,8 +277,7 @@ return query.getResultList();
  */
 @Override
 public City findOrNull(String regionCountryCode, String regionCode, String code) {
-Session session = this.sessionFactory.getCurrentSession();
-CriteriaBuilder builder = session.getCriteriaBuilder();
+CriteriaBuilder builder = entityManager.getCriteriaBuilder();
 CriteriaQuery<City> criteria = builder.createQuery(City.class);
 
 Root<City> root = criteria.from(City.class);
@@ -306,7 +292,7 @@ criteria.where(predicates.toArray(new Predicate[predicates.size()]));
 
 criteria.select(root);
 
-return session.createQuery(criteria).uniqueResult();
+return entityManager.createQuery(criteria).getSingleResult();
 }
 
 /**

@@ -1,15 +1,16 @@
 package org.ifolks.demo.persistence;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import java.util.Properties;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
-import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 @Configuration
 @Profile("local")
@@ -20,26 +21,31 @@ public class LocalPersistenceConfig {
 
 	@Bean
     public DataSource dataSource() {
-		BasicDataSource result = new BasicDataSource();
-		result.setDriverClassName(env.getRequiredProperty("db.driverClassName"));
-		result.setUrl(env.getRequiredProperty("db.url"));
-		result.setUsername(env.getRequiredProperty("db.userName"));
-		result.setPassword(env.getRequiredProperty("db.password"));
-		return result;
+		HikariConfig config = new HikariConfig();
+	    config.setJdbcUrl(env.getRequiredProperty("db.url"));
+	    config.setUsername(env.getRequiredProperty("db.userName"));
+	    config.setPassword(env.getRequiredProperty("db.password"));
+	    config.setDriverClassName(env.getRequiredProperty("db.driverClassName"));
+	    config.setMaximumPoolSize(Integer.valueOf(env.getRequiredProperty("db.maximumPoolSize")));
+	    config.setMinimumIdle(Integer.valueOf(env.getRequiredProperty("db.minimumIdle")));
+	    config.setIdleTimeout(Integer.valueOf(env.getRequiredProperty("db.idleTimeout")));
+	    config.setConnectionTimeout(Integer.valueOf(env.getRequiredProperty("db.connectionTimeout")));
+		
+		return new HikariDataSource(config);
      }
 	
 	@Bean
-	public LocalSessionFactoryBean sessionFactory() throws NamingException {
-		LocalSessionFactoryBean result = new LocalSessionFactoryBean();
-		
-		result.setPackagesToScan("org.ifolks.demo");
-		result.setDataSource(dataSource());
-		
-		Properties hibernateProperties = new Properties();
-		hibernateProperties.setProperty("hibernate.show_sql", env.getRequiredProperty("hibernate.showSql"));
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean result = new LocalContainerEntityManagerFactoryBean();
+        result.setDataSource(dataSource());
+        result.setPackagesToScan("org.ifolks.demo.model");
+        result.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+
+        Properties hibernateProperties = new Properties();
+		hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.showSql"));
 		hibernateProperties.setProperty("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
-		result.setHibernateProperties(hibernateProperties);
-		
-		return result;
-	}
+		result.setJpaProperties(hibernateProperties);
+
+        return result;
+    }
 }
