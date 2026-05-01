@@ -2,7 +2,7 @@
 <metadata:project xmlns:metadata="http://generator.ifolks.org/schema/model/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://generator.ifolks.org/schema/model/metadata skeleton-metadata-4.0.xsd">
     <domainName>org.ifolks</domainName>
     <projectName>demo</projectName>
-    <skeleton>SPRING_HIBERNATE_ANGULAR</skeleton>
+    <skeleton>SPRING_REST_ANGULAR</skeleton>
     <databaseEngine>POSTGRESQL</databaseEngine>
     <audited>false</audited>
     <packages>

@@ -1,9 +1,9 @@
-package org.ifolks.demo.populator.command.reference.localization;
+package org.ifolks.demo.commands.organizations;
 
 import java.util.List;
-import org.ifolks.demo.api.interfaces.reference.localization.CityService;
-import org.ifolks.demo.api.model.reference.localization.forms.CityForm;
-import org.ifolks.demo.components.mapper.reference.localization.forms.CityFormMapper;
+import org.ifolks.demo.api.interfaces.organizations.OrganizationService;
+import org.ifolks.demo.api.model.organizations.forms.OrganizationForm;
+import org.ifolks.demo.components.mapper.organizations.forms.OrganizationFormMapper;
 import org.ifolks.generator.components.population.commands.interfaces.ServiceCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,32 +16,32 @@ import org.springframework.stereotype.Component;
  * <br/>processed by ifolks-generator
  */
 @Component
-public class CityCommand implements ServiceCommand {
+public class OrganizationCommand implements ServiceCommand {
 
 /*
  * logger
  */
-private static final Logger logger = LoggerFactory.getLogger(CityCommand.class);
+private static final Logger logger = LoggerFactory.getLogger(OrganizationCommand.class);
 
 @Autowired
-private CityService cityService;
+private OrganizationService organizationService;
 
 @Autowired
-private CityFormMapper cityFormMapper;
+private OrganizationFormMapper organizationFormMapper;
 
 @Override
 public void execute(List<Object[]> data) {
 for (Object[] args : data) {
-String message = "execute cityService.save - args : ";
+String message = "execute organizationService.save - args : ";
 for (Object arg:args) {
 message += "[" + arg + "]";
 }
 logger.info(message);
 
 try {
-CityForm cityForm = cityFormMapper.toForm(args);
+OrganizationForm organizationForm = organizationFormMapper.toForm(args);
 
-this.cityService.save(cityForm);
+this.organizationService.save(organizationForm);
 } catch (Exception e) {
 logger.error(message + "failed : " + e.getClass().getSimpleName() + " - " + e.getMessage(), e);
 }

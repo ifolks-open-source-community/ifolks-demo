@@ -1,9 +1,9 @@
-package org.ifolks.demo.populator.command.dummy;
+package org.ifolks.demo.commands.reference.localization;
 
 import java.util.List;
-import org.ifolks.demo.api.interfaces.dummy.FoolService;
-import org.ifolks.demo.api.model.dummy.forms.FoolForm;
-import org.ifolks.demo.components.mapper.dummy.forms.FoolFormMapper;
+import org.ifolks.demo.api.interfaces.reference.localization.RegionService;
+import org.ifolks.demo.api.model.reference.localization.forms.RegionForm;
+import org.ifolks.demo.components.mapper.reference.localization.forms.RegionFormMapper;
 import org.ifolks.generator.components.population.commands.interfaces.ServiceCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,32 +16,32 @@ import org.springframework.stereotype.Component;
  * <br/>processed by ifolks-generator
  */
 @Component
-public class FoolCommand implements ServiceCommand {
+public class RegionCommand implements ServiceCommand {
 
 /*
  * logger
  */
-private static final Logger logger = LoggerFactory.getLogger(FoolCommand.class);
+private static final Logger logger = LoggerFactory.getLogger(RegionCommand.class);
 
 @Autowired
-private FoolService foolService;
+private RegionService regionService;
 
 @Autowired
-private FoolFormMapper foolFormMapper;
+private RegionFormMapper regionFormMapper;
 
 @Override
 public void execute(List<Object[]> data) {
 for (Object[] args : data) {
-String message = "execute foolService.save - args : ";
+String message = "execute regionService.save - args : ";
 for (Object arg:args) {
 message += "[" + arg + "]";
 }
 logger.info(message);
 
 try {
-FoolForm foolForm = foolFormMapper.toForm(args);
+RegionForm regionForm = regionFormMapper.toForm(args);
 
-this.foolService.save(foolForm);
+this.regionService.save(regionForm);
 } catch (Exception e) {
 logger.error(message + "failed : " + e.getClass().getSimpleName() + " - " + e.getMessage(), e);
 }

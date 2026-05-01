@@ -5,13 +5,11 @@ import java.util.Map;
 import javax.sql.DataSource;
 import org.ifolks.generator.components.population.datasources.InputDataSourceProvider;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.PropertySource;
 
-@ComponentScan(basePackages = "org.ifolks.demo, org.ifolks.generator")
+@Configuration
 @EnableAspectJAutoProxy
-@PropertySource("classpath:application.properties")
 public class ApplicationConfig {
 	
 	@Bean

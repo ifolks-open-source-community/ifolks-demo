@@ -1,9 +1,9 @@
-package org.ifolks.demo.populator.command.reference.time;
+package org.ifolks.demo.commands.dummy;
 
 import java.util.List;
-import org.ifolks.demo.api.interfaces.reference.time.CalendarService;
-import org.ifolks.demo.api.model.reference.time.forms.CalendarForm;
-import org.ifolks.demo.components.mapper.reference.time.forms.CalendarFormMapper;
+import org.ifolks.demo.api.interfaces.dummy.StupidService;
+import org.ifolks.demo.api.model.dummy.forms.StupidForm;
+import org.ifolks.demo.components.mapper.dummy.forms.StupidFormMapper;
 import org.ifolks.generator.components.population.commands.interfaces.ServiceCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,32 +16,32 @@ import org.springframework.stereotype.Component;
  * <br/>processed by ifolks-generator
  */
 @Component
-public class CalendarCommand implements ServiceCommand {
+public class StupidCommand implements ServiceCommand {
 
 /*
  * logger
  */
-private static final Logger logger = LoggerFactory.getLogger(CalendarCommand.class);
+private static final Logger logger = LoggerFactory.getLogger(StupidCommand.class);
 
 @Autowired
-private CalendarService calendarService;
+private StupidService stupidService;
 
 @Autowired
-private CalendarFormMapper calendarFormMapper;
+private StupidFormMapper stupidFormMapper;
 
 @Override
 public void execute(List<Object[]> data) {
 for (Object[] args : data) {
-String message = "execute calendarService.save - args : ";
+String message = "execute stupidService.save - args : ";
 for (Object arg:args) {
 message += "[" + arg + "]";
 }
 logger.info(message);
 
 try {
-CalendarForm calendarForm = calendarFormMapper.toForm(args);
+StupidForm stupidForm = stupidFormMapper.toForm(args);
 
-this.calendarService.save(calendarForm);
+this.stupidService.save(stupidForm);
 } catch (Exception e) {
 logger.error(message + "failed : " + e.getClass().getSimpleName() + " - " + e.getMessage(), e);
 }

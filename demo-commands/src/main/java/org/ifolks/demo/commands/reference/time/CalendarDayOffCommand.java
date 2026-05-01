@@ -1,4 +1,4 @@
-package org.ifolks.demo.populator.command.reference.time;
+package org.ifolks.demo.commands.reference.time;
 
 import java.util.Arrays;
 import java.util.List;

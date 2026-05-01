@@ -1,4 +1,4 @@
-package org.ifolks.demo.populator.command.organizations;
+package org.ifolks.demo.commands.organizations;
 
 import java.util.Arrays;
 import java.util.List;
