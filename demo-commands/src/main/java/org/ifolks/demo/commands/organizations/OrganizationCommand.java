@@ -1,6 +1,7 @@
 package org.ifolks.demo.commands.organizations;
 
 import java.util.List;
+
 import org.ifolks.demo.api.interfaces.organizations.OrganizationService;
 import org.ifolks.demo.api.model.organizations.forms.OrganizationForm;
 import org.ifolks.demo.components.mapper.organizations.forms.OrganizationFormMapper;

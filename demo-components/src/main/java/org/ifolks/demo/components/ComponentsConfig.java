@@ -1,9 +1,5 @@
 package org.ifolks.demo.components;
 
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.ifolks.commons.log.AccessLogger;
 import org.ifolks.commons.log.ErrorLogger;
 import org.ifolks.commons.text.serialization.JsonSerializer;
@@ -11,6 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @Configuration
 public class ComponentsConfig {
@@ -24,6 +26,7 @@ public class ComponentsConfig {
 		result.setSerializationInclusion(Include.NON_NULL);
 		result.registerModule(new JavaTimeModule());
 		result.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+		result.disable(DeserializationFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE);
 		return result;
 	}
 	

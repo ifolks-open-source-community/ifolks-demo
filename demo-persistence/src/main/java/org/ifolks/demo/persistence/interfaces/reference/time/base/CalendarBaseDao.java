@@ -1,5 +1,6 @@
 package org.ifolks.demo.persistence.interfaces.reference.time.base;
 import java.util.List;
+
 import org.ifolks.commons.model.patterns.BaseDao;
 import org.ifolks.demo.api.model.reference.time.filters.CalendarDayOffFilter;
 import org.ifolks.demo.api.model.reference.time.filters.CalendarFilter;

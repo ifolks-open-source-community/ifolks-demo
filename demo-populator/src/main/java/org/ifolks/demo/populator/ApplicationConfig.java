@@ -2,7 +2,9 @@ package org.ifolks.demo.populator;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.sql.DataSource;
+
 import org.ifolks.generator.components.population.datasources.InputDataSourceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

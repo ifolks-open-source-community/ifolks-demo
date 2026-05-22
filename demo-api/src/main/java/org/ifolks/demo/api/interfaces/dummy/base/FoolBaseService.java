@@ -1,6 +1,7 @@
 package org.ifolks.demo.api.interfaces.dummy.base;
 
 import java.util.List;
+
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.commons.api.model.SelectItem;

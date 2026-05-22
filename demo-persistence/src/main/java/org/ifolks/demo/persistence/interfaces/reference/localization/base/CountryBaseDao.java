@@ -1,5 +1,6 @@
 package org.ifolks.demo.persistence.interfaces.reference.localization.base;
 import java.util.List;
+
 import org.ifolks.commons.model.patterns.BaseDao;
 import org.ifolks.demo.api.model.reference.localization.filters.CountryFilter;
 import org.ifolks.demo.api.model.reference.localization.sortings.CountrySorting;

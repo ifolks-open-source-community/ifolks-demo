@@ -1,7 +1,7 @@
 package org.ifolks.demo.rest.controller.reference.localization.base;
 
-import jakarta.validation.Valid;
 import java.util.List;
+
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.demo.api.interfaces.reference.localization.RegionService;
@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import jakarta.validation.Valid;
 
 /**
  * auto generated base rest controller file

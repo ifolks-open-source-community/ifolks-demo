@@ -1,5 +1,15 @@
 package org.ifolks.demo.model.dummy;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Set;
+
+import org.hibernate.Length;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -9,17 +19,7 @@ import jakarta.persistence.Index;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.persistence.UniqueConstraint;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.Set;
-import org.hibernate.Length;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
 
 /**
  * auto generated entity class file
@@ -76,9 +76,8 @@ private BigDecimal decimalField;
 @Column(name = "DATE_FIELD")
 private LocalDate dateField;
 
-@Temporal(TemporalType.TIMESTAMP)
 @Column(name = "DATETIME_FIELD")
-private Date datetimeField;
+private OffsetDateTime datetimeField;
 
 @OneToMany(fetch = FetchType.LAZY, mappedBy = "fool")
 private Set <Stupid> stupidCollection;
@@ -151,11 +150,11 @@ public void setDateField(LocalDate dateField) {
 this.dateField = dateField;
 }
 
-public Date getDatetimeField() {
+public OffsetDateTime getDatetimeField() {
 return this.datetimeField;
 }
 
-public void setDatetimeField(Date datetimeField) {
+public void setDatetimeField(OffsetDateTime datetimeField) {
 this.datetimeField = datetimeField;
 }
 

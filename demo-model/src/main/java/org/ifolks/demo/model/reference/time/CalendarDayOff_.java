@@ -1,8 +1,9 @@
 package org.ifolks.demo.model.reference.time;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
-import java.time.LocalDate;
 
 /**
  * auto generated entity metamodel class file

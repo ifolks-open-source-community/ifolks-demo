@@ -2,7 +2,8 @@ package org.ifolks.demo.components.mapper.dummy.forms.base;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.OffsetDateTime;
+
 import org.ifolks.demo.api.model.dummy.forms.FoolForm;
 import org.ifolks.demo.model.dummy.Fool;
 import org.springframework.stereotype.Component;
@@ -33,7 +34,7 @@ return new FoolForm (
 (Double)args[4],
 (BigDecimal)args[5],
 (LocalDate)args[6],
-(Date)args[7]);
+(OffsetDateTime)args[7]);
 }
 
 /**
@@ -47,7 +48,7 @@ Boolean booleanField = fool.getBooleanField();
 Double doubleField = fool.getDoubleField();
 BigDecimal decimalField = fool.getDecimalField();
 LocalDate dateField = fool.getDateField();
-Date datetimeField = fool.getDatetimeField();
+OffsetDateTime datetimeField = fool.getDatetimeField();
 
 return new FoolForm (
 code,

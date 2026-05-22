@@ -1,11 +1,12 @@
 package org.ifolks.demo.model.dummy;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+
 import jakarta.persistence.metamodel.SetAttribute;
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * auto generated entity metamodel class file
@@ -23,7 +24,7 @@ public static volatile SingularAttribute<Fool, Boolean> booleanField;
 public static volatile SingularAttribute<Fool, Double> doubleField;
 public static volatile SingularAttribute<Fool, BigDecimal> decimalField;
 public static volatile SingularAttribute<Fool, LocalDate> dateField;
-public static volatile SingularAttribute<Fool, Date> datetimeField;
+public static volatile SingularAttribute<Fool, OffsetDateTime> datetimeField;
 public static volatile SetAttribute<Fool, Stupid> stupidCollection;
 
 public static final String ID = "id";

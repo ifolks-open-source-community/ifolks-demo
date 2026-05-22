@@ -1,5 +1,6 @@
 package org.ifolks.demo.persistence.interfaces.organizations.base;
 import java.util.List;
+
 import org.ifolks.commons.model.patterns.BaseDao;
 import org.ifolks.demo.api.model.organizations.filters.OrganizationFilter;
 import org.ifolks.demo.api.model.organizations.sortings.OrganizationSorting;

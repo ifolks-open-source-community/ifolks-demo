@@ -1,6 +1,7 @@
 package org.ifolks.demo.api.model.dummy.sortings;
 
 import java.io.Serializable;
+
 import org.ifolks.commons.api.model.OrderType;
 
 /**

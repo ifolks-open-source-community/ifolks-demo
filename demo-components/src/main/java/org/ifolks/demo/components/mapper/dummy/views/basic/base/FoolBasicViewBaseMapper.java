@@ -2,7 +2,8 @@ package org.ifolks.demo.components.mapper.dummy.views.basic.base;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.OffsetDateTime;
+
 import org.ifolks.demo.api.model.dummy.views.basic.FoolBasicView;
 import org.ifolks.demo.components.rightsmanager.dummy.FoolRightsManager;
 import org.ifolks.demo.components.statemanager.dummy.FoolStateManager;
@@ -37,7 +38,7 @@ Boolean booleanField = fool.getBooleanField();
 Double doubleField = fool.getDoubleField();
 BigDecimal decimalField = fool.getDecimalField();
 LocalDate dateField = fool.getDateField();
-Date datetimeField = fool.getDatetimeField();
+OffsetDateTime datetimeField = fool.getDatetimeField();
 
 return new FoolBasicView (
 id,

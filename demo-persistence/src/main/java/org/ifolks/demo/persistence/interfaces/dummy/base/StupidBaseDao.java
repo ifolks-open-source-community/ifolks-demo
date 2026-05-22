@@ -1,5 +1,6 @@
 package org.ifolks.demo.persistence.interfaces.dummy.base;
 import java.util.List;
+
 import org.ifolks.commons.model.patterns.BaseDao;
 import org.ifolks.demo.api.model.dummy.filters.StupidFilter;
 import org.ifolks.demo.api.model.dummy.sortings.StupidSorting;

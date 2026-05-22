@@ -2,7 +2,7 @@ package org.ifolks.demo.api.model.dummy.views.basic;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 /**
  * auto generated basic view record
@@ -22,7 +22,7 @@ Boolean booleanField,
 Double doubleField,
 BigDecimal decimalField,
 LocalDate dateField,
-Date datetimeField
+OffsetDateTime datetimeField
 
 ) {
 /* Specific Code Start */

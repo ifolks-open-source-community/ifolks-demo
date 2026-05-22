@@ -1,6 +1,7 @@
 package org.ifolks.demo.api.model.reference.time.sortings;
 
 import java.io.Serializable;
+
 import org.ifolks.commons.api.model.OrderType;
 
 /**

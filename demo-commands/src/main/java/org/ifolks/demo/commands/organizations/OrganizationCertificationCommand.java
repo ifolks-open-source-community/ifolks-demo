@@ -2,6 +2,7 @@ package org.ifolks.demo.commands.organizations;
 
 import java.util.Arrays;
 import java.util.List;
+
 import org.ifolks.demo.api.interfaces.organizations.OrganizationService;
 import org.ifolks.demo.api.model.organizations.forms.OrganizationCertificationForm;
 import org.ifolks.demo.api.model.organizations.views.full.OrganizationFullView;

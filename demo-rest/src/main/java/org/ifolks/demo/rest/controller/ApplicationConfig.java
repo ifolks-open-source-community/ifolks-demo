@@ -1,7 +1,7 @@
 package org.ifolks.demo.rest.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
+
 import org.ifolks.commons.log.AccessLogger;
 import org.ifolks.commons.log.ErrorLogger;
 import org.ifolks.commons.rest.aspect.correlation.RestRequestAspect;
@@ -16,6 +16,8 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Configuration
 @EnableAspectJAutoProxy

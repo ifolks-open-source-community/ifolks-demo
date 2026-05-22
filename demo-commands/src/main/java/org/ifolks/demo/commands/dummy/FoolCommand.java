@@ -1,6 +1,7 @@
 package org.ifolks.demo.commands.dummy;
 
 import java.util.List;
+
 import org.ifolks.demo.api.interfaces.dummy.FoolService;
 import org.ifolks.demo.api.model.dummy.forms.FoolForm;
 import org.ifolks.demo.components.mapper.dummy.forms.FoolFormMapper;

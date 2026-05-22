@@ -3,7 +3,7 @@ package org.ifolks.demo.api.model.dummy.filters;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.OffsetDateTime;
 
 /**
  * auto generated filter class file
@@ -29,8 +29,8 @@ private BigDecimal decimalFieldMinValue;
 private BigDecimal decimalFieldMaxValue;
 private LocalDate dateFieldMinValue;
 private LocalDate dateFieldMaxValue;
-private Date datetimeFieldMinValue;
-private Date datetimeFieldMaxValue;
+private OffsetDateTime datetimeFieldMinValue;
+private OffsetDateTime datetimeFieldMaxValue;
 
 /*
  * getters and setters
@@ -101,16 +101,16 @@ return this.dateFieldMaxValue;
 public void setDateFieldMaxValue(LocalDate dateFieldMaxValue) {
 this.dateFieldMaxValue = dateFieldMaxValue;
 }
-public Date getDatetimeFieldMinValue() {
+public OffsetDateTime getDatetimeFieldMinValue() {
 return this.datetimeFieldMinValue;
 }
-public void setDatetimeFieldMinValue(Date datetimeFieldMinValue) {
+public void setDatetimeFieldMinValue(OffsetDateTime datetimeFieldMinValue) {
 this.datetimeFieldMinValue = datetimeFieldMinValue;
 }
-public Date getDatetimeFieldMaxValue() {
+public OffsetDateTime getDatetimeFieldMaxValue() {
 return this.datetimeFieldMaxValue;
 }
-public void setDatetimeFieldMaxValue(Date datetimeFieldMaxValue) {
+public void setDatetimeFieldMaxValue(OffsetDateTime datetimeFieldMaxValue) {
 this.datetimeFieldMaxValue = datetimeFieldMaxValue;
 }
 

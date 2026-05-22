@@ -1,9 +1,10 @@
 package org.ifolks.demo.api.model.dummy.forms;
 
-import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
+import java.time.OffsetDateTime;
+
+import jakarta.validation.constraints.NotNull;
 
 /**
  * auto generated form bean record file
@@ -19,7 +20,7 @@ Boolean booleanField,
 Double doubleField,
 BigDecimal decimalField,
 LocalDate dateField,
-Date datetimeField
+OffsetDateTime datetimeField
 ) {
 
 /* Specific Code Start */
