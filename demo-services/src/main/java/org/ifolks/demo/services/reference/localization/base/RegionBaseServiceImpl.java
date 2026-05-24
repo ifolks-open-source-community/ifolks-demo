@@ -3,6 +3,7 @@ package org.ifolks.demo.services.reference.localization.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.demo.api.interfaces.reference.localization.base.RegionBaseService;
@@ -18,8 +19,8 @@ import org.ifolks.demo.components.processor.reference.localization.RegionProcess
 import org.ifolks.demo.components.rightsmanager.reference.localization.RegionRightsManager;
 import org.ifolks.demo.components.statemanager.reference.localization.RegionStateManager;
 import org.ifolks.demo.model.reference.localization.Region;
-import org.ifolks.demo.persistence.interfaces.reference.localization.CountryDao;
-import org.ifolks.demo.persistence.interfaces.reference.localization.RegionDao;
+import org.ifolks.demo.persistence.interfaces.reference.localization.CountryRepository;
+import org.ifolks.demo.persistence.interfaces.reference.localization.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,9 +35,9 @@ public class RegionBaseServiceImpl implements RegionBaseService {
  * properties injected by spring
  */
 @Autowired
-protected RegionDao regionDao;
+protected RegionRepository regionRepository;
 @Autowired
-protected CountryDao countryDao;
+protected CountryRepository countryRepository;
 @Autowired
 protected RegionFullViewMapper regionFullViewMapper;
 @Autowired
@@ -57,7 +58,7 @@ protected RegionProcessor regionProcessor;
 @Transactional(readOnly=true)
 public List<RegionBasicView> loadList() {
 regionRightsManager.checkCanAccess();
-List<Region> regionList = regionDao.loadListEagerly();
+List<Region> regionList = regionRepository.loadAll();
 List<RegionBasicView> result = new ArrayList<>(regionList.size());
 for (Region region : regionList) {
 result.add(this.regionBasicViewMapper.toView(region));
@@ -72,7 +73,7 @@ return result;
 @Transactional(readOnly=true)
 public List<RegionBasicView> loadListFromCountry (Short countryId) {
 regionRightsManager.checkCanAccess();
-List<Region> regionList = regionDao.loadListEagerlyFromCountry(countryId);
+List<Region> regionList = regionRepository.loadListFromCountry(countryId);
 List<RegionBasicView> result = new ArrayList<>(regionList.size());
 for (Region region : regionList) {
 result.add(this.regionBasicViewMapper.toView(region));
@@ -87,11 +88,11 @@ return result;
 @Transactional(readOnly=true)
 public ScrollView<RegionBasicView> scroll(ScrollForm<RegionFilter, RegionSorting> form) {
 regionRightsManager.checkCanAccess();
-Long size = regionDao.count();
-Long count = regionDao.count(form.filter());
+Long size = regionRepository.count();
+Long count = regionRepository.count(form.filter());
 Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
 Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
-List<Region> list = regionDao.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
+List<Region> list = regionRepository.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<RegionBasicView> elements = new ArrayList<>(list.size());
 for (Region region : list) {
 elements.add(this.regionBasicViewMapper.toView(region));
@@ -106,11 +107,11 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 @Transactional(readOnly=true)
 public ScrollView<RegionBasicView> scrollFromCountry (Short countryId, ScrollForm<RegionFilter, RegionSorting> form) {
 regionRightsManager.checkCanAccess();
-Long size = regionDao.countFromCountry(countryId);
-Long count = regionDao.countFromCountry(countryId, form.filter());
+Long size = regionRepository.countFromCountry(countryId);
+Long count = regionRepository.countFromCountry(countryId, form.filter());
 Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
 Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
-List<Region> list = regionDao.scrollFromCountry(countryId, form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
+List<Region> list = regionRepository.scrollFromCountry(countryId, form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<RegionBasicView> elements = new ArrayList<>(list.size());
 for (Region region : list) {
 elements.add(this.regionBasicViewMapper.toView(region));
@@ -124,7 +125,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 @Override
 @Transactional(readOnly=true)
 public RegionFullView load(Integer id) {
-Region region = regionDao.load(id);
+Region region = regionRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Region.notFound"));
 regionRightsManager.checkCanAccess(region);
 return this.regionFullViewMapper.toView(region);
 }
@@ -135,7 +136,7 @@ return this.regionFullViewMapper.toView(region);
 @Override
 @Transactional(readOnly=true)
 public RegionFullView find(String countryCode, String code) {
-Region region = regionDao.find(countryCode, code);
+Region region = regionRepository.find(countryCode, code).orElseThrow(() -> new ObjectNotFoundException("Region.notFound"));
 regionRightsManager.checkCanAccess(region);
 return this.regionFullViewMapper.toView(region);
 }
@@ -158,7 +159,7 @@ return regionProcessor.save(region);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void update(Integer id, RegionForm regionForm) {
-Region region = this.regionDao.load(id);
+Region region = this.regionRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Region.notFound"));
 regionRightsManager.checkCanUpdate(region);
 regionStateManager.checkCanUpdate(region);
 region = this.regionFormMapper.toEntity(regionForm, region);
@@ -171,7 +172,7 @@ regionProcessor.update(region);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void delete(Integer id) {
-Region region = regionDao.load(id);
+Region region = regionRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Region.notFound"));
 regionRightsManager.checkCanDelete(region);
 regionStateManager.checkCanDelete(region);
 regionProcessor.delete(region);

@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
-import jakarta.persistence.metamodel.SetAttribute;
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
 
@@ -25,7 +24,7 @@ public static volatile SingularAttribute<Fool, Double> doubleField;
 public static volatile SingularAttribute<Fool, BigDecimal> decimalField;
 public static volatile SingularAttribute<Fool, LocalDate> dateField;
 public static volatile SingularAttribute<Fool, OffsetDateTime> datetimeField;
-public static volatile SetAttribute<Fool, Stupid> stupidCollection;
+public static volatile SingularAttribute<Fool, Stupid> stupid;
 
 public static final String ID = "id";
 public static final String CODE = "code";
@@ -36,7 +35,7 @@ public static final String DOUBLE_FIELD = "doubleField";
 public static final String DECIMAL_FIELD = "decimalField";
 public static final String DATE_FIELD = "dateField";
 public static final String DATETIME_FIELD = "datetimeField";
-public static final String STUPID_COLLECTION = "stupidCollection";
+public static final String STUPID = "Stupid";
 
 /* Specific Code Start */
 /* Specific Code End */

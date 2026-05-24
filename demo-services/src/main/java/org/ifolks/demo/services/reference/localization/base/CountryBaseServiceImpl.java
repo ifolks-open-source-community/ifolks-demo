@@ -3,6 +3,7 @@ package org.ifolks.demo.services.reference.localization.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.commons.api.model.SelectItem;
@@ -19,7 +20,7 @@ import org.ifolks.demo.components.processor.reference.localization.CountryProces
 import org.ifolks.demo.components.rightsmanager.reference.localization.CountryRightsManager;
 import org.ifolks.demo.components.statemanager.reference.localization.CountryStateManager;
 import org.ifolks.demo.model.reference.localization.Country;
-import org.ifolks.demo.persistence.interfaces.reference.localization.CountryDao;
+import org.ifolks.demo.persistence.interfaces.reference.localization.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +35,7 @@ public class CountryBaseServiceImpl implements CountryBaseService {
  * properties injected by spring
  */
 @Autowired
-protected CountryDao countryDao;
+protected CountryRepository countryRepository;
 @Autowired
 protected CountryFullViewMapper countryFullViewMapper;
 @Autowired
@@ -54,7 +55,7 @@ protected CountryProcessor countryProcessor;
 @Override
 @Transactional(readOnly=true)
 public List<SelectItem> getOptions() {
-List<Country> countryList = countryDao.loadList();
+List<Country> countryList = countryRepository.findAll();
 List<SelectItem> result = new ArrayList<>(countryList.size());
 for (Country country : countryList) {
 result.add(new SelectItem(country.getCode(), country.getCode()));
@@ -69,7 +70,7 @@ return result;
 @Transactional(readOnly=true)
 public List<CountryBasicView> loadList() {
 countryRightsManager.checkCanAccess();
-List<Country> countryList = countryDao.loadListEagerly();
+List<Country> countryList = countryRepository.loadAll();
 List<CountryBasicView> result = new ArrayList<>(countryList.size());
 for (Country country : countryList) {
 result.add(this.countryBasicViewMapper.toView(country));
@@ -84,11 +85,11 @@ return result;
 @Transactional(readOnly=true)
 public ScrollView<CountryBasicView> scroll(ScrollForm<CountryFilter, CountrySorting> form) {
 countryRightsManager.checkCanAccess();
-Long size = countryDao.count();
-Long count = countryDao.count(form.filter());
+Long size = countryRepository.count();
+Long count = countryRepository.count(form.filter());
 Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
 Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
-List<Country> list = countryDao.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
+List<Country> list = countryRepository.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<CountryBasicView> elements = new ArrayList<>(list.size());
 for (Country country : list) {
 elements.add(this.countryBasicViewMapper.toView(country));
@@ -102,7 +103,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 @Override
 @Transactional(readOnly=true)
 public CountryFullView load(Short id) {
-Country country = countryDao.load(id);
+Country country = countryRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Country.notFound"));
 countryRightsManager.checkCanAccess(country);
 return this.countryFullViewMapper.toView(country);
 }
@@ -113,7 +114,7 @@ return this.countryFullViewMapper.toView(country);
 @Override
 @Transactional(readOnly=true)
 public CountryFullView find(String code) {
-Country country = countryDao.find(code);
+Country country = countryRepository.find(code).orElseThrow(() -> new ObjectNotFoundException("Country.notFound"));
 countryRightsManager.checkCanAccess(country);
 return this.countryFullViewMapper.toView(country);
 }
@@ -136,7 +137,7 @@ return countryProcessor.save(country);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void update(Short id, CountryForm countryForm) {
-Country country = this.countryDao.load(id);
+Country country = this.countryRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Country.notFound"));
 countryRightsManager.checkCanUpdate(country);
 countryStateManager.checkCanUpdate(country);
 country = this.countryFormMapper.toEntity(countryForm, country);
@@ -149,7 +150,7 @@ countryProcessor.update(country);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void delete(Short id) {
-Country country = countryDao.load(id);
+Country country = countryRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Country.notFound"));
 countryRightsManager.checkCanDelete(country);
 countryStateManager.checkCanDelete(country);
 countryProcessor.delete(country);

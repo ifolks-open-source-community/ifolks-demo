@@ -2,12 +2,12 @@ package org.ifolks.demo.model.organizations;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.GenericGenerator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
@@ -28,7 +28,7 @@ import jakarta.persistence.UniqueConstraint;
 , indexes = {
 @Index(name = "IDX_ORGANIZATION_CERTIFICATION_C0", columnList = "ORGANIZATION_ID")
 })
-public class OrganizationCertification implements org.ifolks.commons.model.interfaces.Entity<String> {
+public class OrganizationCertification implements java.io.Serializable {
 
 private static final long serialVersionUID = 1L;
 
@@ -43,8 +43,7 @@ public OrganizationCertification(){
  */
 @Id
 @Column(name = "id", nullable = false)
-@GeneratedValue(generator="uuid")
-@GenericGenerator(name="uuid", strategy = "uuid2")
+@GeneratedValue(strategy = GenerationType.UUID)
 private String id;
 
 @ManyToOne(fetch = FetchType.LAZY)

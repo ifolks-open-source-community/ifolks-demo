@@ -1,7 +1,7 @@
 package org.ifolks.demo.components.processor.reference.localization.base;
 
 import org.ifolks.demo.model.reference.localization.City;
-import org.ifolks.demo.persistence.interfaces.reference.localization.CityDao;
+import org.ifolks.demo.persistence.interfaces.reference.localization.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -15,13 +15,13 @@ public class CityBaseProcessor {
  * properties injected by spring
  */
 @Autowired
-protected CityDao cityDao;
+protected CityRepository cityRepository;
 
 /**
  * process save
  */
 public Long save(City city) {
-return cityDao.save(city);
+return cityRepository.saveAndFlush(city).getId();
 }
 
 /**
@@ -35,7 +35,7 @@ public void update(City city) {
  * process delete
  */
 public void delete(City city) {
-cityDao.delete(city);
+cityRepository.delete(city);
 }
 
 }

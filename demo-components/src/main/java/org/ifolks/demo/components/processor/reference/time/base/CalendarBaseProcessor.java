@@ -2,7 +2,8 @@ package org.ifolks.demo.components.processor.reference.time.base;
 
 import org.ifolks.demo.model.reference.time.Calendar;
 import org.ifolks.demo.model.reference.time.CalendarDayOff;
-import org.ifolks.demo.persistence.interfaces.reference.time.CalendarDao;
+import org.ifolks.demo.persistence.interfaces.reference.time.CalendarDayOffRepository;
+import org.ifolks.demo.persistence.interfaces.reference.time.CalendarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -16,20 +17,23 @@ public class CalendarBaseProcessor {
  * properties injected by spring
  */
 @Autowired
-protected CalendarDao calendarDao;
+protected CalendarRepository calendarRepository;
+@Autowired
+protected CalendarDayOffRepository calendarDayOffRepository;
 
 /**
  * process save
  */
 public Integer save(Calendar calendar) {
-return calendarDao.save(calendar);
+return calendarRepository.saveAndFlush(calendar).getId();
 }
 
 /**
  * process save one to many component CalendarDayOff
  */
 public void saveCalendarDayOff(CalendarDayOff calendarDayOff,Calendar calendar) {
-calendarDao.saveCalendarDayOff(calendar, calendarDayOff);
+calendarDayOff.setCalendar(calendar);
+this.calendarDayOffRepository.save(calendarDayOff);
 }
 
 /**
@@ -50,14 +54,15 @@ public void updateCalendarDayOff(CalendarDayOff calendarDayOff) {
  * process delete
  */
 public void delete(Calendar calendar) {
-calendarDao.delete(calendar);
+calendarRepository.delete(calendar);
 }
 
 /**
  * process delete one to many component CalendarDayOff
  */
 public void deleteCalendarDayOff(CalendarDayOff calendarDayOff) {
-calendarDao.deleteCalendarDayOff(calendarDayOff);
+calendarDayOff.getCalendar().getCalendarDayOffCollection().remove(calendarDayOff);
+this.calendarDayOffRepository.delete(calendarDayOff);
 }
 
 }

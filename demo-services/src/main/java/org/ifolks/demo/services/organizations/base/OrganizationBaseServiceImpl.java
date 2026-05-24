@@ -3,6 +3,7 @@ package org.ifolks.demo.services.organizations.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.commons.api.model.SelectItem;
@@ -24,7 +25,7 @@ import org.ifolks.demo.components.rightsmanager.organizations.OrganizationRights
 import org.ifolks.demo.components.statemanager.organizations.OrganizationStateManager;
 import org.ifolks.demo.model.organizations.Organization;
 import org.ifolks.demo.model.organizations.OrganizationCertification;
-import org.ifolks.demo.persistence.interfaces.organizations.OrganizationDao;
+import org.ifolks.demo.persistence.interfaces.organizations.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,7 +40,7 @@ public class OrganizationBaseServiceImpl implements OrganizationBaseService {
  * properties injected by spring
  */
 @Autowired
-protected OrganizationDao organizationDao;
+protected OrganizationRepository organizationRepository;
 @Autowired
 protected OrganizationFullViewMapper organizationFullViewMapper;
 @Autowired
@@ -63,7 +64,7 @@ protected OrganizationProcessor organizationProcessor;
 @Override
 @Transactional(readOnly=true)
 public List<SelectItem> searchOptions(String arg) {
-List<Organization> organizationList = organizationDao.search(arg);
+List<Organization> organizationList = organizationRepository.search(arg);
 List<SelectItem> result = new ArrayList<>(organizationList.size());
 for (Organization organization : organizationList) {
 result.add(new SelectItem(organization.getCode(), organization.getCode()));
@@ -78,7 +79,7 @@ return result;
 @Transactional(readOnly=true)
 public List<OrganizationBasicView> loadList() {
 organizationRightsManager.checkCanAccess();
-List<Organization> organizationList = organizationDao.loadListEagerly();
+List<Organization> organizationList = organizationRepository.loadAll();
 List<OrganizationBasicView> result = new ArrayList<>(organizationList.size());
 for (Organization organization : organizationList) {
 result.add(this.organizationBasicViewMapper.toView(organization));
@@ -93,11 +94,11 @@ return result;
 @Transactional(readOnly=true)
 public ScrollView<OrganizationBasicView> scroll(ScrollForm<OrganizationFilter, OrganizationSorting> form) {
 organizationRightsManager.checkCanAccess();
-Long size = organizationDao.count();
-Long count = organizationDao.count(form.filter());
+Long size = organizationRepository.count();
+Long count = organizationRepository.count(form.filter());
 Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
 Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
-List<Organization> list = organizationDao.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
+List<Organization> list = organizationRepository.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<OrganizationBasicView> elements = new ArrayList<>(list.size());
 for (Organization organization : list) {
 elements.add(this.organizationBasicViewMapper.toView(organization));
@@ -111,7 +112,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 @Override
 @Transactional(readOnly=true)
 public OrganizationFullView load(Integer id) {
-Organization organization = organizationDao.load(id);
+Organization organization = organizationRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Organization.notFound"));
 organizationRightsManager.checkCanAccess(organization);
 return this.organizationFullViewMapper.toView(organization);
 }
@@ -122,7 +123,7 @@ return this.organizationFullViewMapper.toView(organization);
 @Override
 @Transactional(readOnly=true)
 public OrganizationFullView find(String code) {
-Organization organization = organizationDao.find(code);
+Organization organization = organizationRepository.find(code).orElseThrow(() -> new ObjectNotFoundException("Organization.notFound"));
 organizationRightsManager.checkCanAccess(organization);
 return this.organizationFullViewMapper.toView(organization);
 }
@@ -133,7 +134,7 @@ return this.organizationFullViewMapper.toView(organization);
 @Override
 @Transactional(readOnly=true)
 public OrganizationCertificationFullView loadOrganizationCertification(Integer id) {
-Organization organization = organizationDao.load(id);
+Organization organization = organizationRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Organization.notFound"));
 organizationRightsManager.checkCanAccessOrganizationCertification(organization);
 OrganizationCertification organizationCertification = organization.getOrganizationCertification();
 if (organizationCertification==null) {
@@ -161,7 +162,7 @@ return organizationProcessor.save(organization);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void saveOrganizationCertification(Integer id, OrganizationCertificationForm organizationCertificationForm) {
-Organization organization = this.organizationDao.load(id);
+Organization organization = this.organizationRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Organization.notFound"));
 OrganizationCertification organizationCertification = this.organizationCertificationFormMapper.toEntity(organizationCertificationForm, new OrganizationCertification());
 organizationRightsManager.checkCanSaveOrganizationCertification(organizationCertification,organization);
 organizationStateManager.checkCanSaveOrganizationCertification(organizationCertification,organization);
@@ -174,7 +175,7 @@ organizationProcessor.saveOrganizationCertification(organizationCertification, o
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void update(Integer id, OrganizationForm organizationForm) {
-Organization organization = this.organizationDao.load(id);
+Organization organization = this.organizationRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Organization.notFound"));
 organizationRightsManager.checkCanUpdate(organization);
 organizationStateManager.checkCanUpdate(organization);
 organization = this.organizationFormMapper.toEntity(organizationForm, organization);
@@ -187,7 +188,7 @@ organizationProcessor.update(organization);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void updateOrganizationCertification(Integer id, OrganizationCertificationForm organizationCertificationForm) {
-Organization organization = this.organizationDao.load(id);
+Organization organization = this.organizationRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Organization.notFound"));
 OrganizationCertification organizationCertification = organization.getOrganizationCertification();
 organizationRightsManager.checkCanUpdateOrganizationCertification(organizationCertification);
 organizationStateManager.checkCanUpdateOrganizationCertification(organizationCertification);
@@ -201,7 +202,7 @@ organizationProcessor.updateOrganizationCertification(organizationCertification)
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void delete(Integer id) {
-Organization organization = organizationDao.load(id);
+Organization organization = organizationRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Organization.notFound"));
 organizationRightsManager.checkCanDelete(organization);
 organizationStateManager.checkCanDelete(organization);
 organizationProcessor.delete(organization);
@@ -213,7 +214,7 @@ organizationProcessor.delete(organization);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void deleteOrganizationCertification(Integer id) {
-Organization organization = this.organizationDao.load(id);
+Organization organization = this.organizationRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Organization.notFound"));
 OrganizationCertification organizationCertification = organization.getOrganizationCertification();
 organizationRightsManager.checkCanDeleteOrganizationCertification(organizationCertification);
 organizationStateManager.checkCanDeleteOrganizationCertification(organizationCertification);

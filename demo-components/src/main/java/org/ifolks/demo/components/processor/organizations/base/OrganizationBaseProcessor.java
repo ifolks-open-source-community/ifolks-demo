@@ -2,7 +2,7 @@ package org.ifolks.demo.components.processor.organizations.base;
 
 import org.ifolks.demo.model.organizations.Organization;
 import org.ifolks.demo.model.organizations.OrganizationCertification;
-import org.ifolks.demo.persistence.interfaces.organizations.OrganizationDao;
+import org.ifolks.demo.persistence.interfaces.organizations.OrganizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -16,20 +16,22 @@ public class OrganizationBaseProcessor {
  * properties injected by spring
  */
 @Autowired
-protected OrganizationDao organizationDao;
+protected OrganizationRepository organizationRepository;
 
 /**
  * process save
  */
 public Integer save(Organization organization) {
-return organizationDao.save(organization);
+return organizationRepository.saveAndFlush(organization).getId();
 }
 
 /**
  * process save one to one component OrganizationCertification
  */
 public void saveOrganizationCertification(OrganizationCertification organizationCertification,Organization organization) {
-organizationDao.saveOrganizationCertification(organization, organizationCertification);
+organization.setOrganizationCertification(organizationCertification);
+organizationCertification.setOrganization(organization);
+this.organizationRepository.save(organization);
 }
 
 /**
@@ -50,14 +52,19 @@ public void updateOrganizationCertification(OrganizationCertification organizati
  * process delete
  */
 public void delete(Organization organization) {
-organizationDao.delete(organization);
+organizationRepository.delete(organization);
 }
 
 /**
  * process delete one to one component OrganizationCertification
  */
 public void deleteOrganizationCertification(OrganizationCertification organizationCertification) {
-organizationDao.deleteOrganizationCertification(organizationCertification);
+Organization organization = organizationCertification.getOrganization();
+if (organization != null) {
+    organization.setOrganizationCertification(null);
+    organizationCertification.setOrganization(null);
+    this.organizationRepository.save(organization);
+}
 }
 
 }

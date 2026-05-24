@@ -33,7 +33,7 @@ import jakarta.persistence.UniqueConstraint;
 @Index(name = "IDX_ORGANIZATION_UC", columnList = "CODE")
 , @Index(name = "IDX_ORGANIZATION_C1", columnList = "ORGANIZATION_DESCRIPTION_ID")
 })
-public class Organization implements org.ifolks.commons.model.interfaces.Entity<Integer> {
+public class Organization implements java.io.Serializable {
 
 private static final long serialVersionUID = 1L;
 
@@ -59,7 +59,7 @@ private String code;
 @JoinColumn(name = "ORGANIZATION_DESCRIPTION_ID", nullable = false)
 private OrganizationDescription organizationDescription;
 
-@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "organization")
+@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
 @Fetch(FetchMode.JOIN)
 private OrganizationCertification organizationCertification;
 

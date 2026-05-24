@@ -1,6 +1,5 @@
 package org.ifolks.demo.api.model.dummy.views.basic;
 
-
 /**
  * auto generated basic view record
  * <br/>basic representation of an entity, adapted to list screens

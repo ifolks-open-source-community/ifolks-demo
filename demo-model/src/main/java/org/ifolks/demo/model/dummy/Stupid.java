@@ -22,12 +22,13 @@ import jakarta.persistence.UniqueConstraint;
 @Table(name="STUPID"
 , uniqueConstraints = {
 @UniqueConstraint(name = "UC_STUPID", columnNames = {"CODE"})
+, @UniqueConstraint(name = "UC_STUPID_C1", columnNames = {"FOOL_ID"})
 }
 , indexes = {
 @Index(name = "IDX_STUPID_UC", columnList = "CODE")
 , @Index(name = "IDX_STUPID_C1", columnList = "FOOL_ID")
 })
-public class Stupid implements org.ifolks.commons.model.interfaces.Entity<Long> {
+public class Stupid implements java.io.Serializable {
 
 private static final long serialVersionUID = 1L;
 

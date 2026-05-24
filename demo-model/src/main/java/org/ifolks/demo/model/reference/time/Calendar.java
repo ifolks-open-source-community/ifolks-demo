@@ -28,7 +28,7 @@ import jakarta.persistence.UniqueConstraint;
 , indexes = {
 @Index(name = "IDX_CALENDAR_UC", columnList = "CODE")
 })
-public class Calendar implements org.ifolks.commons.model.interfaces.Entity<Integer> {
+public class Calendar implements java.io.Serializable {
 
 private static final long serialVersionUID = 1L;
 

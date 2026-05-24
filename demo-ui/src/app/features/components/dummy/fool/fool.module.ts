@@ -7,8 +7,6 @@ import { FoolRoutingModule } from './fool-routing.module';
 import { NgModule } from '@angular/core';
 import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { StupidListComponent } from './stupid/list/stupid-list.component';
-import { StupidModalComponent } from './stupid/modal/stupid-modal.component';
 /**
  * auto generated list module ts file
  * <br/>write modifications between specific code marks
@@ -16,7 +14,7 @@ import { StupidModalComponent } from './stupid/modal/stupid-modal.component';
  */
 
 @NgModule({
-declarations: [FoolListComponent,FoolDetailsComponent, FoolModalComponent, FoolMenuComponent, StupidListComponent, StupidModalComponent],
+declarations: [FoolListComponent,FoolDetailsComponent, FoolModalComponent, FoolMenuComponent],
 imports: [CommonModule, SharedModule, FoolRoutingModule, PrivateTemplatesModule]
 })
 export class FoolModule { }

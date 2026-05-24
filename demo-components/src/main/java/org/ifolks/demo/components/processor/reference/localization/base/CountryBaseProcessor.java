@@ -1,7 +1,7 @@
 package org.ifolks.demo.components.processor.reference.localization.base;
 
 import org.ifolks.demo.model.reference.localization.Country;
-import org.ifolks.demo.persistence.interfaces.reference.localization.CountryDao;
+import org.ifolks.demo.persistence.interfaces.reference.localization.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -15,13 +15,13 @@ public class CountryBaseProcessor {
  * properties injected by spring
  */
 @Autowired
-protected CountryDao countryDao;
+protected CountryRepository countryRepository;
 
 /**
  * process save
  */
 public Short save(Country country) {
-return countryDao.save(country);
+return countryRepository.saveAndFlush(country).getId();
 }
 
 /**
@@ -35,7 +35,7 @@ public void update(Country country) {
  * process delete
  */
 public void delete(Country country) {
-countryDao.delete(country);
+countryRepository.delete(country);
 }
 
 }

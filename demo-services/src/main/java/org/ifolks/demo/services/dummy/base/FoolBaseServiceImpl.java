@@ -3,6 +3,7 @@ package org.ifolks.demo.services.dummy.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.commons.api.model.SelectItem;
@@ -19,7 +20,7 @@ import org.ifolks.demo.components.processor.dummy.FoolProcessor;
 import org.ifolks.demo.components.rightsmanager.dummy.FoolRightsManager;
 import org.ifolks.demo.components.statemanager.dummy.FoolStateManager;
 import org.ifolks.demo.model.dummy.Fool;
-import org.ifolks.demo.persistence.interfaces.dummy.FoolDao;
+import org.ifolks.demo.persistence.interfaces.dummy.FoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +35,7 @@ public class FoolBaseServiceImpl implements FoolBaseService {
  * properties injected by spring
  */
 @Autowired
-protected FoolDao foolDao;
+protected FoolRepository foolRepository;
 @Autowired
 protected FoolFullViewMapper foolFullViewMapper;
 @Autowired
@@ -54,7 +55,7 @@ protected FoolProcessor foolProcessor;
 @Override
 @Transactional(readOnly=true)
 public List<SelectItem> searchOptions(String arg) {
-List<Fool> foolList = foolDao.search(arg);
+List<Fool> foolList = foolRepository.search(arg);
 List<SelectItem> result = new ArrayList<>(foolList.size());
 for (Fool fool : foolList) {
 result.add(new SelectItem(fool.getCode(), fool.getCode()));
@@ -69,7 +70,7 @@ return result;
 @Transactional(readOnly=true)
 public List<FoolBasicView> loadList() {
 foolRightsManager.checkCanAccess();
-List<Fool> foolList = foolDao.loadListEagerly();
+List<Fool> foolList = foolRepository.loadAll();
 List<FoolBasicView> result = new ArrayList<>(foolList.size());
 for (Fool fool : foolList) {
 result.add(this.foolBasicViewMapper.toView(fool));
@@ -84,11 +85,11 @@ return result;
 @Transactional(readOnly=true)
 public ScrollView<FoolBasicView> scroll(ScrollForm<FoolFilter, FoolSorting> form) {
 foolRightsManager.checkCanAccess();
-Long size = foolDao.count();
-Long count = foolDao.count(form.filter());
+Long size = foolRepository.count();
+Long count = foolRepository.count(form.filter());
 Long numberOfPages = count/form.elementsPerPage() + ((count%form.elementsPerPage()) > 0L?1L:0L);
 Long currentPage = Math.max(1L, Math.min(form.page()!=null?form.page():1L, numberOfPages));
-List<Fool> list = foolDao.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
+List<Fool> list = foolRepository.scroll(form.filter(), form.sorting(),(currentPage-1)*form.elementsPerPage(), form.elementsPerPage());
 List<FoolBasicView> elements = new ArrayList<>(list.size());
 for (Fool fool : list) {
 elements.add(this.foolBasicViewMapper.toView(fool));
@@ -102,7 +103,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 @Override
 @Transactional(readOnly=true)
 public FoolFullView load(String id) {
-Fool fool = foolDao.load(id);
+Fool fool = foolRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Fool.notFound"));
 foolRightsManager.checkCanAccess(fool);
 return this.foolFullViewMapper.toView(fool);
 }
@@ -113,7 +114,7 @@ return this.foolFullViewMapper.toView(fool);
 @Override
 @Transactional(readOnly=true)
 public FoolFullView find(String code) {
-Fool fool = foolDao.find(code);
+Fool fool = foolRepository.find(code).orElseThrow(() -> new ObjectNotFoundException("Fool.notFound"));
 foolRightsManager.checkCanAccess(fool);
 return this.foolFullViewMapper.toView(fool);
 }
@@ -136,7 +137,7 @@ return foolProcessor.save(fool);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void update(String id, FoolForm foolForm) {
-Fool fool = this.foolDao.load(id);
+Fool fool = this.foolRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Fool.notFound"));
 foolRightsManager.checkCanUpdate(fool);
 foolStateManager.checkCanUpdate(fool);
 fool = this.foolFormMapper.toEntity(foolForm, fool);
@@ -149,7 +150,7 @@ foolProcessor.update(fool);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void delete(String id) {
-Fool fool = foolDao.load(id);
+Fool fool = foolRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Fool.notFound"));
 foolRightsManager.checkCanDelete(fool);
 foolStateManager.checkCanDelete(fool);
 foolProcessor.delete(fool);

@@ -29,24 +29,10 @@ return this.http.get<StupidBasicView[]>(environment.restApiUrl + '/stupid/list')
 }
 
 /**
- * load object list from fool
- */
-public loadListFromFool (foolId: string) {
-return this.http.get<StupidBasicView[]>(environment.restApiUrl + '/fool/' + foolId + '/stupid/list');
-}
-
-/**
  * scroll object list
  */
 public scroll(form: ScrollForm<StupidFilter, StupidSorting>) {
 return this.http.post<ScrollView<StupidBasicView>>(environment.restApiUrl + '/stupid/scroll', form, this.httpOptions);
-}
-
-/**
- * scroll object list from fool
- */
-public scrollFromFool (foolId: string, form: ScrollForm<StupidFilter, StupidSorting>) {
-return this.http.post<ScrollView<StupidBasicView>>(environment.restApiUrl + '/fool/' + foolId + '/stupid/scroll', form, this.httpOptions);
 }
 
 /**

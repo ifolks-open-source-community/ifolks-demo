@@ -24,22 +24,10 @@ List<StupidBasicView> loadList();
 public static final String GET_LIST_URL = "/stupid/list";
 
 /**
- * load object list from fool
- */
-List<StupidBasicView> loadListFromFool (String foolId);
-public static final String GET_LIST_FROM_FOOL_URL = "/fool/{foolId}/stupid/list";
-
-/**
  * scroll object list
  */
 ScrollView<StupidBasicView> scroll(ScrollForm<StupidFilter, StupidSorting> form);
 public static final String SCROLL_URL = "/stupid/scroll";
-
-/**
- * scroll object list from fool
- */
-ScrollView<StupidBasicView> scrollFromFool (String foolId, ScrollForm<StupidFilter, StupidSorting> form);
-public static final String SCROLL_FROM_FOOL_URL = "/fool/{foolId}/stupid/scroll";
 
 /**
  * load object

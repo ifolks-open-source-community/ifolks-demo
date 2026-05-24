@@ -1,8 +1,9 @@
 package org.ifolks.demo.components.mapper.reference.localization.forms.base;
 
+import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
 import org.ifolks.demo.api.model.reference.localization.forms.RegionForm;
 import org.ifolks.demo.model.reference.localization.Region;
-import org.ifolks.demo.persistence.interfaces.reference.localization.CountryDao;
+import org.ifolks.demo.persistence.interfaces.reference.localization.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class RegionFormBaseMapper {
  * properties
  */
 @Autowired
-protected CountryDao countryDao;
+protected CountryRepository countryRepository;
 
 /**
  * mapping object arry to form
@@ -50,7 +51,7 @@ label);
  * mapping form to entity
  */
 public Region toEntity(RegionForm regionForm, Region region) {
-region.setCountry(countryDao.find(regionForm.countryCode()));
+region.setCountry(countryRepository.find(regionForm.countryCode()).orElseThrow(() -> new ObjectNotFoundException("Country.notFound")));
 region.setCode(regionForm.code());
 region.setLabel(regionForm.label());
 return region;

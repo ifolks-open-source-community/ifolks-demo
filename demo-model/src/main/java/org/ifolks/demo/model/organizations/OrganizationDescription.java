@@ -24,7 +24,7 @@ import jakarta.persistence.Table;
 }
 , indexes = {
 })
-public class OrganizationDescription implements org.ifolks.commons.model.interfaces.Entity<Long> {
+public class OrganizationDescription implements java.io.Serializable {
 
 private static final long serialVersionUID = 1L;
 

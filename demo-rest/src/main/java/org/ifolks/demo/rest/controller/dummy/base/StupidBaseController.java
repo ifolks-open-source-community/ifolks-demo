@@ -42,13 +42,6 @@ return stupidService.loadList();
 }
 
 /**
- * load object list from fool
- */
-@RequestMapping(value = {StupidService.GET_LIST_FROM_FOOL_URL}, method = RequestMethod.GET)
-public @ResponseBody List<StupidBasicView> loadListFromFool (@PathVariable("foolId") String foolId) {
-return stupidService.loadListFromFool(foolId);
-}
-/**
  * scroll object list
  */
 @RequestMapping(value = {StupidService.SCROLL_URL}, method = RequestMethod.POST)
@@ -56,13 +49,6 @@ public @ResponseBody ScrollView<StupidBasicView> scroll(@RequestBody ScrollForm<
 return stupidService.scroll(form);
 }
 
-/**
- * scroll object list from fool
- */
-@RequestMapping(value = {StupidService.SCROLL_FROM_FOOL_URL}, method = RequestMethod.POST)
-public @ResponseBody ScrollView<StupidBasicView> scrollFromFool (@PathVariable("foolId") String foolId, @RequestBody ScrollForm<StupidFilter, StupidSorting> form) {
-return stupidService.scrollFromFool(foolId, form);
-}
 /**
  * load object
  */

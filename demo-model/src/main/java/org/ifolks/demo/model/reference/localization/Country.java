@@ -27,7 +27,7 @@ import jakarta.persistence.UniqueConstraint;
 , indexes = {
 @Index(name = "IDX_COUNTRY_UC", columnList = "CODE")
 })
-public class Country implements org.ifolks.commons.model.interfaces.Entity<Short> {
+public class Country implements java.io.Serializable {
 
 private static final long serialVersionUID = 1L;
 

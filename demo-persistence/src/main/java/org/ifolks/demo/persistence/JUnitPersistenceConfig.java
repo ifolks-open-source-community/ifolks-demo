@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
@@ -17,6 +18,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @Profile("junit")
+@EnableJpaRepositories(basePackages = "org.ifolks.demo.persistence.interfaces")
 public class JUnitPersistenceConfig {
 	
 	@Autowired
@@ -24,8 +26,10 @@ public class JUnitPersistenceConfig {
 
 	@Bean
     public DataSource dataSource() {
+		
+		System.setProperty("hsqldb.method_class_names", "*");
 		HikariConfig config = new HikariConfig();	    
-	    config.setJdbcUrl("jdbc:hsqldb:mem:demo");
+	    config.setJdbcUrl("jdbc:hsqldb:mem:demo;hsqldb.method_class_names=*");
 	    config.setUsername("sa");
 	    config.setPassword("");
 	    config.setDriverClassName("org.hsqldb.jdbcDriver");

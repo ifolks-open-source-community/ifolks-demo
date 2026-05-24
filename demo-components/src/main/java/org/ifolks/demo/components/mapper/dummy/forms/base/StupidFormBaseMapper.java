@@ -1,8 +1,9 @@
 package org.ifolks.demo.components.mapper.dummy.forms.base;
 
+import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
 import org.ifolks.demo.api.model.dummy.forms.StupidForm;
 import org.ifolks.demo.model.dummy.Stupid;
-import org.ifolks.demo.persistence.interfaces.dummy.FoolDao;
+import org.ifolks.demo.persistence.interfaces.dummy.FoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +20,7 @@ public class StupidFormBaseMapper {
  * properties
  */
 @Autowired
-protected FoolDao foolDao;
+protected FoolRepository foolRepository;
 
 /**
  * mapping object arry to form
@@ -48,7 +49,7 @@ foolCode);
  */
 public Stupid toEntity(StupidForm stupidForm, Stupid stupid) {
 stupid.setCode(stupidForm.code());
-stupid.setFool(foolDao.find(stupidForm.foolCode()));
+stupid.setFool(foolRepository.find(stupidForm.foolCode()).orElseThrow(() -> new ObjectNotFoundException("Fool.notFound")));
 return stupid;
 }
 

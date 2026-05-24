@@ -1,7 +1,7 @@
 package org.ifolks.demo.components.processor.reference.localization.base;
 
 import org.ifolks.demo.model.reference.localization.Region;
-import org.ifolks.demo.persistence.interfaces.reference.localization.RegionDao;
+import org.ifolks.demo.persistence.interfaces.reference.localization.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -15,13 +15,13 @@ public class RegionBaseProcessor {
  * properties injected by spring
  */
 @Autowired
-protected RegionDao regionDao;
+protected RegionRepository regionRepository;
 
 /**
  * process save
  */
 public Integer save(Region region) {
-return regionDao.save(region);
+return regionRepository.saveAndFlush(region).getId();
 }
 
 /**
@@ -35,7 +35,7 @@ public void update(Region region) {
  * process delete
  */
 public void delete(Region region) {
-regionDao.delete(region);
+regionRepository.delete(region);
 }
 
 }

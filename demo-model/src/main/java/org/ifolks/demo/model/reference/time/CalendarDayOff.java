@@ -32,7 +32,7 @@ import jakarta.persistence.UniqueConstraint;
 @Index(name = "IDX_CALENDAR_DAY_OFF_UC", columnList = "CALENDAR_ID, DAY_OFF_DATE")
 , @Index(name = "IDX_CALENDAR_DAY_OFF_C0", columnList = "CALENDAR_ID")
 })
-public class CalendarDayOff implements org.ifolks.commons.model.interfaces.Entity<Integer> {
+public class CalendarDayOff implements java.io.Serializable {
 
 private static final long serialVersionUID = 1L;
 

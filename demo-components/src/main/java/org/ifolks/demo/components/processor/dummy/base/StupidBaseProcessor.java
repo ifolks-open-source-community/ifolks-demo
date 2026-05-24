@@ -1,7 +1,7 @@
 package org.ifolks.demo.components.processor.dummy.base;
 
 import org.ifolks.demo.model.dummy.Stupid;
-import org.ifolks.demo.persistence.interfaces.dummy.StupidDao;
+import org.ifolks.demo.persistence.interfaces.dummy.StupidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -15,13 +15,13 @@ public class StupidBaseProcessor {
  * properties injected by spring
  */
 @Autowired
-protected StupidDao stupidDao;
+protected StupidRepository stupidRepository;
 
 /**
  * process save
  */
 public Long save(Stupid stupid) {
-return stupidDao.save(stupid);
+return stupidRepository.saveAndFlush(stupid).getId();
 }
 
 /**
@@ -35,7 +35,7 @@ public void update(Stupid stupid) {
  * process delete
  */
 public void delete(Stupid stupid) {
-stupidDao.delete(stupid);
+stupidRepository.delete(stupid);
 }
 
 }

@@ -3,10 +3,10 @@ package org.ifolks.demo.model.dummy;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.util.Set;
 
 import org.hibernate.Length;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -14,10 +14,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.Lob;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
@@ -34,7 +35,7 @@ import jakarta.persistence.UniqueConstraint;
 , indexes = {
 @Index(name = "IDX_FOOL_UC", columnList = "CODE")
 })
-public class Fool implements org.ifolks.commons.model.interfaces.Entity<String> {
+public class Fool implements java.io.Serializable {
 
 private static final long serialVersionUID = 1L;
 
@@ -49,8 +50,7 @@ public Fool(){
  */
 @Id
 @Column(name = "id", nullable = false)
-@GeneratedValue(generator="uuid")
-@GenericGenerator(name="uuid", strategy = "uuid2")
+@GeneratedValue(strategy = GenerationType.UUID)
 private String id;
 
 @Column(name = "CODE", nullable = false)
@@ -79,8 +79,9 @@ private LocalDate dateField;
 @Column(name = "DATETIME_FIELD")
 private OffsetDateTime datetimeField;
 
-@OneToMany(fetch = FetchType.LAZY, mappedBy = "fool")
-private Set <Stupid> stupidCollection;
+@OneToOne(fetch = FetchType.LAZY, mappedBy = "fool")
+@Fetch(FetchMode.JOIN)
+private Stupid stupid;
 
 
 /*
@@ -158,12 +159,12 @@ public void setDatetimeField(OffsetDateTime datetimeField) {
 this.datetimeField = datetimeField;
 }
 
-public Set <Stupid> getStupidCollection () {
-return this.stupidCollection;
+public Stupid getStupid () {
+return this.stupid;
 }
 
-public void setStupidCollection(Set <Stupid> stupidCollection) {
-this.stupidCollection = stupidCollection;
+public void setStupid (Stupid stupid) {
+this.stupid = stupid;
 }
 
 

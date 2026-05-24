@@ -1,7 +1,7 @@
 package org.ifolks.demo.components.processor.dummy.base;
 
 import org.ifolks.demo.model.dummy.Fool;
-import org.ifolks.demo.persistence.interfaces.dummy.FoolDao;
+import org.ifolks.demo.persistence.interfaces.dummy.FoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -15,13 +15,13 @@ public class FoolBaseProcessor {
  * properties injected by spring
  */
 @Autowired
-protected FoolDao foolDao;
+protected FoolRepository foolRepository;
 
 /**
  * process save
  */
 public String save(Fool fool) {
-return foolDao.save(fool);
+return foolRepository.saveAndFlush(fool).getId();
 }
 
 /**
@@ -35,7 +35,7 @@ public void update(Fool fool) {
  * process delete
  */
 public void delete(Fool fool) {
-foolDao.delete(fool);
+foolRepository.delete(fool);
 }
 
 }

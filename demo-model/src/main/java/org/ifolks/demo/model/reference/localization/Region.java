@@ -30,7 +30,7 @@ import jakarta.persistence.UniqueConstraint;
 @Index(name = "IDX_REGION_UC", columnList = "COUNTRY_ID, CODE")
 , @Index(name = "IDX_REGION_C0", columnList = "COUNTRY_ID")
 })
-public class Region implements org.ifolks.commons.model.interfaces.Entity<Integer> {
+public class Region implements java.io.Serializable {
 
 private static final long serialVersionUID = 1L;
 

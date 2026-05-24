@@ -27,7 +27,7 @@ import jakarta.persistence.UniqueConstraint;
 @Index(name = "IDX_CITY_UC", columnList = "REGION_ID, CODE")
 , @Index(name = "IDX_CITY_C0", columnList = "REGION_ID")
 })
-public class City implements org.ifolks.commons.model.interfaces.Entity<Long> {
+public class City implements java.io.Serializable {
 
 private static final long serialVersionUID = 1L;
 

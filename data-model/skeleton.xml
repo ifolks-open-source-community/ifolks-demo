@@ -170,7 +170,7 @@
 							editable="true" rendering="Code">
 						</column>
 						<column name="FOOL_ID" dataType="LONG" nullable="false"
-							referenceTableName="FOOL" referenceTableRelation="MANY_TO_ONE" editable="true" rendering="Fool">
+							referenceTableName="FOOL" referenceTableRelation="ONE_TO_ONE" editable="true" rendering="Fool">
 						</column>
 					</columns>
 				</table>
