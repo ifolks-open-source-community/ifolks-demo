@@ -13,12 +13,12 @@
 						<table name="COUNTRY" idType="SHORT" cardinality="1" listRendering="Countries"
 							detailRendering="Country details" createEnabled="true"
 							updateEnabled="true" deleteEnabled="true">
-							<selectionBehavior selectionMode="DROPDOWN_OPTIONS" />
+							<selectionBehavior selectionMode="DROPDOWN_OPTIONS" labelColumn="LABEL" />
 							<columns>
 								<column name="CODE" dataType="STRING" nullable="false"
 									editable="true" rendering="ISO Code">
 								</column>
-								<column name="LABEL" dataType="STRING" nullable="false"
+								<column name="LABEL" dataType="STRING" nullable="false" unique="true"
 									editable="true" rendering="Label">
 								</column>
 							</columns>
@@ -134,13 +134,13 @@
 				<table name="FOOL" idType="STRING" idGeneratorType="UUID" cardinality="1" listRendering="Fools"
 					detailRendering="Fool details" createEnabled="true" updateEnabled="true"
 					deleteEnabled="true">
-					<selectionBehavior selectionMode="AUTO_COMPLETE" />
+					<selectionBehavior selectionMode="AUTO_COMPLETE" labelColumn="DESCRIPTION" />
 					<columns>
 						<column name="CODE" dataType="STRING" nullable="false"
 							editable="true" rendering="Code">
 						</column>
 						<column name="DESCRIPTION" dataType="TEXT" nullable="true"
-							editable="true" rendering="Description">
+							editable="true" rendering="Description" unique="true">
 						</column>
 						<column name="LONG_FIELD" dataType="LONG" nullable="true"
 							editable="true" filterable="false" rendering="Long">

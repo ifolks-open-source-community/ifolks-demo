@@ -53,7 +53,7 @@ public class FoolSpecification {
 	public static Specification<Fool> searchSpec(String arg) {
 		return (root, query, cb) -> {
 			List<Predicate> predicates = new ArrayList<>();
-			Predicate predicate = getStringStartsWithRestriction(cb, root.get(Fool_.code), arg);
+			Predicate predicate = getStringStartsWithRestriction(cb, root.get(Fool_.description), arg);
 			if (predicate != null) {
 				predicates.add(predicate);
 			}

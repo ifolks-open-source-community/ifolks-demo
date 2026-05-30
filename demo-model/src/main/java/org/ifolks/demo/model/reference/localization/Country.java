@@ -23,9 +23,11 @@ import jakarta.persistence.UniqueConstraint;
 @Table(name="COUNTRY"
 , uniqueConstraints = {
 @UniqueConstraint(name = "UC_COUNTRY", columnNames = {"CODE"})
+, @UniqueConstraint(name = "UC_COUNTRY_C1", columnNames = {"LABEL"})
 }
 , indexes = {
 @Index(name = "IDX_COUNTRY_UC", columnList = "CODE")
+, @Index(name = "IDX_COUNTRY_C1", columnList = "LABEL")
 })
 public class Country implements java.io.Serializable {
 

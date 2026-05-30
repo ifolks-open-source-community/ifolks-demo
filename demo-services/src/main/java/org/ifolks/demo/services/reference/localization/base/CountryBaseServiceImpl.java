@@ -58,7 +58,7 @@ public List<SelectItem> getOptions() {
 List<Country> countryList = countryRepository.findAll();
 List<SelectItem> result = new ArrayList<>(countryList.size());
 for (Country country : countryList) {
-result.add(new SelectItem(country.getCode(), country.getCode()));
+result.add(new SelectItem(country.getCode(), country.getLabel()));
 }
 return result;
 }

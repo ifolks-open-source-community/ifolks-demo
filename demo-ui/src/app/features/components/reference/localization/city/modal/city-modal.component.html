@@ -18,7 +18,7 @@
 <mat-label>Country</mat-label>
 <mat-select placeholder="Country" formControlName="regionCountryCode" >
 <mat-option [value]="null"></mat-option>
-<mat-option *ngFor="let option of regionCountryCodeOptions" [value]="option.key">{{option.key}}</mat-option>
+<mat-option *ngFor="let option of regionCountryCodeOptions" [value]="option.key">{{option.label}}</mat-option>
 </mat-select>
 </mat-form-field>
 </p>

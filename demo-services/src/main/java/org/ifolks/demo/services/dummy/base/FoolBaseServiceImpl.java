@@ -58,7 +58,7 @@ public List<SelectItem> searchOptions(String arg) {
 List<Fool> foolList = foolRepository.search(arg);
 List<SelectItem> result = new ArrayList<>(foolList.size());
 for (Fool fool : foolList) {
-result.add(new SelectItem(fool.getCode(), fool.getCode()));
+result.add(new SelectItem(fool.getCode(), fool.getDescription()));
 }
 return result;
 }

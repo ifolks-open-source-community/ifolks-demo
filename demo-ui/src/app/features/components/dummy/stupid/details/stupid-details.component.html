@@ -25,7 +25,7 @@ Stupid details
 <mat-label>Fool</mat-label>
 <input matInput placeholder="Fool" formControlName="foolCode" [matAutocomplete]="foolCodeAutoComplete"/>
 <mat-autocomplete #foolCodeAutoComplete="matAutocomplete">
-<mat-option *ngFor="let option of foolCodeOptions | async" [value]="option.key">{{option.key}}</mat-option>
+<mat-option *ngFor="let option of foolCodeOptions | async" [value]="option.key">{{option.label}}</mat-option>
 </mat-autocomplete>
 </mat-form-field>
 </p>
