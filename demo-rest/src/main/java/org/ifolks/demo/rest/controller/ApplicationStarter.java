@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.hibernate.autoconfigure.HibernateJpaAutoConfiguration;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-@SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class, scanBasePackages = {"org.ifolks.demo", "org.ifolks.commons"})
+@SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class, scanBasePackages = {"org.ifolks.demo"})
 public class ApplicationStarter extends SpringBootServletInitializer {
 	
 	public static void main(String[] args) {

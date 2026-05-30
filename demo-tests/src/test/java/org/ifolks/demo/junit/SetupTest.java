@@ -1,17 +1,14 @@
 package org.ifolks.demo.junit;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes={ApplicationConfig.class})
+@SpringJUnitConfig(ApplicationConfig.class)
 public class SetupTest {
 
 	/*
@@ -23,7 +20,7 @@ public class SetupTest {
 	private JUnitDataInitializer dataInitializer;
 
 	
-	@Before
+	@BeforeEach
 	public void setUp() {
 		dataInitializer.initialize();		
 	}
