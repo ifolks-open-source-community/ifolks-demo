@@ -18,7 +18,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @Profile("junit")
-@EnableJpaRepositories(basePackages = "org.ifolks.demo.persistence.interfaces")
+@EnableJpaRepositories(basePackages = "org.ifolks.demo.persistence")
 public class JUnitPersistenceConfig {
 	
 	@Autowired
@@ -26,10 +26,8 @@ public class JUnitPersistenceConfig {
 
 	@Bean
     public DataSource dataSource() {
-		
-		System.setProperty("hsqldb.method_class_names", "*");
 		HikariConfig config = new HikariConfig();	    
-	    config.setJdbcUrl("jdbc:hsqldb:mem:demo;hsqldb.method_class_names=*");
+	    config.setJdbcUrl("jdbc:hsqldb:mem:${project.datasource.databaseName}");
 	    config.setUsername("sa");
 	    config.setPassword("");
 	    config.setDriverClassName("org.hsqldb.jdbcDriver");

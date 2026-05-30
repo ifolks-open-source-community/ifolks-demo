@@ -26,7 +26,6 @@ public class ComponentsConfig {
 			.changeDefaultPropertyInclusion(incl -> incl.withValueInclusion(Include.NON_NULL))
 			.addModule(new JavaTimeModule())
 			.disable(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
-			.disable(DateTimeFeature.ADJUST_DATES_TO_CONTEXT_TIME_ZONE)
 			.build();
 		return result;
 	}

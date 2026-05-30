@@ -17,11 +17,11 @@
 	<packaging>jar</packaging>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>org.ifolks.demo</groupId>
 			<artifactId>demo-commands</artifactId>
 		</dependency>
-		
 		
 		<!-- ifolks generator -->
 		<dependency>

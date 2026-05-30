@@ -18,7 +18,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @Profile("local")
-@EnableJpaRepositories(basePackages = "org.ifolks.demo.persistence.interfaces")
+@EnableJpaRepositories(basePackages = "org.ifolks.demo.persistence")
 public class LocalPersistenceConfig {
 	
 	@Autowired
@@ -38,7 +38,7 @@ public class LocalPersistenceConfig {
 		
 		return new HikariDataSource(config);
      }
-	
+
 	@Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean result = new LocalContainerEntityManagerFactoryBean();
