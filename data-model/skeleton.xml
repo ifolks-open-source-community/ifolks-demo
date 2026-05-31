@@ -4,7 +4,6 @@
     <projectName>demo</projectName>
     <skeleton>SPRING_REST_ANGULAR</skeleton>
     <databaseEngine>POSTGRESQL</databaseEngine>
-    <audited>false</audited>
     <packages>
 		<package name="REFERENCE">
 			<packages>
