@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,9 +14,11 @@ import { OrganizationFullView } from 'src/app/features/models/organizations/view
 import { OrganizationModalComponent } from './../modal/organization-modal.component';
 import { OrganizationRestClient } from 'src/app/features/services/organizations/OrganizationRestClient';
 import { OrganizationSorting } from 'src/app/features/models/organizations/sortings/OrganizationSorting';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 import { ScrollForm } from "src/app/core/models/ScrollForm";
 import { ScrollView } from "src/app/core/models/ScrollView";
 import { SelectItem } from "src/app/core/models/SelectItem";
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
  * auto generated list component ts file
@@ -25,8 +28,10 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 
 @Component({
 selector: 'app-organization-list',
+standalone: true,
+imports: [CommonModule, SharedModule, PrivateTemplatesModule],
 templateUrl: './organization-list.component.html',
-styleUrls: ['./organization-list.component.scss']
+styleUrl: './organization-list.component.scss'
 })
 export class OrganizationListComponent implements OnInit, AfterViewInit {
 

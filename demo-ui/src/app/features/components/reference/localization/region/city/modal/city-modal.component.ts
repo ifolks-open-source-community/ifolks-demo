@@ -1,5 +1,6 @@
 import { CityFullView } from 'src/app/features/models/reference/localization/views/full/CityFullView';
 import { CityRestClient } from 'src/app/features/services/reference/localization/CityRestClient';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -8,6 +9,7 @@ import { Observable } from 'rxjs';
 import { RegionFullView } from 'src/app/features/models/reference/localization/views/full/RegionFullView';
 import { RegionRestClient } from 'src/app/features/services/reference/localization/RegionRestClient';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
  * auto generated one to many modal component ts file
@@ -17,8 +19,10 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 
 @Component({
 selector: 'app-cityfrom-region-modal',
+standalone: true,
+imports: [CommonModule, SharedModule],
 templateUrl: './city-modal.component.html',
-styleUrls: ['./city-modal.component.scss']
+styleUrl: './city-modal.component.scss'
 })
 export class CityModalComponent implements OnInit {
 

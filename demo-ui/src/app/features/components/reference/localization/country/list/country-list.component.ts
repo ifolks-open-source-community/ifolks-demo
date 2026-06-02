@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
 import { CountryBasicView } from 'src/app/features/models/reference/localization/views/basic/CountryBasicView';
@@ -13,9 +14,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NotificationService } from 'src/app/core/services/NotificationService';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 import { ScrollForm } from "src/app/core/models/ScrollForm";
 import { ScrollView } from "src/app/core/models/ScrollView";
 import { SelectItem } from "src/app/core/models/SelectItem";
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
  * auto generated list component ts file
@@ -25,8 +28,10 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 
 @Component({
 selector: 'app-country-list',
+standalone: true,
+imports: [CommonModule, SharedModule, PrivateTemplatesModule],
 templateUrl: './country-list.component.html',
-styleUrls: ['./country-list.component.scss']
+styleUrl: './country-list.component.scss'
 })
 export class CountryListComponent implements OnInit, AfterViewInit {
 

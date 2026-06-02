@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -6,6 +7,7 @@ import { Observable } from 'rxjs';
 import { OrganizationFullView } from 'src/app/features/models/organizations/views/full/OrganizationFullView';
 import { OrganizationRestClient } from 'src/app/features/services/organizations/OrganizationRestClient';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
  * auto generated modal component ts file
@@ -15,8 +17,10 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 
 @Component({
 selector: 'app-organization-modal',
+standalone: true,
+imports: [CommonModule, SharedModule],
 templateUrl: './organization-modal.component.html',
-styleUrls: ['./organization-modal.component.scss']
+styleUrl: './organization-modal.component.scss'
 })
 export class OrganizationModalComponent implements OnInit {
 

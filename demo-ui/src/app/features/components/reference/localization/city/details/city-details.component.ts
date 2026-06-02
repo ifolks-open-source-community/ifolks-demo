@@ -1,13 +1,18 @@
 import { ActivatedRoute } from '@angular/router';
 import { CityFullView } from 'src/app/features/models/reference/localization/views/full/CityFullView';
+import { CityMenuComponent } from './../menu/city-menu.component';
 import { CityRestClient } from 'src/app/features/services/reference/localization/CityRestClient';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CountryRestClient } from 'src/app/features/services/reference/localization/CountryRestClient';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
+import { RouterModule } from '@angular/router';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
  * auto generated details component ts file
@@ -17,8 +22,10 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 
 @Component({
 selector: 'app-city-details',
+standalone: true,
+imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, CityMenuComponent],
 templateUrl: './city-details.component.html',
-styleUrls: ['./city-details.component.scss']
+styleUrl: './city-details.component.scss'
 })
 export class CityDetailsComponent implements OnInit {
 

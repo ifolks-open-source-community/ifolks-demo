@@ -1,12 +1,17 @@
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
 import { OrganizationCertificationFullView } from 'src/app/features/models/organizations/views/full/OrganizationCertificationFullView';
+import { OrganizationMenuComponent } from './../../menu/organization-menu.component';
 import { OrganizationRestClient } from 'src/app/features/services/organizations/OrganizationRestClient';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
+import { RouterModule } from '@angular/router';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
  * auto generated one to one component details component ts file
@@ -16,8 +21,10 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 
 @Component({
 selector: 'app-organization-certification-details',
+standalone: true,
+imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, OrganizationMenuComponent],
 templateUrl: './organization-certification-details.component.html',
-styleUrls: ['./organization-certification-details.component.scss']
+styleUrl: './organization-certification-details.component.scss'
 })
 export class OrganizationCertificationDetailsComponent implements OnInit {
 

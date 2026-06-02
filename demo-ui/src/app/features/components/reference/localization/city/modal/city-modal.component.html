@@ -18,7 +18,9 @@
 <mat-label>Country</mat-label>
 <mat-select placeholder="Country" formControlName="regionCountryCode" >
 <mat-option [value]="null"></mat-option>
-<mat-option *ngFor="let option of regionCountryCodeOptions" [value]="option.key">{{option.label}}</mat-option>
+@for (option of regionCountryCodeOptions; track option.key) {
+  <mat-option [value]="option.key">{{option.label}}</mat-option>
+}
 </mat-select>
 </mat-form-field>
 </p>
@@ -47,8 +49,12 @@
 </section>
 </mat-dialog-content>
 <mat-dialog-actions>
-<button mat-raised-button *ngIf="view.id == null" color="primary" type="submit" [disabled]="form.invalid">Save</button>
-<button mat-raised-button *ngIf="view.id != null && view.canUpdate" color="primary" type="submit" [disabled]="form.invalid">Update</button>
+@if (view.id == null) {
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Save</button>
+}
+@if (view.id != null && view.canUpdate) {
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+}
 </mat-dialog-actions>
 </form>
 <!-- Specific Code Start -->

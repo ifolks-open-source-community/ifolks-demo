@@ -5,6 +5,7 @@ import { CityFullView } from 'src/app/features/models/reference/localization/vie
 import { CityModalComponent } from './../modal/city-modal.component';
 import { CityRestClient } from 'src/app/features/services/reference/localization/CityRestClient';
 import { CitySorting } from 'src/app/features/models/reference/localization/sortings/CitySorting';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,9 +14,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NotificationService } from 'src/app/core/services/NotificationService';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 import { ScrollForm } from "src/app/core/models/ScrollForm";
 import { ScrollView } from "src/app/core/models/ScrollView";
 import { SelectItem } from "src/app/core/models/SelectItem";
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
  * auto generated list component ts file
@@ -25,8 +28,10 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 
 @Component({
 selector: 'app-city-list',
+standalone: true,
+imports: [CommonModule, SharedModule, PrivateTemplatesModule],
 templateUrl: './city-list.component.html',
-styleUrls: ['./city-list.component.scss']
+styleUrl: './city-list.component.scss'
 })
 export class CityListComponent implements OnInit, AfterViewInit {
 

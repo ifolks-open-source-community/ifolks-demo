@@ -1,12 +1,17 @@
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
 import { OrganizationFullView } from 'src/app/features/models/organizations/views/full/OrganizationFullView';
+import { OrganizationMenuComponent } from './../menu/organization-menu.component';
 import { OrganizationRestClient } from 'src/app/features/services/organizations/OrganizationRestClient';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
+import { RouterModule } from '@angular/router';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
  * auto generated details component ts file
@@ -16,8 +21,10 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 
 @Component({
 selector: 'app-organization-details',
+standalone: true,
+imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, OrganizationMenuComponent],
 templateUrl: './organization-details.component.html',
-styleUrls: ['./organization-details.component.scss']
+styleUrl: './organization-details.component.scss'
 })
 export class OrganizationDetailsComponent implements OnInit {
 

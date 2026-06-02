@@ -1,13 +1,18 @@
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CountryRestClient } from 'src/app/features/services/reference/localization/CountryRestClient';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 import { RegionFullView } from 'src/app/features/models/reference/localization/views/full/RegionFullView';
+import { RegionMenuComponent } from './../menu/region-menu.component';
 import { RegionRestClient } from 'src/app/features/services/reference/localization/RegionRestClient';
+import { RouterModule } from '@angular/router';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
  * auto generated details component ts file
@@ -17,8 +22,10 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 
 @Component({
 selector: 'app-region-details',
+standalone: true,
+imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, RegionMenuComponent],
 templateUrl: './region-details.component.html',
-styleUrls: ['./region-details.component.scss']
+styleUrl: './region-details.component.scss'
 })
 export class RegionDetailsComponent implements OnInit {
 

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullView';
 import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
@@ -6,6 +7,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
  * auto generated modal component ts file
@@ -15,8 +17,10 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 
 @Component({
 selector: 'app-fool-modal',
+standalone: true,
+imports: [CommonModule, SharedModule],
 templateUrl: './fool-modal.component.html',
-styleUrls: ['./fool-modal.component.scss']
+styleUrl: './fool-modal.component.scss'
 })
 export class FoolModalComponent implements OnInit {
 

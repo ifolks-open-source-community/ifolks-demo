@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CountryRestClient } from 'src/app/features/services/reference/localization/CountryRestClient';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -7,6 +8,7 @@ import { Observable } from 'rxjs';
 import { RegionFullView } from 'src/app/features/models/reference/localization/views/full/RegionFullView';
 import { RegionRestClient } from 'src/app/features/services/reference/localization/RegionRestClient';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
  * auto generated modal component ts file
@@ -16,8 +18,10 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 
 @Component({
 selector: 'app-region-modal',
+standalone: true,
+imports: [CommonModule, SharedModule],
 templateUrl: './region-modal.component.html',
-styleUrls: ['./region-modal.component.scss']
+styleUrl: './region-modal.component.scss'
 })
 export class RegionModalComponent implements OnInit {
 

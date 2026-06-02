@@ -1,5 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { NavLink } from 'src/app/templates/private/models/nav-link';
+import { SharedModule } from 'src/app/shared/shared.module';
 /**
  * auto generated menu component ts file
  * <br/>write modifications between specific code marks
@@ -8,8 +10,10 @@ import { NavLink } from 'src/app/templates/private/models/nav-link';
 
 @Component({
 selector: 'app-country-menu',
+standalone: true,
+imports: [CommonModule, SharedModule],
 templateUrl: './country-menu.component.html',
-styleUrls: ['./country-menu.component.scss']
+styleUrl: './country-menu.component.scss'
 })
 export class CountryMenuComponent implements OnInit {
 

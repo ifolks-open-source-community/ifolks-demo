@@ -25,13 +25,17 @@ Stupid details
 <mat-label>Fool</mat-label>
 <input matInput placeholder="Fool" formControlName="foolCode" [matAutocomplete]="foolCodeAutoComplete"/>
 <mat-autocomplete #foolCodeAutoComplete="matAutocomplete">
-<mat-option *ngFor="let option of foolCodeOptions | async" [value]="option.key">{{option.label}}</mat-option>
+@for (option of foolCodeOptions | async; track option.key) {
+  <mat-option [value]="option.key">{{option.label}}</mat-option>
+}
 </mat-autocomplete>
 </mat-form-field>
 </p>
 
 <p>
-<button *ngIf="view.canUpdate" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+@if (view.canUpdate) {
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+}
 </p>
 </form>
 <!-- Specific Code Start -->

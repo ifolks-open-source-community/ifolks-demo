@@ -28,7 +28,9 @@ Country details
 </p>
 
 <p>
-<button *ngIf="view.canUpdate" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+@if (view.canUpdate) {
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+}
 </p>
 </form>
 <!-- Specific Code Start -->

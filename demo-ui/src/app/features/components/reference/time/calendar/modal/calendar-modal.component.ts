@@ -1,11 +1,13 @@
 import { CalendarFullView } from 'src/app/features/models/reference/time/views/full/CalendarFullView';
 import { CalendarRestClient } from 'src/app/features/services/reference/time/CalendarRestClient';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
  * auto generated modal component ts file
@@ -15,8 +17,10 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 
 @Component({
 selector: 'app-calendar-modal',
+standalone: true,
+imports: [CommonModule, SharedModule],
 templateUrl: './calendar-modal.component.html',
-styleUrls: ['./calendar-modal.component.scss']
+styleUrl: './calendar-modal.component.scss'
 })
 export class CalendarModalComponent implements OnInit {
 

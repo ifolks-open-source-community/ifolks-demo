@@ -1,13 +1,18 @@
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
+import { RouterModule } from '@angular/router';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 import { StupidFullView } from 'src/app/features/models/dummy/views/full/StupidFullView';
+import { StupidMenuComponent } from './../menu/stupid-menu.component';
 import { StupidRestClient } from 'src/app/features/services/dummy/StupidRestClient';
 /**
  * auto generated details component ts file
@@ -17,8 +22,10 @@ import { StupidRestClient } from 'src/app/features/services/dummy/StupidRestClie
 
 @Component({
 selector: 'app-stupid-details',
+standalone: true,
+imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, StupidMenuComponent],
 templateUrl: './stupid-details.component.html',
-styleUrls: ['./stupid-details.component.scss']
+styleUrl: './stupid-details.component.scss'
 })
 export class StupidDetailsComponent implements OnInit {
 

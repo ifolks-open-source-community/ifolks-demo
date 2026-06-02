@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CountryFullView } from 'src/app/features/models/reference/localization/views/full/CountryFullView';
 import { CountryRestClient } from 'src/app/features/services/reference/localization/CountryRestClient';
@@ -6,6 +7,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
  * auto generated modal component ts file
@@ -15,8 +17,10 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 
 @Component({
 selector: 'app-country-modal',
+standalone: true,
+imports: [CommonModule, SharedModule],
 templateUrl: './country-modal.component.html',
-styleUrls: ['./country-modal.component.scss']
+styleUrl: './country-modal.component.scss'
 })
 export class CountryModalComponent implements OnInit {
 

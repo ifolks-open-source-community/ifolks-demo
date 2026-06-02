@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -6,6 +7,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NotificationService } from 'src/app/core/services/NotificationService';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 import { RegionBasicView } from 'src/app/features/models/reference/localization/views/basic/RegionBasicView';
 import { RegionFilter } from 'src/app/features/models/reference/localization/filters/RegionFilter';
 import { RegionForm } from 'src/app/features/models/reference/localization/forms/RegionForm';
@@ -16,6 +18,7 @@ import { RegionSorting } from 'src/app/features/models/reference/localization/so
 import { ScrollForm } from "src/app/core/models/ScrollForm";
 import { ScrollView } from "src/app/core/models/ScrollView";
 import { SelectItem } from "src/app/core/models/SelectItem";
+import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 /**
  * auto generated list component ts file
@@ -25,8 +28,10 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 
 @Component({
 selector: 'app-region-list',
+standalone: true,
+imports: [CommonModule, SharedModule, PrivateTemplatesModule],
 templateUrl: './region-list.component.html',
-styleUrls: ['./region-list.component.scss']
+styleUrl: './region-list.component.scss'
 })
 export class RegionListComponent implements OnInit, AfterViewInit {
 
