@@ -12,6 +12,7 @@ import org.ifolks.demo.api.model.reference.localization.sortings.CountrySorting;
 import org.ifolks.demo.api.model.reference.localization.views.basic.CountryBasicView;
 import org.ifolks.demo.api.model.reference.localization.views.full.CountryFullView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,7 @@ protected CountryService countryService;
  * get options
  */
 @RequestMapping(value = {CountryService.GET_OPTIONS_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody List<SelectItem> getOptions() {
 return countryService.getOptions();
 }
@@ -46,6 +48,7 @@ return countryService.getOptions();
  * load object list
  */
 @RequestMapping(value = {CountryService.GET_LIST_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody List<CountryBasicView> loadList() {
 return countryService.loadList();
 }
@@ -54,6 +57,7 @@ return countryService.loadList();
  * scroll object list
  */
 @RequestMapping(value = {CountryService.SCROLL_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody ScrollView<CountryBasicView> scroll(@RequestBody ScrollForm<CountryFilter, CountrySorting> form) {
 return countryService.scroll(form);
 }
@@ -62,6 +66,7 @@ return countryService.scroll(form);
  * load object
  */
 @RequestMapping(value = {CountryService.GET_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody CountryFullView load(@PathVariable("id") Short id) {
 return countryService.load(id);
 }
@@ -69,6 +74,7 @@ return countryService.load(id);
  * find object
  */
 @RequestMapping(value = {CountryService.FIND_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody CountryFullView find(@RequestParam("code") String code) {
 return countryService.find(code);
 }
@@ -77,6 +83,7 @@ return countryService.find(code);
  * save object
  */
 @RequestMapping(value = {CountryService.SAVE_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody Short save(@Valid @RequestBody CountryForm form) {
 return countryService.save(form);
 }
@@ -85,6 +92,7 @@ return countryService.save(form);
  * update object
  */
 @RequestMapping(value = {CountryService.UPDATE_URL}, method = RequestMethod.PUT)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void update(@PathVariable("id") Short id, @Valid @RequestBody CountryForm form) {
 countryService.update(id, form);
 }
@@ -93,6 +101,7 @@ countryService.update(id, form);
  * delete object
  */
 @RequestMapping(value = {CountryService.DELETE_URL}, method = RequestMethod.DELETE)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void delete(@PathVariable("id") Short id) {
 countryService.delete(id);
 }

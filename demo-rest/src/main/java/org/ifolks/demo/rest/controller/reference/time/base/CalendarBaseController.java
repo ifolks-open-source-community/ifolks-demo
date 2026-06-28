@@ -17,6 +17,7 @@ import org.ifolks.demo.api.model.reference.time.views.basic.CalendarDayOffBasicV
 import org.ifolks.demo.api.model.reference.time.views.full.CalendarDayOffFullView;
 import org.ifolks.demo.api.model.reference.time.views.full.CalendarFullView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +44,7 @@ protected CalendarService calendarService;
  * get options
  */
 @RequestMapping(value = {CalendarService.GET_OPTIONS_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody List<SelectItem> getOptions() {
 return calendarService.getOptions();
 }
@@ -51,6 +53,7 @@ return calendarService.getOptions();
  * load object list
  */
 @RequestMapping(value = {CalendarService.GET_LIST_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody List<CalendarBasicView> loadList() {
 return calendarService.loadList();
 }
@@ -59,6 +62,7 @@ return calendarService.loadList();
  * scroll object list
  */
 @RequestMapping(value = {CalendarService.SCROLL_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody ScrollView<CalendarBasicView> scroll(@RequestBody ScrollForm<CalendarFilter, CalendarSorting> form) {
 return calendarService.scroll(form);
 }
@@ -67,6 +71,7 @@ return calendarService.scroll(form);
  * load object
  */
 @RequestMapping(value = {CalendarService.GET_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody CalendarFullView load(@PathVariable("id") Integer id) {
 return calendarService.load(id);
 }
@@ -74,6 +79,7 @@ return calendarService.load(id);
  * find object
  */
 @RequestMapping(value = {CalendarService.FIND_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody CalendarFullView find(@RequestParam("code") String code) {
 return calendarService.find(code);
 }
@@ -82,6 +88,7 @@ return calendarService.find(code);
  * load one to many component calendarDayOff list
  */
 @RequestMapping(value = {CalendarService.GET_CALENDAR_DAY_OFF_LIST_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody List<CalendarDayOffBasicView> loadCalendarDayOffList(@PathVariable("id") Integer id) {
 return calendarService.loadCalendarDayOffList(id);
 }
@@ -90,6 +97,7 @@ return calendarService.loadCalendarDayOffList(id);
  * scroll one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.SCROLL_CALENDAR_DAY_OFF_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (@PathVariable("id") Integer id, @RequestBody ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> form) {
 return calendarService.scrollCalendarDayOff(id, form);
 }
@@ -98,6 +106,7 @@ return calendarService.scrollCalendarDayOff(id, form);
  * load one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.GET_CALENDAR_DAY_OFF_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody CalendarDayOffFullView loadCalendarDayOff(@PathVariable("id") Integer id) {
 return calendarService.loadCalendarDayOff(id);
 }
@@ -106,6 +115,7 @@ return calendarService.loadCalendarDayOff(id);
  * save object
  */
 @RequestMapping(value = {CalendarService.SAVE_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody Integer save(@Valid @RequestBody CalendarForm form) {
 return calendarService.save(form);
 }
@@ -114,6 +124,7 @@ return calendarService.save(form);
  * save one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.SAVE_CALENDAR_DAY_OFF_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void saveCalendarDayOff(@PathVariable("id") Integer id, @Valid @RequestBody CalendarDayOffForm form) {
 calendarService.saveCalendarDayOff(id, form);
 }
@@ -122,6 +133,7 @@ calendarService.saveCalendarDayOff(id, form);
  * update object
  */
 @RequestMapping(value = {CalendarService.UPDATE_URL}, method = RequestMethod.PUT)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void update(@PathVariable("id") Integer id, @Valid @RequestBody CalendarForm form) {
 calendarService.update(id, form);
 }
@@ -130,6 +142,7 @@ calendarService.update(id, form);
  * update one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.UPDATE_CALENDAR_DAY_OFF_URL}, method = RequestMethod.PUT)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void updateCalendarDayOff(@PathVariable("id") Integer id, @Valid @RequestBody CalendarDayOffForm form) {
 calendarService.updateCalendarDayOff(id, form);
 }
@@ -138,6 +151,7 @@ calendarService.updateCalendarDayOff(id, form);
  * delete object
  */
 @RequestMapping(value = {CalendarService.DELETE_URL}, method = RequestMethod.DELETE)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void delete(@PathVariable("id") Integer id) {
 calendarService.delete(id);
 }
@@ -146,6 +160,7 @@ calendarService.delete(id);
  * delete one to many component calendarDayOff
  */
 @RequestMapping(value = {CalendarService.DELETE_CALENDAR_DAY_OFF_URL}, method = RequestMethod.DELETE)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void deleteCalendarDayOff(@PathVariable("id")Integer id) {
 calendarService.deleteCalendarDayOff(id);
 }

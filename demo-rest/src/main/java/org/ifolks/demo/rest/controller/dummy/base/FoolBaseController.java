@@ -12,6 +12,7 @@ import org.ifolks.demo.api.model.dummy.sortings.FoolSorting;
 import org.ifolks.demo.api.model.dummy.views.basic.FoolBasicView;
 import org.ifolks.demo.api.model.dummy.views.full.FoolFullView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,6 +39,7 @@ protected FoolService foolService;
  * search options
  */
 @RequestMapping(value = {FoolService.SEARCH_OPTIONS_URL }, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody List<SelectItem> searchOptions(@RequestParam("arg") String arg) {
 return foolService.searchOptions(arg);
 }
@@ -46,6 +48,7 @@ return foolService.searchOptions(arg);
  * load object list
  */
 @RequestMapping(value = {FoolService.GET_LIST_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody List<FoolBasicView> loadList() {
 return foolService.loadList();
 }
@@ -54,6 +57,7 @@ return foolService.loadList();
  * scroll object list
  */
 @RequestMapping(value = {FoolService.SCROLL_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody ScrollView<FoolBasicView> scroll(@RequestBody ScrollForm<FoolFilter, FoolSorting> form) {
 return foolService.scroll(form);
 }
@@ -62,6 +66,7 @@ return foolService.scroll(form);
  * load object
  */
 @RequestMapping(value = {FoolService.GET_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody FoolFullView load(@PathVariable("id") String id) {
 return foolService.load(id);
 }
@@ -69,6 +74,7 @@ return foolService.load(id);
  * find object
  */
 @RequestMapping(value = {FoolService.FIND_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody FoolFullView find(@RequestParam("code") String code) {
 return foolService.find(code);
 }
@@ -77,6 +83,7 @@ return foolService.find(code);
  * save object
  */
 @RequestMapping(value = {FoolService.SAVE_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody String save(@Valid @RequestBody FoolForm form) {
 return foolService.save(form);
 }
@@ -85,6 +92,7 @@ return foolService.save(form);
  * update object
  */
 @RequestMapping(value = {FoolService.UPDATE_URL}, method = RequestMethod.PUT)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void update(@PathVariable("id") String id, @Valid @RequestBody FoolForm form) {
 foolService.update(id, form);
 }
@@ -93,6 +101,7 @@ foolService.update(id, form);
  * delete object
  */
 @RequestMapping(value = {FoolService.DELETE_URL}, method = RequestMethod.DELETE)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void delete(@PathVariable("id") String id) {
 foolService.delete(id);
 }

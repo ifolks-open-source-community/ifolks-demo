@@ -1,8 +1,8 @@
 package org.ifolks.demo.components.rightsmanager.reference.time.base;
 
-import org.ifolks.commons.api.exception.rights.AccessDeniedException;
 import org.ifolks.demo.model.reference.time.Calendar;
 import org.ifolks.demo.model.reference.time.CalendarDayOff;
+import org.springframework.security.access.AccessDeniedException;
 
 /**
  * auto generated base rights manager class file

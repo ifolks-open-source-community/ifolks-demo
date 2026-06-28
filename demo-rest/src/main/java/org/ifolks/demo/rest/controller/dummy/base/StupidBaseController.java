@@ -11,6 +11,7 @@ import org.ifolks.demo.api.model.dummy.sortings.StupidSorting;
 import org.ifolks.demo.api.model.dummy.views.basic.StupidBasicView;
 import org.ifolks.demo.api.model.dummy.views.full.StupidFullView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,7 @@ protected StupidService stupidService;
  * load object list
  */
 @RequestMapping(value = {StupidService.GET_LIST_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody List<StupidBasicView> loadList() {
 return stupidService.loadList();
 }
@@ -45,6 +47,7 @@ return stupidService.loadList();
  * scroll object list
  */
 @RequestMapping(value = {StupidService.SCROLL_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody ScrollView<StupidBasicView> scroll(@RequestBody ScrollForm<StupidFilter, StupidSorting> form) {
 return stupidService.scroll(form);
 }
@@ -53,6 +56,7 @@ return stupidService.scroll(form);
  * load object
  */
 @RequestMapping(value = {StupidService.GET_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody StupidFullView load(@PathVariable("id") Long id) {
 return stupidService.load(id);
 }
@@ -60,6 +64,7 @@ return stupidService.load(id);
  * find object
  */
 @RequestMapping(value = {StupidService.FIND_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody StupidFullView find(@RequestParam("code") String code) {
 return stupidService.find(code);
 }
@@ -68,6 +73,7 @@ return stupidService.find(code);
  * save object
  */
 @RequestMapping(value = {StupidService.SAVE_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody Long save(@Valid @RequestBody StupidForm form) {
 return stupidService.save(form);
 }
@@ -76,6 +82,7 @@ return stupidService.save(form);
  * update object
  */
 @RequestMapping(value = {StupidService.UPDATE_URL}, method = RequestMethod.PUT)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void update(@PathVariable("id") Long id, @Valid @RequestBody StupidForm form) {
 stupidService.update(id, form);
 }
@@ -84,6 +91,7 @@ stupidService.update(id, form);
  * delete object
  */
 @RequestMapping(value = {StupidService.DELETE_URL}, method = RequestMethod.DELETE)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void delete(@PathVariable("id") Long id) {
 stupidService.delete(id);
 }

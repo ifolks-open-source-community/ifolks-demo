@@ -3,7 +3,7 @@ package org.ifolks.demo.services.reference.time.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
+import org.ifolks.commons.api.exception.repository.ResourceNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.commons.api.model.SelectItem;
@@ -124,7 +124,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 @Override
 @Transactional(readOnly=true)
 public CalendarFullView load(Integer id) {
-Calendar calendar = calendarRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Calendar.notFound"));
+Calendar calendar = calendarRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Calendar.notFound"));
 calendarRightsManager.checkCanAccess(calendar);
 return this.calendarFullViewMapper.toView(calendar);
 }
@@ -135,7 +135,7 @@ return this.calendarFullViewMapper.toView(calendar);
 @Override
 @Transactional(readOnly=true)
 public CalendarFullView find(String code) {
-Calendar calendar = calendarRepository.find(code).orElseThrow(() -> new ObjectNotFoundException("Calendar.notFound"));
+Calendar calendar = calendarRepository.find(code).orElseThrow(() -> new ResourceNotFoundException("Calendar.notFound"));
 calendarRightsManager.checkCanAccess(calendar);
 return this.calendarFullViewMapper.toView(calendar);
 }
@@ -146,7 +146,7 @@ return this.calendarFullViewMapper.toView(calendar);
 @Override
 @Transactional(readOnly=true)
 public List<CalendarDayOffBasicView> loadCalendarDayOffList(Integer id) {
-Calendar calendar = calendarRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Calendar.notFound"));
+Calendar calendar = calendarRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Calendar.notFound"));
 calendarRightsManager.checkCanAccessCalendarDayOff(calendar);
 List<CalendarDayOff> calendarDayOffList = this.calendarDayOffRepository.findAll(CalendarDayOffSpecification.filterByCalendarSpec(id));
 List<CalendarDayOffBasicView> result = new ArrayList<>(calendarDayOffList.size());
@@ -162,7 +162,7 @@ return result;
 @Override
 @Transactional(readOnly=true)
 public ScrollView<CalendarDayOffBasicView> scrollCalendarDayOff (Integer calendarId, ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> form) {
-Calendar calendar = calendarRepository.findById(calendarId).orElseThrow(() -> new ObjectNotFoundException("Calendar.notFound"));
+Calendar calendar = calendarRepository.findById(calendarId).orElseThrow(() -> new ResourceNotFoundException("Calendar.notFound"));
 calendarRightsManager.checkCanAccessCalendarDayOff(calendar);
 Long size = this.calendarDayOffRepository.count(CalendarDayOffSpecification.filterByCalendarSpec(calendarId));
 Specification<CalendarDayOff> spec = Specification.where(CalendarDayOffSpecification.filterByCalendarSpec(calendarId)).and(CalendarDayOffSpecification.filterBy(form.filter()));
@@ -183,7 +183,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 @Override
 @Transactional(readOnly=true)
 public CalendarDayOffFullView loadCalendarDayOff(Integer id) {
-CalendarDayOff calendarDayOff = this.calendarDayOffRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("CalendarDayOff.notFound"));
+CalendarDayOff calendarDayOff = this.calendarDayOffRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("CalendarDayOff.notFound"));
 calendarRightsManager.checkCanAccessCalendarDayOff(calendarDayOff.getCalendar());
 return this.calendarDayOffFullViewMapper.toView(calendarDayOff);
 }
@@ -206,7 +206,7 @@ return calendarProcessor.save(calendar);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void saveCalendarDayOff(Integer id, CalendarDayOffForm calendarDayOffForm) {
-Calendar calendar = this.calendarRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Calendar.notFound"));
+Calendar calendar = this.calendarRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Calendar.notFound"));
 CalendarDayOff calendarDayOff = this.calendarDayOffFormMapper.toEntity(calendarDayOffForm, new CalendarDayOff());
 calendarRightsManager.checkCanSaveCalendarDayOff(calendarDayOff,calendar);
 calendarStateManager.checkCanSaveCalendarDayOff(calendarDayOff,calendar);
@@ -219,7 +219,7 @@ calendarProcessor.saveCalendarDayOff(calendarDayOff,calendar);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void update(Integer id, CalendarForm calendarForm) {
-Calendar calendar = this.calendarRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Calendar.notFound"));
+Calendar calendar = this.calendarRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Calendar.notFound"));
 calendarRightsManager.checkCanUpdate(calendar);
 calendarStateManager.checkCanUpdate(calendar);
 calendar = this.calendarFormMapper.toEntity(calendarForm, calendar);
@@ -232,7 +232,7 @@ calendarProcessor.update(calendar);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void updateCalendarDayOff(Integer id, CalendarDayOffForm calendarDayOffForm) {
-CalendarDayOff calendarDayOff = this.calendarDayOffRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("CalendarDayOff.notFound"));
+CalendarDayOff calendarDayOff = this.calendarDayOffRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("CalendarDayOff.notFound"));
 calendarRightsManager.checkCanUpdateCalendarDayOff(calendarDayOff);
 calendarStateManager.checkCanUpdateCalendarDayOff(calendarDayOff);
 calendarDayOff = this.calendarDayOffFormMapper.toEntity(calendarDayOffForm, calendarDayOff);
@@ -246,7 +246,7 @@ calendarProcessor.updateCalendarDayOff(calendarDayOff);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void delete(Integer id) {
-Calendar calendar = calendarRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Calendar.notFound"));
+Calendar calendar = calendarRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Calendar.notFound"));
 calendarRightsManager.checkCanDelete(calendar);
 calendarStateManager.checkCanDelete(calendar);
 calendarProcessor.delete(calendar);
@@ -258,7 +258,7 @@ calendarProcessor.delete(calendar);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void deleteCalendarDayOff(Integer id) {
-CalendarDayOff calendarDayOff = this.calendarDayOffRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("CalendarDayOff.notFound"));
+CalendarDayOff calendarDayOff = this.calendarDayOffRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("CalendarDayOff.notFound"));
 calendarRightsManager.checkCanDeleteCalendarDayOff(calendarDayOff);
 calendarStateManager.checkCanDeleteCalendarDayOff(calendarDayOff);
 this.calendarProcessor.deleteCalendarDayOff(calendarDayOff);

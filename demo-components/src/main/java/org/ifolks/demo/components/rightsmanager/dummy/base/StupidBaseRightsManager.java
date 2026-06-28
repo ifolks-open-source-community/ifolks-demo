@@ -1,7 +1,7 @@
 package org.ifolks.demo.components.rightsmanager.dummy.base;
 
-import org.ifolks.commons.api.exception.rights.AccessDeniedException;
 import org.ifolks.demo.model.dummy.Stupid;
+import org.springframework.security.access.AccessDeniedException;
 
 /**
  * auto generated base rights manager class file

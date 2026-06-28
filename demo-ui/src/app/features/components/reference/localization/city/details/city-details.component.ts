@@ -75,7 +75,7 @@ this.countryService.getOptions().subscribe((t) => {this.regionCountryCodeOptions
 
 update(): void {
 this.applyForm();
-this.service.update(this.id, this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.load();}, error => {this.notifications.error("Operation failed")});
+this.service.update(this.id, this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.load();});
 }
 /* Specific Code Start */
 /* Specific Code End */

@@ -11,6 +11,7 @@ import org.ifolks.demo.api.model.reference.localization.sortings.RegionSorting;
 import org.ifolks.demo.api.model.reference.localization.views.basic.RegionBasicView;
 import org.ifolks.demo.api.model.reference.localization.views.full.RegionFullView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,7 @@ protected RegionService regionService;
  * load object list
  */
 @RequestMapping(value = {RegionService.GET_LIST_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody List<RegionBasicView> loadList() {
 return regionService.loadList();
 }
@@ -45,6 +47,7 @@ return regionService.loadList();
  * load object list from country
  */
 @RequestMapping(value = {RegionService.GET_LIST_FROM_COUNTRY_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody List<RegionBasicView> loadListFromCountry (@PathVariable("countryId") Short countryId) {
 return regionService.loadListFromCountry(countryId);
 }
@@ -52,6 +55,7 @@ return regionService.loadListFromCountry(countryId);
  * scroll object list
  */
 @RequestMapping(value = {RegionService.SCROLL_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody ScrollView<RegionBasicView> scroll(@RequestBody ScrollForm<RegionFilter, RegionSorting> form) {
 return regionService.scroll(form);
 }
@@ -60,6 +64,7 @@ return regionService.scroll(form);
  * scroll object list from country
  */
 @RequestMapping(value = {RegionService.SCROLL_FROM_COUNTRY_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody ScrollView<RegionBasicView> scrollFromCountry (@PathVariable("countryId") Short countryId, @RequestBody ScrollForm<RegionFilter, RegionSorting> form) {
 return regionService.scrollFromCountry(countryId, form);
 }
@@ -67,6 +72,7 @@ return regionService.scrollFromCountry(countryId, form);
  * load object
  */
 @RequestMapping(value = {RegionService.GET_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody RegionFullView load(@PathVariable("id") Integer id) {
 return regionService.load(id);
 }
@@ -74,6 +80,7 @@ return regionService.load(id);
  * find object
  */
 @RequestMapping(value = {RegionService.FIND_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody RegionFullView find(@RequestParam("countryCode") String countryCode, @RequestParam("code") String code) {
 return regionService.find(countryCode, code);
 }
@@ -82,6 +89,7 @@ return regionService.find(countryCode, code);
  * save object
  */
 @RequestMapping(value = {RegionService.SAVE_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody Integer save(@Valid @RequestBody RegionForm form) {
 return regionService.save(form);
 }
@@ -90,6 +98,7 @@ return regionService.save(form);
  * update object
  */
 @RequestMapping(value = {RegionService.UPDATE_URL}, method = RequestMethod.PUT)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void update(@PathVariable("id") Integer id, @Valid @RequestBody RegionForm form) {
 regionService.update(id, form);
 }
@@ -98,6 +107,7 @@ regionService.update(id, form);
  * delete object
  */
 @RequestMapping(value = {RegionService.DELETE_URL}, method = RequestMethod.DELETE)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void delete(@PathVariable("id") Integer id) {
 regionService.delete(id);
 }

@@ -1,7 +1,7 @@
 package org.ifolks.demo.components.rightsmanager.reference.localization.base;
 
-import org.ifolks.commons.api.exception.rights.AccessDeniedException;
 import org.ifolks.demo.model.reference.localization.Country;
+import org.springframework.security.access.AccessDeniedException;
 
 /**
  * auto generated base rights manager class file

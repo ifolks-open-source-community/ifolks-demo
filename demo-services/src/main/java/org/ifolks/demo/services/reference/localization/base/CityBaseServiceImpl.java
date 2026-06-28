@@ -3,7 +3,7 @@ package org.ifolks.demo.services.reference.localization.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
+import org.ifolks.commons.api.exception.repository.ResourceNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.demo.api.interfaces.reference.localization.base.CityBaseService;
@@ -125,7 +125,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 @Override
 @Transactional(readOnly=true)
 public CityFullView load(Long id) {
-City city = cityRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("City.notFound"));
+City city = cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("City.notFound"));
 cityRightsManager.checkCanAccess(city);
 return this.cityFullViewMapper.toView(city);
 }
@@ -136,7 +136,7 @@ return this.cityFullViewMapper.toView(city);
 @Override
 @Transactional(readOnly=true)
 public CityFullView find(String regionCountryCode, String regionCode, String code) {
-City city = cityRepository.find(regionCountryCode, regionCode, code).orElseThrow(() -> new ObjectNotFoundException("City.notFound"));
+City city = cityRepository.find(regionCountryCode, regionCode, code).orElseThrow(() -> new ResourceNotFoundException("City.notFound"));
 cityRightsManager.checkCanAccess(city);
 return this.cityFullViewMapper.toView(city);
 }
@@ -159,7 +159,7 @@ return cityProcessor.save(city);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void update(Long id, CityForm cityForm) {
-City city = this.cityRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("City.notFound"));
+City city = this.cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("City.notFound"));
 cityRightsManager.checkCanUpdate(city);
 cityStateManager.checkCanUpdate(city);
 city = this.cityFormMapper.toEntity(cityForm, city);
@@ -172,7 +172,7 @@ cityProcessor.update(city);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void delete(Long id) {
-City city = cityRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("City.notFound"));
+City city = cityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("City.notFound"));
 cityRightsManager.checkCanDelete(city);
 cityStateManager.checkCanDelete(city);
 cityProcessor.delete(city);

@@ -59,13 +59,13 @@ this.service.loadOrganizationCertification(this.id).subscribe((t) => {if(t){this
 
 save(): void {
 this.applyForm();
-this.service.saveOrganizationCertification(this.id, this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.load();}, error => {this.notifications.error("Operation failed")});
+this.service.saveOrganizationCertification(this.id, this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.load();});
 this.load();
 }
 
 update(): void {
 this.applyForm();
-this.service.updateOrganizationCertification(this.id, this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.load();}, error => {this.notifications.error("Operation failed")});
+this.service.updateOrganizationCertification(this.id, this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.load();});
 }
 
 saveOrUpdate(): void {
@@ -73,7 +73,7 @@ if (this.view.id == null) {this.save()} else {this.update()}
 }
 
 delete(): void {
-this.service.deleteOrganizationCertification(this.id).subscribe(success => {this.notifications.info("Operation completed");this.load();}, error => {this.notifications.error("Operation failed")});
+this.service.deleteOrganizationCertification(this.id).subscribe(success => {this.notifications.info("Operation completed");this.load();});
 }
 
 /* Specific Code Start */

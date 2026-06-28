@@ -14,6 +14,7 @@ import org.ifolks.demo.api.model.organizations.views.basic.OrganizationBasicView
 import org.ifolks.demo.api.model.organizations.views.full.OrganizationCertificationFullView;
 import org.ifolks.demo.api.model.organizations.views.full.OrganizationFullView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +41,7 @@ protected OrganizationService organizationService;
  * search options
  */
 @RequestMapping(value = {OrganizationService.SEARCH_OPTIONS_URL }, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody List<SelectItem> searchOptions(@RequestParam("arg") String arg) {
 return organizationService.searchOptions(arg);
 }
@@ -48,6 +50,7 @@ return organizationService.searchOptions(arg);
  * load object list
  */
 @RequestMapping(value = {OrganizationService.GET_LIST_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody List<OrganizationBasicView> loadList() {
 return organizationService.loadList();
 }
@@ -56,6 +59,7 @@ return organizationService.loadList();
  * scroll object list
  */
 @RequestMapping(value = {OrganizationService.SCROLL_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody ScrollView<OrganizationBasicView> scroll(@RequestBody ScrollForm<OrganizationFilter, OrganizationSorting> form) {
 return organizationService.scroll(form);
 }
@@ -64,6 +68,7 @@ return organizationService.scroll(form);
  * load object
  */
 @RequestMapping(value = {OrganizationService.GET_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody OrganizationFullView load(@PathVariable("id") Integer id) {
 return organizationService.load(id);
 }
@@ -71,6 +76,7 @@ return organizationService.load(id);
  * find object
  */
 @RequestMapping(value = {OrganizationService.FIND_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody OrganizationFullView find(@RequestParam("code") String code) {
 return organizationService.find(code);
 }
@@ -79,6 +85,7 @@ return organizationService.find(code);
  * load one to one component organizationCertification
  */
 @RequestMapping(value = {OrganizationService.GET_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.GET)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody OrganizationCertificationFullView loadOrganizationCertification(@PathVariable("id") Integer id) {
 return organizationService.loadOrganizationCertification(id);
 }
@@ -87,6 +94,7 @@ return organizationService.loadOrganizationCertification(id);
  * save object
  */
 @RequestMapping(value = {OrganizationService.SAVE_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody Integer save(@Valid @RequestBody OrganizationForm form) {
 return organizationService.save(form);
 }
@@ -95,6 +103,7 @@ return organizationService.save(form);
  * save one to one component organizationCertification
  */
 @RequestMapping(value = {OrganizationService.SAVE_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.POST)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void saveOrganizationCertification(@PathVariable("id") Integer id, @Valid @RequestBody OrganizationCertificationForm form) {
 organizationService.saveOrganizationCertification(id, form);
 }
@@ -103,6 +112,7 @@ organizationService.saveOrganizationCertification(id, form);
  * update object
  */
 @RequestMapping(value = {OrganizationService.UPDATE_URL}, method = RequestMethod.PUT)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void update(@PathVariable("id") Integer id, @Valid @RequestBody OrganizationForm form) {
 organizationService.update(id, form);
 }
@@ -111,6 +121,7 @@ organizationService.update(id, form);
  * update one to one component organizationCertification
  */
 @RequestMapping(value = {OrganizationService.UPDATE_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.PUT)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void updateOrganizationCertification(@PathVariable("id") Integer id, @Valid @RequestBody OrganizationCertificationForm form) {
 organizationService.updateOrganizationCertification(id, form);
 }
@@ -119,6 +130,7 @@ organizationService.updateOrganizationCertification(id, form);
  * delete object
  */
 @RequestMapping(value = {OrganizationService.DELETE_URL}, method = RequestMethod.DELETE)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void delete(@PathVariable("id") Integer id) {
 organizationService.delete(id);
 }
@@ -127,6 +139,7 @@ organizationService.delete(id);
  * delete one to one component organizationCertification
  */
 @RequestMapping(value = {OrganizationService.DELETE_ORGANIZATION_CERTIFICATION_URL}, method = RequestMethod.DELETE)
+@PreAuthorize("isAuthenticated()")
 public @ResponseBody void deleteOrganizationCertification(@PathVariable("id")Integer id) {
 organizationService.deleteOrganizationCertification(id);
 }

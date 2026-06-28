@@ -3,7 +3,7 @@ package org.ifolks.demo.services.reference.localization.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
+import org.ifolks.commons.api.exception.repository.ResourceNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.demo.api.interfaces.reference.localization.base.RegionBaseService;
@@ -125,7 +125,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 @Override
 @Transactional(readOnly=true)
 public RegionFullView load(Integer id) {
-Region region = regionRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Region.notFound"));
+Region region = regionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Region.notFound"));
 regionRightsManager.checkCanAccess(region);
 return this.regionFullViewMapper.toView(region);
 }
@@ -136,7 +136,7 @@ return this.regionFullViewMapper.toView(region);
 @Override
 @Transactional(readOnly=true)
 public RegionFullView find(String countryCode, String code) {
-Region region = regionRepository.find(countryCode, code).orElseThrow(() -> new ObjectNotFoundException("Region.notFound"));
+Region region = regionRepository.find(countryCode, code).orElseThrow(() -> new ResourceNotFoundException("Region.notFound"));
 regionRightsManager.checkCanAccess(region);
 return this.regionFullViewMapper.toView(region);
 }
@@ -159,7 +159,7 @@ return regionProcessor.save(region);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void update(Integer id, RegionForm regionForm) {
-Region region = this.regionRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Region.notFound"));
+Region region = this.regionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Region.notFound"));
 regionRightsManager.checkCanUpdate(region);
 regionStateManager.checkCanUpdate(region);
 region = this.regionFormMapper.toEntity(regionForm, region);
@@ -172,7 +172,7 @@ regionProcessor.update(region);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void delete(Integer id) {
-Region region = regionRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Region.notFound"));
+Region region = regionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Region.notFound"));
 regionRightsManager.checkCanDelete(region);
 regionStateManager.checkCanDelete(region);
 regionProcessor.delete(region);

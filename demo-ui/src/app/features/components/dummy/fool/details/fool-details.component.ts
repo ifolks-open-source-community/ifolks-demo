@@ -80,7 +80,7 @@ this.service.load(this.id).subscribe((t) => {this.view=t;this.restoreForm();});
 
 update(): void {
 this.applyForm();
-this.service.update(this.id, this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.load();}, error => {this.notifications.error("Operation failed")});
+this.service.update(this.id, this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.load();});
 }
 /* Specific Code Start */
 /* Specific Code End */

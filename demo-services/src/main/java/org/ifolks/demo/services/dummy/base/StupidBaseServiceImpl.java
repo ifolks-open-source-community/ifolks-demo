@@ -3,7 +3,7 @@ package org.ifolks.demo.services.dummy.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
+import org.ifolks.commons.api.exception.repository.ResourceNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.demo.api.interfaces.dummy.base.StupidBaseService;
@@ -88,7 +88,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 @Override
 @Transactional(readOnly=true)
 public StupidFullView load(Long id) {
-Stupid stupid = stupidRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Stupid.notFound"));
+Stupid stupid = stupidRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stupid.notFound"));
 stupidRightsManager.checkCanAccess(stupid);
 return this.stupidFullViewMapper.toView(stupid);
 }
@@ -99,7 +99,7 @@ return this.stupidFullViewMapper.toView(stupid);
 @Override
 @Transactional(readOnly=true)
 public StupidFullView find(String code) {
-Stupid stupid = stupidRepository.find(code).orElseThrow(() -> new ObjectNotFoundException("Stupid.notFound"));
+Stupid stupid = stupidRepository.find(code).orElseThrow(() -> new ResourceNotFoundException("Stupid.notFound"));
 stupidRightsManager.checkCanAccess(stupid);
 return this.stupidFullViewMapper.toView(stupid);
 }
@@ -122,7 +122,7 @@ return stupidProcessor.save(stupid);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void update(Long id, StupidForm stupidForm) {
-Stupid stupid = this.stupidRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Stupid.notFound"));
+Stupid stupid = this.stupidRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stupid.notFound"));
 stupidRightsManager.checkCanUpdate(stupid);
 stupidStateManager.checkCanUpdate(stupid);
 stupid = this.stupidFormMapper.toEntity(stupidForm, stupid);
@@ -135,7 +135,7 @@ stupidProcessor.update(stupid);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void delete(Long id) {
-Stupid stupid = stupidRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Stupid.notFound"));
+Stupid stupid = stupidRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Stupid.notFound"));
 stupidRightsManager.checkCanDelete(stupid);
 stupidStateManager.checkCanDelete(stupid);
 stupidProcessor.delete(stupid);

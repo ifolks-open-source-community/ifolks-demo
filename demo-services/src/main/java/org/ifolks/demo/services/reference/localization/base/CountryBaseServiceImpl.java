@@ -3,7 +3,7 @@ package org.ifolks.demo.services.reference.localization.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
+import org.ifolks.commons.api.exception.repository.ResourceNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.commons.api.model.SelectItem;
@@ -103,7 +103,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 @Override
 @Transactional(readOnly=true)
 public CountryFullView load(Short id) {
-Country country = countryRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Country.notFound"));
+Country country = countryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Country.notFound"));
 countryRightsManager.checkCanAccess(country);
 return this.countryFullViewMapper.toView(country);
 }
@@ -114,7 +114,7 @@ return this.countryFullViewMapper.toView(country);
 @Override
 @Transactional(readOnly=true)
 public CountryFullView find(String code) {
-Country country = countryRepository.find(code).orElseThrow(() -> new ObjectNotFoundException("Country.notFound"));
+Country country = countryRepository.find(code).orElseThrow(() -> new ResourceNotFoundException("Country.notFound"));
 countryRightsManager.checkCanAccess(country);
 return this.countryFullViewMapper.toView(country);
 }
@@ -137,7 +137,7 @@ return countryProcessor.save(country);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void update(Short id, CountryForm countryForm) {
-Country country = this.countryRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Country.notFound"));
+Country country = this.countryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Country.notFound"));
 countryRightsManager.checkCanUpdate(country);
 countryStateManager.checkCanUpdate(country);
 country = this.countryFormMapper.toEntity(countryForm, country);
@@ -150,7 +150,7 @@ countryProcessor.update(country);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void delete(Short id) {
-Country country = countryRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Country.notFound"));
+Country country = countryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Country.notFound"));
 countryRightsManager.checkCanDelete(country);
 countryStateManager.checkCanDelete(country);
 countryProcessor.delete(country);

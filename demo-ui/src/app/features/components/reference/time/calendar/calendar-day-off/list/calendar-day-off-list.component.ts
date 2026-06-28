@@ -133,7 +133,7 @@ ref.afterClosed().subscribe(result => {this.refresh();});
 delete(id: number): void {
 this.dialog.open(ConfirmationModalComponent).afterClosed().subscribe(result => {
 if (result) {
-this.service.deleteCalendarDayOff(id).subscribe(success => {this.notifications.info("Operation completed");this.refresh()}, error => {this.notifications.error("Operation failed")});
+this.service.deleteCalendarDayOff(id).subscribe(success => {this.notifications.info("Operation completed");this.refresh()});
 }
 });
 }

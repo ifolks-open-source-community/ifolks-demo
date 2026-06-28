@@ -49,12 +49,12 @@ this.view.form.description = StringUtils.emptyToNull(this.form.get('description'
 
 save(): void {
 this.applyForm();
-this.service.save(this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.dialogRef.close();}, error => {this.notifications.error("Operation failed")});
+this.service.save(this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.dialogRef.close();});
 }
 
 update(): void {
 this.applyForm();
-this.service.update(this.view.id, this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.dialogRef.close();}, error => {this.notifications.error("Operation failed")});
+this.service.update(this.view.id, this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.dialogRef.close();});
 }
 
 saveOrUpdate(): void {

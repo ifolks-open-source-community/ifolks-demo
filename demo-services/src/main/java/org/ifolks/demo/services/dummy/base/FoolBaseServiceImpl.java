@@ -3,7 +3,7 @@ package org.ifolks.demo.services.dummy.base;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
+import org.ifolks.commons.api.exception.repository.ResourceNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.commons.api.model.SelectItem;
@@ -103,7 +103,7 @@ return new ScrollView<>(size, count, numberOfPages, currentPage, elements);
 @Override
 @Transactional(readOnly=true)
 public FoolFullView load(String id) {
-Fool fool = foolRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Fool.notFound"));
+Fool fool = foolRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Fool.notFound"));
 foolRightsManager.checkCanAccess(fool);
 return this.foolFullViewMapper.toView(fool);
 }
@@ -114,7 +114,7 @@ return this.foolFullViewMapper.toView(fool);
 @Override
 @Transactional(readOnly=true)
 public FoolFullView find(String code) {
-Fool fool = foolRepository.find(code).orElseThrow(() -> new ObjectNotFoundException("Fool.notFound"));
+Fool fool = foolRepository.find(code).orElseThrow(() -> new ResourceNotFoundException("Fool.notFound"));
 foolRightsManager.checkCanAccess(fool);
 return this.foolFullViewMapper.toView(fool);
 }
@@ -137,7 +137,7 @@ return foolProcessor.save(fool);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void update(String id, FoolForm foolForm) {
-Fool fool = this.foolRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Fool.notFound"));
+Fool fool = this.foolRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Fool.notFound"));
 foolRightsManager.checkCanUpdate(fool);
 foolStateManager.checkCanUpdate(fool);
 fool = this.foolFormMapper.toEntity(foolForm, fool);
@@ -150,7 +150,7 @@ foolProcessor.update(fool);
 @Override
 @Transactional(rollbackFor=Exception.class)
 public void delete(String id) {
-Fool fool = foolRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Fool.notFound"));
+Fool fool = foolRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Fool.notFound"));
 foolRightsManager.checkCanDelete(fool);
 foolStateManager.checkCanDelete(fool);
 foolProcessor.delete(fool);
