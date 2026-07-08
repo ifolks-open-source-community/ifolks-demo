@@ -15,8 +15,8 @@
 <section>
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Country</mat-label>
-<mat-select placeholder="Country" formControlName="countryCode" >
+<mat-label>{{ 'regionCountryCode' | i18n }}</mat-label>
+<mat-select placeholder="{{ 'regionCountryCode' | i18n }}" formControlName="countryCode" >
 <mat-option [value]="null"></mat-option>
 @for (option of countryCodeOptions; track option.key) {
   <mat-option [value]="option.key">{{option.label}}</mat-option>
@@ -27,15 +27,15 @@
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Code</mat-label>
-<input matInput placeholder="Code" formControlName="code"/>
+<mat-label>{{ 'regionCode' | i18n }}</mat-label>
+<input matInput placeholder="{{ 'regionCode' | i18n }}" formControlName="code"/>
 </mat-form-field>
 </p>
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Label</mat-label>
-<input matInput placeholder="Label" formControlName="label"/>
+<mat-label>{{ 'regionLabel' | i18n }}</mat-label>
+<input matInput placeholder="{{ 'regionLabel' | i18n }}" formControlName="label"/>
 </mat-form-field>
 </p>
 
@@ -43,10 +43,10 @@
 </mat-dialog-content>
 <mat-dialog-actions>
 @if (view.id == null) {
-  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Save</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ 'save' | i18n }}</button>
 }
 @if (view.id != null && view.canUpdate) {
-  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ 'update' | i18n }}</button>
 }
 </mat-dialog-actions>
 </form>

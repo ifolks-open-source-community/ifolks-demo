@@ -8,28 +8,28 @@
 <app-calendar-menu  #menu [activePath]="activePath" [id]="id"></app-calendar-menu>
 
 <h2>
-Calendar details
+{{ 'calendarDetails' | i18n }}
 </h2>
 
 <div class="details-form" >
 <form [formGroup]="form" (ngSubmit)="update()">
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Code</mat-label>
-<input matInput placeholder="Code" formControlName="code"/>
+<mat-label>{{ 'calendarCode' | i18n }}</mat-label>
+<input matInput placeholder="{{ 'calendarCode' | i18n }}" formControlName="code"/>
 </mat-form-field>
 </p>
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Label</mat-label>
-<input matInput placeholder="Label" formControlName="label"/>
+<mat-label>{{ 'calendarLabel' | i18n }}</mat-label>
+<input matInput placeholder="{{ 'calendarLabel' | i18n }}" formControlName="label"/>
 </mat-form-field>
 </p>
 
 <p>
 @if (view.canUpdate) {
-  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ 'update' | i18n }}</button>
 }
 </p>
 </form>

@@ -8,26 +8,26 @@
 <app-organization-menu  #menu [activePath]="activePath" [id]="id"></app-organization-menu>
 
 <h2>
-Certification
+{{ 'organizationCertificationDetails' | i18n }}
 </h2>
 
 <div class="details-form" >
 <form [formGroup]="form" (ngSubmit)="saveOrUpdate()">
 <p>
 <mat-checkbox color="primary" formControlName="certified">
-Certified
+{{ 'organizationCertificationCertified' | i18n }}
 </mat-checkbox>
 </p>
 
 <mat-dialog-actions>
 @if (view.id == null) {
-  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Save</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ 'save' | i18n }}</button>
 }
 @if (view.id != null && view.canUpdate) {
-  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ 'update' | i18n }}</button>
 }
 @if (view.id != null && view.canDelete) {
-  <button mat-raised-button color="warn" type="button" (click)="delete()">Delete</button>
+  <button mat-raised-button color="warn" type="button" (click)="delete()">{{ 'delete' | i18n }}</button>
 }
 </mat-dialog-actions>
 </form>

@@ -9,6 +9,7 @@ import { FoolModalComponent } from './../modal/fool-modal.component';
 import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
 import { FoolSorting } from 'src/app/features/models/dummy/sortings/FoolSorting';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -29,7 +30,7 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 @Component({
 selector: 'app-fool-list',
 standalone: true,
-imports: [CommonModule, SharedModule, PrivateTemplatesModule],
+imports: [CommonModule, SharedModule, PrivateTemplatesModule, I18nPipe],
 templateUrl: './fool-list.component.html',
 styleUrl: './fool-list.component.scss'
 })

@@ -5,6 +5,7 @@ import { CalendarRestClient } from 'src/app/features/services/reference/time/Cal
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
@@ -22,7 +23,7 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 @Component({
 selector: 'app-calendar-details',
 standalone: true,
-imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, CalendarMenuComponent],
+imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, CalendarMenuComponent, I18nPipe],
 templateUrl: './calendar-details.component.html',
 styleUrl: './calendar-details.component.scss'
 })

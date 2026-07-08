@@ -9,6 +9,7 @@ import { CountryModalComponent } from './../modal/country-modal.component';
 import { CountryRestClient } from 'src/app/features/services/reference/localization/CountryRestClient';
 import { CountrySorting } from 'src/app/features/models/reference/localization/sortings/CountrySorting';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -29,7 +30,7 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 @Component({
 selector: 'app-country-list',
 standalone: true,
-imports: [CommonModule, SharedModule, PrivateTemplatesModule],
+imports: [CommonModule, SharedModule, PrivateTemplatesModule, I18nPipe],
 templateUrl: './country-list.component.html',
 styleUrl: './country-list.component.scss'
 })

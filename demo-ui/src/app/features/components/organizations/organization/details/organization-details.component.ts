@@ -2,6 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
@@ -22,7 +23,7 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 @Component({
 selector: 'app-organization-details',
 standalone: true,
-imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, OrganizationMenuComponent],
+imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, OrganizationMenuComponent, I18nPipe],
 templateUrl: './organization-details.component.html',
 styleUrl: './organization-details.component.scss'
 })

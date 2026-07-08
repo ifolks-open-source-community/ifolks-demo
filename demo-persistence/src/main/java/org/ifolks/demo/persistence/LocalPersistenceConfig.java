@@ -18,7 +18,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @Profile("local")
-@EnableJpaRepositories(basePackages = "org.ifolks.demo.persistence")
+@EnableJpaRepositories(basePackages = "org.ifolks.demo.persistence.interfaces")
 public class LocalPersistenceConfig {
 	
 	@Autowired

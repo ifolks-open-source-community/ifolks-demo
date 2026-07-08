@@ -8,15 +8,15 @@
 <app-city-menu  #menu [activePath]="activePath" [id]="id"></app-city-menu>
 
 <h2>
-City details
+{{ 'cityDetails' | i18n }}
 </h2>
 
 <div class="details-form" >
 <form [formGroup]="form" (ngSubmit)="update()">
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Country</mat-label>
-<mat-select placeholder="Country" formControlName="regionCountryCode" >
+<mat-label>{{ 'cityRegionCountryCode' | i18n }}</mat-label>
+<mat-select placeholder="{{ 'cityRegionCountryCode' | i18n }}" formControlName="regionCountryCode" >
 <mat-option [value]="null"></mat-option>
 @for (option of regionCountryCodeOptions; track option.key) {
   <mat-option [value]="option.key">{{option.label}}</mat-option>
@@ -27,28 +27,28 @@ City details
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Region(Code)</mat-label>
-<input matInput placeholder="Region(Code)" formControlName="regionCode"/>
+<mat-label>{{ 'cityRegionCode' | i18n }}</mat-label>
+<input matInput placeholder="{{ 'cityRegionCode' | i18n }}" formControlName="regionCode"/>
 </mat-form-field>
 </p>
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Code</mat-label>
-<input matInput placeholder="Code" formControlName="code"/>
+<mat-label>{{ 'cityCode' | i18n }}</mat-label>
+<input matInput placeholder="{{ 'cityCode' | i18n }}" formControlName="code"/>
 </mat-form-field>
 </p>
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Label</mat-label>
-<input matInput placeholder="Label" formControlName="label"/>
+<mat-label>{{ 'cityLabel' | i18n }}</mat-label>
+<input matInput placeholder="{{ 'cityLabel' | i18n }}" formControlName="label"/>
 </mat-form-field>
 </p>
 
 <p>
 @if (view.canUpdate) {
-  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ 'update' | i18n }}</button>
 }
 </p>
 </form>

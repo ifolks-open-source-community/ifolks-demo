@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -29,7 +30,7 @@ import { StupidSorting } from 'src/app/features/models/dummy/sortings/StupidSort
 @Component({
 selector: 'app-stupid-list',
 standalone: true,
-imports: [CommonModule, SharedModule, PrivateTemplatesModule],
+imports: [CommonModule, SharedModule, PrivateTemplatesModule, I18nPipe],
 templateUrl: './stupid-list.component.html',
 styleUrl: './stupid-list.component.scss'
 })

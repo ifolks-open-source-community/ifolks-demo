@@ -15,53 +15,53 @@
 <section>
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Code</mat-label>
-<input matInput placeholder="Code" formControlName="code"/>
+<mat-label>{{ 'foolCode' | i18n }}</mat-label>
+<input matInput placeholder="{{ 'foolCode' | i18n }}" formControlName="code"/>
 </mat-form-field>
 </p>
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Description</mat-label>
-<textarea matInput placeholder="Description" formControlName="description" cdkTextareaAutosize></textarea>
+<mat-label>{{ 'foolDescription' | i18n }}</mat-label>
+<textarea matInput placeholder="{{ 'foolDescription' | i18n }}" formControlName="description" cdkTextareaAutosize></textarea>
 </mat-form-field>
 </p>
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Long</mat-label>
-<input type="number" matInput placeholder="Long" formControlName="longField"/>
+<mat-label>{{ 'foolLongField' | i18n }}</mat-label>
+<input type="number" matInput placeholder="{{ 'foolLongField' | i18n }}" formControlName="longField"/>
 </mat-form-field>
 </p>
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Boolean</mat-label>
-<mat-select placeholder="Boolean" formControlName="booleanField">
+<mat-label>{{ 'foolBooleanField' | i18n }}</mat-label>
+<mat-select placeholder="{{ 'foolBooleanField' | i18n }}" formControlName="booleanField">
 <mat-option [value]=""></mat-option>
-<mat-option [value]="true">true</mat-option>
-<mat-option [value]="false">false</mat-option>
+<mat-option [value]="true">{{ 'trueLabel' | i18n }}</mat-option>
+<mat-option [value]="false">{{ 'falseLabel' | i18n }}</mat-option>
 </mat-select>
 </mat-form-field>
 <p>
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Double</mat-label>
-<input matInput type="decimal" placeholder="Double" formControlName="doubleField"/>
+<mat-label>{{ 'foolDoubleField' | i18n }}</mat-label>
+<input matInput type="decimal" placeholder="{{ 'foolDoubleField' | i18n }}" formControlName="doubleField"/>
 </mat-form-field>
 </p>
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Decimal</mat-label>
-<input matInput type="decimal" placeholder="Decimal" formControlName="decimalField"/>
+<mat-label>{{ 'foolDecimalField' | i18n }}</mat-label>
+<input matInput type="decimal" placeholder="{{ 'foolDecimalField' | i18n }}" formControlName="decimalField"/>
 </mat-form-field>
 </p>
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Date</mat-label>
+<mat-label>{{ 'foolDateField' | i18n }}</mat-label>
 <input matInput [matDatepicker]="dateFieldDatePicker" placeholder="yyyy-MM-dd" formControlName="dateField"/>
 <mat-datepicker-toggle matSuffix [for]="dateFieldDatePicker"></mat-datepicker-toggle>
 <mat-datepicker #dateFieldDatePicker></mat-datepicker>
@@ -70,7 +70,7 @@
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Date and time</mat-label>
+<mat-label>{{ 'foolDatetimeField' | i18n }}</mat-label>
 <input matInput placeholder="yyyy-MM-ddTHH:mm:ssZ" formControlName="datetimeField"/>
 </mat-form-field>
 </p>
@@ -79,10 +79,10 @@
 </mat-dialog-content>
 <mat-dialog-actions>
 @if (view.id == null) {
-  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Save</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ 'save' | i18n }}</button>
 }
 @if (view.id != null && view.canUpdate) {
-  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ 'update' | i18n }}</button>
 }
 </mat-dialog-actions>
 </form>

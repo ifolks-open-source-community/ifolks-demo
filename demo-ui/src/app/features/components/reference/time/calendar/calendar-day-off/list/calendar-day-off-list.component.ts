@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -33,7 +34,7 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 @Component({
 selector: 'app-calendar-day-off-list',
 standalone: true,
-imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, CalendarMenuComponent],
+imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, CalendarMenuComponent, I18nPipe],
 templateUrl: './calendar-day-off-list.component.html',
 styleUrl: './calendar-day-off-list.component.scss'
 })

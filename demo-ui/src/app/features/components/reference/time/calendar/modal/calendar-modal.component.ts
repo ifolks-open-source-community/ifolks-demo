@@ -3,6 +3,7 @@ import { CalendarRestClient } from 'src/app/features/services/reference/time/Cal
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
@@ -18,7 +19,7 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 @Component({
 selector: 'app-calendar-modal',
 standalone: true,
-imports: [CommonModule, SharedModule],
+imports: [CommonModule, SharedModule, I18nPipe],
 templateUrl: './calendar-modal.component.html',
 styleUrl: './calendar-modal.component.scss'
 })

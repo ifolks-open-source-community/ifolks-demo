@@ -15,15 +15,15 @@
 <section>
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>Code</mat-label>
-<input matInput placeholder="Code" formControlName="code"/>
+<mat-label>{{ 'stupidCode' | i18n }}</mat-label>
+<input matInput placeholder="{{ 'stupidCode' | i18n }}" formControlName="code"/>
 </mat-form-field>
 </p>
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always" class="autocomplete">
-<mat-label>Fool</mat-label>
-<input matInput placeholder="Fool" formControlName="foolCode" [matAutocomplete]="foolCodeAutoComplete"/>
+<mat-label>{{ 'stupidFoolCode' | i18n }}</mat-label>
+<input matInput placeholder="{{ 'stupidFoolCode' | i18n }}" formControlName="foolCode" [matAutocomplete]="foolCodeAutoComplete"/>
 <mat-autocomplete #foolCodeAutoComplete="matAutocomplete">
 @for (option of foolCodeOptions | async; track option.key) {
   <mat-option [value]="option.key">{{option.label}}</mat-option>
@@ -36,10 +36,10 @@
 </mat-dialog-content>
 <mat-dialog-actions>
 @if (view.id == null) {
-  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Save</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ 'save' | i18n }}</button>
 }
 @if (view.id != null && view.canUpdate) {
-  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Update</button>
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">{{ 'update' | i18n }}</button>
 }
 </mat-dialog-actions>
 </form>

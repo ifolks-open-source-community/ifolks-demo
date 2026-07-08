@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullView';
 import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
@@ -18,7 +19,7 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 @Component({
 selector: 'app-fool-modal',
 standalone: true,
-imports: [CommonModule, SharedModule],
+imports: [CommonModule, SharedModule, I18nPipe],
 templateUrl: './fool-modal.component.html',
 styleUrl: './fool-modal.component.scss'
 })

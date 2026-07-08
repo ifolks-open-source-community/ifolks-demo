@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
@@ -23,7 +24,7 @@ import { StupidRestClient } from 'src/app/features/services/dummy/StupidRestClie
 @Component({
 selector: 'app-stupid-details',
 standalone: true,
-imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, StupidMenuComponent],
+imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, StupidMenuComponent, I18nPipe],
 templateUrl: './stupid-details.component.html',
 styleUrl: './stupid-details.component.scss'
 })

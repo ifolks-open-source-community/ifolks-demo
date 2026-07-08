@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CountryFullView } from 'src/app/features/models/reference/localization/views/full/CountryFullView';
 import { CountryRestClient } from 'src/app/features/services/reference/localization/CountryRestClient';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
@@ -18,7 +19,7 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 @Component({
 selector: 'app-country-modal',
 standalone: true,
-imports: [CommonModule, SharedModule],
+imports: [CommonModule, SharedModule, I18nPipe],
 templateUrl: './country-modal.component.html',
 styleUrl: './country-modal.component.scss'
 })

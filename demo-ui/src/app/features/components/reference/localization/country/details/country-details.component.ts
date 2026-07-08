@@ -5,6 +5,7 @@ import { CountryFullView } from 'src/app/features/models/reference/localization/
 import { CountryMenuComponent } from './../menu/country-menu.component';
 import { CountryRestClient } from 'src/app/features/services/reference/localization/CountryRestClient';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
@@ -22,7 +23,7 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 @Component({
 selector: 'app-country-details',
 standalone: true,
-imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, CountryMenuComponent],
+imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, CountryMenuComponent, I18nPipe],
 templateUrl: './country-details.component.html',
 styleUrl: './country-details.component.scss'
 })

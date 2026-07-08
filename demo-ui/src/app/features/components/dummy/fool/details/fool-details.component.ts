@@ -5,6 +5,7 @@ import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullV
 import { FoolMenuComponent } from './../menu/fool-menu.component';
 import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
@@ -22,7 +23,7 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 @Component({
 selector: 'app-fool-details',
 standalone: true,
-imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, FoolMenuComponent],
+imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, FoolMenuComponent, I18nPipe],
 templateUrl: './fool-details.component.html',
 styleUrl: './fool-details.component.scss'
 })

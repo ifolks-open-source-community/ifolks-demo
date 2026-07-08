@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CountryRestClient } from 'src/app/features/services/reference/localization/CountryRestClient';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
@@ -19,7 +20,7 @@ import { StringUtils } from 'src/app/core/services/StringUtils';
 @Component({
 selector: 'app-region-modal',
 standalone: true,
-imports: [CommonModule, SharedModule],
+imports: [CommonModule, SharedModule, I18nPipe],
 templateUrl: './region-modal.component.html',
 styleUrl: './region-modal.component.scss'
 })
