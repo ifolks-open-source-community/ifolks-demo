@@ -37,15 +37,7 @@
 		<dependency>
 			<groupId>org.ifolks.commons</groupId>
 			<artifactId>commons-log</artifactId>
-		</dependency>
-		
-		
-		<!-- jackson time support -->
-		<dependency>
-			<groupId>tools.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-jsr310</artifactId>
-		</dependency>
-		
+		</dependency>		
 		
 		<!-- Spring transactions -->
 		<dependency>

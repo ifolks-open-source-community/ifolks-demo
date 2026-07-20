@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import tools.jackson.databind.cfg.DateTimeFeature;
 import tools.jackson.databind.json.JsonMapper;
-import tools.jackson.datatype.jsr310.JavaTimeModule;
 
 @Configuration
 public class ComponentsConfig {
@@ -24,7 +23,6 @@ public class ComponentsConfig {
 	public JsonMapper jsonMapper() {
 		JsonMapper result = JsonMapper.builder()
 			.changeDefaultPropertyInclusion(incl -> incl.withValueInclusion(Include.NON_NULL))
-			.addModule(new JavaTimeModule())
 			.disable(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
 			.build();
 		return result;
