@@ -37,7 +37,8 @@
 		<dependency>
 			<groupId>org.ifolks.commons</groupId>
 			<artifactId>commons-log</artifactId>
-		</dependency>		
+		</dependency>
+		
 		
 		<!-- Spring transactions -->
 		<dependency>
