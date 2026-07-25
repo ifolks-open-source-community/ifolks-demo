@@ -53,7 +53,7 @@ return this.http.get<FoolFullView>(environment.restApiUrl + '/fool/' + id);
  * save object
  */
 public save(form: FoolForm) {
-return this.http.post<string>(environment.restApiUrl + '/fool', form, this.httpOptions);
+return this.http.post(environment.restApiUrl + '/fool', form, { ...this.httpOptions, responseType: 'text' });
 }
 
 /**
