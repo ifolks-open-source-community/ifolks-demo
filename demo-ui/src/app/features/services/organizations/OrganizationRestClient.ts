@@ -69,7 +69,7 @@ return this.http.post<number>(environment.restApiUrl + '/organization', form, th
  * save one to one component organizationCertification
  */
 public saveOrganizationCertification(id:number, form: OrganizationCertificationForm) {
-return this.http.post<string>(environment.restApiUrl + '/organization/' + id + '/organization-certification', form, this.httpOptions);
+return this.http.post(environment.restApiUrl + '/organization/' + id + '/organization-certification', form, { ...this.httpOptions, responseType: 'text' });
 }
 
 /**

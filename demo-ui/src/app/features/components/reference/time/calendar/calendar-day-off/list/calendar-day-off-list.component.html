@@ -13,13 +13,13 @@
 
 <form [formGroup]="filter">
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>{{ 'calendarDayOffDayOffDateMinValue' | i18n }}</mat-label>
+<mat-label>{{ 'calendarDayOffDayOffDate' | i18n }} {{ 'minValue' | i18n }}</mat-label>
 <input matInput [matDatepicker]="dayOffDateMinValueDatePicker" placeholder="yyyy-MM-dd" formControlName="dayOffDateMinValue"/>
 <mat-datepicker-toggle matSuffix [for]="dayOffDateMinValueDatePicker"></mat-datepicker-toggle>
 <mat-datepicker #dayOffDateMinValueDatePicker></mat-datepicker>
 </mat-form-field>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>{{ 'calendarDayOffDayOffDateMaxValue' | i18n }}</mat-label>
+<mat-label>{{ 'calendarDayOffDayOffDate' | i18n }} {{ 'maxValue' | i18n }}</mat-label>
 <input matInput [matDatepicker]="dayOffDateMaxValueDatePicker" placeholder="yyyy-MM-dd" formControlName="dayOffDateMaxValue"/>
 <mat-datepicker-toggle matSuffix [for]="dayOffDateMaxValueDatePicker"></mat-datepicker-toggle>
 <mat-datepicker #dayOffDateMaxValueDatePicker></mat-datepicker>

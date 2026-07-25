@@ -27,23 +27,23 @@
 </mat-select>
 </mat-form-field>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>{{ 'foolDateFieldMinValue' | i18n }}</mat-label>
+<mat-label>{{ 'foolDateField' | i18n }} {{ 'minValue' | i18n }}</mat-label>
 <input matInput [matDatepicker]="dateFieldMinValueDatePicker" placeholder="yyyy-MM-dd" formControlName="dateFieldMinValue"/>
 <mat-datepicker-toggle matSuffix [for]="dateFieldMinValueDatePicker"></mat-datepicker-toggle>
 <mat-datepicker #dateFieldMinValueDatePicker></mat-datepicker>
 </mat-form-field>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>{{ 'foolDateFieldMaxValue' | i18n }}</mat-label>
+<mat-label>{{ 'foolDateField' | i18n }} {{ 'maxValue' | i18n }}</mat-label>
 <input matInput [matDatepicker]="dateFieldMaxValueDatePicker" placeholder="yyyy-MM-dd" formControlName="dateFieldMaxValue"/>
 <mat-datepicker-toggle matSuffix [for]="dateFieldMaxValueDatePicker"></mat-datepicker-toggle>
 <mat-datepicker #dateFieldMaxValueDatePicker></mat-datepicker>
 </mat-form-field>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>{{ 'foolDatetimeFieldMinValue' | i18n }}</mat-label>
+<mat-label>{{ 'foolDatetimeField' | i18n }} {{ 'minValue' | i18n }}</mat-label>
 <input matInput placeholder="yyyy-MM-ddTHH:mm:ssZ" formControlName="datetimeFieldMinValue"/>
 </mat-form-field>
 <mat-form-field appearance="outline" floatLabel="always">
-<mat-label>{{ 'foolDatetimeFieldMaxValue' | i18n }}</mat-label>
+<mat-label>{{ 'foolDatetimeField' | i18n }} {{ 'maxValue' | i18n }}</mat-label>
 <input matInput placeholder="yyyy-MM-ddTHH:mm:ssZ" formControlName="datetimeFieldMaxValue"/>
 </mat-form-field>
 </form>
