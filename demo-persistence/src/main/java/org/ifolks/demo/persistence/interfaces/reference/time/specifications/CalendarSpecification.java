@@ -1,7 +1,7 @@
 package org.ifolks.demo.persistence.interfaces.reference.time.specifications;
 
-import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
-import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
 
 import java.util.ArrayList;
 import java.util.List;

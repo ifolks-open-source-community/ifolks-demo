@@ -1,10 +1,10 @@
 package org.ifolks.demo.persistence.interfaces.dummy.specifications;
 
-import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addBetweenRestriction;
-import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addBooleanRestriction;
-import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
-import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
-import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.getStringStartsWithRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addBetweenRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addBooleanRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.getStringStartsWithRestriction;
 
 import java.util.ArrayList;
 import java.util.List;

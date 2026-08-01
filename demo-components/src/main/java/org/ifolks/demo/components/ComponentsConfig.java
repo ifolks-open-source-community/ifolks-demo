@@ -1,17 +1,11 @@
 package org.ifolks.demo.components;
 
-import org.ifolks.commons.log.AccessLogger;
-import org.ifolks.commons.log.ErrorLogger;
-import org.ifolks.commons.text.serialization.JsonSerializer;
+import org.ifolks.commons.log.logger.AccessLogger;
+import org.ifolks.commons.log.logger.ErrorLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-
-import tools.jackson.databind.cfg.DateTimeFeature;
-import tools.jackson.databind.json.JsonMapper;
 
 @Configuration
 public class ComponentsConfig {
@@ -20,29 +14,13 @@ public class ComponentsConfig {
 	private Environment env;
 	
 	@Bean
-	public JsonMapper jsonMapper() {
-		JsonMapper result = JsonMapper.builder()
-			.changeDefaultPropertyInclusion(incl -> incl.withValueInclusion(Include.NON_NULL))
-			.disable(DateTimeFeature.WRITE_DATES_AS_TIMESTAMPS)
-			.build();
-		return result;
-	}
-	
-	@Bean
-	public JsonSerializer jsonSerializer() {
-		JsonSerializer result = new JsonSerializer(jsonMapper());
-		return result;
-	}
-	
-	@Bean
 	public AccessLogger accessLogger() {
-		AccessLogger result = new AccessLogger(jsonSerializer());
-		return result;
+		return new AccessLogger();
 	}
 	
 	@Bean
 	public ErrorLogger errorLogger() {
-		ErrorLogger result = new ErrorLogger(jsonSerializer());
+		ErrorLogger result = new ErrorLogger();
 		result.setPrintErrorStackInRootLogger(env.getRequiredProperty("accessLog.printErrorStack", Boolean.class));
 		return result;
 	}

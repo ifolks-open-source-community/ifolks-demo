@@ -22,12 +22,12 @@ public class SetupTest {
 	
 	@BeforeEach
 	public void setUp() {
-		dataInitializer.initialize();		
+		dataInitializer.initialize();
 	}
 	
 	
 	@Test
-	public void testSetup() {		
-		logger.info("Your test environment is ready to use !");			
+	public void testSetup() {
+		logger.info("Your test environment is ready to use !");
 	}
 }

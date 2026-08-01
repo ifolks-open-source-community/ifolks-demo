@@ -28,4 +28,3 @@ LOWER(ARG),
 );
 END NORMALIZE;
 /
-

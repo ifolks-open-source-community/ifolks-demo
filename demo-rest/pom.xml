@@ -15,7 +15,6 @@
 	<name>demo-rest</name>
 	<packaging>war</packaging>
 
-
 	<dependencies>
 	
 		<!-- spring boot -->

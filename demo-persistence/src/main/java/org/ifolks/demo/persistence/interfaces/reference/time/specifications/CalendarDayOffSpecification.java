@@ -1,8 +1,8 @@
 package org.ifolks.demo.persistence.interfaces.reference.time.specifications;
 
-import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addBetweenRestriction;
-import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addEqualsRestriction;
-import static org.ifolks.commons.model.patterns.JpaCriteriaUtils.addStringStartsWithRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addBetweenRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
