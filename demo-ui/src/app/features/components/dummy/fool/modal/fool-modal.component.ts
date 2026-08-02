@@ -33,6 +33,7 @@ constructor(private service:FoolRestClient, private formBuilder: FormBuilder, pr
 ngOnInit(): void {
 this.form = this.formBuilder.group({
 code:[{value:null}, Validators.required],
+label:[{value:null}, Validators.required],
 description:[{value:null}],
 longField:[{value:null}],
 booleanField:[{value:null}],
@@ -45,6 +46,7 @@ this.restoreForm();
 restoreForm(): void {
 this.form.patchValue({
 code: this.view.form.code,
+label: this.view.form.label,
 description: this.view.form.description,
 longField: this.view.form.longField,
 booleanField: this.view.form.booleanField,
@@ -57,6 +59,7 @@ datetimeField: this.view.form.datetimeField
 
 applyForm(): void {
 this.view.form.code = StringUtils.emptyToNull(this.form.get('code').value);
+this.view.form.label = StringUtils.emptyToNull(this.form.get('label').value);
 this.view.form.description = StringUtils.emptyToNull(this.form.get('description').value);
 this.view.form.longField = StringUtils.emptyToNull(this.form.get('longField').value);
 this.view.form.booleanField = StringUtils.stringToNullableBoolean(this.form.get('booleanField').value);

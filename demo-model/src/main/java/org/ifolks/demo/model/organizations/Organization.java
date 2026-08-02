@@ -1,8 +1,5 @@
 package org.ifolks.demo.model.organizations;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -60,7 +57,6 @@ private String code;
 private OrganizationDescription organizationDescription;
 
 @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "organization")
-@Fetch(FetchMode.JOIN)
 private OrganizationCertification organizationCertification;
 
 

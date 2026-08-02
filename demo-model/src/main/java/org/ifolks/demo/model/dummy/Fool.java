@@ -4,12 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
-import org.hibernate.Length;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,11 +25,11 @@ import jakarta.persistence.UniqueConstraint;
 @Table(name="FOOL"
 , uniqueConstraints = {
 @UniqueConstraint(name = "UC_FOOL", columnNames = {"CODE"})
-, @UniqueConstraint(name = "UC_FOOL_C1", columnNames = {"DESCRIPTION"})
+, @UniqueConstraint(name = "UC_FOOL_C1", columnNames = {"LABEL"})
 }
 , indexes = {
 @Index(name = "IDX_FOOL_UC", columnList = "CODE")
-, @Index(name = "IDX_FOOL_C1", columnList = "DESCRIPTION")
+, @Index(name = "IDX_FOOL_C1", columnList = "LABEL")
 })
 public class Fool implements java.io.Serializable {
 
@@ -58,9 +52,11 @@ private String id;
 @Column(name = "CODE", nullable = false)
 private String code;
 
+@Column(name = "LABEL", nullable = false)
+private String label;
+
 @Lob
-@JdbcTypeCode(SqlTypes.LONGVARCHAR)
-@Column(name = "DESCRIPTION", length = Length.LOB_DEFAULT)
+@Column(name = "DESCRIPTION")
 private String description;
 
 @Column(name = "LONG_FIELD")
@@ -82,7 +78,6 @@ private LocalDate dateField;
 private OffsetDateTime datetimeField;
 
 @OneToOne(fetch = FetchType.LAZY, mappedBy = "fool")
-@Fetch(FetchMode.JOIN)
 private Stupid stupid;
 
 
@@ -103,6 +98,14 @@ return this.code;
 
 public void setCode(String code) {
 this.code = code;
+}
+
+public String getLabel() {
+return this.label;
+}
+
+public void setLabel(String label) {
+this.label = label;
 }
 
 public String getDescription() {

@@ -17,6 +17,7 @@ public abstract class Fool_ {
 
 public static volatile SingularAttribute<Fool, String> id;
 public static volatile SingularAttribute<Fool, String> code;
+public static volatile SingularAttribute<Fool, String> label;
 public static volatile SingularAttribute<Fool, String> description;
 public static volatile SingularAttribute<Fool, Long> longField;
 public static volatile SingularAttribute<Fool, Boolean> booleanField;
@@ -28,6 +29,7 @@ public static volatile SingularAttribute<Fool, Stupid> stupid;
 
 public static final String ID = "id";
 public static final String CODE = "code";
+public static final String LABEL = "label";
 public static final String DESCRIPTION = "description";
 public static final String LONG_FIELD = "longField";
 public static final String BOOLEAN_FIELD = "booleanField";

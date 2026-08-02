@@ -32,6 +32,7 @@ public class FoolSpecification {
 			List<Predicate> predicates = new ArrayList<>();
 
 			addStringStartsWithRestriction(cb, predicates, root.get(Fool_.code), filter.getCode());
+			addStringStartsWithRestriction(cb, predicates, root.get(Fool_.label), filter.getLabel());
 			addStringStartsWithRestriction(cb, predicates, root.get(Fool_.description), filter.getDescription());
 			addBooleanRestriction(cb, predicates, root.get(Fool_.booleanField), filter.getBooleanField());
 			addBetweenRestriction(cb, predicates, root.get(Fool_.dateField), filter.getDateFieldMinValue(), filter.getDateFieldMaxValue());
@@ -53,7 +54,7 @@ public class FoolSpecification {
 	public static Specification<Fool> searchSpec(String arg) {
 		return (root, query, cb) -> {
 			List<Predicate> predicates = new ArrayList<>();
-			Predicate predicate = getStringStartsWithRestriction(cb, root.get(Fool_.description), arg);
+			Predicate predicate = getStringStartsWithRestriction(cb, root.get(Fool_.label), arg);
 			if (predicate != null) {
 				predicates.add(predicate);
 			}
@@ -65,6 +66,9 @@ public class FoolSpecification {
 		List<Sort.Order> orders = new ArrayList<>();
 		if (sorting.getCodeOrderType() != null) {
 			orders.add(new Sort.Order(sorting.getCodeOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "code"));
+		}
+		if (sorting.getLabelOrderType() != null) {
+			orders.add(new Sort.Order(sorting.getLabelOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "label"));
 		}
 		if (sorting.getDescriptionOrderType() != null) {
 			orders.add(new Sort.Order(sorting.getDescriptionOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "description"));

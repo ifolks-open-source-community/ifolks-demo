@@ -42,13 +42,14 @@ dataSource:MatTableDataSource<FoolBasicView>;
 @ViewChild(MatPaginator) paginator: MatPaginator;
 @ViewChild(MatSort) sort: MatSort
 pageSizeOptions: number[] = [10, 20, 50, 100];
-displayedColumns: string[] = ['code','description','longField','booleanField','doubleField','decimalField','dateField','datetimeField','Actions'];
+displayedColumns: string[] = ['code','label','description','longField','booleanField','doubleField','decimalField','dateField','datetimeField','Actions'];
 filter: FormGroup;
 
 constructor(private service:FoolRestClient, private formBuilder: FormBuilder, private dialog: MatDialog, private notifications: NotificationService) { }
 ngOnInit(): void {
 this.filter = this.formBuilder.group({
 code:[null],
+label:[null],
 description:[null],
 booleanField:[null],
 dateFieldMinValue:[null],
@@ -71,6 +72,7 @@ this.sort.sortChange.subscribe(
 this.scrollForm.sorting = new FoolSorting();
 switch (this.sort.active) {
 case 'code': this.scrollForm.sorting.codeOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
+case 'label': this.scrollForm.sorting.labelOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
 case 'description': this.scrollForm.sorting.descriptionOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
 case 'longField': this.scrollForm.sorting.longFieldOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
 case 'booleanField': this.scrollForm.sorting.booleanFieldOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
@@ -84,6 +86,10 @@ this.refresh();
 
 this.filter.controls['code'].valueChanges.subscribe(value=>{
 this.scrollForm.filter.code=value;
+this.refresh();
+});
+this.filter.controls['label'].valueChanges.subscribe(value=>{
+this.scrollForm.filter.label=value;
 this.refresh();
 });
 this.filter.controls['description'].valueChanges.subscribe(value=>{
@@ -127,6 +133,7 @@ this.scrollForm.page=1;
 this.scrollForm.elementsPerPage=10;
 this.filter.patchValue({
 code: [null],
+label: [null],
 description: [null],
 booleanField: [null],
 dateFieldMinValue: [null],

@@ -133,13 +133,16 @@
 				<table name="FOOL" idType="STRING" idGeneratorType="UUID" cardinality="1" listRendering="Fools"
 					detailRendering="Fool details" createEnabled="true" updateEnabled="true"
 					deleteEnabled="true">
-					<selectionBehavior selectionMode="AUTO_COMPLETE" labelColumn="DESCRIPTION" />
+					<selectionBehavior selectionMode="AUTO_COMPLETE" labelColumn="LABEL" />
 					<columns>
 						<column name="CODE" dataType="STRING" nullable="false"
 							editable="true" rendering="Code">
 						</column>
+						<column name="LABEL" dataType="STRING" nullable="false" unique="true"
+							editable="true" rendering="Label">
+						</column>
 						<column name="DESCRIPTION" dataType="TEXT" nullable="true"
-							editable="true" rendering="Description" unique="true">
+							editable="true" rendering="Description">
 						</column>
 						<column name="LONG_FIELD" dataType="LONG" nullable="true"
 							editable="true" filterable="false" rendering="Long">

@@ -14,6 +14,7 @@ import jakarta.validation.constraints.NotNull;
  */
 public record FoolForm (
 @NotNull String code,
+@NotNull String label,
 String description,
 Long longField,
 Boolean booleanField,

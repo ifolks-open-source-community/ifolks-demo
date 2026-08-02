@@ -18,6 +18,7 @@ private static final long serialVersionUID = 1L;
  * properties
  */
 private String code;
+private String label;
 private String description;
 private Boolean booleanField;
 private LocalDate dateFieldMinValue;
@@ -33,6 +34,12 @@ return this.code;
 }
 public void setCode(String code) {
 this.code = code;
+}
+public String getLabel() {
+return this.label;
+}
+public void setLabel(String label) {
+this.label = label;
 }
 public String getDescription() {
 return this.description;

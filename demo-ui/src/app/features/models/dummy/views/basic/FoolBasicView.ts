@@ -9,6 +9,7 @@ id: string;
 selected: boolean;
 canDelete: boolean;
 code: string;
+label: string;
 description: string;
 longField: number;
 booleanField: boolean;

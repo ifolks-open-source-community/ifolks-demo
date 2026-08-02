@@ -32,6 +32,7 @@ String id = fool.getId();
 boolean selected = false;
 boolean canDelete = foolRightsManager.canDelete(fool) && foolStateManager.canDelete(fool);
 String code = fool.getCode();
+String label = fool.getLabel();
 String description = fool.getDescription();
 Long longField = fool.getLongField();
 Boolean booleanField = fool.getBooleanField();
@@ -45,6 +46,7 @@ id,
 selected,
 canDelete,
 code,
+label,
 description,
 longField,
 booleanField,

@@ -18,6 +18,7 @@ private static final long serialVersionUID = 1L;
  * properties
  */
 private OrderType codeOrderType;
+private OrderType labelOrderType;
 private OrderType descriptionOrderType;
 private OrderType longFieldOrderType;
 private OrderType booleanFieldOrderType;
@@ -35,6 +36,14 @@ return this.codeOrderType;
 
 public void setCodeOrderType(OrderType codeOrderType) {
 this.codeOrderType = codeOrderType;
+}
+
+public OrderType getLabelOrderType() {
+return this.labelOrderType;
+}
+
+public void setLabelOrderType(OrderType labelOrderType) {
+this.labelOrderType = labelOrderType;
 }
 
 public OrderType getDescriptionOrderType() {

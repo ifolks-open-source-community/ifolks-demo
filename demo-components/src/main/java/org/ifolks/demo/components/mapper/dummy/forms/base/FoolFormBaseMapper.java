@@ -29,12 +29,13 @@ public FoolForm toForm(Object[] args) {
 return new FoolForm (
 (String)args[0],
 (String)args[1],
-(Long)args[2],
-(Boolean)args[3],
-(Double)args[4],
-(BigDecimal)args[5],
-(LocalDate)args[6],
-(OffsetDateTime)args[7]);
+(String)args[2],
+(Long)args[3],
+(Boolean)args[4],
+(Double)args[5],
+(BigDecimal)args[6],
+(LocalDate)args[7],
+(OffsetDateTime)args[8]);
 }
 
 /**
@@ -42,6 +43,7 @@ return new FoolForm (
  */
 public FoolForm toForm(Fool fool) {
 String code = fool.getCode();
+String label = fool.getLabel();
 String description = fool.getDescription();
 Long longField = fool.getLongField();
 Boolean booleanField = fool.getBooleanField();
@@ -52,6 +54,7 @@ OffsetDateTime datetimeField = fool.getDatetimeField();
 
 return new FoolForm (
 code,
+label,
 description,
 longField,
 booleanField,
@@ -66,6 +69,7 @@ datetimeField);
  */
 public Fool toEntity(FoolForm foolForm, Fool fool) {
 fool.setCode(foolForm.code());
+fool.setLabel(foolForm.label());
 fool.setDescription(foolForm.description());
 fool.setLongField(foolForm.longField());
 fool.setBooleanField(foolForm.booleanField());

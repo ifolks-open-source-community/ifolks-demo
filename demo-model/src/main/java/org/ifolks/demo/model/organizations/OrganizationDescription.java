@@ -1,9 +1,5 @@
 package org.ifolks.demo.model.organizations;
 
-import org.hibernate.Length;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,8 +40,7 @@ public OrganizationDescription(){
 private Long id;
 
 @Lob
-@JdbcTypeCode(SqlTypes.LONGVARCHAR)
-@Column(name = "DESCRIPTION", length = Length.LOB_DEFAULT)
+@Column(name = "DESCRIPTION")
 private String description;
 
 

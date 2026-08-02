@@ -35,6 +35,7 @@
   "foolList": "Fools",
   "foolDetails": "Fool details",
   "foolCode": "Code",
+  "foolLabel": "Label",
   "foolDescription": "Description",
   "foolLongField": "Long",
   "foolBooleanField": "Boolean",
