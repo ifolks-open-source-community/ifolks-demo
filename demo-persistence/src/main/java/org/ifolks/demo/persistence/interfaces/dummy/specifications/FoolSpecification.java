@@ -14,9 +14,12 @@ import org.ifolks.demo.api.model.dummy.filters.FoolFilter;
 import org.ifolks.demo.api.model.dummy.sortings.FoolSorting;
 import org.ifolks.demo.model.dummy.Fool;
 import org.ifolks.demo.model.dummy.Fool_;
+import org.ifolks.demo.model.dummy.Stupid;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 
 /**
@@ -30,6 +33,13 @@ public class FoolSpecification {
 		return (root, query, cb) -> {
 			boolean isCountQuery = Long.class.equals(query.getResultType()) || long.class.equals(query.getResultType());
 			List<Predicate> predicates = new ArrayList<>();
+
+			Join<Fool, Stupid> stupid;
+			if (isCountQuery) {
+				stupid = root.join(Fool_.stupid, JoinType.LEFT);
+			} else {
+				stupid = (Join<Fool, Stupid>) root.fetch(Fool_.stupid, JoinType.LEFT);
+			}
 
 			addStringStartsWithRestriction(cb, predicates, root.get(Fool_.code), filter.getCode());
 			addStringStartsWithRestriction(cb, predicates, root.get(Fool_.label), filter.getLabel());

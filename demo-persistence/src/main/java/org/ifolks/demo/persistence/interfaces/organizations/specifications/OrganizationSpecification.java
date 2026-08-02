@@ -11,6 +11,7 @@ import org.ifolks.commons.api.model.OrderType;
 import org.ifolks.demo.api.model.organizations.filters.OrganizationFilter;
 import org.ifolks.demo.api.model.organizations.sortings.OrganizationSorting;
 import org.ifolks.demo.model.organizations.Organization;
+import org.ifolks.demo.model.organizations.OrganizationCertification;
 import org.ifolks.demo.model.organizations.OrganizationDescription;
 import org.ifolks.demo.model.organizations.OrganizationDescription_;
 import org.ifolks.demo.model.organizations.Organization_;
@@ -38,6 +39,13 @@ public class OrganizationSpecification {
 				organizationDescription = root.join(Organization_.organizationDescription, JoinType.LEFT);
 			} else {
 				organizationDescription = (Join<Organization, OrganizationDescription>)root.fetch(Organization_.organizationDescription, JoinType.LEFT);
+			}
+
+			Join<Organization, OrganizationCertification> organizationCertification;
+			if (isCountQuery) {
+				organizationCertification = root.join(Organization_.organizationCertification, JoinType.LEFT);
+			} else {
+				organizationCertification = (Join<Organization, OrganizationCertification>)root.fetch(Organization_.organizationCertification, JoinType.LEFT);
 			}
 
 			addStringStartsWithRestriction(cb, predicates, root.get(Organization_.code), filter.getCode());
