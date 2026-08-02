@@ -30,10 +30,10 @@ public class JUnitDataInitializer {
 	private final Logger logger = LoggerFactory.getLogger(JUnitDataInitializer.class);
 	
 	private static final String TRUNCATE_SHEMA_SCRIPT = "TRUNCATE SCHEMA PUBLIC RESTART IDENTITY AND COMMIT NO CHECK";
-	private static final String CREATE_NORMALIZE_FUNCTION = "CREATE FUNCTION normalize(VARCHAR(255))"
+	private static final String CREATE_NORMALIZE_FUNCTION = "CREATE FUNCTION UNACCENT(ARG VARCHAR(255))"
 																		+ " RETURNS VARCHAR(255)"
 																		+ " LANGUAGE JAVA DETERMINISTIC NO SQL"
-																		+ " EXTERNAL NAME 'CLASSPATH:org.ifolks.commons.jpa.StringUtils.normalize'";
+																		+ " EXTERNAL NAME 'CLASSPATH:org.ifolks.commons.jpa.StringUtils.unaccent'";
 	
 	private boolean initialized = false;
 	private Project project;
@@ -84,6 +84,7 @@ public class JUnitDataInitializer {
 	
 	private void createNormalizeFunction() {
 
+		System.setProperty("hsqldb.method_class_names", "org.ifolks.commons.jpa.*");
 		try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement();) {			
 			statement.execute(CREATE_NORMALIZE_FUNCTION);
 		} catch (SQLException e) {
