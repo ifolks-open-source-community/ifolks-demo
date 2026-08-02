@@ -84,7 +84,6 @@ public class JUnitDataInitializer {
 	
 	private void createNormalizeFunction() {
 
-		System.setProperty("hsqldb.method_class_names", "org.ifolks.commons.jpa.*");
 		try (Connection connection = dataSource.getConnection(); Statement statement = connection.createStatement();) {			
 			statement.execute(CREATE_NORMALIZE_FUNCTION);
 		} catch (SQLException e) {

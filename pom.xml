@@ -37,7 +37,7 @@
 		<maven.compiler.release.version>21</maven.compiler.release.version>
 		
 		<ifolks.commons.version>1.0.0</ifolks.commons.version>
-		<ifolks.generator.version>1.0.0-SNAPSHOT</ifolks.generator.version>
+		<ifolks.generator.version>1.0.0</ifolks.generator.version>
 		
 	</properties>
 	
@@ -106,7 +106,6 @@
 				<artifactId>commons-jpa</artifactId>
 				<version>${ifolks.commons.version}</version>
 			</dependency>
-			
 			
 			<dependency>
 				<groupId>org.ifolks.commons</groupId>

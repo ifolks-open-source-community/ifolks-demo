@@ -38,7 +38,7 @@ public class FoolSpecification {
 			if (isCountQuery) {
 				stupid = root.join(Fool_.stupid, JoinType.LEFT);
 			} else {
-				stupid = (Join<Fool, Stupid>) root.fetch(Fool_.stupid, JoinType.LEFT);
+				stupid = (Join<Fool, Stupid>)root.fetch(Fool_.stupid, JoinType.LEFT);
 			}
 
 			addStringStartsWithRestriction(cb, predicates, root.get(Fool_.code), filter.getCode());
