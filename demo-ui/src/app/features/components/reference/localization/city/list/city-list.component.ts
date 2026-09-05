@@ -132,7 +132,7 @@ ref.afterClosed().subscribe(result => {this.refresh();});
 delete(id: number): void {
 this.dialog.open(ConfirmationModalComponent).afterClosed().subscribe(result => {
 if (result) {
-this.service.delete(id).subscribe(success => {this.notifications.info("Operation completed");this.refresh()});
+this.service.delete(id).subscribe(success => {this.notifications.info("operation.completed");this.refresh()});
 }
 });
 }

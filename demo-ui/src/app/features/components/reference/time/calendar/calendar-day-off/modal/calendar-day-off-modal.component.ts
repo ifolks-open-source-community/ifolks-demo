@@ -51,12 +51,12 @@ this.view.form.dayOffLabel = StringUtils.emptyToNull(this.form.get('dayOffLabel'
 
 save(): void {
 this.applyForm();
-this.service.saveCalendarDayOff(this.parentId, this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.dialogRef.close();});
+this.service.saveCalendarDayOff(this.parentId, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close();});
 }
 
 update(): void {
 this.applyForm();
-this.service.updateCalendarDayOff(this.view.id, this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.dialogRef.close();});
+this.service.updateCalendarDayOff(this.view.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close();});
 }
 
 saveOrUpdate(): void {

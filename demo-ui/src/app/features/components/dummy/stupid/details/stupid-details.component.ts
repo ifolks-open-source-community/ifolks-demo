@@ -72,7 +72,7 @@ this.foolCodeOptions = this.foolService.searchOptions(value);
 
 update(): void {
 this.applyForm();
-this.service.update(this.id, this.view.form).subscribe(success => {this.notifications.info("Operation completed");this.load();});
+this.service.update(this.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.load();});
 }
 /* Specific Code Start */
 /* Specific Code End */
