@@ -4,7 +4,8 @@
 <!-- processed by skeleton generator -->
 <!-- -->
 
-<nav mat-tab-nav-bar>
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
 <a mat-tab-link *ngFor="let link of links"
 [active]="activePath == link.path" [routerLink]="link.path"> {{link.text}} </a>
 </nav>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>

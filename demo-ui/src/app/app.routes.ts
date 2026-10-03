@@ -1,6 +1,6 @@
 import { AuthGuard } from './core/services/AuthGuard';
-import { Routes } from '@angular/router';
 import { IndexComponent } from './features/components/index/index.component';
+import { Routes } from '@angular/router';
 /**
  * auto generated app routes ts file
  * <br/>write modifications between specific code marks
