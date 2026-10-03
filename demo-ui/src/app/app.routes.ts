@@ -1,8 +1,6 @@
 import { AuthGuard } from './core/services/AuthGuard';
-import { ForbiddenComponent } from './features/components/public/forbidden/forbidden.component';
-import { InternalServerErrorComponent } from './features/components/public/internal-server-error/internal-server-error.component';
-import { NotFoundComponent } from './features/components/public/not-found/not-found.component';
 import { Routes } from '@angular/router';
+import { IndexComponent } from './features/components/index/index.component';
 /**
  * auto generated app routes ts file
  * <br/>write modifications between specific code marks
@@ -18,12 +16,9 @@ export const routes: Routes = [
 ,{path:'fool', loadChildren:()=>import('src/app/features/components/dummy/fool/fool.routes').then(m=>m.routes), canActivate: [AuthGuard] }
 ,{path:'stupid', loadChildren:()=>import('src/app/features/components/dummy/stupid/stupid.routes').then(m=>m.routes), canActivate: [AuthGuard] }
 /* Specific Code Start */
-,{path: '', redirectTo: '/index', pathMatch:'full'}
-,{path:'', loadChildren:()=>import('src/app/features/components/index/index.routes').then(m=>m.routes), canActivate: [AuthGuard]}
+,{path: '', component: IndexComponent, pathMatch: 'full', canActivate: [AuthGuard]}
+,{path:'', loadChildren:()=>import('src/app/features/components/errors/errors.routes').then(m=>m.routes)}
 ,{path:'', loadChildren:()=>import('src/app/features/components/auth/auth.routes').then(m=>m.routes)}
-,{path: '403', component: ForbiddenComponent}
-,{path: '404', component: NotFoundComponent}
-,{path: '500', component: InternalServerErrorComponent}
 ,{path:'**', redirectTo: '404'}
 /* Specific Code End */
 ];
