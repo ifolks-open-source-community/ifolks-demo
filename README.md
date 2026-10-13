@@ -48,17 +48,44 @@ The project is organized into clean, decoupled layers:
 ### Prerequisites
 * **Java 21** or later
 * **Maven 3.9+**
+* **PostgreSQL** instance running on `localhost:5432`:
+  * Database: `demo`
+  * Username / Password: `postgres` / `postgres`
 
-### 1. Build and Run Tests
+> **Tip (Docker)**: You can start the database in one command:
+> ```bash
+> docker run --name postgres-demo -e POSTGRES_DB=demo -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:16
+> ```
+
+---
+
+### Step 1: Build the Project
 ```bash
 mvn clean install
 ```
 
-### 2. Launch the Spring Boot Backend
+### Step 2: Populate the Database
+Run the automated populator to create the schema and seed initial sample data:
+```bash
+cd demo-populator
+mvn spring-boot:run -Dspring-boot.run.profiles=local
+```
+
+### Step 3: Launch the REST Backend
+Start the Spring Boot REST API with the `local` profile:
 ```bash
 cd demo-rest
-mvn spring-boot:run
+mvn spring-boot:run -Dspring-boot.run.profiles=local
 ```
+The REST API is now available at: **`http://localhost:8080/demo-rest`**
+
+### Step 4 (Optional): Launch the Angular Frontend
+```bash
+cd demo-ui
+npm install
+npm start
+```
+The Angular UI runs at: **`http://localhost:4200`**
 
 ---
 
