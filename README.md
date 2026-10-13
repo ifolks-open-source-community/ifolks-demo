@@ -68,7 +68,7 @@ mvn clean install
 Run the automated populator to create the schema and seed initial sample data:
 ```bash
 cd demo-populator
-mvn spring-boot:run -Dspring-boot.run.profiles=local
+mvn spring-boot:run -Dspring-boot.run.profiles=local -Dspring-boot.run.arguments="--workspace-path=.. --populate --no-prompt"
 ```
 
 ### Step 3: Launch the REST Backend
