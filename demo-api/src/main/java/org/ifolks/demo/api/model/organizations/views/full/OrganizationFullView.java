@@ -1,5 +1,10 @@
 package org.ifolks.demo.api.model.organizations.views.full;
 
+import jakarta.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import org.ifolks.demo.api.model.organizations.forms.OrganizationForm;
 
 /**

@@ -1,9 +1,13 @@
 package org.ifolks.demo.components.mapper.organizations.views.basic.base;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import org.ifolks.demo.api.model.organizations.views.basic.OrganizationBasicView;
 import org.ifolks.demo.components.rightsmanager.organizations.OrganizationRightsManager;
 import org.ifolks.demo.components.statemanager.organizations.OrganizationStateManager;
 import org.ifolks.demo.model.organizations.Organization;
+import org.ifolks.demo.model.organizations.OrganizationRole;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -28,6 +32,7 @@ Integer id = organization.getId();
 boolean selected = false;
 boolean canDelete = organizationRightsManager.canDelete(organization) && organizationStateManager.canDelete(organization);
 String code = organization.getCode();
+OrganizationRole role = organization.getRole();
 String description = organization.getOrganizationDescription().getDescription();
 
 return new OrganizationBasicView (
@@ -35,6 +40,7 @@ id,
 selected,
 canDelete,
 code,
+role,
 description);
 }
 

@@ -3,9 +3,11 @@ package org.ifolks.demo.components.mapper.dummy.forms.base;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-
+import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
 import org.ifolks.demo.api.model.dummy.forms.FoolForm;
 import org.ifolks.demo.model.dummy.Fool;
+import org.ifolks.demo.model.dummy.FoolStatus;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -29,13 +31,14 @@ public FoolForm toForm(Object[] args) {
 return new FoolForm (
 (String)args[0],
 (String)args[1],
-(String)args[2],
-(Long)args[3],
-(Boolean)args[4],
-(Double)args[5],
-(BigDecimal)args[6],
-(LocalDate)args[7],
-(OffsetDateTime)args[8]);
+(args[2] != null ? (FoolStatus) (args[2] instanceof FoolStatus ? args[2] : FoolStatus.valueOf(args[2].toString())) : null),
+(String)args[3],
+(Long)args[4],
+(Boolean)args[5],
+(Double)args[6],
+(BigDecimal)args[7],
+(LocalDate)args[8],
+(OffsetDateTime)args[9]);
 }
 
 /**
@@ -44,6 +47,7 @@ return new FoolForm (
 public FoolForm toForm(Fool fool) {
 String code = fool.getCode();
 String label = fool.getLabel();
+FoolStatus status = fool.getStatus();
 String description = fool.getDescription();
 Long longField = fool.getLongField();
 Boolean booleanField = fool.getBooleanField();
@@ -55,6 +59,7 @@ OffsetDateTime datetimeField = fool.getDatetimeField();
 return new FoolForm (
 code,
 label,
+status,
 description,
 longField,
 booleanField,
@@ -70,6 +75,7 @@ datetimeField);
 public Fool toEntity(FoolForm foolForm, Fool fool) {
 fool.setCode(foolForm.code());
 fool.setLabel(foolForm.label());
+fool.setStatus(foolForm.status());
 fool.setDescription(foolForm.description());
 fool.setLongField(foolForm.longField());
 fool.setBooleanField(foolForm.booleanField());

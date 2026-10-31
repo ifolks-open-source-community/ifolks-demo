@@ -1,6 +1,10 @@
 package org.ifolks.demo.api.model.organizations.filters;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import org.ifolks.demo.model.organizations.OrganizationRole;
 
 /**
  * auto generated filter class file
@@ -16,6 +20,7 @@ private static final long serialVersionUID = 1L;
  * properties
  */
 private String code;
+private OrganizationRole role;
 private String description;
 
 /*
@@ -26,6 +31,12 @@ return this.code;
 }
 public void setCode(String code) {
 this.code = code;
+}
+public OrganizationRole getRole() {
+return this.role;
+}
+public void setRole(OrganizationRole role) {
+this.role = role;
 }
 public String getDescription() {
 return this.description;

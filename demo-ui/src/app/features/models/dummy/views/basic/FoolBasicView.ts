@@ -10,6 +10,7 @@ selected: boolean;
 canDelete: boolean;
 code: string;
 label: string;
+status: FoolStatus;
 description: string;
 longField: number;
 booleanField: boolean;

@@ -24,6 +24,9 @@
 <mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">{{ 'organizationCode' | i18n }}</mat-header-cell>
 <mat-cell *matCellDef="let element"> {{element.code}} </mat-cell>
 </ng-container>
+<ng-container matColumnDef="role">
+<mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">{{ 'organizationRole' | i18n }}</mat-header-cell>
+</ng-container>
 <ng-container matColumnDef="description">
 <mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">{{ 'organizationDescription' | i18n }}</mat-header-cell>
 <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>

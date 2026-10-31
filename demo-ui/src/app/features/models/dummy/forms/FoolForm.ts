@@ -7,6 +7,7 @@ export class FoolForm {
 
 code: string;
 label: string;
+status: FoolStatus;
 description: string;
 longField: number;
 booleanField: boolean;

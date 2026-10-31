@@ -1,13 +1,17 @@
 package org.ifolks.demo.persistence.interfaces.reference.time.specifications;
 
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.addBetweenRestriction;
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
-
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Fetch;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.ifolks.commons.api.model.OrderType;
 import org.ifolks.demo.api.model.reference.time.filters.CalendarDayOffFilter;
 import org.ifolks.demo.api.model.reference.time.sortings.CalendarDayOffSorting;
@@ -17,10 +21,10 @@ import org.ifolks.demo.model.reference.time.CalendarDayOff_;
 import org.ifolks.demo.model.reference.time.Calendar_;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-
-import jakarta.persistence.criteria.Join;
-import jakarta.persistence.criteria.JoinType;
-import jakarta.persistence.criteria.Predicate;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.*;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addBetweenRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
 
 /**
  * auto generated specifications class file

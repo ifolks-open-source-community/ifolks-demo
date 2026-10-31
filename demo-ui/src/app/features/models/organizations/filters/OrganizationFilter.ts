@@ -6,6 +6,7 @@
 export class OrganizationFilter {
 
 code: string;
+role: OrganizationRole;
 description: string;
 
 /* Specific Code Start */

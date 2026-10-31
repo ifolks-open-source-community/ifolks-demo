@@ -3,11 +3,11 @@ package org.ifolks.demo.components.mapper.dummy.views.basic.base;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-
 import org.ifolks.demo.api.model.dummy.views.basic.FoolBasicView;
 import org.ifolks.demo.components.rightsmanager.dummy.FoolRightsManager;
 import org.ifolks.demo.components.statemanager.dummy.FoolStateManager;
 import org.ifolks.demo.model.dummy.Fool;
+import org.ifolks.demo.model.dummy.FoolStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -33,6 +33,7 @@ boolean selected = false;
 boolean canDelete = foolRightsManager.canDelete(fool) && foolStateManager.canDelete(fool);
 String code = fool.getCode();
 String label = fool.getLabel();
+FoolStatus status = fool.getStatus();
 String description = fool.getDescription();
 Long longField = fool.getLongField();
 Boolean booleanField = fool.getBooleanField();
@@ -47,6 +48,7 @@ selected,
 canDelete,
 code,
 label,
+status,
 description,
 longField,
 booleanField,

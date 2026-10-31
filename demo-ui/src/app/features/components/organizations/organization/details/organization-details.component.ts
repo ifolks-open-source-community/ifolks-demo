@@ -42,18 +42,21 @@ this.activePath = '/organization/' + this.id.toString();
 ngOnInit(): void {
 this.form = this.formBuilder.group({
 code:[{value:null}, Validators.required],
+role:[{value:null}, Validators.required],
 description:[{value:null}]})
 this.load();
 }
 restoreForm(): void {
 this.form.patchValue({
 code: this.view.form.code,
+role: this.view.form.role,
 description: this.view.form.description
 })
 }
 
 applyForm(): void {
 this.view.form.code = StringUtils.emptyToNull(this.form.get('code').value);
+this.view.form.role = StringUtils.emptyToNull(this.form.get('role').value);
 this.view.form.description = StringUtils.emptyToNull(this.form.get('description').value);
 }
 

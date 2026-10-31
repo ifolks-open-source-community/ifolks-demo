@@ -1,7 +1,9 @@
 package org.ifolks.demo.api.model.dummy.sortings;
 
 import java.io.Serializable;
-
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import org.ifolks.commons.api.model.OrderType;
 
 /**
@@ -19,6 +21,7 @@ private static final long serialVersionUID = 1L;
  */
 private OrderType codeOrderType;
 private OrderType labelOrderType;
+private OrderType statusOrderType;
 private OrderType descriptionOrderType;
 private OrderType longFieldOrderType;
 private OrderType booleanFieldOrderType;
@@ -44,6 +47,14 @@ return this.labelOrderType;
 
 public void setLabelOrderType(OrderType labelOrderType) {
 this.labelOrderType = labelOrderType;
+}
+
+public OrderType getStatusOrderType() {
+return this.statusOrderType;
+}
+
+public void setStatusOrderType(OrderType statusOrderType) {
+this.statusOrderType = statusOrderType;
 }
 
 public OrderType getDescriptionOrderType() {

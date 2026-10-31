@@ -60,6 +60,9 @@
 <mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">{{ 'foolLabel' | i18n }}</mat-header-cell>
 <mat-cell *matCellDef="let element"> {{element.label}} </mat-cell>
 </ng-container>
+<ng-container matColumnDef="status">
+<mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">{{ 'foolStatus' | i18n }}</mat-header-cell>
+</ng-container>
 <ng-container matColumnDef="description">
 <mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">{{ 'foolDescription' | i18n }}</mat-header-cell>
 <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>

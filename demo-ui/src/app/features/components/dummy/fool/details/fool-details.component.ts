@@ -43,6 +43,7 @@ ngOnInit(): void {
 this.form = this.formBuilder.group({
 code:[{value:null}, Validators.required],
 label:[{value:null}, Validators.required],
+status:[{value:null}],
 description:[{value:null}],
 longField:[{value:null}],
 booleanField:[{value:null}],
@@ -56,6 +57,7 @@ restoreForm(): void {
 this.form.patchValue({
 code: this.view.form.code,
 label: this.view.form.label,
+status: this.view.form.status,
 description: this.view.form.description,
 longField: this.view.form.longField,
 booleanField: this.view.form.booleanField,
@@ -69,6 +71,7 @@ datetimeField: this.view.form.datetimeField
 applyForm(): void {
 this.view.form.code = StringUtils.emptyToNull(this.form.get('code').value);
 this.view.form.label = StringUtils.emptyToNull(this.form.get('label').value);
+this.view.form.status = StringUtils.emptyToNull(this.form.get('status').value);
 this.view.form.description = StringUtils.emptyToNull(this.form.get('description').value);
 this.view.form.longField = StringUtils.emptyToNull(this.form.get('longField').value);
 this.view.form.booleanField = StringUtils.stringToNullableBoolean(this.form.get('booleanField').value);

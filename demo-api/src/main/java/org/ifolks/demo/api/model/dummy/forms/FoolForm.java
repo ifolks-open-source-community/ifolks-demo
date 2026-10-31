@@ -1,10 +1,11 @@
 package org.ifolks.demo.api.model.dummy.forms;
 
+import jakarta.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-
-import jakarta.validation.constraints.NotNull;
+import org.ifolks.demo.model.dummy.FoolStatus;
 
 /**
  * auto generated form bean record file
@@ -15,6 +16,7 @@ import jakarta.validation.constraints.NotNull;
 public record FoolForm (
 @NotNull String code,
 @NotNull String label,
+FoolStatus status,
 String description,
 Long longField,
 Boolean booleanField,

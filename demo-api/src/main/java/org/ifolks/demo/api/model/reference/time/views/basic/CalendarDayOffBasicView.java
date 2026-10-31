@@ -1,6 +1,8 @@
 package org.ifolks.demo.api.model.reference.time.views.basic;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 
 /**
  * auto generated basic view record

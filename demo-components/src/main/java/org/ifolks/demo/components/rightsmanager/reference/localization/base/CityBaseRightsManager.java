@@ -2,6 +2,7 @@ package org.ifolks.demo.components.rightsmanager.reference.localization.base;
 
 import org.ifolks.demo.model.reference.localization.City;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 /**
  * auto generated base rights manager class file

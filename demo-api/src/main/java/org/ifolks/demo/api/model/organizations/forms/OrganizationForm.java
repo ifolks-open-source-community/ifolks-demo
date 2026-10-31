@@ -1,6 +1,11 @@
 package org.ifolks.demo.api.model.organizations.forms;
 
 import jakarta.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import org.ifolks.demo.model.organizations.OrganizationRole;
 
 /**
  * auto generated form bean record file
@@ -10,6 +15,7 @@ import jakarta.validation.constraints.NotNull;
  */
 public record OrganizationForm (
 @NotNull String code,
+@NotNull OrganizationRole role,
 String description
 ) {
 

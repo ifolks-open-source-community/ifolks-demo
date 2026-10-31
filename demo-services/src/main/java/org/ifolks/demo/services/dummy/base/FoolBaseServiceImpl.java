@@ -1,8 +1,11 @@
 package org.ifolks.demo.services.dummy.base;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-
 import org.ifolks.commons.api.exception.repository.ResourceNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
@@ -22,6 +25,8 @@ import org.ifolks.demo.components.statemanager.dummy.FoolStateManager;
 import org.ifolks.demo.model.dummy.Fool;
 import org.ifolks.demo.persistence.interfaces.dummy.FoolRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
