@@ -7,6 +7,7 @@ export class FoolSorting {
 
 codeOrderType: string;
 labelOrderType: string;
+statusOrderType: string;
 descriptionOrderType: string;
 longFieldOrderType: string;
 booleanFieldOrderType: string;

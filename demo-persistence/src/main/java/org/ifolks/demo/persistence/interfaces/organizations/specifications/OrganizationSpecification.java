@@ -1,26 +1,33 @@
 package org.ifolks.demo.persistence.interfaces.organizations.specifications;
 
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.getStringStartsWithRestriction;
-
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Fetch;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.ifolks.commons.api.model.OrderType;
 import org.ifolks.demo.api.model.organizations.filters.OrganizationFilter;
 import org.ifolks.demo.api.model.organizations.sortings.OrganizationSorting;
 import org.ifolks.demo.model.organizations.Organization;
 import org.ifolks.demo.model.organizations.OrganizationCertification;
+import org.ifolks.demo.model.organizations.OrganizationCertification_;
 import org.ifolks.demo.model.organizations.OrganizationDescription;
 import org.ifolks.demo.model.organizations.OrganizationDescription_;
+import org.ifolks.demo.model.organizations.OrganizationRole;
 import org.ifolks.demo.model.organizations.Organization_;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-
-import jakarta.persistence.criteria.Join;
-import jakarta.persistence.criteria.JoinType;
-import jakarta.persistence.criteria.Predicate;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.*;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.getStringStartsWithRestriction;
 
 /**
  * auto generated specifications class file
@@ -49,6 +56,7 @@ public class OrganizationSpecification {
 			}
 
 			addStringStartsWithRestriction(cb, predicates, root.get(Organization_.code), filter.getCode());
+			addEqualsIfNotNullRestriction(cb, predicates, root.get(Organization_.role), filter.getRole());
 			addStringStartsWithRestriction(cb, predicates, organizationDescription.get(OrganizationDescription_.description), filter.getDescription());
 			return cb.and(predicates.toArray(new Predicate[0]));
 		};
@@ -79,6 +87,9 @@ public class OrganizationSpecification {
 		List<Sort.Order> orders = new ArrayList<>();
 		if (sorting.getCodeOrderType() != null) {
 			orders.add(new Sort.Order(sorting.getCodeOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "code"));
+		}
+		if (sorting.getRoleOrderType() != null) {
+			orders.add(new Sort.Order(sorting.getRoleOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "role"));
 		}
 		if (sorting.getDescriptionOrderType() != null) {
 			orders.add(new Sort.Order(sorting.getDescriptionOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "description"));

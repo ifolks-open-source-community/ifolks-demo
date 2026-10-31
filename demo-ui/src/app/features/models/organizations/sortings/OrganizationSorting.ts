@@ -6,6 +6,7 @@
 export class OrganizationSorting {
 
 codeOrderType: string;
+roleOrderType: string;
 descriptionOrderType: string;
 
 /* Specific Code Start */

@@ -1,11 +1,15 @@
 package org.ifolks.demo.services.dummy.base;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-
 import org.ifolks.commons.api.exception.repository.ResourceNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
+import org.ifolks.commons.api.model.SelectItem;
 import org.ifolks.demo.api.interfaces.dummy.base.StupidBaseService;
 import org.ifolks.demo.api.model.dummy.filters.StupidFilter;
 import org.ifolks.demo.api.model.dummy.forms.StupidForm;
@@ -21,6 +25,8 @@ import org.ifolks.demo.components.statemanager.dummy.StupidStateManager;
 import org.ifolks.demo.model.dummy.Stupid;
 import org.ifolks.demo.persistence.interfaces.dummy.StupidRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

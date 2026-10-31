@@ -6,6 +6,7 @@
 export class OrganizationForm {
 
 code: string;
+role: OrganizationRole;
 description: string;
 
 /* Specific Code Start */
