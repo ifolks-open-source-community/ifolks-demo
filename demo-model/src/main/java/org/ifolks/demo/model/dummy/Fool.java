@@ -1,20 +1,31 @@
 package org.ifolks.demo.model.dummy;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.persistence.UniqueConstraint;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Set;
+import org.ifolks.demo.model.dummy.Stupid;
 
 /**
  * auto generated entity class file
@@ -54,6 +65,10 @@ private String code;
 
 @Column(name = "LABEL", nullable = false)
 private String label;
+
+@Enumerated(EnumType.STRING)
+@Column(name = "STATUS", length = 32)
+private FoolStatus status;
 
 @Lob
 @Column(name = "DESCRIPTION")
@@ -106,6 +121,14 @@ return this.label;
 
 public void setLabel(String label) {
 this.label = label;
+}
+
+public FoolStatus getStatus() {
+return this.status;
+}
+
+public void setStatus(FoolStatus status) {
+this.status = status;
 }
 
 public String getDescription() {
