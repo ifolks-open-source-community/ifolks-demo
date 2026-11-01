@@ -19,6 +19,10 @@
 <input matInput placeholder="{{ 'foolLabel' | i18n }}" formControlName="label"/>
 </mat-form-field>
 <mat-form-field appearance="outline" floatLabel="always">
+<mat-label>{{ 'foolStatus' | i18n }}</mat-label>
+<input matInput placeholder="{{ 'foolStatus' | i18n }}" formControlName="status"/>
+</mat-form-field>
+<mat-form-field appearance="outline" floatLabel="always">
 <mat-label>{{ 'foolDescription' | i18n }}</mat-label>
 <input matInput placeholder="{{ 'foolDescription' | i18n }}" formControlName="description"/>
 </mat-form-field>
@@ -62,6 +66,7 @@
 </ng-container>
 <ng-container matColumnDef="status">
 <mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">{{ 'foolStatus' | i18n }}</mat-header-cell>
+<mat-cell *matCellDef="let element"> {{element.status}} </mat-cell>
 </ng-container>
 <ng-container matColumnDef="description">
 <mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">{{ 'foolDescription' | i18n }}</mat-header-cell>

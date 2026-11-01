@@ -3,10 +3,6 @@ package org.ifolks.demo.model.reference.localization;
 import jakarta.persistence.metamodel.SetAttribute;
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-import org.ifolks.demo.model.reference.localization.Region;
 
 /**
  * auto generated entity metamodel class file

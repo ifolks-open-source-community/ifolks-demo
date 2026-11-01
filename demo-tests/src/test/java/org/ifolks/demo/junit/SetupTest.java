@@ -1,6 +1,7 @@
 package org.ifolks.demo.junit;
 
 import java.util.List;
+
 import org.ifolks.demo.api.interfaces.organizations.OrganizationService;
 import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
 import org.ifolks.demo.api.model.organizations.views.basic.OrganizationBasicView;

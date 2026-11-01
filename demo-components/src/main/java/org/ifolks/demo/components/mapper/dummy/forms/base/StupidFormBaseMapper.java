@@ -1,8 +1,5 @@
 package org.ifolks.demo.components.mapper.dummy.forms.base;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
 import org.ifolks.demo.api.model.dummy.forms.StupidForm;
 import org.ifolks.demo.model.dummy.Stupid;

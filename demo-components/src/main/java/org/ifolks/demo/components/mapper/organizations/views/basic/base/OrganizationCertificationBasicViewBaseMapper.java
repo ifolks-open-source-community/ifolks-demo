@@ -1,8 +1,5 @@
 package org.ifolks.demo.components.mapper.organizations.views.basic.base;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import org.ifolks.demo.api.model.organizations.views.basic.OrganizationCertificationBasicView;
 import org.ifolks.demo.components.rightsmanager.organizations.OrganizationRightsManager;
 import org.ifolks.demo.components.statemanager.organizations.OrganizationStateManager;

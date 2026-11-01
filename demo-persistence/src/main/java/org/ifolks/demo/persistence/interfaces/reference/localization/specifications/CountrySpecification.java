@@ -1,17 +1,11 @@
 package org.ifolks.demo.persistence.interfaces.reference.localization.specifications;
 
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Fetch;
-import jakarta.persistence.criteria.Join;
-import jakarta.persistence.criteria.JoinType;
-import jakarta.persistence.criteria.Predicate;
-import jakarta.persistence.criteria.Root;
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import org.ifolks.commons.api.model.OrderType;
 import org.ifolks.demo.api.model.reference.localization.filters.CountryFilter;
 import org.ifolks.demo.api.model.reference.localization.sortings.CountrySorting;
@@ -19,9 +13,8 @@ import org.ifolks.demo.model.reference.localization.Country;
 import org.ifolks.demo.model.reference.localization.Country_;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.*;
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
+
+import jakarta.persistence.criteria.Predicate;
 
 /**
  * auto generated specifications class file

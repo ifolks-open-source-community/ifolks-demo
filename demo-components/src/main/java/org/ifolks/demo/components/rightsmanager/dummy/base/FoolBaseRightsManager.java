@@ -2,7 +2,6 @@ package org.ifolks.demo.components.rightsmanager.dummy.base;
 
 import org.ifolks.demo.model.dummy.Fool;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 /**
  * auto generated base rights manager class file

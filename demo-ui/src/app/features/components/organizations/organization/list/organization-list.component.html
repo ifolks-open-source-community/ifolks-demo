@@ -15,6 +15,10 @@
 <input matInput placeholder="{{ 'organizationCode' | i18n }}" formControlName="code"/>
 </mat-form-field>
 <mat-form-field appearance="outline" floatLabel="always">
+<mat-label>{{ 'organizationRole' | i18n }}</mat-label>
+<input matInput placeholder="{{ 'organizationRole' | i18n }}" formControlName="role"/>
+</mat-form-field>
+<mat-form-field appearance="outline" floatLabel="always">
 <mat-label>{{ 'organizationDescription' | i18n }}</mat-label>
 <input matInput placeholder="{{ 'organizationDescription' | i18n }}" formControlName="description"/>
 </mat-form-field>
@@ -26,6 +30,7 @@
 </ng-container>
 <ng-container matColumnDef="role">
 <mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">{{ 'organizationRole' | i18n }}</mat-header-cell>
+<mat-cell *matCellDef="let element"> {{element.role}} </mat-cell>
 </ng-container>
 <ng-container matColumnDef="description">
 <mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">{{ 'organizationDescription' | i18n }}</mat-header-cell>
