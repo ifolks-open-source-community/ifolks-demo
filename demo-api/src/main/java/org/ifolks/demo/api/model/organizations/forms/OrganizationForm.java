@@ -1,8 +1,11 @@
 package org.ifolks.demo.api.model.organizations.forms;
 
-import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
-
 import jakarta.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
 
 /**
  * auto generated form bean record file

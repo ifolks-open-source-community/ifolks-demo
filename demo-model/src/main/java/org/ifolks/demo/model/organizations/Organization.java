@@ -1,7 +1,5 @@
 package org.ifolks.demo.model.organizations;
 
-import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,11 +11,23 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.persistence.UniqueConstraint;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.Set;
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
+import org.ifolks.demo.model.organizations.OrganizationCertification;
+import org.ifolks.demo.model.organizations.OrganizationDescription;
 
 /**
  * auto generated entity class file

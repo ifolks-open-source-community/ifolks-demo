@@ -1,5 +1,8 @@
 package org.ifolks.demo.components.mapper.dummy.views.basic.base;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import org.ifolks.demo.api.model.dummy.views.basic.StupidBasicView;
 import org.ifolks.demo.components.rightsmanager.dummy.StupidRightsManager;
 import org.ifolks.demo.components.statemanager.dummy.StupidStateManager;

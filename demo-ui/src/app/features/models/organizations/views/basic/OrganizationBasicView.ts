@@ -9,7 +9,7 @@ id: number;
 selected: boolean;
 canDelete: boolean;
 code: string;
-role: OrganizationRole;
+role: string;
 description: string;
 
 /* Specific Code Start */

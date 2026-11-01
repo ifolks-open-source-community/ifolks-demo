@@ -1,9 +1,14 @@
 package org.ifolks.demo.model.organizations;
 
-import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
-
+import jakarta.persistence.metamodel.SetAttribute;
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
+import org.ifolks.demo.model.organizations.OrganizationCertification;
+import org.ifolks.demo.model.organizations.OrganizationDescription;
 
 /**
  * auto generated entity metamodel class file

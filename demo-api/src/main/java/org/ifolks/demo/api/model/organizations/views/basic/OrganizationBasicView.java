@@ -1,5 +1,8 @@
 package org.ifolks.demo.api.model.organizations.views.basic;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
 
 /**

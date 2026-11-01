@@ -1,11 +1,17 @@
 package org.ifolks.demo.persistence.interfaces.dummy.specifications;
 
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
-
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Fetch;
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-
 import org.ifolks.commons.api.model.OrderType;
 import org.ifolks.demo.api.model.dummy.filters.StupidFilter;
 import org.ifolks.demo.api.model.dummy.sortings.StupidSorting;
@@ -15,10 +21,9 @@ import org.ifolks.demo.model.dummy.Stupid;
 import org.ifolks.demo.model.dummy.Stupid_;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-
-import jakarta.persistence.criteria.Join;
-import jakarta.persistence.criteria.JoinType;
-import jakarta.persistence.criteria.Predicate;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.*;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
 
 /**
  * auto generated specifications class file
