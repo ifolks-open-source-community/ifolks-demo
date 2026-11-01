@@ -1,5 +1,7 @@
 package org.ifolks.demo.api.model.organizations.views.basic;
 
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
+
 /**
  * auto generated basic view record
  * <br/>basic representation of an entity, adapted to list screens
@@ -12,6 +14,7 @@ Integer id,
 boolean selected,
 boolean canDelete,
 String code,
+OrganizationRole role,
 String description
 
 ) {

@@ -1,5 +1,6 @@
 package org.ifolks.demo.persistence.interfaces.organizations.specifications;
 
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsIfNotNullRestriction;
 import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
 import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
 import static org.ifolks.commons.jpa.JpaCriteriaUtils.getStringStartsWithRestriction;
@@ -49,6 +50,7 @@ public class OrganizationSpecification {
 			}
 
 			addStringStartsWithRestriction(cb, predicates, root.get(Organization_.code), filter.getCode());
+			addEqualsIfNotNullRestriction(cb, predicates, root.get(Organization_.role), filter.getRole());
 			addStringStartsWithRestriction(cb, predicates, organizationDescription.get(OrganizationDescription_.description), filter.getDescription());
 			return cb.and(predicates.toArray(new Predicate[0]));
 		};
@@ -79,6 +81,9 @@ public class OrganizationSpecification {
 		List<Sort.Order> orders = new ArrayList<>();
 		if (sorting.getCodeOrderType() != null) {
 			orders.add(new Sort.Order(sorting.getCodeOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "code"));
+		}
+		if (sorting.getRoleOrderType() != null) {
+			orders.add(new Sort.Order(sorting.getRoleOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "role"));
 		}
 		if (sorting.getDescriptionOrderType() != null) {
 			orders.add(new Sort.Order(sorting.getDescriptionOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "description"));

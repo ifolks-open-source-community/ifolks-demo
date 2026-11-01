@@ -19,6 +19,15 @@
 <input matInput placeholder="{{ 'foolLabel' | i18n }}" formControlName="label"/>
 </mat-form-field>
 <mat-form-field appearance="outline" floatLabel="always">
+<mat-label>{{ 'foolStatus' | i18n }}</mat-label>
+<mat-select placeholder="{{ 'foolStatus' | i18n }}" formControlName="status">
+<mat-option [value]="null"></mat-option>
+@for (option of statusOptions; track option) {
+  <mat-option [value]="option">{{ 'FoolStatus.' + option | i18n }}</mat-option>
+}
+</mat-select>
+</mat-form-field>
+<mat-form-field appearance="outline" floatLabel="always">
 <mat-label>{{ 'foolDescription' | i18n }}</mat-label>
 <input matInput placeholder="{{ 'foolDescription' | i18n }}" formControlName="description"/>
 </mat-form-field>
@@ -59,6 +68,10 @@
 <ng-container matColumnDef="label">
 <mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">{{ 'foolLabel' | i18n }}</mat-header-cell>
 <mat-cell *matCellDef="let element"> {{element.label}} </mat-cell>
+</ng-container>
+<ng-container matColumnDef="status">
+<mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">{{ 'foolStatus' | i18n }}</mat-header-cell>
+<mat-cell *matCellDef="let element"> {{element.status ? ('FoolStatus.' + element.status | i18n) : ''}} </mat-cell>
 </ng-container>
 <ng-container matColumnDef="description">
 <mat-header-cell *matHeaderCellDef mat-sort-header class="table-header">{{ 'foolDescription' | i18n }}</mat-header-cell>

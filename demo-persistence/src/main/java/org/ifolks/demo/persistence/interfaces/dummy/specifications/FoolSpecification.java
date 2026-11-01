@@ -2,6 +2,7 @@ package org.ifolks.demo.persistence.interfaces.dummy.specifications;
 
 import static org.ifolks.commons.jpa.JpaCriteriaUtils.addBetweenRestriction;
 import static org.ifolks.commons.jpa.JpaCriteriaUtils.addBooleanRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsIfNotNullRestriction;
 import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
 import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
 import static org.ifolks.commons.jpa.JpaCriteriaUtils.getStringStartsWithRestriction;
@@ -43,6 +44,7 @@ public class FoolSpecification {
 
 			addStringStartsWithRestriction(cb, predicates, root.get(Fool_.code), filter.getCode());
 			addStringStartsWithRestriction(cb, predicates, root.get(Fool_.label), filter.getLabel());
+			addEqualsIfNotNullRestriction(cb, predicates, root.get(Fool_.status), filter.getStatus());
 			addStringStartsWithRestriction(cb, predicates, root.get(Fool_.description), filter.getDescription());
 			addBooleanRestriction(cb, predicates, root.get(Fool_.booleanField), filter.getBooleanField());
 			addBetweenRestriction(cb, predicates, root.get(Fool_.dateField), filter.getDateFieldMinValue(), filter.getDateFieldMaxValue());
@@ -79,6 +81,9 @@ public class FoolSpecification {
 		}
 		if (sorting.getLabelOrderType() != null) {
 			orders.add(new Sort.Order(sorting.getLabelOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "label"));
+		}
+		if (sorting.getStatusOrderType() != null) {
+			orders.add(new Sort.Order(sorting.getStatusOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "status"));
 		}
 		if (sorting.getDescriptionOrderType() != null) {
 			orders.add(new Sort.Order(sorting.getDescriptionOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "description"));

@@ -7,6 +7,7 @@ export class FoolFilter {
 
 code: string;
 label: string;
+status: string;
 description: string;
 booleanField: boolean;
 dateFieldMinValue: string;

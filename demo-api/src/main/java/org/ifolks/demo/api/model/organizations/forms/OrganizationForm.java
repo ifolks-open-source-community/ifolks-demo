@@ -1,5 +1,7 @@
 package org.ifolks.demo.api.model.organizations.forms;
 
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
+
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -10,6 +12,7 @@ import jakarta.validation.constraints.NotNull;
  */
 public record OrganizationForm (
 @NotNull String code,
+@NotNull OrganizationRole role,
 String description
 ) {
 

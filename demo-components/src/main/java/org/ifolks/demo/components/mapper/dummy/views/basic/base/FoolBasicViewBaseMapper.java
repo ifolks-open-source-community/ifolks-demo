@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
+import org.ifolks.demo.api.model.dummy.enums.FoolStatus;
 import org.ifolks.demo.api.model.dummy.views.basic.FoolBasicView;
 import org.ifolks.demo.components.rightsmanager.dummy.FoolRightsManager;
 import org.ifolks.demo.components.statemanager.dummy.FoolStateManager;
@@ -33,6 +34,7 @@ boolean selected = false;
 boolean canDelete = foolRightsManager.canDelete(fool) && foolStateManager.canDelete(fool);
 String code = fool.getCode();
 String label = fool.getLabel();
+FoolStatus status = fool.getStatus();
 String description = fool.getDescription();
 Long longField = fool.getLongField();
 Boolean booleanField = fool.getBooleanField();
@@ -47,6 +49,7 @@ selected,
 canDelete,
 code,
 label,
+status,
 description,
 longField,
 booleanField,

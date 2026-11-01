@@ -9,6 +9,7 @@ id: number;
 selected: boolean;
 canDelete: boolean;
 code: string;
+role: string;
 description: string;
 
 /* Specific Code Start */

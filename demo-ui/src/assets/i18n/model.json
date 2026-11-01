@@ -25,6 +25,7 @@
   "organizationList": "Organizations",
   "organizationDetails": "Organization",
   "organizationCode": "Code",
+  "organizationRole": "Organization Role",
   "organizationDescription": "Description",
   "organizationDescriptionList": "",
   "organizationDescriptionDetails": "",
@@ -32,10 +33,14 @@
   "organizationCertificationList": "Certifications",
   "organizationCertificationDetails": "Certification",
   "organizationCertificationCertified": "Certified",
+  "OrganizationRole.HEADQUARTERS": "HEADQUARTERS",
+  "OrganizationRole.SUBSIDIARY": "SUBSIDIARY",
+  "OrganizationRole.BRANCH": "BRANCH",
   "foolList": "Fools",
   "foolDetails": "Fool details",
   "foolCode": "Code",
   "foolLabel": "Label",
+  "foolStatus": "Status",
   "foolDescription": "Description",
   "foolLongField": "Long",
   "foolBooleanField": "Boolean",
@@ -46,5 +51,8 @@
   "stupidList": "Stupids",
   "stupidDetails": "Stupid details",
   "stupidCode": "Code",
-  "stupidFoolCode": "Fool"
+  "stupidFoolCode": "Fool",
+  "FoolStatus.DRAFT": "DRAFT",
+  "FoolStatus.ACTIVE": "ACTIVE",
+  "FoolStatus.ARCHIVED": "ARCHIVED"
 }

@@ -9,6 +9,7 @@ import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullV
 import { FoolModalComponent } from './../modal/fool-modal.component';
 import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
 import { FoolSorting } from 'src/app/features/models/dummy/sortings/FoolSorting';
+import { FoolStatus, FOOL_STATUS_OPTIONS } from 'src/app/features/models/dummy/enums/FoolStatus';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialog } from '@angular/material/dialog';
@@ -44,8 +45,9 @@ dataSource:MatTableDataSource<FoolBasicView>;
 @ViewChild(MatPaginator) paginator: MatPaginator;
 @ViewChild(MatSort) sort: MatSort
 pageSizeOptions: number[] = [10, 20, 50, 100];
-displayedColumns: string[] = ['code','label','description','longField','booleanField','doubleField','decimalField','dateField','datetimeField','Actions'];
+displayedColumns: string[] = ['code','label','status','description','longField','booleanField','doubleField','decimalField','dateField','datetimeField','Actions'];
 filter: FormGroup;
+readonly statusOptions = FOOL_STATUS_OPTIONS;
 private refreshSubscription: Subscription;
 
 constructor(private service:FoolRestClient, private formBuilder: FormBuilder, private dialog: MatDialog, private notifications: NotificationService, private changeDetector: ChangeDetectorRef) { }
@@ -53,6 +55,7 @@ ngOnInit(): void {
 this.filter = this.formBuilder.group({
 code:[null],
 label:[null],
+status:[null],
 description:[null],
 booleanField:[null],
 dateFieldMinValue:[null],
@@ -76,6 +79,7 @@ this.scrollForm.sorting = new FoolSorting();
 switch (this.sort.active) {
 case 'code': this.scrollForm.sorting.codeOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
 case 'label': this.scrollForm.sorting.labelOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
+case 'status': this.scrollForm.sorting.statusOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
 case 'description': this.scrollForm.sorting.descriptionOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
 case 'longField': this.scrollForm.sorting.longFieldOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
 case 'booleanField': this.scrollForm.sorting.booleanFieldOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
@@ -93,6 +97,10 @@ this.refresh();
 });
 this.filter.controls['label'].valueChanges.subscribe(value=>{
 this.scrollForm.filter.label=value;
+this.refresh();
+});
+this.filter.controls['status'].valueChanges.subscribe(value=>{
+this.scrollForm.filter.status=value;
 this.refresh();
 });
 this.filter.controls['description'].valueChanges.subscribe(value=>{
@@ -139,6 +147,7 @@ this.scrollForm.elementsPerPage=10;
 this.filter.patchValue({
 code: null,
 label: null,
+status: null,
 description: null,
 booleanField: null,
 dateFieldMinValue: null,

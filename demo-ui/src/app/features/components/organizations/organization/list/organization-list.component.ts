@@ -15,6 +15,7 @@ import { OrganizationForm } from 'src/app/features/models/organizations/forms/Or
 import { OrganizationFullView } from 'src/app/features/models/organizations/views/full/OrganizationFullView';
 import { OrganizationModalComponent } from './../modal/organization-modal.component';
 import { OrganizationRestClient } from 'src/app/features/services/organizations/OrganizationRestClient';
+import { OrganizationRole, ORGANIZATION_ROLE_OPTIONS } from 'src/app/features/models/organizations/enums/OrganizationRole';
 import { OrganizationSorting } from 'src/app/features/models/organizations/sortings/OrganizationSorting';
 import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 import { ScrollForm } from "src/app/core/models/ScrollForm";
@@ -44,14 +45,16 @@ dataSource:MatTableDataSource<OrganizationBasicView>;
 @ViewChild(MatPaginator) paginator: MatPaginator;
 @ViewChild(MatSort) sort: MatSort
 pageSizeOptions: number[] = [10, 20, 50, 100];
-displayedColumns: string[] = ['code','description','Actions'];
+displayedColumns: string[] = ['code','role','description','Actions'];
 filter: FormGroup;
+readonly roleOptions = ORGANIZATION_ROLE_OPTIONS;
 private refreshSubscription: Subscription;
 
 constructor(private service:OrganizationRestClient, private formBuilder: FormBuilder, private dialog: MatDialog, private notifications: NotificationService, private changeDetector: ChangeDetectorRef) { }
 ngOnInit(): void {
 this.filter = this.formBuilder.group({
 code:[null],
+role:[null],
 description:[null]})
 this.reset();
 }
@@ -69,6 +72,7 @@ this.sort.sortChange.subscribe(
 this.scrollForm.sorting = new OrganizationSorting();
 switch (this.sort.active) {
 case 'code': this.scrollForm.sorting.codeOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
+case 'role': this.scrollForm.sorting.roleOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
 case 'description': this.scrollForm.sorting.descriptionOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
 }
 this.refresh();
@@ -76,6 +80,10 @@ this.refresh();
 
 this.filter.controls['code'].valueChanges.subscribe(value=>{
 this.scrollForm.filter.code=value;
+this.refresh();
+});
+this.filter.controls['role'].valueChanges.subscribe(value=>{
+this.scrollForm.filter.role=value;
 this.refresh();
 });
 this.filter.controls['description'].valueChanges.subscribe(value=>{
@@ -101,6 +109,7 @@ this.scrollForm.page=1;
 this.scrollForm.elementsPerPage=10;
 this.filter.patchValue({
 code: null,
+role: null,
 description: null
 }, {emitEvent: false});
 this.refresh();

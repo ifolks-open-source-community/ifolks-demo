@@ -29,6 +29,18 @@
 
 <p>
 <mat-form-field appearance="outline" floatLabel="always">
+<mat-label>{{ 'foolStatus' | i18n }}</mat-label>
+<mat-select placeholder="{{ 'foolStatus' | i18n }}" formControlName="status">
+<mat-option [value]="null"></mat-option>
+@for (option of statusOptions; track option) {
+  <mat-option [value]="option">{{ 'FoolStatus.' + option | i18n }}</mat-option>
+}
+</mat-select>
+</mat-form-field>
+</p>
+
+<p>
+<mat-form-field appearance="outline" floatLabel="always">
 <mat-label>{{ 'foolDescription' | i18n }}</mat-label>
 <textarea matInput placeholder="{{ 'foolDescription' | i18n }}" formControlName="description" cdkTextareaAutosize></textarea>
 </mat-form-field>

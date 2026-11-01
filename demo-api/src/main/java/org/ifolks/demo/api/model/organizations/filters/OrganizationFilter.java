@@ -2,6 +2,8 @@ package org.ifolks.demo.api.model.organizations.filters;
 
 import java.io.Serializable;
 
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
+
 /**
  * auto generated filter class file
  * <br/>basic representation of filter used along with jsf datatable
@@ -16,6 +18,7 @@ private static final long serialVersionUID = 1L;
  * properties
  */
 private String code;
+private OrganizationRole role;
 private String description;
 
 /*
@@ -26,6 +29,12 @@ return this.code;
 }
 public void setCode(String code) {
 this.code = code;
+}
+public OrganizationRole getRole() {
+return this.role;
+}
+public void setRole(OrganizationRole role) {
+this.role = role;
 }
 public String getDescription() {
 return this.description;

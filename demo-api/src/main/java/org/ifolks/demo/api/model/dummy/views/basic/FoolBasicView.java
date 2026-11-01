@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
+import org.ifolks.demo.api.model.dummy.enums.FoolStatus;
+
 /**
  * auto generated basic view record
  * <br/>basic representation of an entity, adapted to list screens
@@ -17,6 +19,7 @@ boolean selected,
 boolean canDelete,
 String code,
 String label,
+FoolStatus status,
 String description,
 Long longField,
 Boolean booleanField,

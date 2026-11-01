@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
+import org.ifolks.demo.api.model.dummy.enums.FoolStatus;
+
 /**
  * auto generated filter class file
  * <br/>basic representation of filter used along with jsf datatable
@@ -19,6 +21,7 @@ private static final long serialVersionUID = 1L;
  */
 private String code;
 private String label;
+private FoolStatus status;
 private String description;
 private Boolean booleanField;
 private LocalDate dateFieldMinValue;
@@ -40,6 +43,12 @@ return this.label;
 }
 public void setLabel(String label) {
 this.label = label;
+}
+public FoolStatus getStatus() {
+return this.status;
+}
+public void setStatus(FoolStatus status) {
+this.status = status;
 }
 public String getDescription() {
 return this.description;

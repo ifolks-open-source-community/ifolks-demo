@@ -1,5 +1,6 @@
 package org.ifolks.demo.components.mapper.organizations.forms.base;
 
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
 import org.ifolks.demo.api.model.organizations.forms.OrganizationForm;
 import org.ifolks.demo.model.organizations.Organization;
 import org.ifolks.demo.model.organizations.OrganizationDescription;
@@ -25,7 +26,8 @@ public OrganizationForm toForm(Object[] args) {
 
 return new OrganizationForm (
 (String)args[0],
-(String)args[1]);
+(args[1] != null ? (OrganizationRole) (args[1] instanceof OrganizationRole ? args[1] : OrganizationRole.valueOf(args[1].toString().trim())) : null),
+(String)args[2]);
 }
 
 /**
@@ -33,10 +35,12 @@ return new OrganizationForm (
  */
 public OrganizationForm toForm(Organization organization) {
 String code = organization.getCode();
+OrganizationRole role = organization.getRole();
 String description = organization.getOrganizationDescription().getDescription();
 
 return new OrganizationForm (
 code,
+role,
 description);
 }
 
@@ -45,6 +49,7 @@ description);
  */
 public Organization toEntity(OrganizationForm organizationForm, Organization organization) {
 organization.setCode(organizationForm.code());
+organization.setRole(organizationForm.role());
 OrganizationDescription organizationDescription = organization.getOrganizationDescription();
 if (organizationDescription == null) {
 organizationDescription = new OrganizationDescription();

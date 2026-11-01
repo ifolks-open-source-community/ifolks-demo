@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
+import org.ifolks.demo.api.model.dummy.enums.FoolStatus;
+
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -15,6 +17,7 @@ import jakarta.validation.constraints.NotNull;
 public record FoolForm (
 @NotNull String code,
 @NotNull String label,
+FoolStatus status,
 String description,
 Long longField,
 Boolean booleanField,

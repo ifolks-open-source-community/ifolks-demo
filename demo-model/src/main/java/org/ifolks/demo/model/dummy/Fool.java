@@ -4,8 +4,12 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
+import org.ifolks.demo.api.model.dummy.enums.FoolStatus;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -54,6 +58,10 @@ private String code;
 
 @Column(name = "LABEL", nullable = false)
 private String label;
+
+@Enumerated(EnumType.STRING)
+@Column(name = "STATUS", length = 32)
+private FoolStatus status;
 
 @Lob
 @Column(name = "DESCRIPTION")
@@ -106,6 +114,14 @@ return this.label;
 
 public void setLabel(String label) {
 this.label = label;
+}
+
+public FoolStatus getStatus() {
+return this.status;
+}
+
+public void setStatus(FoolStatus status) {
+this.status = status;
 }
 
 public String getDescription() {
