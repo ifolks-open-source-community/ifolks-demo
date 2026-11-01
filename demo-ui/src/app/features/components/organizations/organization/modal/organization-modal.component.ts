@@ -8,6 +8,7 @@ import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
 import { OrganizationFullView } from 'src/app/features/models/organizations/views/full/OrganizationFullView';
 import { OrganizationRestClient } from 'src/app/features/services/organizations/OrganizationRestClient';
+import { OrganizationRole, ORGANIZATION_ROLE_OPTIONS } from 'src/app/features/models/organizations/enums/OrganizationRole';
 import { SelectItem } from 'src/app/core/models/SelectItem';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
@@ -28,6 +29,7 @@ export class OrganizationModalComponent implements OnInit {
 
 view: OrganizationFullView;
 form: FormGroup;
+readonly roleOptions = ORGANIZATION_ROLE_OPTIONS;
 
 constructor(private service:OrganizationRestClient, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService, private dialogRef: MatDialogRef<OrganizationModalComponent>) {}
 

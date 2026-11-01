@@ -5,6 +5,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullView';
 import { FoolMenuComponent } from './../menu/fool-menu.component';
 import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
+import { FoolStatus, FOOL_STATUS_OPTIONS } from 'src/app/features/models/dummy/enums/FoolStatus';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { NavLink } from 'src/app/templates/private/models/nav-link';
@@ -34,6 +35,7 @@ id:string;
 activePath:string;
 view: FoolFullView = new FoolFullView();
 form: FormGroup;
+readonly statusOptions = FOOL_STATUS_OPTIONS;
 
 constructor(private service:FoolRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService) {
 this.id = this.route.snapshot.paramMap.get('id');

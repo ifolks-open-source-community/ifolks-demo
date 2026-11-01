@@ -15,6 +15,7 @@ import { OrganizationForm } from 'src/app/features/models/organizations/forms/Or
 import { OrganizationFullView } from 'src/app/features/models/organizations/views/full/OrganizationFullView';
 import { OrganizationModalComponent } from './../modal/organization-modal.component';
 import { OrganizationRestClient } from 'src/app/features/services/organizations/OrganizationRestClient';
+import { OrganizationRole, ORGANIZATION_ROLE_OPTIONS } from 'src/app/features/models/organizations/enums/OrganizationRole';
 import { OrganizationSorting } from 'src/app/features/models/organizations/sortings/OrganizationSorting';
 import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 import { ScrollForm } from "src/app/core/models/ScrollForm";
@@ -46,6 +47,7 @@ dataSource:MatTableDataSource<OrganizationBasicView>;
 pageSizeOptions: number[] = [10, 20, 50, 100];
 displayedColumns: string[] = ['code','role','description','Actions'];
 filter: FormGroup;
+readonly roleOptions = ORGANIZATION_ROLE_OPTIONS;
 private refreshSubscription: Subscription;
 
 constructor(private service:OrganizationRestClient, private formBuilder: FormBuilder, private dialog: MatDialog, private notifications: NotificationService, private changeDetector: ChangeDetectorRef) { }

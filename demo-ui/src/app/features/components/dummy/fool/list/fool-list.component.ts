@@ -9,6 +9,7 @@ import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullV
 import { FoolModalComponent } from './../modal/fool-modal.component';
 import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
 import { FoolSorting } from 'src/app/features/models/dummy/sortings/FoolSorting';
+import { FoolStatus, FOOL_STATUS_OPTIONS } from 'src/app/features/models/dummy/enums/FoolStatus';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialog } from '@angular/material/dialog';
@@ -46,6 +47,7 @@ dataSource:MatTableDataSource<FoolBasicView>;
 pageSizeOptions: number[] = [10, 20, 50, 100];
 displayedColumns: string[] = ['code','label','status','description','longField','booleanField','doubleField','decimalField','dateField','datetimeField','Actions'];
 filter: FormGroup;
+readonly statusOptions = FOOL_STATUS_OPTIONS;
 private refreshSubscription: Subscription;
 
 constructor(private service:FoolRestClient, private formBuilder: FormBuilder, private dialog: MatDialog, private notifications: NotificationService, private changeDetector: ChangeDetectorRef) { }
