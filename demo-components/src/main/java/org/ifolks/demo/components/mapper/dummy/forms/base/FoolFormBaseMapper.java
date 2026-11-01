@@ -3,11 +3,10 @@ package org.ifolks.demo.components.mapper.dummy.forms.base;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
+
 import org.ifolks.demo.api.model.dummy.forms.FoolForm;
 import org.ifolks.demo.model.dummy.Fool;
 import org.ifolks.demo.model.dummy.FoolStatus;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**

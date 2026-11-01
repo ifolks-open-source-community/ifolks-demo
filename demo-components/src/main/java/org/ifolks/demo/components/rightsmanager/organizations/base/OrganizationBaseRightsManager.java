@@ -3,7 +3,6 @@ package org.ifolks.demo.components.rightsmanager.organizations.base;
 import org.ifolks.demo.model.organizations.Organization;
 import org.ifolks.demo.model.organizations.OrganizationCertification;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 /**
  * auto generated base rights manager class file

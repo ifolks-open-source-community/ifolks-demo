@@ -1,15 +1,11 @@
 package org.ifolks.demo.services.reference.localization.base;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+
 import org.ifolks.commons.api.exception.repository.ResourceNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
-import org.ifolks.commons.api.model.SelectItem;
 import org.ifolks.demo.api.interfaces.reference.localization.base.RegionBaseService;
 import org.ifolks.demo.api.model.reference.localization.filters.RegionFilter;
 import org.ifolks.demo.api.model.reference.localization.forms.RegionForm;
@@ -22,13 +18,10 @@ import org.ifolks.demo.components.mapper.reference.localization.views.full.Regio
 import org.ifolks.demo.components.processor.reference.localization.RegionProcessor;
 import org.ifolks.demo.components.rightsmanager.reference.localization.RegionRightsManager;
 import org.ifolks.demo.components.statemanager.reference.localization.RegionStateManager;
-import org.ifolks.demo.model.reference.localization.Country;
 import org.ifolks.demo.model.reference.localization.Region;
 import org.ifolks.demo.persistence.interfaces.reference.localization.CountryRepository;
 import org.ifolks.demo.persistence.interfaces.reference.localization.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

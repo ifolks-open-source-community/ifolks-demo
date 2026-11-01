@@ -3,6 +3,7 @@ package org.ifolks.demo.api.model.dummy.views.basic;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+
 import org.ifolks.demo.model.dummy.FoolStatus;
 
 /**
