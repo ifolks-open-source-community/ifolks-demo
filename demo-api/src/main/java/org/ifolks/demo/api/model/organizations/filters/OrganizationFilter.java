@@ -2,7 +2,7 @@ package org.ifolks.demo.api.model.organizations.filters;
 
 import java.io.Serializable;
 
-import org.ifolks.demo.model.organizations.OrganizationRole;
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
 
 /**
  * auto generated filter class file

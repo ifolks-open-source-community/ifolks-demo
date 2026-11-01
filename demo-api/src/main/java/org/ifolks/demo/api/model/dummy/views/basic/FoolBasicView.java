@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
-import org.ifolks.demo.model.dummy.FoolStatus;
+import org.ifolks.demo.api.model.dummy.enums.FoolStatus;
 
 /**
  * auto generated basic view record

@@ -1,4 +1,4 @@
-package org.ifolks.demo.model.organizations;
+package org.ifolks.demo.api.model.organizations.enums;
 
 
 /**

@@ -1,6 +1,6 @@
 package org.ifolks.demo.api.model.organizations.views.basic;
 
-import org.ifolks.demo.model.organizations.OrganizationRole;
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
 
 /**
  * auto generated basic view record

@@ -1,4 +1,4 @@
-package org.ifolks.demo.model.dummy;
+package org.ifolks.demo.api.model.dummy.enums;
 
 
 /**

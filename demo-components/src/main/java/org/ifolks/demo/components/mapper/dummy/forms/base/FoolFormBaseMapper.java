@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
+import org.ifolks.demo.api.model.dummy.enums.FoolStatus;
 import org.ifolks.demo.api.model.dummy.forms.FoolForm;
 import org.ifolks.demo.model.dummy.Fool;
-import org.ifolks.demo.model.dummy.FoolStatus;
 import org.springframework.stereotype.Component;
 
 /**

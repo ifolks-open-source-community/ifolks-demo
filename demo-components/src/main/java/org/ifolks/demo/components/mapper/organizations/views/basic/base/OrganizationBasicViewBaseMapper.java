@@ -1,10 +1,10 @@
 package org.ifolks.demo.components.mapper.organizations.views.basic.base;
 
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
 import org.ifolks.demo.api.model.organizations.views.basic.OrganizationBasicView;
 import org.ifolks.demo.components.rightsmanager.organizations.OrganizationRightsManager;
 import org.ifolks.demo.components.statemanager.organizations.OrganizationStateManager;
 import org.ifolks.demo.model.organizations.Organization;
-import org.ifolks.demo.model.organizations.OrganizationRole;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

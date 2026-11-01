@@ -1,6 +1,6 @@
 package org.ifolks.demo.api.model.organizations.forms;
 
-import org.ifolks.demo.model.organizations.OrganizationRole;
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
 
 import jakarta.validation.constraints.NotNull;
 

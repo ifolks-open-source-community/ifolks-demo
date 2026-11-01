@@ -1,9 +1,9 @@
 package org.ifolks.demo.components.mapper.organizations.forms.base;
 
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
 import org.ifolks.demo.api.model.organizations.forms.OrganizationForm;
 import org.ifolks.demo.model.organizations.Organization;
 import org.ifolks.demo.model.organizations.OrganizationDescription;
-import org.ifolks.demo.model.organizations.OrganizationRole;
 import org.springframework.stereotype.Component;
 
 /**
