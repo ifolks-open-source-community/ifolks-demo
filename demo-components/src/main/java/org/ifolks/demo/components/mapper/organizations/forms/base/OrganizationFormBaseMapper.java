@@ -31,7 +31,7 @@ public OrganizationForm toForm(Object[] args) {
 
 return new OrganizationForm (
 (String)args[0],
-(args[1] != null ? (OrganizationRole) (args[1] instanceof OrganizationRole ? args[1] : OrganizationRole.valueOf(args[1].toString())) : null),
+(args[1] != null ? (OrganizationRole) (args[1] instanceof OrganizationRole ? args[1] : OrganizationRole.valueOf(args[1].toString().trim())) : null),
 (String)args[2]);
 }
 

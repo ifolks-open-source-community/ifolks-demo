@@ -31,7 +31,7 @@ public FoolForm toForm(Object[] args) {
 return new FoolForm (
 (String)args[0],
 (String)args[1],
-(args[2] != null ? (FoolStatus) (args[2] instanceof FoolStatus ? args[2] : FoolStatus.valueOf(args[2].toString())) : null),
+(args[2] != null ? (FoolStatus) (args[2] instanceof FoolStatus ? args[2] : FoolStatus.valueOf(args[2].toString().trim())) : null),
 (String)args[3],
 (Long)args[4],
 (Boolean)args[5],
