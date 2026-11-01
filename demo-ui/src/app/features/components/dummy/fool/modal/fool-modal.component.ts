@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullView';
@@ -28,7 +29,7 @@ export class FoolModalComponent implements OnInit {
 view: FoolFullView;
 form: FormGroup;
 
-constructor(private service:FoolRestClient, private formBuilder: FormBuilder, private notifications: NotificationService, private dialogRef: MatDialogRef<FoolModalComponent>) {}
+constructor(private service:FoolRestClient, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService, private dialogRef: MatDialogRef<FoolModalComponent>) {}
 
 ngOnInit(): void {
 this.form = this.formBuilder.group({
@@ -71,12 +72,12 @@ this.view.form.datetimeField = StringUtils.emptyToNull(this.form.get('datetimeFi
 
 save(): void {
 this.applyForm();
-this.service.save(this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close();});
+this.service.save(this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
 }
 
 update(): void {
 this.applyForm();
-this.service.update(this.view.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close();});
+this.service.update(this.view.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
 }
 
 saveOrUpdate(): void {

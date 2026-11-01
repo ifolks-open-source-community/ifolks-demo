@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
@@ -21,6 +22,7 @@ import { ScrollView } from "src/app/core/models/ScrollView";
 import { SelectItem } from "src/app/core/models/SelectItem";
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StringUtils } from 'src/app/core/services/StringUtils';
+import { Subscription } from 'rxjs';
 /**
  * auto generated list component ts file
  * <br/>write modifications between specific code marks
@@ -44,8 +46,9 @@ dataSource:MatTableDataSource<FoolBasicView>;
 pageSizeOptions: number[] = [10, 20, 50, 100];
 displayedColumns: string[] = ['code','label','description','longField','booleanField','doubleField','decimalField','dateField','datetimeField','Actions'];
 filter: FormGroup;
+private refreshSubscription: Subscription;
 
-constructor(private service:FoolRestClient, private formBuilder: FormBuilder, private dialog: MatDialog, private notifications: NotificationService) { }
+constructor(private service:FoolRestClient, private formBuilder: FormBuilder, private dialog: MatDialog, private notifications: NotificationService, private changeDetector: ChangeDetectorRef) { }
 ngOnInit(): void {
 this.filter = this.formBuilder.group({
 code:[null],
@@ -119,9 +122,11 @@ this.refresh();
 }
 
 refresh(): void {
-this.service.scroll(this.scrollForm).subscribe((t) => {
+this.refreshSubscription?.unsubscribe();
+this.refreshSubscription = this.service.scroll(this.scrollForm).subscribe((t) => {
 this.scrollView=t;
 this.dataSource = new MatTableDataSource(this.scrollView.elements);
+this.changeDetector.markForCheck();
 });
 }
 
@@ -132,36 +137,36 @@ this.scrollForm.sorting = new FoolSorting();
 this.scrollForm.page=1;
 this.scrollForm.elementsPerPage=10;
 this.filter.patchValue({
-code: [null],
-label: [null],
-description: [null],
-booleanField: [null],
-dateFieldMinValue: [null],
-dateFieldMaxValue: [null],
-datetimeFieldMinValue: [null],
-datetimeFieldMaxValue: [null]
-})
+code: null,
+label: null,
+description: null,
+booleanField: null,
+dateFieldMinValue: null,
+dateFieldMaxValue: null,
+datetimeFieldMinValue: null,
+datetimeFieldMaxValue: null
+}, {emitEvent: false});
 this.refresh();
 }
 
 create(): void {
 let ref = this.dialog.open(FoolModalComponent);
 ref.componentInstance.view = new FoolFullView();
-ref.afterClosed().subscribe(result => {this.refresh();});
+ref.beforeClosed().subscribe(result => {if (result) {this.refresh();}});
 }
 
 edit(id: string): void {
 this.service.load(id).subscribe((t) => {
 let ref = this.dialog.open(FoolModalComponent);
 ref.componentInstance.view = t;
-ref.afterClosed().subscribe(result => {this.refresh();});
+ref.beforeClosed().subscribe(result => {if (result) {this.refresh();}});
 });
 }
 
 delete(id: string): void {
-this.dialog.open(ConfirmationModalComponent).afterClosed().subscribe(result => {
+this.dialog.open(ConfirmationModalComponent).beforeClosed().subscribe(result => {
 if (result) {
-this.service.delete(id).subscribe(success => {this.notifications.info("operation.completed");this.refresh()});
+this.service.delete(id).subscribe(success => {this.notifications.info("operation.completed");this.refresh();});
 }
 });
 }

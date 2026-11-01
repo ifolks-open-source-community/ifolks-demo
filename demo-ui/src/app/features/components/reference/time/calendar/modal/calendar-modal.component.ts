@@ -1,5 +1,6 @@
 import { CalendarFullView } from 'src/app/features/models/reference/time/views/full/CalendarFullView';
 import { CalendarRestClient } from 'src/app/features/services/reference/time/CalendarRestClient';
+import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -28,7 +29,7 @@ export class CalendarModalComponent implements OnInit {
 view: CalendarFullView;
 form: FormGroup;
 
-constructor(private service:CalendarRestClient, private formBuilder: FormBuilder, private notifications: NotificationService, private dialogRef: MatDialogRef<CalendarModalComponent>) {}
+constructor(private service:CalendarRestClient, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService, private dialogRef: MatDialogRef<CalendarModalComponent>) {}
 
 ngOnInit(): void {
 this.form = this.formBuilder.group({
@@ -50,12 +51,12 @@ this.view.form.label = StringUtils.emptyToNull(this.form.get('label').value);
 
 save(): void {
 this.applyForm();
-this.service.save(this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close();});
+this.service.save(this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
 }
 
 update(): void {
 this.applyForm();
-this.service.update(this.view.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close();});
+this.service.update(this.view.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
 }
 
 saveOrUpdate(): void {

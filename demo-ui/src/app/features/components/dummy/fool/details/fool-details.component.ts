@@ -1,4 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullView';
@@ -34,7 +35,7 @@ activePath:string;
 view: FoolFullView = new FoolFullView();
 form: FormGroup;
 
-constructor(private service:FoolRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
+constructor(private service:FoolRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService) {
 this.id = this.route.snapshot.paramMap.get('id');
 this.activePath = '/fool/' + this.id.toString();
 }
@@ -79,7 +80,7 @@ this.view.form.datetimeField = StringUtils.emptyToNull(this.form.get('datetimeFi
 }
 
 load(): void {
-this.service.load(this.id).subscribe((t) => {this.view=t;this.restoreForm();});
+this.service.load(this.id).subscribe((t) => {this.view=t;this.restoreForm();this.changeDetector.markForCheck();});
 }
 
 update(): void {

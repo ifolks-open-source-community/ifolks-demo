@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { CityFullView } from 'src/app/features/models/reference/localization/views/full/CityFullView';
 import { CityRestClient } from 'src/app/features/services/reference/localization/CityRestClient';
 import { CommonModule } from '@angular/common';
@@ -30,7 +31,7 @@ view: CityFullView;
 form: FormGroup;
 regionCountryCodeOptions: SelectItem[];
 
-constructor(private service:CityRestClient, private countryService:CountryRestClient, private formBuilder: FormBuilder, private notifications: NotificationService, private dialogRef: MatDialogRef<CityModalComponent>) {}
+constructor(private service:CityRestClient, private countryService:CountryRestClient, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService, private dialogRef: MatDialogRef<CityModalComponent>) {}
 
 ngOnInit(): void {
 this.form = this.formBuilder.group({
@@ -58,17 +59,17 @@ this.view.form.label = StringUtils.emptyToNull(this.form.get('label').value);
 }
 
 loadOptionsForRegionCountryCode() {
-this.countryService.getOptions().subscribe((t) => {this.regionCountryCodeOptions=t;});
+this.countryService.getOptions().subscribe((t) => {this.regionCountryCodeOptions=t;this.changeDetector.markForCheck();});
 }
 
 save(): void {
 this.applyForm();
-this.service.save(this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close();});
+this.service.save(this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
 }
 
 update(): void {
 this.applyForm();
-this.service.update(this.view.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close();});
+this.service.update(this.view.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
 }
 
 saveOrUpdate(): void {
