@@ -1,4 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CountryFullView } from 'src/app/features/models/reference/localization/views/full/CountryFullView';
@@ -34,7 +35,7 @@ activePath:string;
 view: CountryFullView = new CountryFullView();
 form: FormGroup;
 
-constructor(private service:CountryRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
+constructor(private service:CountryRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService) {
 this.id = parseInt(this.route.snapshot.paramMap.get('id'));
 this.activePath = '/country/' + this.id.toString();
 }
@@ -58,7 +59,7 @@ this.view.form.label = StringUtils.emptyToNull(this.form.get('label').value);
 }
 
 load(): void {
-this.service.load(this.id).subscribe((t) => {this.view=t;this.restoreForm();});
+this.service.load(this.id).subscribe((t) => {this.view=t;this.restoreForm();this.changeDetector.markForCheck();});
 }
 
 update(): void {

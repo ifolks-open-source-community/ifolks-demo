@@ -1,4 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -34,7 +35,7 @@ activePath:string;
 view: OrganizationCertificationFullView = new OrganizationCertificationFullView();
 form: FormGroup;
 
-constructor(private service:OrganizationRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
+constructor(private service:OrganizationRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService) {
 this.id = parseInt(this.route.snapshot.paramMap.get('id'));
 this.activePath = '/organization/' + this.id.toString() + '/organization-certification';
 }
@@ -55,13 +56,12 @@ this.view.form.certified = StringUtils.stringToStrictBoolean(this.form.get('cert
 }
 
 load(): void {
-this.service.loadOrganizationCertification(this.id).subscribe((t) => {if(t){this.view=t}else{this.view = new OrganizationCertificationFullView()};this.restoreForm();});
+this.service.loadOrganizationCertification(this.id).subscribe((t) => {if(t){this.view=t}else{this.view = new OrganizationCertificationFullView()};this.restoreForm();this.changeDetector.markForCheck();});
 }
 
 save(): void {
 this.applyForm();
 this.service.saveOrganizationCertification(this.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.load();});
-this.load();
 }
 
 update(): void {

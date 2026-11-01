@@ -1,5 +1,6 @@
 import { CalendarDayOffFullView } from 'src/app/features/models/reference/time/views/full/CalendarDayOffFullView';
 import { CalendarRestClient } from 'src/app/features/services/reference/time/CalendarRestClient';
+import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -29,7 +30,7 @@ parentId: number;
 view: CalendarDayOffFullView;
 form: FormGroup;
 
-constructor(private service:CalendarRestClient, private formBuilder: FormBuilder, private notifications: NotificationService, private dialogRef: MatDialogRef<CalendarDayOffModalComponent>) {}
+constructor(private service:CalendarRestClient, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService, private dialogRef: MatDialogRef<CalendarDayOffModalComponent>) {}
 
 ngOnInit(): void {
 this.form = this.formBuilder.group({
@@ -51,12 +52,12 @@ this.view.form.dayOffLabel = StringUtils.emptyToNull(this.form.get('dayOffLabel'
 
 save(): void {
 this.applyForm();
-this.service.saveCalendarDayOff(this.parentId, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close();});
+this.service.saveCalendarDayOff(this.parentId, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
 }
 
 update(): void {
 this.applyForm();
-this.service.updateCalendarDayOff(this.view.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close();});
+this.service.updateCalendarDayOff(this.view.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
 }
 
 saveOrUpdate(): void {

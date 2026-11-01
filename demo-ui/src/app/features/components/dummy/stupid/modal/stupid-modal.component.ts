@@ -1,3 +1,4 @@
+import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
@@ -30,7 +31,7 @@ view: StupidFullView;
 form: FormGroup;
 foolCodeOptions: Observable<SelectItem[]>;
 
-constructor(private service:StupidRestClient, private foolService:FoolRestClient, private formBuilder: FormBuilder, private notifications: NotificationService, private dialogRef: MatDialogRef<StupidModalComponent>) {}
+constructor(private service:StupidRestClient, private foolService:FoolRestClient, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService, private dialogRef: MatDialogRef<StupidModalComponent>) {}
 
 ngOnInit(): void {
 this.form = this.formBuilder.group({
@@ -59,12 +60,12 @@ this.foolCodeOptions = this.foolService.searchOptions(value);
 
 save(): void {
 this.applyForm();
-this.service.save(this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close();});
+this.service.save(this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
 }
 
 update(): void {
 this.applyForm();
-this.service.update(this.view.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close();});
+this.service.update(this.view.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
 }
 
 saveOrUpdate(): void {

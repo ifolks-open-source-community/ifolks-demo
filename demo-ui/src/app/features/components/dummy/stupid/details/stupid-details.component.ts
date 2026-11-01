@@ -1,4 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
@@ -36,7 +37,7 @@ view: StupidFullView = new StupidFullView();
 form: FormGroup;
 foolCodeOptions: Observable<SelectItem[]>;
 
-constructor(private service:StupidRestClient, private foolService:FoolRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
+constructor(private service:StupidRestClient, private foolService:FoolRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService) {
 this.id = parseInt(this.route.snapshot.paramMap.get('id'));
 this.activePath = '/stupid/' + this.id.toString();
 }
@@ -61,7 +62,7 @@ this.view.form.foolCode = StringUtils.emptyToNull(this.form.get('foolCode').valu
 }
 
 load(): void {
-this.service.load(this.id).subscribe((t) => {this.view=t;this.restoreForm();});
+this.service.load(this.id).subscribe((t) => {this.view=t;this.restoreForm();this.changeDetector.markForCheck();});
 }
 
 searchOptionsForFoolCode(value:string) {

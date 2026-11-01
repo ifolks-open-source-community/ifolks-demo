@@ -1,4 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 import { CityFullView } from 'src/app/features/models/reference/localization/views/full/CityFullView';
 import { CityMenuComponent } from './../menu/city-menu.component';
 import { CityRestClient } from 'src/app/features/services/reference/localization/CityRestClient';
@@ -36,7 +37,7 @@ view: CityFullView = new CityFullView();
 form: FormGroup;
 regionCountryCodeOptions: SelectItem[];
 
-constructor(private service:CityRestClient, private countryService:CountryRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
+constructor(private service:CityRestClient, private countryService:CountryRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService) {
 this.id = parseInt(this.route.snapshot.paramMap.get('id'));
 this.activePath = '/city/' + this.id.toString();
 }
@@ -66,12 +67,12 @@ this.view.form.label = StringUtils.emptyToNull(this.form.get('label').value);
 }
 
 load(): void {
-this.service.load(this.id).subscribe((t) => {this.view=t;this.restoreForm();});
+this.service.load(this.id).subscribe((t) => {this.view=t;this.restoreForm();this.changeDetector.markForCheck();});
 this.loadOptionsForRegionCountryCode();
 }
 
 loadOptionsForRegionCountryCode() {
-this.countryService.getOptions().subscribe((t) => {this.regionCountryCodeOptions=t;});
+this.countryService.getOptions().subscribe((t) => {this.regionCountryCodeOptions=t;this.changeDetector.markForCheck();});
 }
 
 update(): void {

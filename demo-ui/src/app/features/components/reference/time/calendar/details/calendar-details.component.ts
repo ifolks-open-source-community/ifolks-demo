@@ -2,6 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CalendarFullView } from 'src/app/features/models/reference/time/views/full/CalendarFullView';
 import { CalendarMenuComponent } from './../menu/calendar-menu.component';
 import { CalendarRestClient } from 'src/app/features/services/reference/time/CalendarRestClient';
+import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -34,7 +35,7 @@ activePath:string;
 view: CalendarFullView = new CalendarFullView();
 form: FormGroup;
 
-constructor(private service:CalendarRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private notifications: NotificationService) {
+constructor(private service:CalendarRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService) {
 this.id = parseInt(this.route.snapshot.paramMap.get('id'));
 this.activePath = '/calendar/' + this.id.toString();
 }
@@ -58,7 +59,7 @@ this.view.form.label = StringUtils.emptyToNull(this.form.get('label').value);
 }
 
 load(): void {
-this.service.load(this.id).subscribe((t) => {this.view=t;this.restoreForm();});
+this.service.load(this.id).subscribe((t) => {this.view=t;this.restoreForm();this.changeDetector.markForCheck();});
 }
 
 update(): void {
