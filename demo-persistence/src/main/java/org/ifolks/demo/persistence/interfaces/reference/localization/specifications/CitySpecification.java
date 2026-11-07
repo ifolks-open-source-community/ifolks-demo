@@ -90,10 +90,10 @@ public class CitySpecification {
 	public static Sort getSort(CitySorting sorting) {
 		List<Sort.Order> orders = new ArrayList<>();
 		if (sorting.getRegionCountryCodeOrderType() != null) {
-			orders.add(new Sort.Order(sorting.getRegionCountryCodeOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "regionCountryCode"));
+			orders.add(new Sort.Order(sorting.getRegionCountryCodeOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "region.country.code"));
 		}
 		if (sorting.getRegionCodeOrderType() != null) {
-			orders.add(new Sort.Order(sorting.getRegionCodeOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "regionCode"));
+			orders.add(new Sort.Order(sorting.getRegionCodeOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "region.code"));
 		}
 		if (sorting.getCodeOrderType() != null) {
 			orders.add(new Sort.Order(sorting.getCodeOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "code"));

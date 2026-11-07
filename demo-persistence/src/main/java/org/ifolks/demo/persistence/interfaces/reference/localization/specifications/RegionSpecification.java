@@ -78,7 +78,7 @@ public class RegionSpecification {
 	public static Sort getSort(RegionSorting sorting) {
 		List<Sort.Order> orders = new ArrayList<>();
 		if (sorting.getCountryCodeOrderType() != null) {
-			orders.add(new Sort.Order(sorting.getCountryCodeOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "countryCode"));
+			orders.add(new Sort.Order(sorting.getCountryCodeOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "country.code"));
 		}
 		if (sorting.getCodeOrderType() != null) {
 			orders.add(new Sort.Order(sorting.getCodeOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "code"));

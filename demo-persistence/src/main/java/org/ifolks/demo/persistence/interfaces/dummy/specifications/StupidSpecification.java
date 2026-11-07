@@ -61,7 +61,7 @@ public class StupidSpecification {
 			orders.add(new Sort.Order(sorting.getCodeOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "code"));
 		}
 		if (sorting.getFoolCodeOrderType() != null) {
-			orders.add(new Sort.Order(sorting.getFoolCodeOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "foolCode"));
+			orders.add(new Sort.Order(sorting.getFoolCodeOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "fool.code"));
 		}
 		orders.add(new Sort.Order(Sort.Direction.DESC, "id"));
 		return Sort.by(orders);

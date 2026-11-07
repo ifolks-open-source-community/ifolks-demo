@@ -86,7 +86,7 @@ public class OrganizationSpecification {
 			orders.add(new Sort.Order(sorting.getRoleOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "role"));
 		}
 		if (sorting.getDescriptionOrderType() != null) {
-			orders.add(new Sort.Order(sorting.getDescriptionOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "description"));
+			orders.add(new Sort.Order(sorting.getDescriptionOrderType() == OrderType.ASC ? Sort.Direction.ASC : Sort.Direction.DESC, "organizationDescription.description"));
 		}
 		orders.add(new Sort.Order(Sort.Direction.DESC, "id"));
 		return Sort.by(orders);
