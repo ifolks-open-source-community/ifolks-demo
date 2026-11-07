@@ -29,6 +29,7 @@ protected FoolStateManager foolStateManager;
  * mapping entity to view
  */
 public FoolBasicView toView(Fool fool) {
+
 String id = fool.getId();
 boolean selected = false;
 boolean canDelete = foolRightsManager.canDelete(fool) && foolStateManager.canDelete(fool);

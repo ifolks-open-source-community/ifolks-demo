@@ -26,6 +26,7 @@ protected CalendarStateManager calendarStateManager;
  * mapping entity to view
  */
 public CalendarDayOffBasicView toView(CalendarDayOff calendarDayOff) {
+
 Integer id = calendarDayOff.getId();
 boolean selected = false;
 boolean canDelete = calendarRightsManager.canDeleteCalendarDayOff(calendarDayOff) && calendarStateManager.canDeleteCalendarDayOff(calendarDayOff);

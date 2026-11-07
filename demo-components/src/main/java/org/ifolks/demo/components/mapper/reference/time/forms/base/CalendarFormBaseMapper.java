@@ -31,6 +31,7 @@ return new CalendarForm (
  * mapping entity to form
  */
 public CalendarForm toForm(Calendar calendar) {
+
 String code = calendar.getCode();
 String label = calendar.getLabel();
 

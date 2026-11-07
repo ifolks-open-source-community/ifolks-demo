@@ -37,7 +37,8 @@ return new RegionForm (
  * mapping entity to form
  */
 public RegionForm toForm(Region region) {
-String countryCode = region.getCountry().getCode();
+
+String countryCode = region.getCountry() != null ? region.getCountry().getCode() : null;
 String code = region.getCode();
 String label = region.getLabel();
 

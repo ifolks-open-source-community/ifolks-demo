@@ -38,8 +38,9 @@ return new CityForm (
  * mapping entity to form
  */
 public CityForm toForm(City city) {
-String regionCountryCode = city.getRegion().getCountry().getCode();
-String regionCode = city.getRegion().getCode();
+
+String regionCountryCode = (city.getRegion() != null && city.getRegion().getCountry() != null) ? city.getRegion().getCountry().getCode() : null;
+String regionCode = city.getRegion() != null ? city.getRegion().getCode() : null;
 String code = city.getCode();
 String label = city.getLabel();
 

@@ -36,8 +36,9 @@ return new StupidForm (
  * mapping entity to form
  */
 public StupidForm toForm(Stupid stupid) {
+
 String code = stupid.getCode();
-String foolCode = stupid.getFool().getCode();
+String foolCode = stupid.getFool() != null ? stupid.getFool().getCode() : null;
 
 return new StupidForm (
 code,

@@ -24,6 +24,7 @@ protected OrganizationStateManager organizationStateManager;
  * mapping entity to view
  */
 public OrganizationCertificationBasicView toView(OrganizationCertification organizationCertification) {
+
 String id = organizationCertification.getId();
 boolean selected = false;
 boolean canDelete = organizationRightsManager.canDeleteOrganizationCertification(organizationCertification) && organizationStateManager.canDeleteOrganizationCertification(organizationCertification);

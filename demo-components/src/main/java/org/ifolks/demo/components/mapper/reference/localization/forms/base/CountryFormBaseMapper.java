@@ -31,6 +31,7 @@ return new CountryForm (
  * mapping entity to form
  */
 public CountryForm toForm(Country country) {
+
 String code = country.getCode();
 String label = country.getLabel();
 

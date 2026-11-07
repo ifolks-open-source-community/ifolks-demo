@@ -44,6 +44,7 @@ return new FoolForm (
  * mapping entity to form
  */
 public FoolForm toForm(Fool fool) {
+
 String code = fool.getCode();
 String label = fool.getLabel();
 FoolStatus status = fool.getStatus();

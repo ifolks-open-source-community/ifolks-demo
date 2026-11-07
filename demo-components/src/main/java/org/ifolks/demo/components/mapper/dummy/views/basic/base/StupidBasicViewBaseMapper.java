@@ -24,11 +24,12 @@ protected StupidStateManager stupidStateManager;
  * mapping entity to view
  */
 public StupidBasicView toView(Stupid stupid) {
+
 Long id = stupid.getId();
 boolean selected = false;
 boolean canDelete = stupidRightsManager.canDelete(stupid) && stupidStateManager.canDelete(stupid);
 String code = stupid.getCode();
-String foolCode = stupid.getFool().getCode();
+String foolCode = stupid.getFool() != null ? stupid.getFool().getCode() : null;
 
 return new StupidBasicView (
 id,

@@ -24,6 +24,7 @@ protected CountryStateManager countryStateManager;
  * mapping entity to view
  */
 public CountryBasicView toView(Country country) {
+
 Short id = country.getId();
 boolean selected = false;
 boolean canDelete = countryRightsManager.canDelete(country) && countryStateManager.canDelete(country);

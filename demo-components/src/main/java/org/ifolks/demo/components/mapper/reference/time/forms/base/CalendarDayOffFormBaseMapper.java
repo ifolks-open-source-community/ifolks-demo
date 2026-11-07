@@ -33,6 +33,7 @@ return new CalendarDayOffForm (
  * mapping entity to form
  */
 public CalendarDayOffForm toForm(CalendarDayOff calendarDayOff) {
+
 LocalDate dayOffDate = calendarDayOff.getDayOffDate();
 String dayOffLabel = calendarDayOff.getDayOffLabel();
 

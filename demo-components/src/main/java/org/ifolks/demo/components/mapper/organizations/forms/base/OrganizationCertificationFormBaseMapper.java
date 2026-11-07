@@ -30,6 +30,7 @@ return new OrganizationCertificationForm (
  * mapping entity to form
  */
 public OrganizationCertificationForm toForm(OrganizationCertification organizationCertification) {
+
 Boolean certified = organizationCertification.getCertified();
 
 return new OrganizationCertificationForm (

@@ -24,10 +24,11 @@ protected RegionStateManager regionStateManager;
  * mapping entity to view
  */
 public RegionBasicView toView(Region region) {
+
 Integer id = region.getId();
 boolean selected = false;
 boolean canDelete = regionRightsManager.canDelete(region) && regionStateManager.canDelete(region);
-String countryCode = region.getCountry().getCode();
+String countryCode = region.getCountry() != null ? region.getCountry().getCode() : null;
 String code = region.getCode();
 String label = region.getLabel();
 

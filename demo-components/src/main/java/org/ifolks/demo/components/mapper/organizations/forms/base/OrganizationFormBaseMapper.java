@@ -34,9 +34,10 @@ return new OrganizationForm (
  * mapping entity to form
  */
 public OrganizationForm toForm(Organization organization) {
+
 String code = organization.getCode();
 OrganizationRole role = organization.getRole();
-String description = organization.getOrganizationDescription().getDescription();
+String description = organization.getOrganizationDescription() != null ? organization.getOrganizationDescription().getDescription() : null;
 
 return new OrganizationForm (
 code,

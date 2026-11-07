@@ -25,12 +25,13 @@ protected OrganizationStateManager organizationStateManager;
  * mapping entity to view
  */
 public OrganizationBasicView toView(Organization organization) {
+
 Integer id = organization.getId();
 boolean selected = false;
 boolean canDelete = organizationRightsManager.canDelete(organization) && organizationStateManager.canDelete(organization);
 String code = organization.getCode();
 OrganizationRole role = organization.getRole();
-String description = organization.getOrganizationDescription().getDescription();
+String description = organization.getOrganizationDescription() != null ? organization.getOrganizationDescription().getDescription() : null;
 
 return new OrganizationBasicView (
 id,
