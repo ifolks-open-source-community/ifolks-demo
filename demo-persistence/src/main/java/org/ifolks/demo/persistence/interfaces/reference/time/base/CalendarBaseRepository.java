@@ -3,14 +3,15 @@ package org.ifolks.demo.persistence.interfaces.reference.time.base;
 import java.util.List;
 import java.util.Optional;
 
-import org.ifolks.demo.api.model.reference.time.filters.CalendarFilter;
-import org.ifolks.demo.api.model.reference.time.sortings.CalendarSorting;
-import org.ifolks.demo.model.reference.time.Calendar;
-import org.ifolks.demo.persistence.interfaces.reference.time.specifications.CalendarSpecification;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import org.ifolks.demo.api.model.reference.time.filters.CalendarFilter;
+import org.ifolks.demo.api.model.reference.time.sortings.CalendarSorting;
+import org.ifolks.demo.model.reference.time.Calendar;
+import org.ifolks.demo.persistence.interfaces.reference.time.specifications.CalendarSpecification;
 
 /**
  * auto generated base repository interface file

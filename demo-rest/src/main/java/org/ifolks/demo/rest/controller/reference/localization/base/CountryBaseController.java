@@ -2,15 +2,11 @@ package org.ifolks.demo.rest.controller.reference.localization.base;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.commons.api.model.SelectItem;
-import org.ifolks.demo.api.interfaces.reference.localization.CountryService;
-import org.ifolks.demo.api.model.reference.localization.filters.CountryFilter;
-import org.ifolks.demo.api.model.reference.localization.forms.CountryForm;
-import org.ifolks.demo.api.model.reference.localization.sortings.CountrySorting;
-import org.ifolks.demo.api.model.reference.localization.views.basic.CountryBasicView;
-import org.ifolks.demo.api.model.reference.localization.views.full.CountryFullView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.validation.Valid;
+import org.ifolks.demo.api.interfaces.reference.localization.CountryService;
+import org.ifolks.demo.api.model.reference.localization.filters.CountryFilter;
+import org.ifolks.demo.api.model.reference.localization.forms.CountryForm;
+import org.ifolks.demo.api.model.reference.localization.sortings.CountrySorting;
+import org.ifolks.demo.api.model.reference.localization.views.basic.CountryBasicView;
+import org.ifolks.demo.api.model.reference.localization.views.full.CountryFullView;
 
 /**
  * auto generated base rest controller file

@@ -2,14 +2,15 @@ package org.ifolks.demo.commands.dummy;
 
 import java.util.List;
 
-import org.ifolks.demo.api.interfaces.dummy.FoolService;
-import org.ifolks.demo.api.model.dummy.forms.FoolForm;
-import org.ifolks.demo.components.mapper.dummy.forms.FoolFormMapper;
 import org.ifolks.generator.components.population.commands.interfaces.ServiceCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.api.interfaces.dummy.FoolService;
+import org.ifolks.demo.api.model.dummy.forms.FoolForm;
+import org.ifolks.demo.components.mapper.dummy.forms.FoolFormMapper;
 
 /**
  * auto generated bean populator command class file

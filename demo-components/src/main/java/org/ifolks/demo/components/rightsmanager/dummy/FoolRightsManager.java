@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.rightsmanager.dummy;
 
-import org.ifolks.demo.components.rightsmanager.dummy.base.FoolBaseRightsManager;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.rightsmanager.dummy.base.FoolBaseRightsManager;
 
 /**
  * auto generated rights manager class file

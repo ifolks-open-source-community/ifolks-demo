@@ -7,6 +7,9 @@ import org.ifolks.commons.api.exception.repository.ResourceNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.commons.api.model.SelectItem;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
 import org.ifolks.demo.api.interfaces.reference.localization.base.CountryBaseService;
 import org.ifolks.demo.api.model.reference.localization.filters.CountryFilter;
 import org.ifolks.demo.api.model.reference.localization.forms.CountryForm;
@@ -21,8 +24,6 @@ import org.ifolks.demo.components.rightsmanager.reference.localization.CountryRi
 import org.ifolks.demo.components.statemanager.reference.localization.CountryStateManager;
 import org.ifolks.demo.model.reference.localization.Country;
 import org.ifolks.demo.persistence.interfaces.reference.localization.CountryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * auto generated base service class file

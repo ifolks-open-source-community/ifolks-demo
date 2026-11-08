@@ -1,13 +1,14 @@
 package org.ifolks.demo.components.mapper.dummy.views.full.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import org.ifolks.demo.api.model.dummy.forms.FoolForm;
 import org.ifolks.demo.api.model.dummy.views.full.FoolFullView;
 import org.ifolks.demo.components.mapper.dummy.forms.FoolFormMapper;
 import org.ifolks.demo.components.rightsmanager.dummy.FoolRightsManager;
 import org.ifolks.demo.components.statemanager.dummy.FoolStateManager;
 import org.ifolks.demo.model.dummy.Fool;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * auto generated mapper class file

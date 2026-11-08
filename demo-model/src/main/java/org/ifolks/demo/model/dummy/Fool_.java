@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
-import org.ifolks.demo.api.model.dummy.enums.FoolStatus;
-
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
+
+import org.ifolks.demo.api.model.dummy.enums.FoolStatus;
 
 /**
  * auto generated entity metamodel class file

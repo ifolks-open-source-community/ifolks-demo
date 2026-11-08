@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.mapper.reference.time.forms;
 
-import org.ifolks.demo.components.mapper.reference.time.forms.base.CalendarFormBaseMapper;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.mapper.reference.time.forms.base.CalendarFormBaseMapper;
 
 /**
  * auto generated mapper class file

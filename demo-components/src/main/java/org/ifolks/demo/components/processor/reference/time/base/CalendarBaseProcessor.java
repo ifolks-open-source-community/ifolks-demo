@@ -1,10 +1,11 @@
 package org.ifolks.demo.components.processor.reference.time.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.ifolks.demo.model.reference.time.Calendar;
 import org.ifolks.demo.model.reference.time.CalendarDayOff;
 import org.ifolks.demo.persistence.interfaces.reference.time.CalendarDayOffRepository;
 import org.ifolks.demo.persistence.interfaces.reference.time.CalendarRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * auto generated base processor class file

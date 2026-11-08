@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.processor.organizations;
 
-import org.ifolks.demo.components.processor.organizations.base.OrganizationBaseProcessor;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.processor.organizations.base.OrganizationBaseProcessor;
 
 /**
  * auto generated state manager class file

@@ -1,14 +1,16 @@
 package org.ifolks.demo.persistence.interfaces.organizations.specifications;
 
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsIfNotNullRestriction;
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
-import static org.ifolks.commons.jpa.JpaCriteriaUtils.getStringStartsWithRestriction;
-
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.criteria.Join;
+import jakarta.persistence.criteria.JoinType;
+import jakarta.persistence.criteria.Predicate;
+
 import org.ifolks.commons.api.model.OrderType;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
+
 import org.ifolks.demo.api.model.organizations.filters.OrganizationFilter;
 import org.ifolks.demo.api.model.organizations.sortings.OrganizationSorting;
 import org.ifolks.demo.model.organizations.Organization;
@@ -16,12 +18,11 @@ import org.ifolks.demo.model.organizations.OrganizationCertification;
 import org.ifolks.demo.model.organizations.OrganizationDescription;
 import org.ifolks.demo.model.organizations.OrganizationDescription_;
 import org.ifolks.demo.model.organizations.Organization_;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 
-import jakarta.persistence.criteria.Join;
-import jakarta.persistence.criteria.JoinType;
-import jakarta.persistence.criteria.Predicate;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsIfNotNullRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addEqualsRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.addStringStartsWithRestriction;
+import static org.ifolks.commons.jpa.JpaCriteriaUtils.getStringStartsWithRestriction;
 
 /**
  * auto generated specifications class file

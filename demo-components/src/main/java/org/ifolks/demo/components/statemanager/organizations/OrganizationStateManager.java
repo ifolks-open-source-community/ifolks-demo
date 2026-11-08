@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.statemanager.organizations;
 
-import org.ifolks.demo.components.statemanager.organizations.base.OrganizationBaseStateManager;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.statemanager.organizations.base.OrganizationBaseStateManager;
 
 /**
  * auto generated state manager class file

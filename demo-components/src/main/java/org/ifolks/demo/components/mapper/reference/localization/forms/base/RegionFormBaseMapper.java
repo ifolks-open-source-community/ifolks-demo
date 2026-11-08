@@ -1,11 +1,12 @@
 package org.ifolks.demo.components.mapper.reference.localization.forms.base;
 
 import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import org.ifolks.demo.api.model.reference.localization.forms.RegionForm;
 import org.ifolks.demo.model.reference.localization.Region;
 import org.ifolks.demo.persistence.interfaces.reference.localization.CountryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * auto generated base mapper class file

@@ -1,10 +1,11 @@
 package org.ifolks.demo.components.mapper.reference.localization.views.basic.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.ifolks.demo.api.model.reference.localization.views.basic.CountryBasicView;
 import org.ifolks.demo.components.rightsmanager.reference.localization.CountryRightsManager;
 import org.ifolks.demo.components.statemanager.reference.localization.CountryStateManager;
 import org.ifolks.demo.model.reference.localization.Country;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * auto generated base basic view mapper class file

@@ -4,14 +4,15 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import org.ifolks.demo.api.model.reference.time.filters.CalendarDayOffFilter;
-import org.ifolks.demo.api.model.reference.time.sortings.CalendarDayOffSorting;
-import org.ifolks.demo.model.reference.time.CalendarDayOff;
-import org.ifolks.demo.persistence.interfaces.reference.time.specifications.CalendarDayOffSpecification;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import org.ifolks.demo.api.model.reference.time.filters.CalendarDayOffFilter;
+import org.ifolks.demo.api.model.reference.time.sortings.CalendarDayOffSorting;
+import org.ifolks.demo.model.reference.time.CalendarDayOff;
+import org.ifolks.demo.persistence.interfaces.reference.time.specifications.CalendarDayOffSpecification;
 
 /**
  * auto generated base repository interface file

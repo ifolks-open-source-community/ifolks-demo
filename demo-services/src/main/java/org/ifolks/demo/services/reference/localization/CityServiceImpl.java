@@ -1,8 +1,9 @@
 package org.ifolks.demo.services.reference.localization;
 
+import org.springframework.stereotype.Service;
+
 import org.ifolks.demo.api.interfaces.reference.localization.CityService;
 import org.ifolks.demo.services.reference.localization.base.CityBaseServiceImpl;
-import org.springframework.stereotype.Service;
 
 /**
  * auto generated service class file

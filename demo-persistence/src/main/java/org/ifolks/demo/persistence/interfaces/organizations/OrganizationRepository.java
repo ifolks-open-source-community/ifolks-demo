@@ -1,7 +1,8 @@
 package org.ifolks.demo.persistence.interfaces.organizations;
 
-import org.ifolks.demo.persistence.interfaces.organizations.base.OrganizationBaseRepository;
 import org.springframework.stereotype.Repository;
+
+import org.ifolks.demo.persistence.interfaces.organizations.base.OrganizationBaseRepository;
 
 /**
  * auto generated repository interface file

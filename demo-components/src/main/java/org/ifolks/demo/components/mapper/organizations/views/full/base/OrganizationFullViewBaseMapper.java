@@ -1,13 +1,14 @@
 package org.ifolks.demo.components.mapper.organizations.views.full.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import org.ifolks.demo.api.model.organizations.forms.OrganizationForm;
 import org.ifolks.demo.api.model.organizations.views.full.OrganizationFullView;
 import org.ifolks.demo.components.mapper.organizations.forms.OrganizationFormMapper;
 import org.ifolks.demo.components.rightsmanager.organizations.OrganizationRightsManager;
 import org.ifolks.demo.components.statemanager.organizations.OrganizationStateManager;
 import org.ifolks.demo.model.organizations.Organization;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * auto generated mapper class file

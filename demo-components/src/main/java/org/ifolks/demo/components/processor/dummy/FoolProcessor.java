@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.processor.dummy;
 
-import org.ifolks.demo.components.processor.dummy.base.FoolBaseProcessor;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.processor.dummy.base.FoolBaseProcessor;
 
 /**
  * auto generated state manager class file

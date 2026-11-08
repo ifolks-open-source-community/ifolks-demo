@@ -1,6 +1,7 @@
 package org.ifolks.demo.components.statemanager.organizations.base;
 
 import org.ifolks.commons.api.exception.state.InvalidStateException;
+
 import org.ifolks.demo.model.organizations.Organization;
 import org.ifolks.demo.model.organizations.OrganizationCertification;
 

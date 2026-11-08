@@ -6,6 +6,9 @@ import java.util.List;
 import org.ifolks.commons.api.exception.repository.ResourceNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
 import org.ifolks.demo.api.interfaces.reference.localization.base.CityBaseService;
 import org.ifolks.demo.api.model.reference.localization.filters.CityFilter;
 import org.ifolks.demo.api.model.reference.localization.forms.CityForm;
@@ -21,8 +24,6 @@ import org.ifolks.demo.components.statemanager.reference.localization.CityStateM
 import org.ifolks.demo.model.reference.localization.City;
 import org.ifolks.demo.persistence.interfaces.reference.localization.CityRepository;
 import org.ifolks.demo.persistence.interfaces.reference.localization.RegionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * auto generated base service class file

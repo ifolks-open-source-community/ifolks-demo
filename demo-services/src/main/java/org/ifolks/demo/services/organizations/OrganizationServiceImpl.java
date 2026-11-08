@@ -1,8 +1,9 @@
 package org.ifolks.demo.services.organizations;
 
+import org.springframework.stereotype.Service;
+
 import org.ifolks.demo.api.interfaces.organizations.OrganizationService;
 import org.ifolks.demo.services.organizations.base.OrganizationBaseServiceImpl;
-import org.springframework.stereotype.Service;
 
 /**
  * auto generated service class file

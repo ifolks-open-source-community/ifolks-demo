@@ -3,15 +3,16 @@ package org.ifolks.demo.persistence.interfaces.reference.localization.base;
 import java.util.List;
 import java.util.Optional;
 
-import org.ifolks.demo.api.model.reference.localization.filters.CityFilter;
-import org.ifolks.demo.api.model.reference.localization.sortings.CitySorting;
-import org.ifolks.demo.model.reference.localization.City;
-import org.ifolks.demo.persistence.interfaces.reference.localization.specifications.CitySpecification;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import org.ifolks.demo.api.model.reference.localization.filters.CityFilter;
+import org.ifolks.demo.api.model.reference.localization.sortings.CitySorting;
+import org.ifolks.demo.model.reference.localization.City;
+import org.ifolks.demo.persistence.interfaces.reference.localization.specifications.CitySpecification;
 
 /**
  * auto generated base repository interface file

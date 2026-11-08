@@ -1,7 +1,5 @@
 package org.ifolks.demo.model.organizations;
 
-import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,6 +16,8 @@ import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
 
 /**
  * auto generated entity class file

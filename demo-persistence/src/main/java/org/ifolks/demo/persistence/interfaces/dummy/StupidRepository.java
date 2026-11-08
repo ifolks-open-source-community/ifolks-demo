@@ -1,7 +1,8 @@
 package org.ifolks.demo.persistence.interfaces.dummy;
 
-import org.ifolks.demo.persistence.interfaces.dummy.base.StupidBaseRepository;
 import org.springframework.stereotype.Repository;
+
+import org.ifolks.demo.persistence.interfaces.dummy.base.StupidBaseRepository;
 
 /**
  * auto generated repository interface file

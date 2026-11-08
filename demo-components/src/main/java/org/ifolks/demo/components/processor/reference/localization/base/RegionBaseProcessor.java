@@ -1,8 +1,9 @@
 package org.ifolks.demo.components.processor.reference.localization.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.ifolks.demo.model.reference.localization.Region;
 import org.ifolks.demo.persistence.interfaces.reference.localization.RegionRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * auto generated base processor class file

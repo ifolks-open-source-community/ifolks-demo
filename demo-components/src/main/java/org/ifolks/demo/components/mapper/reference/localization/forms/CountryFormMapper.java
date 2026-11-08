@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.mapper.reference.localization.forms;
 
-import org.ifolks.demo.components.mapper.reference.localization.forms.base.CountryFormBaseMapper;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.mapper.reference.localization.forms.base.CountryFormBaseMapper;
 
 /**
  * auto generated mapper class file

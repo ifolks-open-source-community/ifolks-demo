@@ -1,7 +1,8 @@
 package org.ifolks.demo.persistence.interfaces.reference.localization;
 
-import org.ifolks.demo.persistence.interfaces.reference.localization.base.CountryBaseRepository;
 import org.springframework.stereotype.Repository;
+
+import org.ifolks.demo.persistence.interfaces.reference.localization.base.CountryBaseRepository;
 
 /**
  * auto generated repository interface file

@@ -1,8 +1,9 @@
 package org.ifolks.demo.components.processor.dummy.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.ifolks.demo.model.dummy.Stupid;
 import org.ifolks.demo.persistence.interfaces.dummy.StupidRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * auto generated base processor class file

@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.mapper.dummy.forms;
 
-import org.ifolks.demo.components.mapper.dummy.forms.base.FoolFormBaseMapper;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.mapper.dummy.forms.base.FoolFormBaseMapper;
 
 /**
  * auto generated mapper class file

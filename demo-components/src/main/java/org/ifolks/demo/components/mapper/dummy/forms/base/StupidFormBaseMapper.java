@@ -1,11 +1,12 @@
 package org.ifolks.demo.components.mapper.dummy.forms.base;
 
 import org.ifolks.commons.api.exception.repository.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import org.ifolks.demo.api.model.dummy.forms.StupidForm;
 import org.ifolks.demo.model.dummy.Stupid;
 import org.ifolks.demo.persistence.interfaces.dummy.FoolRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * auto generated base mapper class file

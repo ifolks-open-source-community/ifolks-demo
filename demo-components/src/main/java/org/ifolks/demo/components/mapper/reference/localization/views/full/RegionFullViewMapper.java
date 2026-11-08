@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.mapper.reference.localization.views.full;
 
-import org.ifolks.demo.components.mapper.reference.localization.views.full.base.RegionFullViewBaseMapper;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.mapper.reference.localization.views.full.base.RegionFullViewBaseMapper;
 
 /**
  * auto generated mapper class file

@@ -14,7 +14,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.converter.HttpMessageConverters;
 import org.springframework.http.converter.json.JacksonJsonHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import tools.jackson.databind.json.JsonMapper;
 
 @Configuration

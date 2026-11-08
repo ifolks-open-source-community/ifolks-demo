@@ -5,6 +5,7 @@ import java.util.List;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.commons.api.model.SelectItem;
+
 import org.ifolks.demo.api.model.dummy.filters.FoolFilter;
 import org.ifolks.demo.api.model.dummy.forms.FoolForm;
 import org.ifolks.demo.api.model.dummy.sortings.FoolSorting;

@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.mapper.organizations.forms;
 
-import org.ifolks.demo.components.mapper.organizations.forms.base.OrganizationCertificationFormBaseMapper;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.mapper.organizations.forms.base.OrganizationCertificationFormBaseMapper;
 
 /**
  * auto generated mapper class file

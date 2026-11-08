@@ -1,8 +1,8 @@
 package org.ifolks.demo.api.model.organizations.forms;
 
-import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
-
 import jakarta.validation.constraints.NotNull;
+
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
 
 /**
  * auto generated form bean record file

@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.statemanager.reference.localization;
 
-import org.ifolks.demo.components.statemanager.reference.localization.base.CountryBaseStateManager;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.statemanager.reference.localization.base.CountryBaseStateManager;
 
 /**
  * auto generated state manager class file

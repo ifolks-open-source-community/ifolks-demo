@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.statemanager.dummy;
 
-import org.ifolks.demo.components.statemanager.dummy.base.FoolBaseStateManager;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.statemanager.dummy.base.FoolBaseStateManager;
 
 /**
  * auto generated state manager class file

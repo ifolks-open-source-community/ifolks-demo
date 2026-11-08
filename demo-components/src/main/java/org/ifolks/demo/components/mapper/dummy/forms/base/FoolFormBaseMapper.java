@@ -4,10 +4,11 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
+import org.springframework.stereotype.Component;
+
 import org.ifolks.demo.api.model.dummy.enums.FoolStatus;
 import org.ifolks.demo.api.model.dummy.forms.FoolForm;
 import org.ifolks.demo.model.dummy.Fool;
-import org.springframework.stereotype.Component;
 
 /**
  * auto generated base mapper class file

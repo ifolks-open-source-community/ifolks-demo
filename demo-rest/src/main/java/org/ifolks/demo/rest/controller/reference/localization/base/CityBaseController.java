@@ -2,14 +2,10 @@ package org.ifolks.demo.rest.controller.reference.localization.base;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
-import org.ifolks.demo.api.interfaces.reference.localization.CityService;
-import org.ifolks.demo.api.model.reference.localization.filters.CityFilter;
-import org.ifolks.demo.api.model.reference.localization.forms.CityForm;
-import org.ifolks.demo.api.model.reference.localization.sortings.CitySorting;
-import org.ifolks.demo.api.model.reference.localization.views.basic.CityBasicView;
-import org.ifolks.demo.api.model.reference.localization.views.full.CityFullView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.validation.Valid;
+import org.ifolks.demo.api.interfaces.reference.localization.CityService;
+import org.ifolks.demo.api.model.reference.localization.filters.CityFilter;
+import org.ifolks.demo.api.model.reference.localization.forms.CityForm;
+import org.ifolks.demo.api.model.reference.localization.sortings.CitySorting;
+import org.ifolks.demo.api.model.reference.localization.views.basic.CityBasicView;
+import org.ifolks.demo.api.model.reference.localization.views.full.CityFullView;
 
 /**
  * auto generated base rest controller file

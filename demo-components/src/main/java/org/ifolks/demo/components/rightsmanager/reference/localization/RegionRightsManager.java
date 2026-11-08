@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.rightsmanager.reference.localization;
 
-import org.ifolks.demo.components.rightsmanager.reference.localization.base.RegionBaseRightsManager;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.rightsmanager.reference.localization.base.RegionBaseRightsManager;
 
 /**
  * auto generated rights manager class file

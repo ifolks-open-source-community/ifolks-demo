@@ -4,12 +4,13 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.ifolks.demo.api.model.dummy.enums.FoolStatus;
 import org.ifolks.demo.api.model.dummy.views.basic.FoolBasicView;
 import org.ifolks.demo.components.rightsmanager.dummy.FoolRightsManager;
 import org.ifolks.demo.components.statemanager.dummy.FoolStateManager;
 import org.ifolks.demo.model.dummy.Fool;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * auto generated base basic view mapper class file

@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.mapper.reference.time.views.basic;
 
-import org.ifolks.demo.components.mapper.reference.time.views.basic.base.CalendarDayOffBasicViewBaseMapper;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.mapper.reference.time.views.basic.base.CalendarDayOffBasicViewBaseMapper;
 
 /**
  * auto generated mapper class file

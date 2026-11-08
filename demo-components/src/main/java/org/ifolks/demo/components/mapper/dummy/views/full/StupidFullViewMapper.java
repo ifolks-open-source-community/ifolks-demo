@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.mapper.dummy.views.full;
 
-import org.ifolks.demo.components.mapper.dummy.views.full.base.StupidFullViewBaseMapper;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.mapper.dummy.views.full.base.StupidFullViewBaseMapper;
 
 /**
  * auto generated mapper class file

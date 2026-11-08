@@ -1,13 +1,14 @@
 package org.ifolks.demo.components.mapper.reference.time.views.full.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import org.ifolks.demo.api.model.reference.time.forms.CalendarDayOffForm;
 import org.ifolks.demo.api.model.reference.time.views.full.CalendarDayOffFullView;
 import org.ifolks.demo.components.mapper.reference.time.forms.CalendarDayOffFormMapper;
 import org.ifolks.demo.components.rightsmanager.reference.time.CalendarRightsManager;
 import org.ifolks.demo.components.statemanager.reference.time.CalendarStateManager;
 import org.ifolks.demo.model.reference.time.CalendarDayOff;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * auto generated mapper class file

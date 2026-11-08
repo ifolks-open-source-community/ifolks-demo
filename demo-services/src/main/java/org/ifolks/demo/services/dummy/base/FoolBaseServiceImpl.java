@@ -7,6 +7,9 @@ import org.ifolks.commons.api.exception.repository.ResourceNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.commons.api.model.SelectItem;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
 import org.ifolks.demo.api.interfaces.dummy.base.FoolBaseService;
 import org.ifolks.demo.api.model.dummy.filters.FoolFilter;
 import org.ifolks.demo.api.model.dummy.forms.FoolForm;
@@ -21,8 +24,6 @@ import org.ifolks.demo.components.rightsmanager.dummy.FoolRightsManager;
 import org.ifolks.demo.components.statemanager.dummy.FoolStateManager;
 import org.ifolks.demo.model.dummy.Fool;
 import org.ifolks.demo.persistence.interfaces.dummy.FoolRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * auto generated base service class file

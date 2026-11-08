@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.rightsmanager.organizations;
 
-import org.ifolks.demo.components.rightsmanager.organizations.base.OrganizationBaseRightsManager;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.rightsmanager.organizations.base.OrganizationBaseRightsManager;
 
 /**
  * auto generated rights manager class file

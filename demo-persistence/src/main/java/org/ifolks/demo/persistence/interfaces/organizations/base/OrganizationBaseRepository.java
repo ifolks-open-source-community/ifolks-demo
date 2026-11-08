@@ -3,14 +3,15 @@ package org.ifolks.demo.persistence.interfaces.organizations.base;
 import java.util.List;
 import java.util.Optional;
 
-import org.ifolks.demo.api.model.organizations.filters.OrganizationFilter;
-import org.ifolks.demo.api.model.organizations.sortings.OrganizationSorting;
-import org.ifolks.demo.model.organizations.Organization;
-import org.ifolks.demo.persistence.interfaces.organizations.specifications.OrganizationSpecification;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import org.ifolks.demo.api.model.organizations.filters.OrganizationFilter;
+import org.ifolks.demo.api.model.organizations.sortings.OrganizationSorting;
+import org.ifolks.demo.model.organizations.Organization;
+import org.ifolks.demo.persistence.interfaces.organizations.specifications.OrganizationSpecification;
 
 /**
  * auto generated base repository interface file

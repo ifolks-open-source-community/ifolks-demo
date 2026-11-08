@@ -2,14 +2,10 @@ package org.ifolks.demo.rest.controller.dummy.base;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
-import org.ifolks.demo.api.interfaces.dummy.StupidService;
-import org.ifolks.demo.api.model.dummy.filters.StupidFilter;
-import org.ifolks.demo.api.model.dummy.forms.StupidForm;
-import org.ifolks.demo.api.model.dummy.sortings.StupidSorting;
-import org.ifolks.demo.api.model.dummy.views.basic.StupidBasicView;
-import org.ifolks.demo.api.model.dummy.views.full.StupidFullView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +15,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.validation.Valid;
+import org.ifolks.demo.api.interfaces.dummy.StupidService;
+import org.ifolks.demo.api.model.dummy.filters.StupidFilter;
+import org.ifolks.demo.api.model.dummy.forms.StupidForm;
+import org.ifolks.demo.api.model.dummy.sortings.StupidSorting;
+import org.ifolks.demo.api.model.dummy.views.basic.StupidBasicView;
+import org.ifolks.demo.api.model.dummy.views.full.StupidFullView;
 
 /**
  * auto generated base rest controller file

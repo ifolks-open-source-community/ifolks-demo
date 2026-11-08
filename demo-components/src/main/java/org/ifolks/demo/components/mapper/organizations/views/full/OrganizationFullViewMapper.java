@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.mapper.organizations.views.full;
 
-import org.ifolks.demo.components.mapper.organizations.views.full.base.OrganizationFullViewBaseMapper;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.mapper.organizations.views.full.base.OrganizationFullViewBaseMapper;
 
 /**
  * auto generated mapper class file

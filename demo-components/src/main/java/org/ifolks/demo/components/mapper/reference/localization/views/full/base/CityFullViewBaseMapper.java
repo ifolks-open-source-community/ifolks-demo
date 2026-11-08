@@ -1,13 +1,14 @@
 package org.ifolks.demo.components.mapper.reference.localization.views.full.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import org.ifolks.demo.api.model.reference.localization.forms.CityForm;
 import org.ifolks.demo.api.model.reference.localization.views.full.CityFullView;
 import org.ifolks.demo.components.mapper.reference.localization.forms.CityFormMapper;
 import org.ifolks.demo.components.rightsmanager.reference.localization.CityRightsManager;
 import org.ifolks.demo.components.statemanager.reference.localization.CityStateManager;
 import org.ifolks.demo.model.reference.localization.City;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 /**
  * auto generated mapper class file

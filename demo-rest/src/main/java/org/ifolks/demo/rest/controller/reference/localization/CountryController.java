@@ -1,7 +1,8 @@
 package org.ifolks.demo.rest.controller.reference.localization;
 
-import org.ifolks.demo.rest.controller.reference.localization.base.CountryBaseController;
 import org.springframework.stereotype.Controller;
+
+import org.ifolks.demo.rest.controller.reference.localization.base.CountryBaseController;
 
 /**
  * auto generated rest controller file

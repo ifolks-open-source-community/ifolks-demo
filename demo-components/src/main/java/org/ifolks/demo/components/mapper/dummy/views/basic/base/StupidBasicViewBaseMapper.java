@@ -1,10 +1,11 @@
 package org.ifolks.demo.components.mapper.dummy.views.basic.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.ifolks.demo.api.model.dummy.views.basic.StupidBasicView;
 import org.ifolks.demo.components.rightsmanager.dummy.StupidRightsManager;
 import org.ifolks.demo.components.statemanager.dummy.StupidStateManager;
 import org.ifolks.demo.model.dummy.Stupid;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * auto generated base basic view mapper class file

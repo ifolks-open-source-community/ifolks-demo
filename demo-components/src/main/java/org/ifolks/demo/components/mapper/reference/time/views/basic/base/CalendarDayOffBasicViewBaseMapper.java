@@ -2,11 +2,12 @@ package org.ifolks.demo.components.mapper.reference.time.views.basic.base;
 
 import java.time.LocalDate;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.ifolks.demo.api.model.reference.time.views.basic.CalendarDayOffBasicView;
 import org.ifolks.demo.components.rightsmanager.reference.time.CalendarRightsManager;
 import org.ifolks.demo.components.statemanager.reference.time.CalendarStateManager;
 import org.ifolks.demo.model.reference.time.CalendarDayOff;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * auto generated base basic view mapper class file

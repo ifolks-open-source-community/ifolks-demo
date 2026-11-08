@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.processor.reference.localization;
 
-import org.ifolks.demo.components.processor.reference.localization.base.CityBaseProcessor;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.processor.reference.localization.base.CityBaseProcessor;
 
 /**
  * auto generated state manager class file

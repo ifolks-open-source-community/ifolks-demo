@@ -1,10 +1,11 @@
 package org.ifolks.demo.components.mapper.reference.time.views.basic.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.ifolks.demo.api.model.reference.time.views.basic.CalendarBasicView;
 import org.ifolks.demo.components.rightsmanager.reference.time.CalendarRightsManager;
 import org.ifolks.demo.components.statemanager.reference.time.CalendarStateManager;
 import org.ifolks.demo.model.reference.time.Calendar;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * auto generated base basic view mapper class file

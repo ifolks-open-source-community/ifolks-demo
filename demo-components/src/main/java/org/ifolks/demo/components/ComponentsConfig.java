@@ -1,14 +1,12 @@
 package org.ifolks.demo.components;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import org.ifolks.commons.log.logger.AccessLogger;
 import org.ifolks.commons.log.logger.ErrorLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-
 import tools.jackson.databind.cfg.DateTimeFeature;
 import tools.jackson.databind.json.JsonMapper;
 

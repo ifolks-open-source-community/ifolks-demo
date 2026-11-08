@@ -2,15 +2,11 @@ package org.ifolks.demo.rest.controller.dummy.base;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
 import org.ifolks.commons.api.model.SelectItem;
-import org.ifolks.demo.api.interfaces.dummy.FoolService;
-import org.ifolks.demo.api.model.dummy.filters.FoolFilter;
-import org.ifolks.demo.api.model.dummy.forms.FoolForm;
-import org.ifolks.demo.api.model.dummy.sortings.FoolSorting;
-import org.ifolks.demo.api.model.dummy.views.basic.FoolBasicView;
-import org.ifolks.demo.api.model.dummy.views.full.FoolFullView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +16,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import jakarta.validation.Valid;
+import org.ifolks.demo.api.interfaces.dummy.FoolService;
+import org.ifolks.demo.api.model.dummy.filters.FoolFilter;
+import org.ifolks.demo.api.model.dummy.forms.FoolForm;
+import org.ifolks.demo.api.model.dummy.sortings.FoolSorting;
+import org.ifolks.demo.api.model.dummy.views.basic.FoolBasicView;
+import org.ifolks.demo.api.model.dummy.views.full.FoolFullView;
 
 /**
  * auto generated base rest controller file

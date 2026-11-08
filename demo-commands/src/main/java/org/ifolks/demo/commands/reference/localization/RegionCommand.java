@@ -2,14 +2,15 @@ package org.ifolks.demo.commands.reference.localization;
 
 import java.util.List;
 
-import org.ifolks.demo.api.interfaces.reference.localization.RegionService;
-import org.ifolks.demo.api.model.reference.localization.forms.RegionForm;
-import org.ifolks.demo.components.mapper.reference.localization.forms.RegionFormMapper;
 import org.ifolks.generator.components.population.commands.interfaces.ServiceCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.api.interfaces.reference.localization.RegionService;
+import org.ifolks.demo.api.model.reference.localization.forms.RegionForm;
+import org.ifolks.demo.components.mapper.reference.localization.forms.RegionFormMapper;
 
 /**
  * auto generated bean populator command class file

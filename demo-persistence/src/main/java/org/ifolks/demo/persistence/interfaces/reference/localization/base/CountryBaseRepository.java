@@ -3,14 +3,15 @@ package org.ifolks.demo.persistence.interfaces.reference.localization.base;
 import java.util.List;
 import java.util.Optional;
 
-import org.ifolks.demo.api.model.reference.localization.filters.CountryFilter;
-import org.ifolks.demo.api.model.reference.localization.sortings.CountrySorting;
-import org.ifolks.demo.model.reference.localization.Country;
-import org.ifolks.demo.persistence.interfaces.reference.localization.specifications.CountrySpecification;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import org.ifolks.demo.api.model.reference.localization.filters.CountryFilter;
+import org.ifolks.demo.api.model.reference.localization.sortings.CountrySorting;
+import org.ifolks.demo.model.reference.localization.Country;
+import org.ifolks.demo.persistence.interfaces.reference.localization.specifications.CountrySpecification;
 
 /**
  * auto generated base repository interface file

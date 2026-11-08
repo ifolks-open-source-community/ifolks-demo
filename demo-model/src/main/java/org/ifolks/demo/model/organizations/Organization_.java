@@ -1,9 +1,9 @@
 package org.ifolks.demo.model.organizations;
 
-import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
-
 import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
+
+import org.ifolks.demo.api.model.organizations.enums.OrganizationRole;
 
 /**
  * auto generated entity metamodel class file

@@ -1,9 +1,10 @@
 package org.ifolks.demo.components.processor.organizations.base;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.ifolks.demo.model.organizations.Organization;
 import org.ifolks.demo.model.organizations.OrganizationCertification;
 import org.ifolks.demo.persistence.interfaces.organizations.OrganizationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * auto generated base processor class file

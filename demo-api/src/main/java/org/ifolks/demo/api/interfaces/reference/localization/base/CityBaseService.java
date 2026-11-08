@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
+
 import org.ifolks.demo.api.model.reference.localization.filters.CityFilter;
 import org.ifolks.demo.api.model.reference.localization.forms.CityForm;
 import org.ifolks.demo.api.model.reference.localization.sortings.CitySorting;

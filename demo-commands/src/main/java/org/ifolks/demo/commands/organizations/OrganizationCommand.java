@@ -2,14 +2,15 @@ package org.ifolks.demo.commands.organizations;
 
 import java.util.List;
 
-import org.ifolks.demo.api.interfaces.organizations.OrganizationService;
-import org.ifolks.demo.api.model.organizations.forms.OrganizationForm;
-import org.ifolks.demo.components.mapper.organizations.forms.OrganizationFormMapper;
 import org.ifolks.generator.components.population.commands.interfaces.ServiceCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.api.interfaces.organizations.OrganizationService;
+import org.ifolks.demo.api.model.organizations.forms.OrganizationForm;
+import org.ifolks.demo.components.mapper.organizations.forms.OrganizationFormMapper;
 
 /**
  * auto generated bean populator command class file

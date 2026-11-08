@@ -1,6 +1,7 @@
 package org.ifolks.demo.components.statemanager.reference.localization.base;
 
 import org.ifolks.commons.api.exception.state.InvalidStateException;
+
 import org.ifolks.demo.model.reference.localization.City;
 
 /**

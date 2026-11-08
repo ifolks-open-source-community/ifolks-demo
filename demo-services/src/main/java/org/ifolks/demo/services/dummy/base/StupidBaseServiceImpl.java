@@ -6,6 +6,9 @@ import java.util.List;
 import org.ifolks.commons.api.exception.repository.ResourceNotFoundException;
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
 import org.ifolks.demo.api.interfaces.dummy.base.StupidBaseService;
 import org.ifolks.demo.api.model.dummy.filters.StupidFilter;
 import org.ifolks.demo.api.model.dummy.forms.StupidForm;
@@ -20,8 +23,6 @@ import org.ifolks.demo.components.rightsmanager.dummy.StupidRightsManager;
 import org.ifolks.demo.components.statemanager.dummy.StupidStateManager;
 import org.ifolks.demo.model.dummy.Stupid;
 import org.ifolks.demo.persistence.interfaces.dummy.StupidRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * auto generated base service class file

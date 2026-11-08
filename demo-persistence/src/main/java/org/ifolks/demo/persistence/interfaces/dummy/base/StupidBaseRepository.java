@@ -3,14 +3,15 @@ package org.ifolks.demo.persistence.interfaces.dummy.base;
 import java.util.List;
 import java.util.Optional;
 
-import org.ifolks.demo.api.model.dummy.filters.StupidFilter;
-import org.ifolks.demo.api.model.dummy.sortings.StupidSorting;
-import org.ifolks.demo.model.dummy.Stupid;
-import org.ifolks.demo.persistence.interfaces.dummy.specifications.StupidSpecification;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import org.ifolks.demo.api.model.dummy.filters.StupidFilter;
+import org.ifolks.demo.api.model.dummy.sortings.StupidSorting;
+import org.ifolks.demo.model.dummy.Stupid;
+import org.ifolks.demo.persistence.interfaces.dummy.specifications.StupidSpecification;
 
 /**
  * auto generated base repository interface file

@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 
-import org.ifolks.demo.api.model.dummy.enums.FoolStatus;
-
 import jakarta.validation.constraints.NotNull;
+
+import org.ifolks.demo.api.model.dummy.enums.FoolStatus;
 
 /**
  * auto generated form bean record file

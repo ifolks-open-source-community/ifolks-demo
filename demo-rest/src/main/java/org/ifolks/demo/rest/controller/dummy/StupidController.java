@@ -1,7 +1,8 @@
 package org.ifolks.demo.rest.controller.dummy;
 
-import org.ifolks.demo.rest.controller.dummy.base.StupidBaseController;
 import org.springframework.stereotype.Controller;
+
+import org.ifolks.demo.rest.controller.dummy.base.StupidBaseController;
 
 /**
  * auto generated rest controller file

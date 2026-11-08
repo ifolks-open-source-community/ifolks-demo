@@ -1,7 +1,8 @@
 package org.ifolks.demo.rest.controller.reference.time;
 
-import org.ifolks.demo.rest.controller.reference.time.base.CalendarBaseController;
 import org.springframework.stereotype.Controller;
+
+import org.ifolks.demo.rest.controller.reference.time.base.CalendarBaseController;
 
 /**
  * auto generated rest controller file

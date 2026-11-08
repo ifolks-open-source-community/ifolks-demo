@@ -1,8 +1,9 @@
 package org.ifolks.demo.services.dummy;
 
+import org.springframework.stereotype.Service;
+
 import org.ifolks.demo.api.interfaces.dummy.FoolService;
 import org.ifolks.demo.services.dummy.base.FoolBaseServiceImpl;
-import org.springframework.stereotype.Service;
 
 /**
  * auto generated service class file

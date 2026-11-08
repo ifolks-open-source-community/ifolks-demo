@@ -1,7 +1,8 @@
 package org.ifolks.demo.persistence.interfaces.reference.time;
 
-import org.ifolks.demo.persistence.interfaces.reference.time.base.CalendarDayOffBaseRepository;
 import org.springframework.stereotype.Repository;
+
+import org.ifolks.demo.persistence.interfaces.reference.time.base.CalendarDayOffBaseRepository;
 
 /**
  * auto generated repository interface file

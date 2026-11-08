@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.ifolks.commons.api.model.ScrollForm;
 import org.ifolks.commons.api.model.ScrollView;
+
 import org.ifolks.demo.api.model.dummy.filters.StupidFilter;
 import org.ifolks.demo.api.model.dummy.forms.StupidForm;
 import org.ifolks.demo.api.model.dummy.sortings.StupidSorting;

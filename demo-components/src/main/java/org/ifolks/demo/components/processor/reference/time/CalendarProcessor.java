@@ -1,7 +1,8 @@
 package org.ifolks.demo.components.processor.reference.time;
 
-import org.ifolks.demo.components.processor.reference.time.base.CalendarBaseProcessor;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.components.processor.reference.time.base.CalendarBaseProcessor;
 
 /**
  * auto generated state manager class file

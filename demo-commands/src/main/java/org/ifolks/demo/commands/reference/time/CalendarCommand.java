@@ -2,14 +2,15 @@ package org.ifolks.demo.commands.reference.time;
 
 import java.util.List;
 
-import org.ifolks.demo.api.interfaces.reference.time.CalendarService;
-import org.ifolks.demo.api.model.reference.time.forms.CalendarForm;
-import org.ifolks.demo.components.mapper.reference.time.forms.CalendarFormMapper;
 import org.ifolks.generator.components.population.commands.interfaces.ServiceCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import org.ifolks.demo.api.interfaces.reference.time.CalendarService;
+import org.ifolks.demo.api.model.reference.time.forms.CalendarForm;
+import org.ifolks.demo.components.mapper.reference.time.forms.CalendarFormMapper;
 
 /**
  * auto generated bean populator command class file
