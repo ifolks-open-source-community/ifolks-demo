@@ -6,14 +6,10 @@
 export enum FoolStatus {
   DRAFT = 'DRAFT',
   ACTIVE = 'ACTIVE',
-  ARCHIVED = 'ARCHIVED'
+  ARCHIVED = 'ARCHIVED',
 }
 
-export const FOOL_STATUS_OPTIONS: FoolStatus[] = [
-  FoolStatus.DRAFT,
-  FoolStatus.ACTIVE,
-  FoolStatus.ARCHIVED
-];
+export const FOOL_STATUS_OPTIONS: FoolStatus[] = [FoolStatus.DRAFT, FoolStatus.ACTIVE, FoolStatus.ARCHIVED];
 
 /* Specific Code Start */
 /* Specific Code End */

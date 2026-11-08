@@ -4,10 +4,9 @@
  * <br/>processed by ifolks-generator
  */
 export class StupidFilter {
+  code: string;
+  foolCode: string;
 
-code: string;
-foolCode: string;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

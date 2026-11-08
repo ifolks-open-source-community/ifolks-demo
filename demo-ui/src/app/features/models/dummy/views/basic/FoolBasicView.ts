@@ -4,21 +4,20 @@
  * <br/>processed by ifolks-generator
  */
 export class FoolBasicView {
+  id: string;
+  selected: boolean;
+  canDelete: boolean;
+  code: string;
+  label: string;
+  status: string;
+  description: string;
+  longField: number;
+  booleanField: boolean;
+  doubleField: number;
+  decimalField: number;
+  dateField: string;
+  datetimeField: Date;
 
-id: string;
-selected: boolean;
-canDelete: boolean;
-code: string;
-label: string;
-status: string;
-description: string;
-longField: number;
-booleanField: boolean;
-doubleField: number;
-decimalField: number;
-dateField: string;
-datetimeField: Date;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

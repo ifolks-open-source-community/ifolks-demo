@@ -6,13 +6,13 @@
 export enum OrganizationRole {
   HEADQUARTERS = 'HEADQUARTERS',
   SUBSIDIARY = 'SUBSIDIARY',
-  BRANCH = 'BRANCH'
+  BRANCH = 'BRANCH',
 }
 
 export const ORGANIZATION_ROLE_OPTIONS: OrganizationRole[] = [
   OrganizationRole.HEADQUARTERS,
   OrganizationRole.SUBSIDIARY,
-  OrganizationRole.BRANCH
+  OrganizationRole.BRANCH,
 ];
 
 /* Specific Code Start */

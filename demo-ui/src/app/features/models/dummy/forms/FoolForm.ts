@@ -4,18 +4,17 @@
  * <br/>processed by ifolks-generator
  */
 export class FoolForm {
+  code: string;
+  label: string;
+  status: string;
+  description: string;
+  longField: number;
+  booleanField: boolean;
+  doubleField: number;
+  decimalField: number;
+  dateField: string;
+  datetimeField: Date;
 
-code: string;
-label: string;
-status: string;
-description: string;
-longField: number;
-booleanField: boolean;
-doubleField: number;
-decimalField: number;
-dateField: string;
-datetimeField: Date;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

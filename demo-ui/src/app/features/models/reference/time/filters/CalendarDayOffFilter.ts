@@ -4,11 +4,10 @@
  * <br/>processed by ifolks-generator
  */
 export class CalendarDayOffFilter {
+  dayOffDateMinValue: string;
+  dayOffDateMaxValue: string;
+  dayOffLabel: string;
 
-dayOffDateMinValue: string;
-dayOffDateMaxValue: string;
-dayOffLabel: string;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

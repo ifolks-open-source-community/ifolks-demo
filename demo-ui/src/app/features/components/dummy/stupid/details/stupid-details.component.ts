@@ -1,6 +1,5 @@
-import { StupidMenuComponent } from './../menu/stupid-menu.component';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -12,8 +11,8 @@ import { StupidFullView } from 'src/app/features/models/dummy/views/full/StupidF
 import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
 import { StupidRestClient } from 'src/app/features/services/dummy/StupidRestClient';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
+import { StupidMenuComponent } from './../menu/stupid-menu.component';
 /**
  * auto generated details component ts file
  * <br/>write modifications between specific code marks
@@ -21,58 +20,74 @@ import { PrivateTemplatesModule } from 'src/app/templates/private/templates.modu
  */
 
 @Component({
-selector: 'app-stupid-details',
-standalone: true,
-imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, StupidMenuComponent, I18nPipe],
-templateUrl: './stupid-details.component.html',
-styleUrl: './stupid-details.component.scss'
+  selector: 'app-stupid-details',
+  standalone: true,
+  imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, StupidMenuComponent, I18nPipe],
+  templateUrl: './stupid-details.component.html',
+  styleUrl: './stupid-details.component.scss',
 })
 export class StupidDetailsComponent implements OnInit {
+  id: number;
+  activePath: string;
+  view: StupidFullView = new StupidFullView();
+  form: FormGroup;
+  foolCodeOptions: Observable<SelectItem[]>;
 
-id:number;
-activePath:string;
-view: StupidFullView = new StupidFullView();
-form: FormGroup;
-foolCodeOptions: Observable<SelectItem[]>;
+  constructor(
+    private service: StupidRestClient,
+    private foolService: FoolRestClient,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private changeDetector: ChangeDetectorRef,
+    private notifications: NotificationService,
+  ) {
+    this.id = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.activePath = '/stupid/' + this.id.toString();
+  }
 
-constructor(private service:StupidRestClient, private foolService:FoolRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService) {
-this.id = parseInt(this.route.snapshot.paramMap.get('id'));
-this.activePath = '/stupid/' + this.id.toString();
-}
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      code: [{ value: null }, Validators.required],
+      foolCode: [{ value: null }, Validators.required],
+    });
+    this.form.controls['foolCode'].valueChanges.subscribe((value) => {
+      this.searchOptionsForFoolCode(value);
+    });
+    this.load();
+  }
+  restoreForm(): void {
+    this.form.patchValue({
+      code: this.view.form.code,
+      foolCode: this.view.form.foolCode,
+    });
+  }
 
-ngOnInit(): void {
-this.form = this.formBuilder.group({
-code:[{value:null}, Validators.required],
-foolCode:[{value:null}, Validators.required]})
-this.form.controls['foolCode'].valueChanges.subscribe(value=>{this.searchOptionsForFoolCode(value)});
-this.load();
-}
-restoreForm(): void {
-this.form.patchValue({
-code: this.view.form.code,
-foolCode: this.view.form.foolCode
-})
-}
+  applyForm(): void {
+    this.view.form.code = StringUtils.emptyToNull(this.form.get('code').value);
+    this.view.form.foolCode = StringUtils.emptyToNull(this.form.get('foolCode').value);
+  }
 
-applyForm(): void {
-this.view.form.code = StringUtils.emptyToNull(this.form.get('code').value);
-this.view.form.foolCode = StringUtils.emptyToNull(this.form.get('foolCode').value);
-}
+  load(): void {
+    this.service.load(this.id).subscribe((t) => {
+      this.view = t;
+      this.restoreForm();
+      this.changeDetector.markForCheck();
+    });
+  }
 
-load(): void {
-this.service.load(this.id).subscribe((t) => {this.view=t;this.restoreForm();this.changeDetector.markForCheck();});
-}
+  searchOptionsForFoolCode(value: string) {
+    if (value) {
+      this.foolCodeOptions = this.foolService.searchOptions(value);
+    }
+  }
 
-searchOptionsForFoolCode(value:string) {
-if (value) {
-this.foolCodeOptions = this.foolService.searchOptions(value);
-}
-}
-
-update(): void {
-this.applyForm();
-this.service.update(this.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.load();});
-}
-/* Specific Code Start */
-/* Specific Code End */
+  update(): void {
+    this.applyForm();
+    this.service.update(this.id, this.view.form).subscribe((success) => {
+      this.notifications.info('operation.completed');
+      this.load();
+    });
+  }
+  /* Specific Code Start */
+  /* Specific Code End */
 }

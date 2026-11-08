@@ -15,63 +15,64 @@ import { environment } from 'src/environments/environment';
  * <br/>no modification should be done to this file
  * <br/>processed by ifolks-generator
  */
-@Injectable({providedIn:'root'})
+@Injectable({ providedIn: 'root' })
 export class CountryRestClient {
+  private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
-private httpOptions = {headers:new HttpHeaders({'Content-Type':'application/json'})};
+  constructor(private http: HttpClient) {}
+  /**
+   * get options
+   */
+  public getOptions() {
+    return this.http.get<SelectItem[]>(environment.restApiUrl + '/country/options');
+  }
 
-constructor(private http: HttpClient) { }
-/**
- * get options
- */
-public getOptions() {
-return this.http.get<SelectItem[]>(environment.restApiUrl + '/country/options');
-}
+  /**
+   * load object list
+   */
+  public loadList() {
+    return this.http.get<CountryBasicView[]>(environment.restApiUrl + '/country/list');
+  }
 
-/**
- * load object list
- */
-public loadList() {
-return this.http.get<CountryBasicView[]>(environment.restApiUrl + '/country/list');
-}
+  /**
+   * scroll object list
+   */
+  public scroll(form: ScrollForm<CountryFilter, CountrySorting>) {
+    return this.http.post<ScrollView<CountryBasicView>>(
+      environment.restApiUrl + '/country/scroll',
+      form,
+      this.httpOptions,
+    );
+  }
 
-/**
- * scroll object list
- */
-public scroll(form: ScrollForm<CountryFilter, CountrySorting>) {
-return this.http.post<ScrollView<CountryBasicView>>(environment.restApiUrl + '/country/scroll', form, this.httpOptions);
-}
+  /**
+   * load object
+   */
+  public load(id: number) {
+    return this.http.get<CountryFullView>(environment.restApiUrl + '/country/' + id);
+  }
 
-/**
- * load object
- */
-public load(id:number) {
-return this.http.get<CountryFullView>(environment.restApiUrl + '/country/' + id);
-}
+  /**
+   * save object
+   */
+  public save(form: CountryForm) {
+    return this.http.post<number>(environment.restApiUrl + '/country', form, this.httpOptions);
+  }
 
-/**
- * save object
- */
-public save(form: CountryForm) {
-return this.http.post<number>(environment.restApiUrl + '/country', form, this.httpOptions);
-}
+  /**
+   * update object
+   */
+  public update(id: number, form: CountryForm) {
+    return this.http.put(environment.restApiUrl + '/country/' + id, form, this.httpOptions);
+  }
 
-/**
- * update object
- */
-public update(id: number, form: CountryForm) {
-return this.http.put(environment.restApiUrl + '/country/' + id, form, this.httpOptions);
-}
+  /**
+   * delete object
+   */
+  public delete(id: number) {
+    return this.http.delete(environment.restApiUrl + '/country/' + id);
+  }
 
-/**
- * delete object
- */
-public delete(id: number) {
-return this.http.delete(environment.restApiUrl + '/country/' + id);
-}
-
-
-/* Specific Code Start */
-/* Specific Code End */
-
+  /* Specific Code Start */
+  /* Specific Code End */
 }

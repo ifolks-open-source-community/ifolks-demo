@@ -4,10 +4,9 @@
  * <br/>processed by ifolks-generator
  */
 export class StupidSorting {
+  codeOrderType: string;
+  foolCodeOrderType: string;
 
-codeOrderType: string;
-foolCodeOrderType: string;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

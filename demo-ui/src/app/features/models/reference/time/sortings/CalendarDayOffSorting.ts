@@ -4,10 +4,9 @@
  * <br/>processed by ifolks-generator
  */
 export class CalendarDayOffSorting {
+  dayOffDateOrderType: string;
+  dayOffLabelOrderType: string;
 
-dayOffDateOrderType: string;
-dayOffLabelOrderType: string;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

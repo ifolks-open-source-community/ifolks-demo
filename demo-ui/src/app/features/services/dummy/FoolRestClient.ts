@@ -15,63 +15,60 @@ import { environment } from 'src/environments/environment';
  * <br/>no modification should be done to this file
  * <br/>processed by ifolks-generator
  */
-@Injectable({providedIn:'root'})
+@Injectable({ providedIn: 'root' })
 export class FoolRestClient {
+  private httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
-private httpOptions = {headers:new HttpHeaders({'Content-Type':'application/json'})};
+  constructor(private http: HttpClient) {}
+  /**
+   * get options
+   */
+  public searchOptions(arg: string) {
+    return this.http.get<SelectItem[]>(environment.restApiUrl + '/fool/options/search', { params: { arg: arg } });
+  }
 
-constructor(private http: HttpClient) { }
-/**
- * get options
- */
-public searchOptions(arg:string) {
-return this.http.get<SelectItem[]>(environment.restApiUrl + '/fool/options/search', {params:{'arg':arg}});
-}
+  /**
+   * load object list
+   */
+  public loadList() {
+    return this.http.get<FoolBasicView[]>(environment.restApiUrl + '/fool/list');
+  }
 
-/**
- * load object list
- */
-public loadList() {
-return this.http.get<FoolBasicView[]>(environment.restApiUrl + '/fool/list');
-}
+  /**
+   * scroll object list
+   */
+  public scroll(form: ScrollForm<FoolFilter, FoolSorting>) {
+    return this.http.post<ScrollView<FoolBasicView>>(environment.restApiUrl + '/fool/scroll', form, this.httpOptions);
+  }
 
-/**
- * scroll object list
- */
-public scroll(form: ScrollForm<FoolFilter, FoolSorting>) {
-return this.http.post<ScrollView<FoolBasicView>>(environment.restApiUrl + '/fool/scroll', form, this.httpOptions);
-}
+  /**
+   * load object
+   */
+  public load(id: string) {
+    return this.http.get<FoolFullView>(environment.restApiUrl + '/fool/' + id);
+  }
 
-/**
- * load object
- */
-public load(id:string) {
-return this.http.get<FoolFullView>(environment.restApiUrl + '/fool/' + id);
-}
+  /**
+   * save object
+   */
+  public save(form: FoolForm) {
+    return this.http.post(environment.restApiUrl + '/fool', form, { ...this.httpOptions, responseType: 'text' });
+  }
 
-/**
- * save object
- */
-public save(form: FoolForm) {
-return this.http.post(environment.restApiUrl + '/fool', form, { ...this.httpOptions, responseType: 'text' });
-}
+  /**
+   * update object
+   */
+  public update(id: string, form: FoolForm) {
+    return this.http.put(environment.restApiUrl + '/fool/' + id, form, this.httpOptions);
+  }
 
-/**
- * update object
- */
-public update(id: string, form: FoolForm) {
-return this.http.put(environment.restApiUrl + '/fool/' + id, form, this.httpOptions);
-}
+  /**
+   * delete object
+   */
+  public delete(id: string) {
+    return this.http.delete(environment.restApiUrl + '/fool/' + id);
+  }
 
-/**
- * delete object
- */
-public delete(id: string) {
-return this.http.delete(environment.restApiUrl + '/fool/' + id);
-}
-
-
-/* Specific Code Start */
-/* Specific Code End */
-
+  /* Specific Code Start */
+  /* Specific Code End */
 }

@@ -4,11 +4,10 @@
  * <br/>processed by ifolks-generator
  */
 export class OrganizationForm {
+  code: string;
+  role: string;
+  description: string;
 
-code: string;
-role: string;
-description: string;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

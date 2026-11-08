@@ -5,12 +5,11 @@ import { StupidForm } from 'src/app/features/models/dummy/forms/StupidForm';
  * <br/>processed by ifolks-generator
  */
 export class StupidFullView {
+  id: number;
+  form: StupidForm = new StupidForm();
+  canUpdate: boolean;
+  canDelete: boolean;
 
-id: number;
-form: StupidForm = new StupidForm();
-canUpdate: boolean;
-canDelete: boolean;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

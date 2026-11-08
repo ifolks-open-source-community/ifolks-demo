@@ -4,11 +4,10 @@
  * <br/>processed by ifolks-generator
  */
 export class RegionFilter {
+  countryCode: string;
+  code: string;
+  label: string;
 
-countryCode: string;
-code: string;
-label: string;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

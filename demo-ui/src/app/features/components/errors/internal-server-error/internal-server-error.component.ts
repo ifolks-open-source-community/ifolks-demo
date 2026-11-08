@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
 import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 
 @Component({
@@ -9,6 +9,6 @@ import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
   standalone: true,
   imports: [CommonModule, RouterModule, MatButtonModule, I18nPipe],
   templateUrl: './internal-server-error.component.html',
-  styleUrl: './internal-server-error.component.scss'
+  styleUrl: './internal-server-error.component.scss',
 })
 export class InternalServerErrorComponent {}

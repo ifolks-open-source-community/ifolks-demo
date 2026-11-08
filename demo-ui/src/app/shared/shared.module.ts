@@ -1,11 +1,10 @@
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from './material.module';
-import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { IsoLocalDateNativeDateAdapter, ISO_LOCAL_DATE_FORMAT } from '../core/adapters/IsoLocalDateAdapter';
-
+import { RouterModule } from '@angular/router';
+import { ISO_LOCAL_DATE_FORMAT, IsoLocalDateNativeDateAdapter } from '../core/adapters/IsoLocalDateAdapter';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   imports: [CommonModule, MaterialModule, RouterModule, ReactiveFormsModule, FormsModule],
@@ -14,8 +13,7 @@ import { IsoLocalDateNativeDateAdapter, ISO_LOCAL_DATE_FORMAT } from '../core/ad
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'en-US' },
     { provide: DateAdapter, useClass: IsoLocalDateNativeDateAdapter },
-    { provide: MAT_DATE_FORMATS, useValue: ISO_LOCAL_DATE_FORMAT }
-  ]
+    { provide: MAT_DATE_FORMATS, useValue: ISO_LOCAL_DATE_FORMAT },
+  ],
 })
-export class SharedModule {
-}
+export class SharedModule {}

@@ -4,15 +4,14 @@
  * <br/>processed by ifolks-generator
  */
 export class CityBasicView {
+  id: number;
+  selected: boolean;
+  canDelete: boolean;
+  regionCountryCode: string;
+  regionCode: string;
+  code: string;
+  label: string;
 
-id: number;
-selected: boolean;
-canDelete: boolean;
-regionCountryCode: string;
-regionCode: string;
-code: string;
-label: string;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

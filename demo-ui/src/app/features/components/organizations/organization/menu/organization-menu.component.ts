@@ -9,19 +9,21 @@ import { NavLink } from 'src/app/templates/private/models/nav-link';
  */
 
 @Component({
-selector: 'app-organization-menu',
-standalone: true,
-imports: [CommonModule, SharedModule],
-templateUrl: './organization-menu.component.html',
-styleUrl: './organization-menu.component.scss'
+  selector: 'app-organization-menu',
+  standalone: true,
+  imports: [CommonModule, SharedModule],
+  templateUrl: './organization-menu.component.html',
+  styleUrl: './organization-menu.component.scss',
 })
 export class OrganizationMenuComponent implements OnInit {
+  links: NavLink[];
+  @Input() id: number;
+  @Input() activePath: string;
 
-links:NavLink[];
-@Input() id:number;
-@Input() activePath:string;
-
-ngOnInit(): void {
-this.links=[{text:'Details',path:'/organization/' + this.id.toString()},{text:'Certification',path:'/organization/' + this.id.toString() + '/organization-certification'}];
-}
+  ngOnInit(): void {
+    this.links = [
+      { text: 'Details', path: '/organization/' + this.id.toString() },
+      { text: 'Certification', path: '/organization/' + this.id.toString() + '/organization-certification' },
+    ];
+  }
 }

@@ -1,46 +1,45 @@
 import { NavMenu } from '../models/nav-menu';
 
 export const navigationMenus: NavMenu[] = [
-
   {
     text: 'Reference',
-    links:[
+    links: [
       {
         text: 'Countries',
-        path: '/country/list'
+        path: '/country/list',
       },
       {
         text: 'Regions',
-        path: '/region/list'
+        path: '/region/list',
       },
       {
         text: 'Cities',
-        path: '/city/list'
-      }
-    ]
+        path: '/city/list',
+      },
+    ],
   },
 
   {
-    text:'Organizations',
-    path:'/organization/list'
+    text: 'Organizations',
+    path: '/organization/list',
   },
 
   {
-    text:'Calendars',
-    path:'/calendar/list'
+    text: 'Calendars',
+    path: '/calendar/list',
   },
 
   {
     text: 'Dummies',
-    links:[
+    links: [
       {
         text: 'Fools',
-        path: '/fool/list'
+        path: '/fool/list',
       },
       {
         text: 'Stupids',
-        path: '/stupid/list'
-      }
-    ]
-  }
+        path: '/stupid/list',
+      },
+    ],
+  },
 ];

@@ -1,7 +1,7 @@
+import { Routes } from '@angular/router';
 import { OrganizationDetailsComponent } from './details/organization-details.component';
 import { OrganizationListComponent } from './list/organization-list.component';
 import { OrganizationCertificationDetailsComponent } from './organization-certification/details/organization-certification-details.component';
-import { Routes } from '@angular/router';
 /**
  * auto generated list routes ts file
  * <br/>write modifications between specific code marks
@@ -9,7 +9,7 @@ import { Routes } from '@angular/router';
  */
 
 export const routes: Routes = [
-{path: 'list', component: OrganizationListComponent }
-,{path: ':id', component: OrganizationDetailsComponent }
-,{path: ':id/organization-certification', component: OrganizationCertificationDetailsComponent }
+  { path: 'list', component: OrganizationListComponent },
+  { path: ':id', component: OrganizationDetailsComponent },
+  { path: ':id/organization-certification', component: OrganizationCertificationDetailsComponent },
 ];

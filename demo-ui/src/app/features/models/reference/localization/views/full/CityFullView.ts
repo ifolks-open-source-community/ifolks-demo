@@ -5,12 +5,11 @@ import { CityForm } from 'src/app/features/models/reference/localization/forms/C
  * <br/>processed by ifolks-generator
  */
 export class CityFullView {
+  id: number;
+  form: CityForm = new CityForm();
+  canUpdate: boolean;
+  canDelete: boolean;
 
-id: number;
-form: CityForm = new CityForm();
-canUpdate: boolean;
-canDelete: boolean;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

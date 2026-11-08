@@ -4,17 +4,16 @@
  * <br/>processed by ifolks-generator
  */
 export class FoolFilter {
+  code: string;
+  label: string;
+  status: string;
+  description: string;
+  booleanField: boolean;
+  dateFieldMinValue: string;
+  dateFieldMaxValue: string;
+  datetimeFieldMinValue: Date;
+  datetimeFieldMaxValue: Date;
 
-code: string;
-label: string;
-status: string;
-description: string;
-booleanField: boolean;
-dateFieldMinValue: string;
-dateFieldMaxValue: string;
-datetimeFieldMinValue: Date;
-datetimeFieldMaxValue: Date;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

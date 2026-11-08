@@ -5,12 +5,11 @@ import { CalendarDayOffForm } from 'src/app/features/models/reference/time/forms
  * <br/>processed by ifolks-generator
  */
 export class CalendarDayOffFullView {
+  id: number;
+  form: CalendarDayOffForm = new CalendarDayOffForm();
+  canUpdate: boolean;
+  canDelete: boolean;
 
-id: number;
-form: CalendarDayOffForm = new CalendarDayOffForm();
-canUpdate: boolean;
-canDelete: boolean;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

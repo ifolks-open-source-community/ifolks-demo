@@ -4,11 +4,10 @@
  * <br/>processed by ifolks-generator
  */
 export class RegionSorting {
+  countryCodeOrderType: string;
+  codeOrderType: string;
+  labelOrderType: string;
 
-countryCodeOrderType: string;
-codeOrderType: string;
-labelOrderType: string;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

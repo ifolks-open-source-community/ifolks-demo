@@ -4,10 +4,9 @@
  * <br/>processed by ifolks-generator
  */
 export class CountryFilter {
+  code: string;
+  label: string;
 
-code: string;
-label: string;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

@@ -5,12 +5,11 @@ import { RegionForm } from 'src/app/features/models/reference/localization/forms
  * <br/>processed by ifolks-generator
  */
 export class RegionFullView {
+  id: number;
+  form: RegionForm = new RegionForm();
+  canUpdate: boolean;
+  canDelete: boolean;
 
-id: number;
-form: RegionForm = new RegionForm();
-canUpdate: boolean;
-canDelete: boolean;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

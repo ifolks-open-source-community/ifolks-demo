@@ -4,11 +4,10 @@
  * <br/>processed by ifolks-generator
  */
 export class OrganizationSorting {
+  codeOrderType: string;
+  roleOrderType: string;
+  descriptionOrderType: string;
 
-codeOrderType: string;
-roleOrderType: string;
-descriptionOrderType: string;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

@@ -1,6 +1,6 @@
+import { Routes } from '@angular/router';
 import { CityDetailsComponent } from './details/city-details.component';
 import { CityListComponent } from './list/city-list.component';
-import { Routes } from '@angular/router';
 /**
  * auto generated list routes ts file
  * <br/>write modifications between specific code marks
@@ -8,6 +8,6 @@ import { Routes } from '@angular/router';
  */
 
 export const routes: Routes = [
-{path: 'list', component: CityListComponent }
-,{path: ':id', component: CityDetailsComponent }
+  { path: 'list', component: CityListComponent },
+  { path: ':id', component: CityDetailsComponent },
 ];

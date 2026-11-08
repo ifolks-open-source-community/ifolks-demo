@@ -5,12 +5,11 @@ import { CalendarForm } from 'src/app/features/models/reference/time/forms/Calen
  * <br/>processed by ifolks-generator
  */
 export class CalendarFullView {
+  id: number;
+  form: CalendarForm = new CalendarForm();
+  canUpdate: boolean;
+  canDelete: boolean;
 
-id: number;
-form: CalendarForm = new CalendarForm();
-canUpdate: boolean;
-canDelete: boolean;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

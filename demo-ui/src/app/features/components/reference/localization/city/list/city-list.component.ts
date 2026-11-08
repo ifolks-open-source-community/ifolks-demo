@@ -1,7 +1,6 @@
-import { CityModalComponent } from './../modal/city-modal.component';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -10,18 +9,17 @@ import { Subscription } from 'rxjs';
 import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
 import { ScrollForm } from 'src/app/core/models/ScrollForm';
 import { ScrollView } from 'src/app/core/models/ScrollView';
-import { SelectItem } from 'src/app/core/models/SelectItem';
 import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 import { CityFilter } from 'src/app/features/models/reference/localization/filters/CityFilter';
-import { CityForm } from 'src/app/features/models/reference/localization/forms/CityForm';
 import { CitySorting } from 'src/app/features/models/reference/localization/sortings/CitySorting';
 import { CityBasicView } from 'src/app/features/models/reference/localization/views/basic/CityBasicView';
 import { CityFullView } from 'src/app/features/models/reference/localization/views/full/CityFullView';
 import { CityRestClient } from 'src/app/features/services/reference/localization/CityRestClient';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
+import { CityModalComponent } from './../modal/city-modal.component';
 /**
  * auto generated list component ts file
  * <br/>write modifications between specific code marks
@@ -29,118 +27,149 @@ import { PrivateTemplatesModule } from 'src/app/templates/private/templates.modu
  */
 
 @Component({
-selector: 'app-city-list',
-standalone: true,
-imports: [CommonModule, SharedModule, PrivateTemplatesModule, I18nPipe],
-templateUrl: './city-list.component.html',
-styleUrl: './city-list.component.scss'
+  selector: 'app-city-list',
+  standalone: true,
+  imports: [CommonModule, SharedModule, PrivateTemplatesModule, I18nPipe],
+  templateUrl: './city-list.component.html',
+  styleUrl: './city-list.component.scss',
 })
 export class CityListComponent implements OnInit, AfterViewInit {
+  scrollForm: ScrollForm<CityFilter, CitySorting> = new ScrollForm();
+  scrollView: ScrollView<CityBasicView> = new ScrollView();
+  dataSource: MatTableDataSource<CityBasicView>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  pageSizeOptions: number[] = [10, 20, 50, 100];
+  displayedColumns: string[] = ['regionCountryCode', 'regionCode', 'code', 'label', 'Actions'];
+  filter: FormGroup;
+  private refreshSubscription: Subscription;
 
-scrollForm: ScrollForm<CityFilter, CitySorting> = new ScrollForm();
-scrollView: ScrollView<CityBasicView> = new ScrollView();
-dataSource:MatTableDataSource<CityBasicView>;
-@ViewChild(MatPaginator) paginator: MatPaginator;
-@ViewChild(MatSort) sort: MatSort
-pageSizeOptions: number[] = [10, 20, 50, 100];
-displayedColumns: string[] = ['regionCountryCode','regionCode','code','label','Actions'];
-filter: FormGroup;
-private refreshSubscription: Subscription;
+  constructor(
+    private service: CityRestClient,
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog,
+    private notifications: NotificationService,
+    private changeDetector: ChangeDetectorRef,
+  ) {}
+  ngOnInit(): void {
+    this.filter = this.formBuilder.group({
+      regionCountryCode: [null],
+      regionCode: [null],
+      code: [null],
+      label: [null],
+    });
+    this.reset();
+  }
 
-constructor(private service:CityRestClient, private formBuilder: FormBuilder, private dialog: MatDialog, private notifications: NotificationService, private changeDetector: ChangeDetectorRef) { }
-ngOnInit(): void {
-this.filter = this.formBuilder.group({
-regionCountryCode:[null],
-regionCode:[null],
-code:[null],
-label:[null]})
-this.reset();
-}
+  ngAfterViewInit(): void {
+    this.paginator.page.subscribe((event) => {
+      this.scrollForm.page = event.pageIndex + 1;
+      this.scrollForm.elementsPerPage = event.pageSize;
+      this.refresh();
+    });
 
-ngAfterViewInit(): void {
-this.paginator.page.subscribe(
-(event) => {
-this.scrollForm.page=event.pageIndex+1;
-this.scrollForm.elementsPerPage=event.pageSize;
-this.refresh();
-});
+    this.sort.sortChange.subscribe((event) => {
+      this.scrollForm.sorting = new CitySorting();
+      switch (this.sort.active) {
+        case 'regionCountryCode':
+          this.scrollForm.sorting.regionCountryCodeOrderType = StringUtils.emptyToNull(
+            this.sort.direction.toUpperCase(),
+          );
+          break;
+        case 'regionCode':
+          this.scrollForm.sorting.regionCodeOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());
+          break;
+        case 'code':
+          this.scrollForm.sorting.codeOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());
+          break;
+        case 'label':
+          this.scrollForm.sorting.labelOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());
+          break;
+      }
+      this.refresh();
+    });
 
-this.sort.sortChange.subscribe(
-(event) => {
-this.scrollForm.sorting = new CitySorting();
-switch (this.sort.active) {
-case 'regionCountryCode': this.scrollForm.sorting.regionCountryCodeOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
-case 'regionCode': this.scrollForm.sorting.regionCodeOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
-case 'code': this.scrollForm.sorting.codeOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
-case 'label': this.scrollForm.sorting.labelOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
-}
-this.refresh();
-});
+    this.filter.controls['regionCountryCode'].valueChanges.subscribe((value) => {
+      this.scrollForm.filter.regionCountryCode = value;
+      this.refresh();
+    });
+    this.filter.controls['regionCode'].valueChanges.subscribe((value) => {
+      this.scrollForm.filter.regionCode = value;
+      this.refresh();
+    });
+    this.filter.controls['code'].valueChanges.subscribe((value) => {
+      this.scrollForm.filter.code = value;
+      this.refresh();
+    });
+    this.filter.controls['label'].valueChanges.subscribe((value) => {
+      this.scrollForm.filter.label = value;
+      this.refresh();
+    });
+  }
 
-this.filter.controls['regionCountryCode'].valueChanges.subscribe(value=>{
-this.scrollForm.filter.regionCountryCode=value;
-this.refresh();
-});
-this.filter.controls['regionCode'].valueChanges.subscribe(value=>{
-this.scrollForm.filter.regionCode=value;
-this.refresh();
-});
-this.filter.controls['code'].valueChanges.subscribe(value=>{
-this.scrollForm.filter.code=value;
-this.refresh();
-});
-this.filter.controls['label'].valueChanges.subscribe(value=>{
-this.scrollForm.filter.label=value;
-this.refresh();
-});
-}
+  refresh(): void {
+    this.refreshSubscription?.unsubscribe();
+    this.refreshSubscription = this.service.scroll(this.scrollForm).subscribe((t) => {
+      this.scrollView = t;
+      this.dataSource = new MatTableDataSource(this.scrollView.elements);
+      this.changeDetector.markForCheck();
+    });
+  }
 
-refresh(): void {
-this.refreshSubscription?.unsubscribe();
-this.refreshSubscription = this.service.scroll(this.scrollForm).subscribe((t) => {
-this.scrollView=t;
-this.dataSource = new MatTableDataSource(this.scrollView.elements);
-this.changeDetector.markForCheck();
-});
-}
+  reset(): void {
+    this.scrollForm = new ScrollForm();
+    this.scrollForm.filter = new CityFilter();
+    this.scrollForm.sorting = new CitySorting();
+    this.scrollForm.page = 1;
+    this.scrollForm.elementsPerPage = 10;
+    this.filter.patchValue(
+      {
+        regionCountryCode: null,
+        regionCode: null,
+        code: null,
+        label: null,
+      },
+      { emitEvent: false },
+    );
+    this.refresh();
+  }
 
-reset(): void {
-this.scrollForm = new ScrollForm();
-this.scrollForm.filter = new CityFilter();
-this.scrollForm.sorting = new CitySorting();
-this.scrollForm.page=1;
-this.scrollForm.elementsPerPage=10;
-this.filter.patchValue({
-regionCountryCode: null,
-regionCode: null,
-code: null,
-label: null
-}, {emitEvent: false});
-this.refresh();
-}
+  create(): void {
+    let ref = this.dialog.open(CityModalComponent);
+    ref.componentInstance.view = new CityFullView();
+    ref.beforeClosed().subscribe((result) => {
+      if (result) {
+        this.refresh();
+      }
+    });
+  }
 
-create(): void {
-let ref = this.dialog.open(CityModalComponent);
-ref.componentInstance.view = new CityFullView();
-ref.beforeClosed().subscribe(result => {if (result) {this.refresh();}});
-}
+  edit(id: number): void {
+    this.service.load(id).subscribe((t) => {
+      let ref = this.dialog.open(CityModalComponent);
+      ref.componentInstance.view = t;
+      ref.beforeClosed().subscribe((result) => {
+        if (result) {
+          this.refresh();
+        }
+      });
+    });
+  }
 
-edit(id: number): void {
-this.service.load(id).subscribe((t) => {
-let ref = this.dialog.open(CityModalComponent);
-ref.componentInstance.view = t;
-ref.beforeClosed().subscribe(result => {if (result) {this.refresh();}});
-});
-}
+  delete(id: number): void {
+    this.dialog
+      .open(ConfirmationModalComponent)
+      .beforeClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.service.delete(id).subscribe((success) => {
+            this.notifications.info('operation.completed');
+            this.refresh();
+          });
+        }
+      });
+  }
 
-delete(id: number): void {
-this.dialog.open(ConfirmationModalComponent).beforeClosed().subscribe(result => {
-if (result) {
-this.service.delete(id).subscribe(success => {this.notifications.info("operation.completed");this.refresh();});
-}
-});
-}
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

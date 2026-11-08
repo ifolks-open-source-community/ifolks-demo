@@ -5,12 +5,11 @@ import { FoolForm } from 'src/app/features/models/dummy/forms/FoolForm';
  * <br/>processed by ifolks-generator
  */
 export class FoolFullView {
+  id: string;
+  form: FoolForm = new FoolForm();
+  canUpdate: boolean;
+  canDelete: boolean;
 
-id: string;
-form: FoolForm = new FoolForm();
-canUpdate: boolean;
-canDelete: boolean;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

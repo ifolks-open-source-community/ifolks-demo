@@ -5,12 +5,11 @@ import { OrganizationForm } from 'src/app/features/models/organizations/forms/Or
  * <br/>processed by ifolks-generator
  */
 export class OrganizationFullView {
+  id: number;
+  form: OrganizationForm = new OrganizationForm();
+  canUpdate: boolean;
+  canDelete: boolean;
 
-id: number;
-form: OrganizationForm = new OrganizationForm();
-canUpdate: boolean;
-canDelete: boolean;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

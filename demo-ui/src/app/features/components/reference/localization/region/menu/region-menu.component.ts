@@ -9,19 +9,21 @@ import { NavLink } from 'src/app/templates/private/models/nav-link';
  */
 
 @Component({
-selector: 'app-region-menu',
-standalone: true,
-imports: [CommonModule, SharedModule],
-templateUrl: './region-menu.component.html',
-styleUrl: './region-menu.component.scss'
+  selector: 'app-region-menu',
+  standalone: true,
+  imports: [CommonModule, SharedModule],
+  templateUrl: './region-menu.component.html',
+  styleUrl: './region-menu.component.scss',
 })
 export class RegionMenuComponent implements OnInit {
+  links: NavLink[];
+  @Input() id: number;
+  @Input() activePath: string;
 
-links:NavLink[];
-@Input() id:number;
-@Input() activePath:string;
-
-ngOnInit(): void {
-this.links=[{text:'Details',path:'/region/' + this.id.toString()},{text:'Cities',path:'/region/' + this.id.toString() + '/city/list'}];
-}
+  ngOnInit(): void {
+    this.links = [
+      { text: 'Details', path: '/region/' + this.id.toString() },
+      { text: 'Cities', path: '/region/' + this.id.toString() + '/city/list' },
+    ];
+  }
 }

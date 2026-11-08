@@ -4,14 +4,13 @@
  * <br/>processed by ifolks-generator
  */
 export class OrganizationBasicView {
+  id: number;
+  selected: boolean;
+  canDelete: boolean;
+  code: string;
+  role: string;
+  description: string;
 
-id: number;
-selected: boolean;
-canDelete: boolean;
-code: string;
-role: string;
-description: string;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

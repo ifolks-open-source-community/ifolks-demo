@@ -9,19 +9,18 @@ import { NavLink } from 'src/app/templates/private/models/nav-link';
  */
 
 @Component({
-selector: 'app-stupid-menu',
-standalone: true,
-imports: [CommonModule, SharedModule],
-templateUrl: './stupid-menu.component.html',
-styleUrl: './stupid-menu.component.scss'
+  selector: 'app-stupid-menu',
+  standalone: true,
+  imports: [CommonModule, SharedModule],
+  templateUrl: './stupid-menu.component.html',
+  styleUrl: './stupid-menu.component.scss',
 })
 export class StupidMenuComponent implements OnInit {
+  links: NavLink[];
+  @Input() id: number;
+  @Input() activePath: string;
 
-links:NavLink[];
-@Input() id:number;
-@Input() activePath:string;
-
-ngOnInit(): void {
-this.links=[{text:'Details',path:'/stupid/' + this.id.toString()}];
-}
+  ngOnInit(): void {
+    this.links = [{ text: 'Details', path: '/stupid/' + this.id.toString() }];
+  }
 }

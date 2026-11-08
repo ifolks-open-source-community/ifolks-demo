@@ -4,18 +4,17 @@
  * <br/>processed by ifolks-generator
  */
 export class FoolSorting {
+  codeOrderType: string;
+  labelOrderType: string;
+  statusOrderType: string;
+  descriptionOrderType: string;
+  longFieldOrderType: string;
+  booleanFieldOrderType: string;
+  doubleFieldOrderType: string;
+  decimalFieldOrderType: string;
+  dateFieldOrderType: string;
+  datetimeFieldOrderType: string;
 
-codeOrderType: string;
-labelOrderType: string;
-statusOrderType: string;
-descriptionOrderType: string;
-longFieldOrderType: string;
-booleanFieldOrderType: string;
-doubleFieldOrderType: string;
-decimalFieldOrderType: string;
-dateFieldOrderType: string;
-datetimeFieldOrderType: string;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { SelectItem } from 'src/app/core/models/SelectItem';
 import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { StringUtils } from 'src/app/core/services/StringUtils';
-import { ORGANIZATION_ROLE_OPTIONS, OrganizationRole } from 'src/app/features/models/organizations/enums/OrganizationRole';
+import { ORGANIZATION_ROLE_OPTIONS } from 'src/app/features/models/organizations/enums/OrganizationRole';
 import { OrganizationFullView } from 'src/app/features/models/organizations/views/full/OrganizationFullView';
 import { OrganizationRestClient } from 'src/app/features/services/organizations/OrganizationRestClient';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -18,55 +16,71 @@ import { SharedModule } from 'src/app/shared/shared.module';
  */
 
 @Component({
-selector: 'app-organization-modal',
-standalone: true,
-imports: [CommonModule, SharedModule, I18nPipe],
-templateUrl: './organization-modal.component.html',
-styleUrl: './organization-modal.component.scss'
+  selector: 'app-organization-modal',
+  standalone: true,
+  imports: [CommonModule, SharedModule, I18nPipe],
+  templateUrl: './organization-modal.component.html',
+  styleUrl: './organization-modal.component.scss',
 })
 export class OrganizationModalComponent implements OnInit {
+  view: OrganizationFullView;
+  form: FormGroup;
+  readonly roleOptions = ORGANIZATION_ROLE_OPTIONS;
 
-view: OrganizationFullView;
-form: FormGroup;
-readonly roleOptions = ORGANIZATION_ROLE_OPTIONS;
+  constructor(
+    private service: OrganizationRestClient,
+    private formBuilder: FormBuilder,
+    private changeDetector: ChangeDetectorRef,
+    private notifications: NotificationService,
+    private dialogRef: MatDialogRef<OrganizationModalComponent>,
+  ) {}
 
-constructor(private service:OrganizationRestClient, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService, private dialogRef: MatDialogRef<OrganizationModalComponent>) {}
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      code: [{ value: null }, Validators.required],
+      role: [{ value: null }, Validators.required],
+      description: [{ value: null }],
+    });
+    this.restoreForm();
+  }
+  restoreForm(): void {
+    this.form.patchValue({
+      code: this.view.form.code,
+      role: this.view.form.role,
+      description: this.view.form.description,
+    });
+  }
 
-ngOnInit(): void {
-this.form = this.formBuilder.group({
-code:[{value:null}, Validators.required],
-role:[{value:null}, Validators.required],
-description:[{value:null}]});
-this.restoreForm();
-}
-restoreForm(): void {
-this.form.patchValue({
-code: this.view.form.code,
-role: this.view.form.role,
-description: this.view.form.description
-})
-}
+  applyForm(): void {
+    this.view.form.code = StringUtils.emptyToNull(this.form.get('code').value);
+    this.view.form.role = StringUtils.emptyToNull(this.form.get('role').value);
+    this.view.form.description = StringUtils.emptyToNull(this.form.get('description').value);
+  }
 
-applyForm(): void {
-this.view.form.code = StringUtils.emptyToNull(this.form.get('code').value);
-this.view.form.role = StringUtils.emptyToNull(this.form.get('role').value);
-this.view.form.description = StringUtils.emptyToNull(this.form.get('description').value);
-}
+  save(): void {
+    this.applyForm();
+    this.service.save(this.view.form).subscribe((success) => {
+      this.notifications.info('operation.completed');
+      this.dialogRef.close(true);
+    });
+  }
 
-save(): void {
-this.applyForm();
-this.service.save(this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
-}
+  update(): void {
+    this.applyForm();
+    this.service.update(this.view.id, this.view.form).subscribe((success) => {
+      this.notifications.info('operation.completed');
+      this.dialogRef.close(true);
+    });
+  }
 
-update(): void {
-this.applyForm();
-this.service.update(this.view.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
-}
+  saveOrUpdate(): void {
+    if (this.view.id == null) {
+      this.save();
+    } else {
+      this.update();
+    }
+  }
 
-saveOrUpdate(): void {
-if (this.view.id == null) {this.save()} else {this.update()}
-}
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

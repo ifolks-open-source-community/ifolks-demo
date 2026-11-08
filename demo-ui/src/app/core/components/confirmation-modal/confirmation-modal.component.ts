@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 
 @Component({
@@ -8,6 +8,6 @@ import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
   standalone: true,
   imports: [MatDialogModule, MatButtonModule, I18nPipe],
   templateUrl: './confirmation-modal.component.html',
-  styleUrls: ['./confirmation-modal.component.scss']
+  styleUrls: ['./confirmation-modal.component.scss'],
 })
 export class ConfirmationModalComponent {}

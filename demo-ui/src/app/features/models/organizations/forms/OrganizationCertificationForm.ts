@@ -4,9 +4,8 @@
  * <br/>processed by ifolks-generator
  */
 export class OrganizationCertificationForm {
+  certified: boolean;
 
-certified: boolean;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

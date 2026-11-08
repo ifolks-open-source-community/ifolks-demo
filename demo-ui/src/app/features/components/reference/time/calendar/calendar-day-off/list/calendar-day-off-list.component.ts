@@ -1,8 +1,6 @@
-import { CalendarMenuComponent } from './../../menu/calendar-menu.component';
-import { CalendarDayOffModalComponent } from './../modal/calendar-day-off-modal.component';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -12,19 +10,18 @@ import { Subscription } from 'rxjs';
 import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
 import { ScrollForm } from 'src/app/core/models/ScrollForm';
 import { ScrollView } from 'src/app/core/models/ScrollView';
-import { SelectItem } from 'src/app/core/models/SelectItem';
 import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 import { CalendarDayOffFilter } from 'src/app/features/models/reference/time/filters/CalendarDayOffFilter';
-import { CalendarDayOffForm } from 'src/app/features/models/reference/time/forms/CalendarDayOffForm';
 import { CalendarDayOffSorting } from 'src/app/features/models/reference/time/sortings/CalendarDayOffSorting';
 import { CalendarDayOffBasicView } from 'src/app/features/models/reference/time/views/basic/CalendarDayOffBasicView';
 import { CalendarDayOffFullView } from 'src/app/features/models/reference/time/views/full/CalendarDayOffFullView';
 import { CalendarRestClient } from 'src/app/features/services/reference/time/CalendarRestClient';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
+import { CalendarMenuComponent } from './../../menu/calendar-menu.component';
+import { CalendarDayOffModalComponent } from './../modal/calendar-day-off-modal.component';
 /**
  * auto generated one to many component list component ts file
  * <br/>write modifications between specific code marks
@@ -32,116 +29,142 @@ import { PrivateTemplatesModule } from 'src/app/templates/private/templates.modu
  */
 
 @Component({
-selector: 'app-calendar-day-off-list',
-standalone: true,
-imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, CalendarMenuComponent, I18nPipe],
-templateUrl: './calendar-day-off-list.component.html',
-styleUrl: './calendar-day-off-list.component.scss'
+  selector: 'app-calendar-day-off-list',
+  standalone: true,
+  imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, CalendarMenuComponent, I18nPipe],
+  templateUrl: './calendar-day-off-list.component.html',
+  styleUrl: './calendar-day-off-list.component.scss',
 })
 export class CalendarDayOffListComponent implements OnInit, AfterViewInit {
+  id: number;
+  activePath: string;
+  scrollForm: ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> = new ScrollForm();
+  scrollView: ScrollView<CalendarDayOffBasicView> = new ScrollView();
+  dataSource: MatTableDataSource<CalendarDayOffBasicView>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  pageSizeOptions: number[] = [10, 20, 50, 100];
+  displayedColumns: string[] = ['dayOffDate', 'dayOffLabel', 'Actions'];
+  filter: FormGroup;
+  private refreshSubscription: Subscription;
 
-id:number;
-activePath:string;
-scrollForm: ScrollForm<CalendarDayOffFilter, CalendarDayOffSorting> = new ScrollForm();
-scrollView: ScrollView<CalendarDayOffBasicView> = new ScrollView();
-dataSource:MatTableDataSource<CalendarDayOffBasicView>;
-@ViewChild(MatPaginator) paginator: MatPaginator;
-@ViewChild(MatSort) sort: MatSort
-pageSizeOptions: number[] = [10, 20, 50, 100];
-displayedColumns: string[] = ['dayOffDate','dayOffLabel','Actions'];
-filter: FormGroup;
-private refreshSubscription: Subscription;
+  constructor(
+    private service: CalendarRestClient,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private dialog: MatDialog,
+    private notifications: NotificationService,
+    private changeDetector: ChangeDetectorRef,
+  ) {
+    this.id = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.activePath = '/calendar/' + this.id.toString() + '/calendar-day-off/list';
+  }
+  ngOnInit(): void {
+    this.filter = this.formBuilder.group({
+      dayOffDateMinValue: [null],
+      dayOffDateMaxValue: [null],
+      dayOffLabel: [null],
+    });
+    this.reset();
+  }
 
-constructor(private service:CalendarRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private dialog: MatDialog, private notifications: NotificationService, private changeDetector: ChangeDetectorRef) {
-this.id = parseInt(this.route.snapshot.paramMap.get('id'));
-this.activePath = '/calendar/' + this.id.toString() + '/calendar-day-off/list';
-}
-ngOnInit(): void {
-this.filter = this.formBuilder.group({
-dayOffDateMinValue:[null],
-dayOffDateMaxValue:[null],
-dayOffLabel:[null]})
-this.reset();
-}
+  ngAfterViewInit(): void {
+    this.paginator.page.subscribe((event) => {
+      this.scrollForm.page = event.pageIndex + 1;
+      this.scrollForm.elementsPerPage = event.pageSize;
+      this.refresh();
+    });
 
-ngAfterViewInit(): void {
-this.paginator.page.subscribe(
-(event) => {
-this.scrollForm.page=event.pageIndex+1;
-this.scrollForm.elementsPerPage=event.pageSize;
-this.refresh();
-});
+    this.sort.sortChange.subscribe((event) => {
+      this.scrollForm.sorting = new CalendarDayOffSorting();
+      switch (this.sort.active) {
+        case 'dayOffDate':
+          this.scrollForm.sorting.dayOffDateOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());
+          break;
+        case 'dayOffLabel':
+          this.scrollForm.sorting.dayOffLabelOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());
+          break;
+      }
+      this.refresh();
+    });
 
-this.sort.sortChange.subscribe(
-(event) => {
-this.scrollForm.sorting = new CalendarDayOffSorting();
-switch (this.sort.active) {
-case 'dayOffDate': this.scrollForm.sorting.dayOffDateOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
-case 'dayOffLabel': this.scrollForm.sorting.dayOffLabelOrderType = StringUtils.emptyToNull(this.sort.direction.toUpperCase());break;
-}
-this.refresh();
-});
+    this.filter.controls['dayOffDateMinValue'].valueChanges.subscribe((value) => {
+      this.scrollForm.filter.dayOffDateMinValue = value;
+      this.refresh();
+    });
+    this.filter.controls['dayOffDateMaxValue'].valueChanges.subscribe((value) => {
+      this.scrollForm.filter.dayOffDateMaxValue = value;
+      this.refresh();
+    });
+    this.filter.controls['dayOffLabel'].valueChanges.subscribe((value) => {
+      this.scrollForm.filter.dayOffLabel = value;
+      this.refresh();
+    });
+  }
 
-this.filter.controls['dayOffDateMinValue'].valueChanges.subscribe(value=>{
-this.scrollForm.filter.dayOffDateMinValue=value;
-this.refresh();
-});
-this.filter.controls['dayOffDateMaxValue'].valueChanges.subscribe(value=>{
-this.scrollForm.filter.dayOffDateMaxValue=value;
-this.refresh();
-});
-this.filter.controls['dayOffLabel'].valueChanges.subscribe(value=>{
-this.scrollForm.filter.dayOffLabel=value;
-this.refresh();
-});
-}
+  refresh(): void {
+    this.refreshSubscription?.unsubscribe();
+    this.refreshSubscription = this.service.scrollCalendarDayOff(this.id, this.scrollForm).subscribe((t) => {
+      this.scrollView = t;
+      this.dataSource = new MatTableDataSource(this.scrollView.elements);
+      this.changeDetector.markForCheck();
+    });
+  }
 
-refresh(): void {
-this.refreshSubscription?.unsubscribe();
-this.refreshSubscription = this.service.scrollCalendarDayOff(this.id, this.scrollForm).subscribe((t) => {
-this.scrollView=t;
-this.dataSource = new MatTableDataSource(this.scrollView.elements);
-this.changeDetector.markForCheck();
-});
-}
+  reset(): void {
+    this.scrollForm = new ScrollForm();
+    this.scrollForm.filter = new CalendarDayOffFilter();
+    this.scrollForm.sorting = new CalendarDayOffSorting();
+    this.scrollForm.page = 1;
+    this.scrollForm.elementsPerPage = 10;
+    this.filter.patchValue(
+      {
+        dayOffDateMinValue: null,
+        dayOffDateMaxValue: null,
+        dayOffLabel: null,
+      },
+      { emitEvent: false },
+    );
+    this.refresh();
+  }
 
-reset(): void {
-this.scrollForm = new ScrollForm();
-this.scrollForm.filter = new CalendarDayOffFilter();
-this.scrollForm.sorting = new CalendarDayOffSorting();
-this.scrollForm.page=1;
-this.scrollForm.elementsPerPage=10;
-this.filter.patchValue({
-dayOffDateMinValue: null,
-dayOffDateMaxValue: null,
-dayOffLabel: null
-}, {emitEvent: false});
-this.refresh();
-}
+  create(): void {
+    let ref = this.dialog.open(CalendarDayOffModalComponent);
+    ref.componentInstance.view = new CalendarDayOffFullView();
+    ref.componentInstance.parentId = this.id;
+    ref.beforeClosed().subscribe((result) => {
+      if (result) {
+        this.refresh();
+      }
+    });
+  }
 
-create(): void {
-let ref = this.dialog.open(CalendarDayOffModalComponent);
-ref.componentInstance.view = new CalendarDayOffFullView();
-ref.componentInstance.parentId = this.id;
-ref.beforeClosed().subscribe(result => {if (result) {this.refresh();}});
-}
+  edit(id: number): void {
+    this.service.loadCalendarDayOff(id).subscribe((t) => {
+      let ref = this.dialog.open(CalendarDayOffModalComponent);
+      ref.componentInstance.view = t;
+      ref.beforeClosed().subscribe((result) => {
+        if (result) {
+          this.refresh();
+        }
+      });
+    });
+  }
 
-edit(id: number): void {
-this.service.loadCalendarDayOff(id).subscribe((t) => {
-let ref = this.dialog.open(CalendarDayOffModalComponent);
-ref.componentInstance.view = t;
-ref.beforeClosed().subscribe(result => {if (result) {this.refresh();}});
-});
-}
+  delete(id: number): void {
+    this.dialog
+      .open(ConfirmationModalComponent)
+      .beforeClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.service.deleteCalendarDayOff(id).subscribe((success) => {
+            this.notifications.info('operation.completed');
+            this.refresh();
+          });
+        }
+      });
+  }
 
-delete(id: number): void {
-this.dialog.open(ConfirmationModalComponent).beforeClosed().subscribe(result => {
-if (result) {
-this.service.deleteCalendarDayOff(id).subscribe(success => {this.notifications.info("operation.completed");this.refresh();});
-}
-});
-}
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

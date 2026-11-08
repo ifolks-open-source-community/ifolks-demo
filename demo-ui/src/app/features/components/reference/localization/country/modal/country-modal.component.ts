@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { SelectItem } from 'src/app/core/models/SelectItem';
 import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { StringUtils } from 'src/app/core/services/StringUtils';
@@ -17,51 +15,67 @@ import { SharedModule } from 'src/app/shared/shared.module';
  */
 
 @Component({
-selector: 'app-country-modal',
-standalone: true,
-imports: [CommonModule, SharedModule, I18nPipe],
-templateUrl: './country-modal.component.html',
-styleUrl: './country-modal.component.scss'
+  selector: 'app-country-modal',
+  standalone: true,
+  imports: [CommonModule, SharedModule, I18nPipe],
+  templateUrl: './country-modal.component.html',
+  styleUrl: './country-modal.component.scss',
 })
 export class CountryModalComponent implements OnInit {
+  view: CountryFullView;
+  form: FormGroup;
 
-view: CountryFullView;
-form: FormGroup;
+  constructor(
+    private service: CountryRestClient,
+    private formBuilder: FormBuilder,
+    private changeDetector: ChangeDetectorRef,
+    private notifications: NotificationService,
+    private dialogRef: MatDialogRef<CountryModalComponent>,
+  ) {}
 
-constructor(private service:CountryRestClient, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService, private dialogRef: MatDialogRef<CountryModalComponent>) {}
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      code: [{ value: null }, Validators.required],
+      label: [{ value: null }, Validators.required],
+    });
+    this.restoreForm();
+  }
+  restoreForm(): void {
+    this.form.patchValue({
+      code: this.view.form.code,
+      label: this.view.form.label,
+    });
+  }
 
-ngOnInit(): void {
-this.form = this.formBuilder.group({
-code:[{value:null}, Validators.required],
-label:[{value:null}, Validators.required]});
-this.restoreForm();
-}
-restoreForm(): void {
-this.form.patchValue({
-code: this.view.form.code,
-label: this.view.form.label
-})
-}
+  applyForm(): void {
+    this.view.form.code = StringUtils.emptyToNull(this.form.get('code').value);
+    this.view.form.label = StringUtils.emptyToNull(this.form.get('label').value);
+  }
 
-applyForm(): void {
-this.view.form.code = StringUtils.emptyToNull(this.form.get('code').value);
-this.view.form.label = StringUtils.emptyToNull(this.form.get('label').value);
-}
+  save(): void {
+    this.applyForm();
+    this.service.save(this.view.form).subscribe((success) => {
+      this.notifications.info('operation.completed');
+      this.dialogRef.close(true);
+    });
+  }
 
-save(): void {
-this.applyForm();
-this.service.save(this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
-}
+  update(): void {
+    this.applyForm();
+    this.service.update(this.view.id, this.view.form).subscribe((success) => {
+      this.notifications.info('operation.completed');
+      this.dialogRef.close(true);
+    });
+  }
 
-update(): void {
-this.applyForm();
-this.service.update(this.view.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
-}
+  saveOrUpdate(): void {
+    if (this.view.id == null) {
+      this.save();
+    } else {
+      this.update();
+    }
+  }
 
-saveOrUpdate(): void {
-if (this.view.id == null) {this.save()} else {this.update()}
-}
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

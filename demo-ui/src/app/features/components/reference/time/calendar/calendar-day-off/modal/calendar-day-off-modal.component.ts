@@ -1,9 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
-import { SelectItem } from 'src/app/core/models/SelectItem';
 import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { NotificationService } from 'src/app/core/services/NotificationService';
 import { StringUtils } from 'src/app/core/services/StringUtils';
@@ -17,52 +15,68 @@ import { SharedModule } from 'src/app/shared/shared.module';
  */
 
 @Component({
-selector: 'app-calendar-day-off-modal',
-standalone: true,
-imports: [CommonModule, SharedModule, I18nPipe],
-templateUrl: './calendar-day-off-modal.component.html',
-styleUrl: './calendar-day-off-modal.component.scss'
+  selector: 'app-calendar-day-off-modal',
+  standalone: true,
+  imports: [CommonModule, SharedModule, I18nPipe],
+  templateUrl: './calendar-day-off-modal.component.html',
+  styleUrl: './calendar-day-off-modal.component.scss',
 })
 export class CalendarDayOffModalComponent implements OnInit {
+  parentId: number;
+  view: CalendarDayOffFullView;
+  form: FormGroup;
 
-parentId: number;
-view: CalendarDayOffFullView;
-form: FormGroup;
+  constructor(
+    private service: CalendarRestClient,
+    private formBuilder: FormBuilder,
+    private changeDetector: ChangeDetectorRef,
+    private notifications: NotificationService,
+    private dialogRef: MatDialogRef<CalendarDayOffModalComponent>,
+  ) {}
 
-constructor(private service:CalendarRestClient, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService, private dialogRef: MatDialogRef<CalendarDayOffModalComponent>) {}
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      dayOffDate: [{ value: null }, Validators.required],
+      dayOffLabel: [{ value: null }],
+    });
+    this.restoreForm();
+  }
+  restoreForm(): void {
+    this.form.patchValue({
+      dayOffDate: this.view.form.dayOffDate,
+      dayOffLabel: this.view.form.dayOffLabel,
+    });
+  }
 
-ngOnInit(): void {
-this.form = this.formBuilder.group({
-dayOffDate:[{value:null}, Validators.required],
-dayOffLabel:[{value:null}]});
-this.restoreForm();
-}
-restoreForm(): void {
-this.form.patchValue({
-dayOffDate: this.view.form.dayOffDate,
-dayOffLabel: this.view.form.dayOffLabel
-})
-}
+  applyForm(): void {
+    this.view.form.dayOffDate = StringUtils.emptyToNull(this.form.get('dayOffDate').value);
+    this.view.form.dayOffLabel = StringUtils.emptyToNull(this.form.get('dayOffLabel').value);
+  }
 
-applyForm(): void {
-this.view.form.dayOffDate = StringUtils.emptyToNull(this.form.get('dayOffDate').value);
-this.view.form.dayOffLabel = StringUtils.emptyToNull(this.form.get('dayOffLabel').value);
-}
+  save(): void {
+    this.applyForm();
+    this.service.saveCalendarDayOff(this.parentId, this.view.form).subscribe((success) => {
+      this.notifications.info('operation.completed');
+      this.dialogRef.close(true);
+    });
+  }
 
-save(): void {
-this.applyForm();
-this.service.saveCalendarDayOff(this.parentId, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
-}
+  update(): void {
+    this.applyForm();
+    this.service.updateCalendarDayOff(this.view.id, this.view.form).subscribe((success) => {
+      this.notifications.info('operation.completed');
+      this.dialogRef.close(true);
+    });
+  }
 
-update(): void {
-this.applyForm();
-this.service.updateCalendarDayOff(this.view.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.dialogRef.close(true);});
-}
+  saveOrUpdate(): void {
+    if (this.view.id == null) {
+      this.save();
+    } else {
+      this.update();
+    }
+  }
 
-saveOrUpdate(): void {
-if (this.view.id == null) {this.save()} else {this.update()}
-}
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

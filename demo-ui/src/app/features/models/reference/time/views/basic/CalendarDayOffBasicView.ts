@@ -4,13 +4,12 @@
  * <br/>processed by ifolks-generator
  */
 export class CalendarDayOffBasicView {
+  id: number;
+  selected: boolean;
+  canDelete: boolean;
+  dayOffDate: string;
+  dayOffLabel: string;
 
-id: number;
-selected: boolean;
-canDelete: boolean;
-dayOffDate: string;
-dayOffLabel: string;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

@@ -1,9 +1,7 @@
-import { RegionMenuComponent } from './../menu/region-menu.component';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Observable } from 'rxjs';
 import { SelectItem } from 'src/app/core/models/SelectItem';
 import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { NotificationService } from 'src/app/core/services/NotificationService';
@@ -12,8 +10,8 @@ import { RegionFullView } from 'src/app/features/models/reference/localization/v
 import { CountryRestClient } from 'src/app/features/services/reference/localization/CountryRestClient';
 import { RegionRestClient } from 'src/app/features/services/reference/localization/RegionRestClient';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
+import { RegionMenuComponent } from './../menu/region-menu.component';
 /**
  * auto generated details component ts file
  * <br/>write modifications between specific code marks
@@ -21,59 +19,76 @@ import { PrivateTemplatesModule } from 'src/app/templates/private/templates.modu
  */
 
 @Component({
-selector: 'app-region-details',
-standalone: true,
-imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, RegionMenuComponent, I18nPipe],
-templateUrl: './region-details.component.html',
-styleUrl: './region-details.component.scss'
+  selector: 'app-region-details',
+  standalone: true,
+  imports: [CommonModule, SharedModule, PrivateTemplatesModule, RouterModule, RegionMenuComponent, I18nPipe],
+  templateUrl: './region-details.component.html',
+  styleUrl: './region-details.component.scss',
 })
 export class RegionDetailsComponent implements OnInit {
+  id: number;
+  activePath: string;
+  view: RegionFullView = new RegionFullView();
+  form: FormGroup;
+  countryCodeOptions: SelectItem[];
 
-id:number;
-activePath:string;
-view: RegionFullView = new RegionFullView();
-form: FormGroup;
-countryCodeOptions: SelectItem[];
+  constructor(
+    private service: RegionRestClient,
+    private countryService: CountryRestClient,
+    private route: ActivatedRoute,
+    private formBuilder: FormBuilder,
+    private changeDetector: ChangeDetectorRef,
+    private notifications: NotificationService,
+  ) {
+    this.id = parseInt(this.route.snapshot.paramMap.get('id'));
+    this.activePath = '/region/' + this.id.toString();
+  }
 
-constructor(private service:RegionRestClient, private countryService:CountryRestClient, private route: ActivatedRoute, private formBuilder: FormBuilder, private changeDetector: ChangeDetectorRef, private notifications: NotificationService) {
-this.id = parseInt(this.route.snapshot.paramMap.get('id'));
-this.activePath = '/region/' + this.id.toString();
-}
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      countryCode: [{ value: null }, Validators.required],
+      code: [{ value: null }, Validators.required],
+      label: [{ value: null }, Validators.required],
+    });
+    this.load();
+  }
+  restoreForm(): void {
+    this.form.patchValue({
+      countryCode: this.view.form.countryCode,
+      code: this.view.form.code,
+      label: this.view.form.label,
+    });
+  }
 
-ngOnInit(): void {
-this.form = this.formBuilder.group({
-countryCode:[{value:null}, Validators.required],
-code:[{value:null}, Validators.required],
-label:[{value:null}, Validators.required]})
-this.load();
-}
-restoreForm(): void {
-this.form.patchValue({
-countryCode: this.view.form.countryCode,
-code: this.view.form.code,
-label: this.view.form.label
-})
-}
+  applyForm(): void {
+    this.view.form.countryCode = StringUtils.emptyToNull(this.form.get('countryCode').value);
+    this.view.form.code = StringUtils.emptyToNull(this.form.get('code').value);
+    this.view.form.label = StringUtils.emptyToNull(this.form.get('label').value);
+  }
 
-applyForm(): void {
-this.view.form.countryCode = StringUtils.emptyToNull(this.form.get('countryCode').value);
-this.view.form.code = StringUtils.emptyToNull(this.form.get('code').value);
-this.view.form.label = StringUtils.emptyToNull(this.form.get('label').value);
-}
+  load(): void {
+    this.service.load(this.id).subscribe((t) => {
+      this.view = t;
+      this.restoreForm();
+      this.changeDetector.markForCheck();
+    });
+    this.loadOptionsForCountryCode();
+  }
 
-load(): void {
-this.service.load(this.id).subscribe((t) => {this.view=t;this.restoreForm();this.changeDetector.markForCheck();});
-this.loadOptionsForCountryCode();
-}
+  loadOptionsForCountryCode() {
+    this.countryService.getOptions().subscribe((t) => {
+      this.countryCodeOptions = t;
+      this.changeDetector.markForCheck();
+    });
+  }
 
-loadOptionsForCountryCode() {
-this.countryService.getOptions().subscribe((t) => {this.countryCodeOptions=t;this.changeDetector.markForCheck();});
-}
-
-update(): void {
-this.applyForm();
-this.service.update(this.id, this.view.form).subscribe(success => {this.notifications.info("operation.completed");this.load();});
-}
-/* Specific Code Start */
-/* Specific Code End */
+  update(): void {
+    this.applyForm();
+    this.service.update(this.id, this.view.form).subscribe((success) => {
+      this.notifications.info('operation.completed');
+      this.load();
+    });
+  }
+  /* Specific Code Start */
+  /* Specific Code End */
 }

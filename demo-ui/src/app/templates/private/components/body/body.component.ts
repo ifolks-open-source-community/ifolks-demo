@@ -7,7 +7,7 @@ import { NavMenu } from '../../models/nav-menu';
   selector: 'app-private-body',
   standalone: false,
   templateUrl: './body.component.html',
-  styleUrls: ['./body.component.scss']
+  styleUrls: ['./body.component.scss'],
 })
 export class BodyComponent {
   @ViewChild('sidenavRef', { static: false }) sideNavRef: MatSidenav;

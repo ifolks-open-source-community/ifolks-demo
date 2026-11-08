@@ -9,19 +9,18 @@ import { NavLink } from 'src/app/templates/private/models/nav-link';
  */
 
 @Component({
-selector: 'app-fool-menu',
-standalone: true,
-imports: [CommonModule, SharedModule],
-templateUrl: './fool-menu.component.html',
-styleUrl: './fool-menu.component.scss'
+  selector: 'app-fool-menu',
+  standalone: true,
+  imports: [CommonModule, SharedModule],
+  templateUrl: './fool-menu.component.html',
+  styleUrl: './fool-menu.component.scss',
 })
 export class FoolMenuComponent implements OnInit {
+  links: NavLink[];
+  @Input() id: string;
+  @Input() activePath: string;
 
-links:NavLink[];
-@Input() id:string;
-@Input() activePath:string;
-
-ngOnInit(): void {
-this.links=[{text:'Details',path:'/fool/' + this.id.toString()}];
-}
+  ngOnInit(): void {
+    this.links = [{ text: 'Details', path: '/fool/' + this.id.toString() }];
+  }
 }

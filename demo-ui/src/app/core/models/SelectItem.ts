@@ -1,4 +1,4 @@
 export class SelectItem {
-  key:string;
-  label:string;
+  key: string;
+  label: string;
 }

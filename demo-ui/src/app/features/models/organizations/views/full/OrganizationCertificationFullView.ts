@@ -5,12 +5,11 @@ import { OrganizationCertificationForm } from 'src/app/features/models/organizat
  * <br/>processed by ifolks-generator
  */
 export class OrganizationCertificationFullView {
+  id: string;
+  form: OrganizationCertificationForm = new OrganizationCertificationForm();
+  canUpdate: boolean;
+  canDelete: boolean;
 
-id: string;
-form: OrganizationCertificationForm = new OrganizationCertificationForm();
-canUpdate: boolean;
-canDelete: boolean;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

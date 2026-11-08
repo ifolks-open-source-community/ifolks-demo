@@ -4,10 +4,9 @@
  * <br/>processed by ifolks-generator
  */
 export class CalendarDayOffForm {
+  dayOffDate: string;
+  dayOffLabel: string;
 
-dayOffDate: string;
-dayOffLabel: string;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

@@ -1,14 +1,16 @@
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
 import { NotificationService } from './NotificationService';
 
 @Injectable()
 export class RestRequestInterceptor implements HttpInterceptor {
-
-  constructor(private router: Router, private notifications: NotificationService) {}
+  constructor(
+    private router: Router,
+    private notifications: NotificationService,
+  ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (request.url.includes('/assets/') || request.url.startsWith('assets/')) {
@@ -26,12 +28,13 @@ export class RestRequestInterceptor implements HttpInterceptor {
 
       request = request.clone({
         setHeaders: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
     }
 
-    const isReadRequest = request.method === 'GET' || request.url.includes('/scroll') || request.url.includes('/search');
+    const isReadRequest =
+      request.method === 'GET' || request.url.includes('/scroll') || request.url.includes('/search');
 
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
@@ -46,19 +49,19 @@ export class RestRequestInterceptor implements HttpInterceptor {
           if (isReadRequest) {
             this.router.navigate(['/403']);
           } else {
-            this.notifications.error(error.error?.detail || "access.denied");
+            this.notifications.error(error.error?.detail || 'access.denied');
           }
         } else if (error.status === 409 || (error.status === 400 && !isReadRequest)) {
-          this.notifications.error(error.error?.detail || "generic.error");
+          this.notifications.error(error.error?.detail || 'generic.error');
         } else if (error.status === 0 || error.status >= 500) {
           if (isReadRequest) {
             this.router.navigate(['/500']);
           } else {
-            this.notifications.error("technical.error");
+            this.notifications.error('technical.error');
           }
         }
         return throwError(() => error);
-      })
+      }),
     );
   }
 

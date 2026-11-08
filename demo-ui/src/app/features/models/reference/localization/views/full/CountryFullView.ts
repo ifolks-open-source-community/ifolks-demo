@@ -5,12 +5,11 @@ import { CountryForm } from 'src/app/features/models/reference/localization/form
  * <br/>processed by ifolks-generator
  */
 export class CountryFullView {
+  id: number;
+  form: CountryForm = new CountryForm();
+  canUpdate: boolean;
+  canDelete: boolean;
 
-id: number;
-form: CountryForm = new CountryForm();
-canUpdate: boolean;
-canDelete: boolean;
-
-/* Specific Code Start */
-/* Specific Code End */
+  /* Specific Code Start */
+  /* Specific Code End */
 }

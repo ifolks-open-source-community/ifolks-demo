@@ -14,10 +14,9 @@ export const ISO_LOCAL_DATE_FORMAT = {
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IsoLocalDateNativeDateAdapter extends NativeDateAdapter {
-
   override getYear(date: Date): number {
     return date.getUTCFullYear();
   }

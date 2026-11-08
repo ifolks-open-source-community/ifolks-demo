@@ -9,19 +9,18 @@ import { NavLink } from 'src/app/templates/private/models/nav-link';
  */
 
 @Component({
-selector: 'app-city-menu',
-standalone: true,
-imports: [CommonModule, SharedModule],
-templateUrl: './city-menu.component.html',
-styleUrl: './city-menu.component.scss'
+  selector: 'app-city-menu',
+  standalone: true,
+  imports: [CommonModule, SharedModule],
+  templateUrl: './city-menu.component.html',
+  styleUrl: './city-menu.component.scss',
 })
 export class CityMenuComponent implements OnInit {
+  links: NavLink[];
+  @Input() id: number;
+  @Input() activePath: string;
 
-links:NavLink[];
-@Input() id:number;
-@Input() activePath:string;
-
-ngOnInit(): void {
-this.links=[{text:'Details',path:'/city/' + this.id.toString()}];
-}
+  ngOnInit(): void {
+    this.links = [{ text: 'Details', path: '/city/' + this.id.toString() }];
+  }
 }
