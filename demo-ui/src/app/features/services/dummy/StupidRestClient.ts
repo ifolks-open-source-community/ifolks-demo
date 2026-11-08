@@ -1,13 +1,13 @@
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ScrollForm } from 'src/app/core/models/ScrollForm';
 import { ScrollView } from 'src/app/core/models/ScrollView';
 import { SelectItem } from 'src/app/core/models/SelectItem';
-import { StupidBasicView } from 'src/app/features/models/dummy/views/basic/StupidBasicView';
 import { StupidFilter } from 'src/app/features/models/dummy/filters/StupidFilter';
 import { StupidForm } from 'src/app/features/models/dummy/forms/StupidForm';
-import { StupidFullView } from 'src/app/features/models/dummy/views/full/StupidFullView';
 import { StupidSorting } from 'src/app/features/models/dummy/sortings/StupidSorting';
+import { StupidBasicView } from 'src/app/features/models/dummy/views/basic/StupidBasicView';
+import { StupidFullView } from 'src/app/features/models/dummy/views/full/StupidFullView';
 import { environment } from 'src/environments/environment';
 
 /**

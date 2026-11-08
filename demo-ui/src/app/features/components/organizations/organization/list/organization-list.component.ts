@@ -1,29 +1,28 @@
-import { ChangeDetectorRef } from '@angular/core';
+import { OrganizationModalComponent } from './../modal/organization-modal.component';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Subscription } from 'rxjs';
+import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
+import { ScrollForm } from 'src/app/core/models/ScrollForm';
+import { ScrollView } from 'src/app/core/models/ScrollView';
+import { SelectItem } from 'src/app/core/models/SelectItem';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { NotificationService } from 'src/app/core/services/NotificationService';
-import { OrganizationBasicView } from 'src/app/features/models/organizations/views/basic/OrganizationBasicView';
+import { StringUtils } from 'src/app/core/services/StringUtils';
+import { ORGANIZATION_ROLE_OPTIONS, OrganizationRole } from 'src/app/features/models/organizations/enums/OrganizationRole';
 import { OrganizationFilter } from 'src/app/features/models/organizations/filters/OrganizationFilter';
 import { OrganizationForm } from 'src/app/features/models/organizations/forms/OrganizationForm';
-import { OrganizationFullView } from 'src/app/features/models/organizations/views/full/OrganizationFullView';
-import { OrganizationModalComponent } from './../modal/organization-modal.component';
-import { OrganizationRestClient } from 'src/app/features/services/organizations/OrganizationRestClient';
-import { OrganizationRole, ORGANIZATION_ROLE_OPTIONS } from 'src/app/features/models/organizations/enums/OrganizationRole';
 import { OrganizationSorting } from 'src/app/features/models/organizations/sortings/OrganizationSorting';
-import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
-import { ScrollForm } from "src/app/core/models/ScrollForm";
-import { ScrollView } from "src/app/core/models/ScrollView";
-import { SelectItem } from "src/app/core/models/SelectItem";
+import { OrganizationBasicView } from 'src/app/features/models/organizations/views/basic/OrganizationBasicView';
+import { OrganizationFullView } from 'src/app/features/models/organizations/views/full/OrganizationFullView';
+import { OrganizationRestClient } from 'src/app/features/services/organizations/OrganizationRestClient';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { StringUtils } from 'src/app/core/services/StringUtils';
-import { Subscription } from 'rxjs';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 /**
  * auto generated list component ts file
  * <br/>write modifications between specific code marks

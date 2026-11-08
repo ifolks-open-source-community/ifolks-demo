@@ -1,21 +1,19 @@
-import { ActivatedRoute } from '@angular/router';
-import { ChangeDetectorRef } from '@angular/core';
+import { StupidMenuComponent } from './../menu/stupid-menu.component';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
-import { NavLink } from 'src/app/templates/private/models/nav-link';
-import { NotificationService } from 'src/app/core/services/NotificationService';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
-import { RouterModule } from '@angular/router';
 import { SelectItem } from 'src/app/core/models/SelectItem';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
+import { NotificationService } from 'src/app/core/services/NotificationService';
 import { StringUtils } from 'src/app/core/services/StringUtils';
 import { StupidFullView } from 'src/app/features/models/dummy/views/full/StupidFullView';
-import { StupidMenuComponent } from './../menu/stupid-menu.component';
+import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
 import { StupidRestClient } from 'src/app/features/services/dummy/StupidRestClient';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { NavLink } from 'src/app/templates/private/models/nav-link';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 /**
  * auto generated details component ts file
  * <br/>write modifications between specific code marks

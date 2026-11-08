@@ -1,18 +1,17 @@
-import { ChangeDetectorRef } from '@angular/core';
-import { CityFullView } from 'src/app/features/models/reference/localization/views/full/CityFullView';
-import { CityRestClient } from 'src/app/features/services/reference/localization/CityRestClient';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialogRef } from '@angular/material/dialog';
-import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
-import { RegionFullView } from 'src/app/features/models/reference/localization/views/full/RegionFullView';
-import { RegionRestClient } from 'src/app/features/services/reference/localization/RegionRestClient';
 import { SelectItem } from 'src/app/core/models/SelectItem';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
+import { NotificationService } from 'src/app/core/services/NotificationService';
 import { StringUtils } from 'src/app/core/services/StringUtils';
+import { CityFullView } from 'src/app/features/models/reference/localization/views/full/CityFullView';
+import { RegionFullView } from 'src/app/features/models/reference/localization/views/full/RegionFullView';
+import { CityRestClient } from 'src/app/features/services/reference/localization/CityRestClient';
+import { RegionRestClient } from 'src/app/features/services/reference/localization/RegionRestClient';
+import { SharedModule } from 'src/app/shared/shared.module';
 /**
  * auto generated one to many modal component ts file
  * <br/>write modifications between specific code marks

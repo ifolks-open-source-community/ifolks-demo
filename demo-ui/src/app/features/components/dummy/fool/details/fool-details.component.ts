@@ -1,21 +1,19 @@
-import { ActivatedRoute } from '@angular/router';
-import { ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullView';
 import { FoolMenuComponent } from './../menu/fool-menu.component';
-import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
-import { FoolStatus, FOOL_STATUS_OPTIONS } from 'src/app/features/models/dummy/enums/FoolStatus';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
-import { NavLink } from 'src/app/templates/private/models/nav-link';
-import { NotificationService } from 'src/app/core/services/NotificationService';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
-import { RouterModule } from '@angular/router';
 import { SelectItem } from 'src/app/core/models/SelectItem';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
+import { NotificationService } from 'src/app/core/services/NotificationService';
 import { StringUtils } from 'src/app/core/services/StringUtils';
+import { FOOL_STATUS_OPTIONS, FoolStatus } from 'src/app/features/models/dummy/enums/FoolStatus';
+import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullView';
+import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { NavLink } from 'src/app/templates/private/models/nav-link';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 /**
  * auto generated details component ts file
  * <br/>write modifications between specific code marks

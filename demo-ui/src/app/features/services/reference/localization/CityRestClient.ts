@@ -1,13 +1,13 @@
-import { CityBasicView } from 'src/app/features/models/reference/localization/views/basic/CityBasicView';
-import { CityFilter } from 'src/app/features/models/reference/localization/filters/CityFilter';
-import { CityForm } from 'src/app/features/models/reference/localization/forms/CityForm';
-import { CityFullView } from 'src/app/features/models/reference/localization/views/full/CityFullView';
-import { CitySorting } from 'src/app/features/models/reference/localization/sortings/CitySorting';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ScrollForm } from 'src/app/core/models/ScrollForm';
 import { ScrollView } from 'src/app/core/models/ScrollView';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { CityFilter } from 'src/app/features/models/reference/localization/filters/CityFilter';
+import { CityForm } from 'src/app/features/models/reference/localization/forms/CityForm';
+import { CitySorting } from 'src/app/features/models/reference/localization/sortings/CitySorting';
+import { CityBasicView } from 'src/app/features/models/reference/localization/views/basic/CityBasicView';
+import { CityFullView } from 'src/app/features/models/reference/localization/views/full/CityFullView';
 import { environment } from 'src/environments/environment';
 
 /**

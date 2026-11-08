@@ -1,21 +1,19 @@
-import { ActivatedRoute } from '@angular/router';
-import { ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CountryRestClient } from 'src/app/features/services/reference/localization/CountryRestClient';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
-import { NavLink } from 'src/app/templates/private/models/nav-link';
-import { NotificationService } from 'src/app/core/services/NotificationService';
-import { Observable } from 'rxjs';
-import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
-import { RegionFullView } from 'src/app/features/models/reference/localization/views/full/RegionFullView';
 import { RegionMenuComponent } from './../menu/region-menu.component';
-import { RegionRestClient } from 'src/app/features/services/reference/localization/RegionRestClient';
-import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Observable } from 'rxjs';
 import { SelectItem } from 'src/app/core/models/SelectItem';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
+import { NotificationService } from 'src/app/core/services/NotificationService';
 import { StringUtils } from 'src/app/core/services/StringUtils';
+import { RegionFullView } from 'src/app/features/models/reference/localization/views/full/RegionFullView';
+import { CountryRestClient } from 'src/app/features/services/reference/localization/CountryRestClient';
+import { RegionRestClient } from 'src/app/features/services/reference/localization/RegionRestClient';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { NavLink } from 'src/app/templates/private/models/nav-link';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 /**
  * auto generated details component ts file
  * <br/>write modifications between specific code marks

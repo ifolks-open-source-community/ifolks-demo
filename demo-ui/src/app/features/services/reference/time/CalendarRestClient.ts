@@ -1,18 +1,18 @@
-import { CalendarBasicView } from 'src/app/features/models/reference/time/views/basic/CalendarBasicView';
-import { CalendarDayOffBasicView } from 'src/app/features/models/reference/time/views/basic/CalendarDayOffBasicView';
-import { CalendarDayOffFilter } from 'src/app/features/models/reference/time/filters/CalendarDayOffFilter';
-import { CalendarDayOffForm } from 'src/app/features/models/reference/time/forms/CalendarDayOffForm';
-import { CalendarDayOffFullView } from 'src/app/features/models/reference/time/views/full/CalendarDayOffFullView';
-import { CalendarDayOffSorting } from 'src/app/features/models/reference/time/sortings/CalendarDayOffSorting';
-import { CalendarFilter } from 'src/app/features/models/reference/time/filters/CalendarFilter';
-import { CalendarForm } from 'src/app/features/models/reference/time/forms/CalendarForm';
-import { CalendarFullView } from 'src/app/features/models/reference/time/views/full/CalendarFullView';
-import { CalendarSorting } from 'src/app/features/models/reference/time/sortings/CalendarSorting';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ScrollForm } from 'src/app/core/models/ScrollForm';
 import { ScrollView } from 'src/app/core/models/ScrollView';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { CalendarDayOffFilter } from 'src/app/features/models/reference/time/filters/CalendarDayOffFilter';
+import { CalendarFilter } from 'src/app/features/models/reference/time/filters/CalendarFilter';
+import { CalendarDayOffForm } from 'src/app/features/models/reference/time/forms/CalendarDayOffForm';
+import { CalendarForm } from 'src/app/features/models/reference/time/forms/CalendarForm';
+import { CalendarDayOffSorting } from 'src/app/features/models/reference/time/sortings/CalendarDayOffSorting';
+import { CalendarSorting } from 'src/app/features/models/reference/time/sortings/CalendarSorting';
+import { CalendarBasicView } from 'src/app/features/models/reference/time/views/basic/CalendarBasicView';
+import { CalendarDayOffBasicView } from 'src/app/features/models/reference/time/views/basic/CalendarDayOffBasicView';
+import { CalendarDayOffFullView } from 'src/app/features/models/reference/time/views/full/CalendarDayOffFullView';
+import { CalendarFullView } from 'src/app/features/models/reference/time/views/full/CalendarFullView';
 import { environment } from 'src/environments/environment';
 
 /**

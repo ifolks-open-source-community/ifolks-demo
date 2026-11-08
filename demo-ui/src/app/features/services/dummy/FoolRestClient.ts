@@ -1,13 +1,13 @@
-import { FoolBasicView } from 'src/app/features/models/dummy/views/basic/FoolBasicView';
-import { FoolFilter } from 'src/app/features/models/dummy/filters/FoolFilter';
-import { FoolForm } from 'src/app/features/models/dummy/forms/FoolForm';
-import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullView';
-import { FoolSorting } from 'src/app/features/models/dummy/sortings/FoolSorting';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ScrollForm } from 'src/app/core/models/ScrollForm';
 import { ScrollView } from 'src/app/core/models/ScrollView';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { FoolFilter } from 'src/app/features/models/dummy/filters/FoolFilter';
+import { FoolForm } from 'src/app/features/models/dummy/forms/FoolForm';
+import { FoolSorting } from 'src/app/features/models/dummy/sortings/FoolSorting';
+import { FoolBasicView } from 'src/app/features/models/dummy/views/basic/FoolBasicView';
+import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullView';
 import { environment } from 'src/environments/environment';
 
 /**

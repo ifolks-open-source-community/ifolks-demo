@@ -1,20 +1,18 @@
-import { ActivatedRoute } from '@angular/router';
-import { ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
-import { NavLink } from 'src/app/templates/private/models/nav-link';
-import { NotificationService } from 'src/app/core/services/NotificationService';
-import { Observable } from 'rxjs';
-import { OrganizationCertificationFullView } from 'src/app/features/models/organizations/views/full/OrganizationCertificationFullView';
 import { OrganizationMenuComponent } from './../../menu/organization-menu.component';
-import { OrganizationRestClient } from 'src/app/features/services/organizations/OrganizationRestClient';
-import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
-import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Observable } from 'rxjs';
 import { SelectItem } from 'src/app/core/models/SelectItem';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
+import { NotificationService } from 'src/app/core/services/NotificationService';
 import { StringUtils } from 'src/app/core/services/StringUtils';
+import { OrganizationCertificationFullView } from 'src/app/features/models/organizations/views/full/OrganizationCertificationFullView';
+import { OrganizationRestClient } from 'src/app/features/services/organizations/OrganizationRestClient';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { NavLink } from 'src/app/templates/private/models/nav-link';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 /**
  * auto generated one to one component details component ts file
  * <br/>write modifications between specific code marks

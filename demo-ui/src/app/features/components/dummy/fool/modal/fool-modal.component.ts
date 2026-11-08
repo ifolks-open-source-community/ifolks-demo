@@ -1,17 +1,16 @@
-import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullView';
-import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
-import { FoolStatus, FOOL_STATUS_OPTIONS } from 'src/app/features/models/dummy/enums/FoolStatus';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialogRef } from '@angular/material/dialog';
-import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
 import { SelectItem } from 'src/app/core/models/SelectItem';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
+import { NotificationService } from 'src/app/core/services/NotificationService';
 import { StringUtils } from 'src/app/core/services/StringUtils';
+import { FOOL_STATUS_OPTIONS, FoolStatus } from 'src/app/features/models/dummy/enums/FoolStatus';
+import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullView';
+import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
+import { SharedModule } from 'src/app/shared/shared.module';
 /**
  * auto generated modal component ts file
  * <br/>write modifications between specific code marks

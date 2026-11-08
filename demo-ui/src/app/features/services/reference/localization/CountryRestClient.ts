@@ -1,13 +1,13 @@
-import { CountryBasicView } from 'src/app/features/models/reference/localization/views/basic/CountryBasicView';
-import { CountryFilter } from 'src/app/features/models/reference/localization/filters/CountryFilter';
-import { CountryForm } from 'src/app/features/models/reference/localization/forms/CountryForm';
-import { CountryFullView } from 'src/app/features/models/reference/localization/views/full/CountryFullView';
-import { CountrySorting } from 'src/app/features/models/reference/localization/sortings/CountrySorting';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ScrollForm } from 'src/app/core/models/ScrollForm';
 import { ScrollView } from 'src/app/core/models/ScrollView';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { CountryFilter } from 'src/app/features/models/reference/localization/filters/CountryFilter';
+import { CountryForm } from 'src/app/features/models/reference/localization/forms/CountryForm';
+import { CountrySorting } from 'src/app/features/models/reference/localization/sortings/CountrySorting';
+import { CountryBasicView } from 'src/app/features/models/reference/localization/views/basic/CountryBasicView';
+import { CountryFullView } from 'src/app/features/models/reference/localization/views/full/CountryFullView';
 import { environment } from 'src/environments/environment';
 
 /**

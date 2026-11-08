@@ -1,28 +1,27 @@
-import { ChangeDetectorRef } from '@angular/core';
-import { CityBasicView } from 'src/app/features/models/reference/localization/views/basic/CityBasicView';
-import { CityFilter } from 'src/app/features/models/reference/localization/filters/CityFilter';
-import { CityForm } from 'src/app/features/models/reference/localization/forms/CityForm';
-import { CityFullView } from 'src/app/features/models/reference/localization/views/full/CityFullView';
 import { CityModalComponent } from './../modal/city-modal.component';
-import { CityRestClient } from 'src/app/features/services/reference/localization/CityRestClient';
-import { CitySorting } from 'src/app/features/models/reference/localization/sortings/CitySorting';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { NotificationService } from 'src/app/core/services/NotificationService';
-import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
-import { ScrollForm } from "src/app/core/models/ScrollForm";
-import { ScrollView } from "src/app/core/models/ScrollView";
-import { SelectItem } from "src/app/core/models/SelectItem";
-import { SharedModule } from 'src/app/shared/shared.module';
-import { StringUtils } from 'src/app/core/services/StringUtils';
 import { Subscription } from 'rxjs';
+import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
+import { ScrollForm } from 'src/app/core/models/ScrollForm';
+import { ScrollView } from 'src/app/core/models/ScrollView';
+import { SelectItem } from 'src/app/core/models/SelectItem';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
+import { NotificationService } from 'src/app/core/services/NotificationService';
+import { StringUtils } from 'src/app/core/services/StringUtils';
+import { CityFilter } from 'src/app/features/models/reference/localization/filters/CityFilter';
+import { CityForm } from 'src/app/features/models/reference/localization/forms/CityForm';
+import { CitySorting } from 'src/app/features/models/reference/localization/sortings/CitySorting';
+import { CityBasicView } from 'src/app/features/models/reference/localization/views/basic/CityBasicView';
+import { CityFullView } from 'src/app/features/models/reference/localization/views/full/CityFullView';
+import { CityRestClient } from 'src/app/features/services/reference/localization/CityRestClient';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 /**
  * auto generated list component ts file
  * <br/>write modifications between specific code marks

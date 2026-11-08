@@ -1,13 +1,13 @@
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { RegionBasicView } from 'src/app/features/models/reference/localization/views/basic/RegionBasicView';
-import { RegionFilter } from 'src/app/features/models/reference/localization/filters/RegionFilter';
-import { RegionForm } from 'src/app/features/models/reference/localization/forms/RegionForm';
-import { RegionFullView } from 'src/app/features/models/reference/localization/views/full/RegionFullView';
-import { RegionSorting } from 'src/app/features/models/reference/localization/sortings/RegionSorting';
 import { ScrollForm } from 'src/app/core/models/ScrollForm';
 import { ScrollView } from 'src/app/core/models/ScrollView';
 import { SelectItem } from 'src/app/core/models/SelectItem';
+import { RegionFilter } from 'src/app/features/models/reference/localization/filters/RegionFilter';
+import { RegionForm } from 'src/app/features/models/reference/localization/forms/RegionForm';
+import { RegionSorting } from 'src/app/features/models/reference/localization/sortings/RegionSorting';
+import { RegionBasicView } from 'src/app/features/models/reference/localization/views/basic/RegionBasicView';
+import { RegionFullView } from 'src/app/features/models/reference/localization/views/full/RegionFullView';
 import { environment } from 'src/environments/environment';
 
 /**

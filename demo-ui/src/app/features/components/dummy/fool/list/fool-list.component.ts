@@ -1,29 +1,28 @@
-import { ChangeDetectorRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
-import { FoolBasicView } from 'src/app/features/models/dummy/views/basic/FoolBasicView';
-import { FoolFilter } from 'src/app/features/models/dummy/filters/FoolFilter';
-import { FoolForm } from 'src/app/features/models/dummy/forms/FoolForm';
-import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullView';
 import { FoolModalComponent } from './../modal/fool-modal.component';
-import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
-import { FoolSorting } from 'src/app/features/models/dummy/sortings/FoolSorting';
-import { FoolStatus, FOOL_STATUS_OPTIONS } from 'src/app/features/models/dummy/enums/FoolStatus';
+import { CommonModule } from '@angular/common';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { NotificationService } from 'src/app/core/services/NotificationService';
-import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
-import { ScrollForm } from "src/app/core/models/ScrollForm";
-import { ScrollView } from "src/app/core/models/ScrollView";
-import { SelectItem } from "src/app/core/models/SelectItem";
-import { SharedModule } from 'src/app/shared/shared.module';
-import { StringUtils } from 'src/app/core/services/StringUtils';
 import { Subscription } from 'rxjs';
+import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
+import { ScrollForm } from 'src/app/core/models/ScrollForm';
+import { ScrollView } from 'src/app/core/models/ScrollView';
+import { SelectItem } from 'src/app/core/models/SelectItem';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
+import { NotificationService } from 'src/app/core/services/NotificationService';
+import { StringUtils } from 'src/app/core/services/StringUtils';
+import { FOOL_STATUS_OPTIONS, FoolStatus } from 'src/app/features/models/dummy/enums/FoolStatus';
+import { FoolFilter } from 'src/app/features/models/dummy/filters/FoolFilter';
+import { FoolForm } from 'src/app/features/models/dummy/forms/FoolForm';
+import { FoolSorting } from 'src/app/features/models/dummy/sortings/FoolSorting';
+import { FoolBasicView } from 'src/app/features/models/dummy/views/basic/FoolBasicView';
+import { FoolFullView } from 'src/app/features/models/dummy/views/full/FoolFullView';
+import { FoolRestClient } from 'src/app/features/services/dummy/FoolRestClient';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 /**
  * auto generated list component ts file
  * <br/>write modifications between specific code marks

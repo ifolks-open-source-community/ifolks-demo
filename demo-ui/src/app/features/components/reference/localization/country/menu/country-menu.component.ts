@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { NavLink } from 'src/app/templates/private/models/nav-link';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { NavLink } from 'src/app/templates/private/models/nav-link';
 /**
  * auto generated menu component ts file
  * <br/>write modifications between specific code marks

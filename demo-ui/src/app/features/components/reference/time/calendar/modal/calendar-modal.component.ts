@@ -1,16 +1,15 @@
-import { CalendarFullView } from 'src/app/features/models/reference/time/views/full/CalendarFullView';
-import { CalendarRestClient } from 'src/app/features/services/reference/time/CalendarRestClient';
-import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialogRef } from '@angular/material/dialog';
-import { NotificationService } from 'src/app/core/services/NotificationService';
 import { Observable } from 'rxjs';
 import { SelectItem } from 'src/app/core/models/SelectItem';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
+import { NotificationService } from 'src/app/core/services/NotificationService';
 import { StringUtils } from 'src/app/core/services/StringUtils';
+import { CalendarFullView } from 'src/app/features/models/reference/time/views/full/CalendarFullView';
+import { CalendarRestClient } from 'src/app/features/services/reference/time/CalendarRestClient';
+import { SharedModule } from 'src/app/shared/shared.module';
 /**
  * auto generated modal component ts file
  * <br/>write modifications between specific code marks

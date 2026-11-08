@@ -1,28 +1,27 @@
-import { CalendarBasicView } from 'src/app/features/models/reference/time/views/basic/CalendarBasicView';
-import { CalendarFilter } from 'src/app/features/models/reference/time/filters/CalendarFilter';
-import { CalendarForm } from 'src/app/features/models/reference/time/forms/CalendarForm';
-import { CalendarFullView } from 'src/app/features/models/reference/time/views/full/CalendarFullView';
 import { CalendarModalComponent } from './../modal/calendar-modal.component';
-import { CalendarRestClient } from 'src/app/features/services/reference/time/CalendarRestClient';
-import { CalendarSorting } from 'src/app/features/models/reference/time/sortings/CalendarSorting';
-import { ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { NotificationService } from 'src/app/core/services/NotificationService';
-import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
-import { ScrollForm } from "src/app/core/models/ScrollForm";
-import { ScrollView } from "src/app/core/models/ScrollView";
-import { SelectItem } from "src/app/core/models/SelectItem";
-import { SharedModule } from 'src/app/shared/shared.module';
-import { StringUtils } from 'src/app/core/services/StringUtils';
 import { Subscription } from 'rxjs';
+import { ConfirmationModalComponent } from 'src/app/core/components/confirmation-modal/confirmation-modal.component';
+import { ScrollForm } from 'src/app/core/models/ScrollForm';
+import { ScrollView } from 'src/app/core/models/ScrollView';
+import { SelectItem } from 'src/app/core/models/SelectItem';
+import { I18nPipe } from 'src/app/core/pipes/I18nPipe';
+import { NotificationService } from 'src/app/core/services/NotificationService';
+import { StringUtils } from 'src/app/core/services/StringUtils';
+import { CalendarFilter } from 'src/app/features/models/reference/time/filters/CalendarFilter';
+import { CalendarForm } from 'src/app/features/models/reference/time/forms/CalendarForm';
+import { CalendarSorting } from 'src/app/features/models/reference/time/sortings/CalendarSorting';
+import { CalendarBasicView } from 'src/app/features/models/reference/time/views/basic/CalendarBasicView';
+import { CalendarFullView } from 'src/app/features/models/reference/time/views/full/CalendarFullView';
+import { CalendarRestClient } from 'src/app/features/services/reference/time/CalendarRestClient';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { PrivateTemplatesModule } from 'src/app/templates/private/templates.module';
 /**
  * auto generated list component ts file
  * <br/>write modifications between specific code marks
