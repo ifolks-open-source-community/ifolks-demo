@@ -5,6 +5,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { AppComponent } from './app/app.component';
 import { routes } from './app/app.routes';
+import { i18nConfig } from './app/core/services/i18n.config';
 import { I18nService } from './app/core/services/I18nService';
 import { RestRequestInterceptor } from './app/core/services/RestRequestInterceptor';
 import { environment } from './environments/environment';
@@ -14,14 +15,7 @@ if (environment.production) {
 }
 
 export function initI18n(i18nService: I18nService) {
-  return () =>
-    i18nService.init({
-      defaultLocale: 'en_US',
-      supportedLocales: [
-        { code: 'en_US', label: 'English (US)' },
-        { code: 'fr_FR', label: 'Français (France)' },
-      ],
-    });
+  return () => i18nService.init(i18nConfig);
 }
 
 bootstrapApplication(AppComponent, {
