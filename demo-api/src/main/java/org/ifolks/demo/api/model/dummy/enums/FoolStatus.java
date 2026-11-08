@@ -1,6 +1,5 @@
 package org.ifolks.demo.api.model.dummy.enums;
 
-
 /**
  * auto generated enumeration class file
  * <br/>write modifications between specific code marks
