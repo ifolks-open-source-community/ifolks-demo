@@ -14,7 +14,7 @@ import org.ifolks.commons.api.model.SelectItem;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import org.ifolks.demo.api.interfaces.dummy.FoolService;
 import org.ifolks.demo.api.interfaces.dummy.StupidService;
@@ -59,7 +59,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringJUnitConfig(ApplicationConfig.class)
+@SpringBootTest(classes = ApplicationConfig.class)
 public class DemoFunctionalTest {
 
 	@Autowired

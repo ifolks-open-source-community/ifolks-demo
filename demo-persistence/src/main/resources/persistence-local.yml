@@ -1,0 +1,17 @@
+# Persistence configuration for the local profile
+
+# DB
+db:
+  driverClassName: org.postgresql.Driver
+  url: "jdbc:postgresql://localhost:5432/demo"
+  userName: "postgres"
+  password: "postgres"
+  maximumPoolSize: 10
+  minimumIdle: 5
+  idleTimeout: 300000
+  connectionTimeout: 20000
+
+# Hibernate settings
+hibernate:
+  showSql: false
+  dialect: org.hibernate.dialect.PostgreSQLDialect
